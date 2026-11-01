@@ -33,7 +33,6 @@ export default function (eleventyConfig) {
   // Files referenced by old posts (uploads, demo pages), served at their original paths.
   eleventyConfig.addPassthroughCopy({ "src/static": "/" });
   eleventyConfig.ignores.add("src/static/**");
-  eleventyConfig.addPassthroughCopy({ "serve.json": "serve.json" });
 
   eleventyConfig.addCollection("posts", (api) =>
     api.getFilteredByGlob("src/posts/**/*.html").sort((a, b) => b.date - a.date),

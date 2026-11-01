@@ -27,8 +27,9 @@ The site is written to `_site/`.
 ## Deploy (Railway)
 
 `railway.json` tells Railway to run `npm run build` and then `npm start`, which
-serves `_site/` with [`serve`](https://github.com/vercel/serve). `serve.json`
-adds the rewrites for the old WordPress feed URLs.
+serves `_site/` with the small static server in `server.js` (built on
+`serve-static`). It also rewrites the old WordPress feed URLs (`/feed/`,
+`/feed/atom/`, ...) to the generated feeds and serves `404.html` for misses.
 
 Set `SITE_URL` (for example `https://blog.example.com`) in the Railway service's
 variables so the RSS/Atom feeds and sitemap use absolute URLs.
