@@ -1,0 +1,159 @@
+---json
+{
+  "title": "For Each Loop in Mozilla",
+  "date": "2005-09-02T01:00:01-08:00",
+  "permalink": "/archives/2005/09/02/01.00.01/",
+  "tags": [
+    "JavaScript",
+    "Mozilla",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "5288",
+      "author": "ioriwellings",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 2nd, 2005 at 02:55",
+      "html": "<p>Wrong in FireFox or Opera.</p>\n<p>by the way, what&#8217;s E4X?</p>"
+    },
+    {
+      "id": "5289",
+      "author": "minghong",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 2nd, 2005 at 03:24",
+      "html": "<p>No, it works prefectly if you are using Deer Park Alpha 2 (not sure about Alpha 1, probably works too). E4X stands for ECMAScript for XML.</p>\n<p>&#8220;for each&#8221; seems to be more suitable instead of &#8220;for in&#8221;, which scans all the object under the subject, e.g. length in Array.</p>\n<p>Try to rewrite the second for each loop to for in loop and you&#8217;ll notice the differences.</p>"
+    },
+    {
+      "id": "5290",
+      "author": "minghong",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 2nd, 2005 at 03:30",
+      "html": "<p>Correction: rewriting the second loop will give the same result. I can&#8217;t find the right example yet. <img src='/wp-includes/images/smilies/icon_razz.gif' alt=':-P' class='wp-smiley' /> </p>"
+    },
+    {
+      "id": "5291",
+      "author": "Emil A Eklund",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 2nd, 2005 at 10:20",
+      "html": "<p>Thats great news. While not the most exciting addition they are quite convenient.</p>"
+    },
+    {
+      "id": "5311",
+      "author": "nitro2k01",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 8th, 2005 at 20:29",
+      "html": "<p>I don&#8217;t get the point&#8230;<br />\nIsn&#8217;t this exactly what you have been able to do for years using<br />\nfor (i in v){}<br />\nOr is there some subtle difference? (Now I see, it returns the actual object, not the index)</p>\n<p>var o = {a: &#8220;A&#8221;, b: &#8220;B&#8221;, c: &#8220;C&#8221;};<br />\nfor (v in o) {<br />\n   alert(o[v]);<br />\n}</p>\n<p>var a = [\"A\", \"B\", \"C\"];<br />\nfor (v in a) {<br />\n   alert(a[v]);<br />\n}</p>\n<p>window.onload = function () {<br />\n   var sb = [];<br />\n   for (el in document.getElementsByTagName(&#8220;*&#8221;)) {<br />\n      sb.push(document.getElementsByTagName(&#8220;*&#8221;)[el].tagName);<br />\n   }<br />\n   alert(sb.join(&#8220;\\n&#8221;));<br />\n};<br />\nseems to be working fine cross-browser.<br />\nSo right, this is convenient, but nowhere near revolutionary&#8230;</p>"
+    },
+    {
+      "id": "5312",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 8th, 2005 at 20:42",
+      "html": "<p>It is nothing revolutionary. The good thing is that Mozilla realizes that there is a need to improve JS 1.x.</p>"
+    },
+    {
+      "id": "5314",
+      "author": "Hakan Bilgin",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 9th, 2005 at 13:52",
+      "html": "<p>Hi,<br />\nWell, in that case&#8230;<br />\n- Mozilla can render HTML, thank god for Mozilla. <img src='/wp-includes/images/smilies/icon_wink.gif' alt=';-)' class='wp-smiley' /> </p>"
+    },
+    {
+      "id": "5315",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 9th, 2005 at 16:16",
+      "html": "<p>Hakan: I&#8217;m not sure what you are trying to say here?</p>"
+    },
+    {
+      "id": "5316",
+      "author": "Hakan Bilgin",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 9th, 2005 at 16:49",
+      "html": "<p>I was a little bit sarcastic. Even thoguh this ain&#8217;t so big a deal, you&#8217;re taking every opportunity to exaggerate Firefox. &#8216;Coz the feature with different version of browsers, and code that works on a few of them, is also available on IE. tihi</p>\n<p>Anyway&#8230;hope you aren&#8217;t offended. I&#8217;m just expressing differing opinions.</p>"
+    },
+    {
+      "id": "5317",
+      "author": "nitro2k01",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 9th, 2005 at 17:29",
+      "html": "<p>HBI! Great to see that you read Erik&#8217;s blog. (I found it through challenger&#8217;s home page, so I should&#8217;ve guessed)<br />\nYou&#8217;re post is a bit of freudian mis-saying. If you had added an X to HTML that would be a totally true statement.<br />\nFact is that IE is a browser which barely has been updated for a few years. (Except for security patches) Alot can be done with the custom DOM of IE, but you can&#8217;t escape from the fact that IE lacks proper support for XHTML, and that jscript has quite a few memomry leaks. (Look here: <a href=\"/archives/2005/08/04/21.38.18/\" rel=\"nofollow\">/archives/2005/08/04/21.38.18/</a> )</p>"
+    },
+    {
+      "id": "5324",
+      "author": "Hakan Bilgin",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 10th, 2005 at 01:06",
+      "html": "<p>nitro2k01,<br />\nLong time no see, pal&#8230;How&#8217;s everything? I read Erik&#8217;s blog when ever I can, even though I sometimes don&#8217;t agree I appreciate and recognize the guru. Now to my response&#8230;</p>\n<p>Sometimes I really get confused by the anti-MS propaganda. No to pathes but yes to upgrades? Hmmm&#8230;</p>\n<p>Many years ago, I was at a seminar. The lecturer said something I find fitting here:<br />\n&#8220;There are two kinds of people. The ones in the box, complaining about how the walls are too limiting. The other ones, that are outside the box, pushing or pulling the box and taking advantage of the box&#8217;s shape, size and color.&#8221;</p>\n<p>Instead of complaining, Mozart created wonderful music (even though the lack of synths and equalizers) and Da Vinci painted beautiful paintings (even though the lack of Photoshop&#8230;haha). Either accept the tools that are at hand and create or don&#8217;t.</p>\n<p>Alright, I agree&#8230;one should always have the right of complaining but don&#8217;t dismiss the fact that one can achieve wonders, independently of the tools that are at hand, right now. Erik, Emil and others has prooven that in the past. But enough with this grumbling phase allready&#8230;</p>\n<p>/hbi</p>"
+    },
+    {
+      "id": "5331",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 10th, 2005 at 13:46",
+      "html": "<p>I&#8217;m not sure I complain too much. I try identify issues that should not be tolerated in a browser. If you don&#8217;t know about the issues it is hard to work around them. Most of the times the issues I describe are with IE but I agree that I haven&#8217;t been too good at pointing fingers at Moz, Opera and KHTML. Opera and KHTML/Safari are a lot worse than IE and that is why most applications work in IE and Mozilla. It is just that Opera and KHTML can be ignored in most cases. IE cannot be ignored.</p>\n<p>Another reason why I complain about IE: I want MSFT to fix these issues.</p>\n<p>A third reason is so more people move away from IE. When people started to move away from IE to Firefox MSFT assembled the old IE team and started its development again. And I want IE and the web to improve.</p>"
+    },
+    {
+      "id": "6117",
+      "author": "alex",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "December 13th, 2005 at 12:47",
+      "html": "<p>Very interesting, only in mozilla not correct<br />\nview many sites<br />\nexample : <a href=\"http://games-all.com/\" rel=\"nofollow\">http://games-all.com/</a></p>"
+    },
+    {
+      "id": "14281",
+      "author": "sucheta",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "May 26th, 2006 at 11:25",
+      "html": "<p>hello<br />\n i want to complete definition and example of for each loop. i m not sure in this example what he trying to show.And difference between for in and for each loop.<br />\n thanks</p>"
+    }
+  ]
+}
+---
+<p>I&#8217;m not entirely sure when Mozilla started to support <code>for each</code> loops but I guess it was part of the E4X code checkins. Anyway, I was totally shocked when I saw it and I fired up a <a href="/playground/foreach.html">quick test</a>.</p>
+<pre><code>var o = {a: "A", b: "B", c: "C"};
+for each (var v in o) {
+   alert(v);
+}
+
+var a = ["A", "B", "C"];
+for each (v in a) {
+   alert(v);
+}
+
+window.onload = function () {
+   var sb = [];
+   for each (var el in document.getElementsByTagName("*")) {
+      sb.push(el.tagName);
+   }
+   alert(sb.join("\n"));
+};</code></pre>
+<p>Thank god for Mozilla</p>

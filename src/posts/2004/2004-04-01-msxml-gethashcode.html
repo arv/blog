@@ -1,0 +1,41 @@
+---json
+{
+  "title": "MSXML GetHashCode",
+  "date": "2004-04-01T21:45:03-08:00",
+  "permalink": "/archives/2004/04/01/21.45.03/",
+  "tags": [
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "733",
+      "author": "aaron",
+      "url": "http://youngpup.net/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>There&#8217;s a function to do this called &#8211; ironically enough &#8211; uniqueid(). witness: </p>\n<p><a href=\"http://msdn.microsoft.com/library/en-us/xmlsdk30/htm/xmmthuniqueid.asp\" rel=\"nofollow\">http://msdn.microsoft.com/library/en-us/xmlsdk30/htm/xmmthuniqueid.asp</a></p>\n<p>I&#8217;m trying to figure out how to get at it through old school msxml, let you know what I find.</p>\n<p>&#8211;<br />\nAaron</p>"
+    },
+    {
+      "id": "734",
+      "author": "aaron",
+      "url": "http://youngpup.net/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Yeah, there is probably a way better way to get at that IXTLRuntime object that I can&#8217;t find right now, but you could always do something horrific like this:</p>\n<p>var source = new ActiveXObject(&#8220;Msxml2.DOMDocument&#8221;);<br />\nsource.async = false;<br />\nsource.resolveExternals = false;<br />\nsource.loadXML(&#8220;&lt;foo&gt;&lt;bar/&gt;&lt;/foo&gt;&#8221;);</p>\n<p>// Load style sheet.<br />\nvar stylesheet = new ActiveXObject(&#8220;Msxml2.DOMDocument&#8221;);<br />\nstylesheet.async = false;<br />\nstylesheet.resolveExternals = false;<br />\nstylesheet.loadXML(&#8216;&lt;xsl:stylesheet xmlns:xsl=&#8221;http://www.w3.org/1999/XSL/Transform&#8221; version=&#8221;1.0&#8243;&gt;&#8217; +<br />\n&#8216;&lt;xsl:output omit-xml-declaration=&#8221;yes&#8221; /&gt;&#8217; +<br />\n&#8216;&lt;xsl:template match=&#8221;*&#8221;&gt;&lt;xsl:value-of select=&#8221;generate-id(.)&#8221; /&gt;&lt;/xsl:template&gt;&#8217; +<br />\n&#8216;&lt;/xsl:stylesheet&gt;&#8217;);</p>\n<p>// Fill a div tag with the result of the transform<br />\nalert(source.transformNode(stylesheet));</p>"
+    },
+    {
+      "id": "735",
+      "author": "IE Team",
+      "url": "http://blogs.msdn.com/ie/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Explorer will always be the best browser. Don&#8221;t you dare install Firefox or we will sue you.</p>\n<p>IE Team</p>"
+    }
+  ]
+}
+---
+<p>Does anyone know how to get a unique identifier for an IXMLNode for MSXML? I&#8217;ve tried googling around for this without finding a solution. In Mozilla I can just use expando properties but expandos do not work when using ActiveX objects.</p>
+<p>I think I&#8217;ll probably have to use an array and then use the index in the array as the hash code but that will make it O(n) and that would totally suck for something as common as this.</p>

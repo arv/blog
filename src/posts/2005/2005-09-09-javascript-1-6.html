@@ -1,0 +1,132 @@
+---json
+{
+  "title": "JavaScript 1.6",
+  "date": "2005-09-09T23:05:56-08:00",
+  "permalink": "/archives/2005/09/09/23.05.56/",
+  "tags": [
+    "JavaScript",
+    "Mozilla"
+  ],
+  "comments": [
+    {
+      "id": "5326",
+      "author": "Hakan Bilgin",
+      "url": "http://www.challenger.se",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Some usefull functions:</p>\n<p>Document.prototype.selectNodes = function($_XPath, $_xNode) {<br />\n\tif(!$_xNode) $_xNode = this;<br />\n\toNSResolver = this.createNSResolver(this.documentElement);<br />\n\t$_aItems = this.evaluate($_XPath, $_xNode, oNSResolver, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);<br />\n\t$_aResult = [];<br />\n\tfor(i=0; i 0)? $_xItems[0] : null ;<br />\n}<br />\nElement.prototype.selectNodes =\tfunction($_XPath) {<br />\n\treturn this.ownerDocument.selectNodes($_XPath, this);<br />\n}<br />\nElement.prototype.selectSingleNode = function($_XPath) {<br />\n\treturn this.ownerDocument.selectSingleNode($_XPath, this);<br />\n}<br />\nNode.prototype.__defineGetter__(&#8216;xml&#8217;, function() {<br />\n\treturn (new XMLSerializer()).serializeToString(this);<br />\n});<br />\nNode.prototype.__defineGetter__(&#8216;outerHTML&#8217;, function() {<br />\n\treturn this.xml;<br />\n});</p>\n<p>/* An extra function */<br />\nElement.prototype.getElementsByClassName = function (s) {<br />\n   return this.selectNodes(&#8220;.//*[@class='\"+ s +\"']&#8220;);<br />\n};</p>\n<p>All functions above apart from the last one are functions that I include in most of my work. These function are applied on HTML elements as well as XML Nodes. I find them useful <img src=\"/wp-includes/images/smilies/icon_razz.gif\" alt=\":-P\" class=\"wp-smiley\" /> </p>\n<p>The last one, I just wrote this in this textarea and haven&#8217;t tested it but it should work (I don&#8217;t see why it would be useful&#8230;anywho) But it should do exactly as (Eriks) function above.</p>\n<p>Best regards,<br />\nhbi</p>"
+    },
+    {
+      "id": "5327",
+      "author": "Hakan Bilgin",
+      "url": "http://www.challenger.se",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I dont know why but this function didn&#8217;t make it throught the submission (!?). One more try:</p>\n<p>Document.prototype.selectSingleNode = function($_XPath, $_xNode) {<br />\n\tif(!$_xNode) $_xNode = this;<br />\n\t$_xItems = this.selectNodes($_XPath, $_xNode);<br />\n\treturn ($_xItems.length &gt; 0)? $_xItems[0] : null ;<br />\n}</p>\n<p>/hbi</p>"
+    },
+    {
+      "id": "5328",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Those are useful extensions to Mozilla and I use them myself quite a lot. Using XPath for getElementsByClassName is a lot better than what I wrote but I wanted to show off Array.filter etc on NodeLists.</p>"
+    },
+    {
+      "id": "5332",
+      "author": "Hakan Bilgin",
+      "url": "http://www.challenger.se",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>My point exactly&#8230; even though one has to extend Firefox with functions and objects to do arbitrary stuff, none of you pro-Firefox guys complain on the fact that they aren&#8217;t built in. Instead you blabber on with with the support of standards. But these and other methods, properties or objects should be built-in by default. This is the backside of Firefox and many developers has accustomed to having them automatically from IE. That is one of the reasons why its still more prefered.</p>\n<p>Why mimic a browser that you&#8217;re complaining about? Fact is that MS and IE didn&#8217;t affect the development of web and related in only negative ways. Few recognize this fact when focusing on and pointing at what they don&#8217;t like in MS.</p>\n<p>/hbi</p>"
+    },
+    {
+      "id": "5333",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>&#8220;none of you pro-Firefox guys complain on the fact that they aren’t built in&#8221; &#8211; they are built in. You just do it in a different way (usually the W3C DOM way).</p>\n<p>&#8220;Why mimic a browser that you’re complaining about?&#8221; &#8211; because IE/JScript cannot support this kind of emulation. I would of course have preferred to fix the bugs in MSXML and IE and extend them to support DOM but that cannot be done.</p>\n<p>It all comes down to IE not being extensive and Mozilla being powerful enough to emulate everything in IE and MSXML. It is better to have one interface than two.</p>\n<p>I like MS <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":-)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "5348",
+      "author": "Hakan Bilgin",
+      "url": "http://www.challenger.se",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>How is &#8220;selectSingleNode&#8221; and &#8220;selectNodes&#8221; built in? I&#8217;m very curious, without any extension, how do you &#8220;selectNodes&#8221; with xPath? &#8216;Coz the other isn&#8217;t a issue&#8230;</p>"
+    },
+    {
+      "id": "5349",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>var p = document.evaluate(&#8220;//p&#8221;, document, null, 9, null).singleNodeValue;</p>\n<p>A bit more cryptic but a lot more powerful. The W3C XPath DOM allows you to return more than just nodes.</p>\n<p><a href=\"http://www.w3.org/TR/DOM-Level-3-XPath\" rel=\"nofollow\">http://www.w3.org/TR/DOM-Level-3-XPath</a></p>"
+    },
+    {
+      "id": "6126",
+      "author": "Garrett Smith",
+      "url": "http://dhtmlkitchen.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Looks like I need to entitify my text. The &#8220;&lt;&#8221; char got right through to the final output.</p>\n<p>// You should not have to check for a special null value.<br />\nvar matches = &#8220;foo&#8221;.match(/o/g);<br />\nfor(var i = 0; i &lt; matches.length; i++) { &#8230; }</p>"
+    },
+    {
+      "id": "6127",
+      "author": "Garrett Smith",
+      "url": "http://dhtmlkitchen.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>&#8230;I propose that:</p>\n<p>String.prototype match and RegExp.prototype.exec return arrays only, never null.</p>\n<p>Also very easy to implement would be:<br />\nString.prototype:<br />\n   trim, startsWith, endsWith </p>\n<p>These are simple requests, much in line with your requests in this post, Erik. Nothing fancy like classes or modifiers, which would be great, but require significant changes to the language.</p>"
+    },
+    {
+      "id": "6128",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I agree that returning null for exec and match is a bit stupid. However, changing the return value might break existing code.</p>\n<p>Regarding the string methods, I believe you should file a bug to Bugzilla and cc Brendan and it might actually happen <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":-)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "102558",
+      "author": "Hofneriu",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p><a></a></p>"
+    }
+  ]
+}
+---
+<p>With the upcoming release of Firefox 1.5 Mozilla have decided to increase their JavaScript version number to 1.6. There are basically three new features since 1.5:</p>
+<ul>
+<li><a href="http://www.ecma-international.org/publications/standards/Ecma-357.htm">ECMAScript 4 XML</a></li>
+<li><a href="/archives/2005/06/05/17.53.19/">Array Extras</a></li>
+<li>Array and String generics</li>
+</ul>
+<p>Array and String generics means that some of the methods that are available on <code>Array.prototype</code> and <code>String.prototype</code> are now also available as static methods of <code>Array</code> and <code>String</code> where the first argument passed is an obejct that has the <em>same</em> inteface. For strings it is not that useful becuase strings are immutable and all objects have a built in <code>toString</code> meathod already. But for array like structures it is really nice, allowing you to apply  for example <code>filter</code> to a <code>NodeList</code>. Using this we can implement the oh-so-famous-getElementsByClassName with just a few lines of code:</p>
+<pre><code>Document.prototype.getElementsByClassName =
+Element.prototype.getElementsByClassName = function (s) {
+   return Array.filter(this.getElementsByTagName("*"), function (el) {
+      return el.className.split(/\s+/).indexOf(s) != -1;
+   });
+};
+
+window.onload = function () {
+   Array.forEach(document.getElementsByClassName("foo"), function (el) {
+      alert((new XMLSerializer).serializeToString(el));
+   });
+}</code></pre>
+<p>Personally I think there is room for a <a href="/archives/2005/07/14/18.28.12/">few more</a> before finalizing 1.6.</p>

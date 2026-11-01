@@ -1,0 +1,101 @@
+---json
+{
+  "title": "Playing around with WebKit Animations",
+  "date": "2009-02-20T17:47:41-08:00",
+  "permalink": "/archives/2009/02/20/17.47.41/",
+  "tags": [
+    "Uncategorized",
+    "animaton",
+    "css",
+    "Transition",
+    "WebKit"
+  ],
+  "comments": [
+    {
+      "id": "103808",
+      "author": "niclas",
+      "url": "http://niclas.n3g.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Neat!<br />\nI didn&#8217;t dig into these yet, but it seems by your samples that it shouldn&#8217;t be to hard to combine those with some rules for the good old IE transition filters to get some basic transformations going for at least a few of the browsers working in some semi-decent way.</p>\n<p>And yes, kudos to the WebKit (and Chrome) people for soo many reasons.</p>"
+    },
+    {
+      "id": "103809",
+      "author": "niclas",
+      "url": "http://niclas.n3g.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>err.. that would be t-r-a-n-s-i-t-i-o-n-s</p>"
+    },
+    {
+      "id": "103814",
+      "author": "Shawn Lauriat",
+      "url": "http://frozen-o.com/blog/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Nice start! I did something similar back in September ( <a href=\"http://www.frozen-o.com/blog/2008/09/s5-with-css-slide-transitions-in-webkit.html\" rel=\"nofollow\">http://www.frozen-o.com/blog/2008/09/s5-with-css-slide-transitions-in-webkit.html</a> ), but I modified the latest S5 I could find. In the end, it resulted in a huge amount of unused code and styles, since it no longer needed to support IE, Opera, or Firefox. Your project will undoubtedly end up much cleaner than mine, so I hope you keep us posted as you work on it!</p>\n<p>Let me know if you&#8217;d like any help (code or testing). You can see my end result at <a href=\"http://www.frozen-o.com/blog/2008/11/enterprise-guts-slides-up-with-css.html\" rel=\"nofollow\">http://www.frozen-o.com/blog/2008/11/enterprise-guts-slides-up-with-css.html</a> for an idea of how mine ended up (just look for &#8220;TRANSITION EXTENSION&#8221; comments in ui/safari/slides.js of the presentation itself).</p>"
+    },
+    {
+      "id": "103838",
+      "author": "dflock",
+      "url": "http://www.codeistry.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>These are really neat &#8211; I can&#8217;t wait until they&#8217;re more widely supported &#8211; roll on 2034 and IE15!</p>"
+    },
+    {
+      "id": "103850",
+      "author": "Brad Neuberg",
+      "url": "http://codinginparadise.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Nice! I&#8217;m also a fan of the custom Webkit transition/animation stuff; it&#8217;s nice to see these getting picked up in Firefox as well &#8212; alot of them will show up in the next version of Firefox: <a href=\"https://developer.mozilla.org/En/CSS/Using_CSS_transforms\" rel=\"nofollow\">https://developer.mozilla.org/En/CSS/Using_CSS_transforms</a></p>"
+    },
+    {
+      "id": "103906",
+      "author": "yalda nasirian",
+      "url": "http://yaldanasirian.blogspot.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Neat !</p>\n<p>see my web at </p>\n<p><a href=\"http://yaldanasirian.blogspot.com/\" rel=\"nofollow\">http://yaldanasirian.blogspot.com/</a></p>\n<p>good luck</p>"
+    }
+  ]
+}
+---
+<p>Ever since WebKit started to introduce <a href="http://webkit.org/specs/">all these fancy new CSS properties like 2D and 3D transformations, transitions and declarative animations</a> I&#8217;ve been drooling like a script kiddie from the year 2000. I&#8217;ve been thinking about how I can use them in some Google property but unfortunately the whole world is not using nightly builds of WebKit so I&#8217;m pretty limited to just playing around at home. Well, platying around home is not<br />
+exactly what I did. Most of the time I was actually playing on the bus going home from work.</p>
+<p>I&#8217;ve been playing around doing a KeyNote like animation done with CSS and some JS to hook up the necessary events. The animation is kind of like a deck of cards. When you go to the next one the current one zooms in and fades out,<br />
+symbolizing getting closer to the viewer. The next card then zooms and fades in from the back and to give a fancy effect <img src="/wp-includes/images/smilies/icon_wink.gif" alt=";-)" class="wp-smiley" /> </p>
+<h2>V1</h2>
+<p><a href="/playground/webkit/animation1.html">Example 1</a> (use left and right arrow keys to go between the cards.</p>
+<p>I started off playing around with the @keyframes rule. This is the CSS animation that gives you most control and it should be good enough to be able to replace most of your js animations. I believe JS libraries should be able to use the CSS animation internally as long as no code depends on &#8221; any animation&#8221; events except start and begin.</p>
+<p>The CSS animation allows you to set the animation-name at the time you want to start your animation. You can set up multiple keypoints at different intervals but for the simplest case you only need to set the from (0%) and to (100%) frames.</p>
+<p>For the animation I had in mind I needed 4 animations. fade-in-backwards, fade-out-backwards, fade-in-forwards and fade-out-forwards. These are extremely simple and I was very tempted to create these using the CSSOM but I never went that far.</p>
+<p>To play the animation forward I set the animation-name of the current card to fade-out-forward and the next card to fade-in-forward (and the fade-*-backward for animation backwards).</p>
+<p>The CSS animations has a few drawbacks. One of them is that when the animation is finished it is pretty cumbersome to freeze the state. One way to achieve the freezing is to listen to the window.onwebkitanimationend event , check the<br />
+animationName of the event, read the computed style and apply that. The problem with this is that I either iterate over all CSS properties used in the to (100%) keyframe or I manually keep track of the properties I want to freeze. I ended up<br />
+manually setting the properties because I was laze. This does not scale well of course so if you are serious about freezing your animations I would recommend writing functions to freeze the animation (you will need to be able to unfreeze<br />
+it if you want to animate it again).</p>
+<p>I can think of two other drawbacks. One is mentioned in the spec proposal and that is the ability to pause the animation. The spec proposal currently supports this but they are considering removing it. If they remove it the user will have to write some non trivial js to freeze the state again (same thing as I talked about before). I&#8217;m not even sure how resuming would work since I don&#8217;t think there is a way to set the time for the animation.</p>
+<h2>V2</h2>
+<p><a href="/playground/webkit/animation2.html">Example 2</a></p>
+<p>It turned out that my use case is actually a transition (surprise) and for transitions, CSS transitions are much better suited.</p>
+<p>Transitions allow you to change a CSS property (any property that supports transitions) and it will animate the property when changed. For example, if you say that &#8220;width&#8221; should be a transition-property, setting the width will animate the width from its old width to the new width. I cannot emphezise enough how useful this property is. Please reread this paragraph and makes sure you get it <img src="/wp-includes/images/smilies/icon_smile.gif" alt=":-)" class="wp-smiley" />  Now how many lines of js do you need to make your elements fade in and out when you show and hide them? None, it is easily done with one line of CSS (if<br />
+you use opacity to hide them that is).</p>
+<p>So back to the KeyNote like demo. The idea here is to set all the coming cards to zoomed out and totally transparent and all the previous cards to zoomed in and transparent. Now you only need to change which element is current by setting the zoom to 100% and the opacity to 1. Done!</p>
+<p>That is not entirely true, I also updated the class name of the previous and next card.</p>
+<h2>V3</h2>
+<p><a href="/playground/webkit/animation3.html">Example 3</a></p>
+<p>This is an iteration on the previous one. Instead of defining .next, .current and .previous classes I realized I could use the :target CSS selector in combination with the next sibling selector. The :target selector matches any<br />
+element with the same id as the hash fragment of the URL. This is mostly used for highlighing the target of an internal anchor that was clicked but it can be used for other more fancy things (like tab panes for example).</p>
+<p>When the page loads I needed to ensure that the URL contained a hash fragment and if it didn&#8217;t I replaced the URL with one that did. Also, I needed to add some code to sync the current card with the hash, allowing the user to bookmark<br />
+the correct card. A feature that should be part of any sane web app.</p>
+<h2>Conclusion</h2>
+<p>I cannot wait till we can use things like this in all browsers. It will surely make the web a richer experience. Once again, I&#8217;d like to thank the WebKit team for a totally excellent web browser and for pushing the web foward. I don&#8217;t know<br />
+what I would do without you <img src="/wp-includes/images/smilies/icon_smile.gif" alt=":-)" class="wp-smiley" /> </p>

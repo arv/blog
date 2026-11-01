@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style>
+
+</style>
+<script>
+
+
+var A;
+
+(function() {
+
+var KEY = {};
+
+function getPrivate(obj) {
+  return obj._getPrivateWithKey(KEY);
+}
+
+function setPrivate(obj, state) {
+  obj._getPrivateWithKey = function(key) {
+    if (key === KEY) {
+      return state;
+    }
+    throw Error('Permission denied');
+  };
+}
+
+A = function (a) {
+  var P = {
+    a: a
+  };
+
+  setPrivate(this, P);
+}
+
+A.prototype.getA = function() {
+  return getPrivate(this).a
+};
+
+A.prototype.setA = function(a) {
+  getPrivate(this).a = a;
+};
+
+A.prototype.inc = function() {
+  privateMethod(this);
+};
+
+function privateMethod(self) {
+  getPrivate(self).a++;
+}
+
+})();
+
+
+</script>
+</head>
+<body>
+
+<script>
+
+var obj = new A(0);
+document.write(obj.getA() + '<br>');
+obj.setA('42');
+document.write(obj.getA() + '<br>');
+obj.inc();
+document.write(obj.getA() + '<br>');
+obj.inc();
+document.write(obj.getA() + '<br>');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+---
+layout: base.njk
+pagination:
+  data: collections.posts
+  size: 10
+  alias: posts
+permalink: "{% if pagination.pageNumber == 0 %}/{% else %}/page/{{ pagination.pageNumber + 1 }}/{% endif %}"
+eleventyExcludeFromCollections: true
+---
+{% set navId = "multinav1" %}{% include "multinav.njk" %}
+
+<div class="post-list">
+{% for post in posts %}
+	{% include "post-list-item.njk" %}
+{% endfor %}
+</div>
+
+{% set navId = "multinav2" %}{% include "multinav.njk" %}

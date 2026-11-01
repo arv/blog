@@ -1,0 +1,314 @@
+---json
+{
+  "title": "Computed vs Cascaded Style",
+  "date": "2007-07-27T18:54:15-08:00",
+  "permalink": "/archives/2007/07/27/18.54.15/",
+  "tags": [
+    "DHTML",
+    "Internet Explorer",
+    "Mozilla",
+    "Rant"
+  ],
+  "comments": [
+    {
+      "id": "102291",
+      "author": "Dean Edwards",
+      "url": "http://dean.edwards.name/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>This works on IE6 and IE7:</p>\n<p>var PIXEL = /^\\d+(px)?$/i;<br />\nfunction getPixelValue(element, value) {<br />\n  if (PIXEL.test(value)) return parseInt(value);<br />\n  var style = element.style.left;<br />\n  var runtimeStyle = element.runtimeStyle.left;<br />\n  element.runtimeStyle.left = element.currentStyle.left;<br />\n  element.style.left = value || 0;<br />\n  value = element.style.pixelLeft;<br />\n  element.style.left = style;<br />\n  element.runtimeStyle.left = runtimeStyle;<br />\n  return value;<br />\n};</p>"
+    },
+    {
+      "id": "102292",
+      "author": "yn",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I disagree. I find currentStyle much more useful than getComputedStyle and would have preferred non-IE browsers to implement it instead of computed styles (ideally both).</p>\n<p>There is always a way to calculate the pixel value using the tools browsers provide. But in FF today, there simply NO WAY to know whether a width value is set in percentages, inches or pixels if the value had been set outside of the style attribute! This is a pretty unbelievable shortcoming.</p>\n<p>The offset* and client* functions provide nearly everything you may want in terms of getting the pixel values, and the difference between them helps you calculate padding/border values. In fact they&#8217;re so useful that I&#8217;ve rarely seen anyone opt for computed style in such situations, even if the target is FF-only.</p>"
+    },
+    {
+      "id": "102293",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Dean: That seems to work pretty well in some cases. Which cases? It seems like it would only work for properties that have pixel* equivalent (left, top, right, bottom, width and height).</p>\n<p>yn: How would you compute the font size given the following:</p>\n<p>* { font-size: 12pt; }</p>\n<p>or the background color given:</p>\n<p>* { background-color: Highlight; }</p>"
+    },
+    {
+      "id": "102297",
+      "author": "yn",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik: It&#8217;s not about finding cases where offset* and client* won&#8217;t be enough, they certainly exist. It&#8217;s about what&#8217;s more useful to have if you had to choose one. Why would you need the pixel value of a font set in points? I really can&#8217;t think of such a scenario. If you want the height of the line in pixels, which would make more sense, that&#8217;s easy to do. </p>\n<p>On the other hand, I can easily think of multiple scenarios requiring the actual cascaded properties and I&#8217;ve been constantly bumping against these cases, as mentioned above.</p>\n<p>Btw, to answer your specific questions:</p>\n<p>function getRealBackgroundColor(el) {<br />\n    var oRG=document.body.createTextRange();<br />\n    oRG.moveToElementText(el);<br />\n    var iClr=oRG.queryCommandValue(&#8220;BackColor&#8221;);<br />\n    return &#8220;rgb(&#8220;+(iClr &amp; 0xFF)+&#8221;,&#8221;+((iClr &amp; 0xFF00)&gt;&gt;8)+&#8221;,&#8221;+((iClr &amp; 0xFF0000)&gt;&gt;16)+&#8221;)&#8221;;<br />\n}</p>\n<p>Your other question was already answered by Dean, his function can take any value in any unit (except % in some cases) and return it in pixels, it&#8217;s not limited to .left, he&#8217;s just using it to do the conversion. so getPixelValue(document.body,&#8221;12pt&#8221;) will give you the pixel value for your font under your setup.</p>\n<p>Again, I&#8217;m not saying anything everywhere can be converted to an absolute value, I&#8217;m just saying that currentStyle is a lot more useful.</p>"
+    },
+    {
+      "id": "102298",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>yn: Thanks, the queryCommandValue is a great example how to do this.</p>"
+    },
+    {
+      "id": "102305",
+      "author": "Papandreou",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@yn: Your getRealBackgroundColor function is really interesting. For different reasons, I&#8217;ve been looking for a way to get the rrggbb values corresponding to a user&#8217;s CSS system colors, but I actually gave up a while ago.</p>\n<p>However, I can only get your code to work in IE. Any chance you know a cross-browser way of accomplishing this?</p>"
+    },
+    {
+      "id": "102312",
+      "author": "yn",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Papandreou: In any other browser it&#8217;s trivial to get the real background color, via getComputedStyle. IE is the only one that makes this a bit of a challenge. </p>\n<p>To create a cross-browser function simply check if the getComputedStyle method exists (FF, Opera, etc.), and if so use it, otherwise see if the createTextRange method exists (IE), and if so use it.</p>\n<p>A *real* challenge would be to get the cascaded value (&#8220;red&#8221;, &#8220;highlight&#8221;, etc.) set in external CSS in Firefox.</p>\n<p>BTW, Erik: Your article is mistaken. Opera supports .currentStyle properly, allowing you to get the cascaded style (from the article: &#8220;Only IE has a way to get the cascaded style.&#8221;).</p>"
+    },
+    {
+      "id": "102508",
+      "author": "Dimitri Glazkov",
+      "url": "http://glazkov.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Another interesting tidbit is that computed style does not take into account margin collapse. For instance, the marginTop value reported does not necessarily represent the actual margin value in effect. Quick example:</p>\n<p>Yo</p>\n<p>Using just default styles, the computed style on body will be 8, but it&#8217;s not very useful, because the effective margin is 21 (body margin collapsed in favor of h1).</p>"
+    },
+    {
+      "id": "102509",
+      "author": "Dimitri Glazkov",
+      "url": "http://glazkov.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Sorry, I should&#8217;ve escaped the markup:</p>\n<p>&lt;body&gt;<br />\n&lt;div&gt;<br />\n&lt;h1&gt;Yo&lt;/h1&gt;<br />\n&lt;/div&gt;<br />\n&lt;/body&gt;</p>"
+    },
+    {
+      "id": "102937",
+      "author": "Melikoth",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>For some reason when I use this it returns &#8220;auto&#8221; for top and left values.  The object I am interrogating has no styling applied, but I was hopinh it would tell me where it was located.</p>"
+    },
+    {
+      "id": "103035",
+      "author": "xErath",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Why all the trouble of defining document.defaultView.document.defaultView.document.defaultView.document.defaultView.document.defaultView ??</p>\n<p>use .getComputedStyle directly</p>"
+    },
+    {
+      "id": "103398",
+      "author": "Michel",
+      "url": "http://www.counti.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Stylesheets are class. It reduces size doe this is a page of search engines thus can better spiders. What a shame I only think that the Internet Explorer and Firefox that partially distinct process.</p>"
+    },
+    {
+      "id": "103835",
+      "author": "Bill",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@Dean Edwards: the code provided does not work properly under the following conditions in IE7 (I haven&#8217;t tried it in IE6).</p>\n<p>Create a CSS rule body { font-size: 62.5%; }</p>\n<p>Somewhere on a page, put some text in the body of a SPAN tag.</p>\n<p>Your code will return 625px.  NOT cool!  <img src=\"/wp-includes/images/smilies/icon_sad.gif\" alt=\":(\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "103845",
+      "author": "Rob",
+      "url": "http://www.strictly-software.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I had a similar problem the other day requiring the computed style in px not the currentStyle or style value and ran into the limitations of Deans hack when working with styles using %. The following function seems to correctly convert the style to px and ems and also handles styles in % and child elements where the parent is in % but the child is set to &#8220;auto&#8221;. It returns an object with the style value (computed/current), size in px, sixe in em, size 1em equates to in px on that element. May not be perfect but seems to work at the moment until told otherwise <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>\n<p><a href=\"http://www.strictly-software.com/CSSStyleObject.asp\" rel=\"nofollow\">http://www.strictly-software.com/CSSStyleObject.asp</a></p>"
+    },
+    {
+      "id": "103901",
+      "author": "Tomek",
+      "url": "http://www.tomus.eu/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Very nice solution.<br />\nBut there is a little bug in the hack by Dean Edwards.<br />\nI had a case where floating point numbers had to pass this hack.<br />\nIt return false <img src=\"/wp-includes/images/smilies/icon_sad.gif\" alt=\":(\" class=\"wp-smiley\" />  this was logical <img src=\"/wp-includes/images/smilies/icon_razz.gif\" alt=\":P\" class=\"wp-smiley\" /><br />\ni&#8217;ve modified this hack to </p>\n<p>if ( !/^\\d+(.\\d*)+(px)?$/i.test( ret ) ){</p>\n<p>    // do something good <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>\n<p>}<br />\nhave fun i hope i could help someone</p>"
+    },
+    {
+      "id": "104275",
+      "author": "Lindsey",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I know you guys may just think anyone that doesn&#8217;t have the capability of learning computer systems and hacking via code or html might just be suckers, I really hope you haven&#8217;t hacked my computer <img src=\"/wp-includes/images/smilies/icon_sad.gif\" alt=\":(\" class=\"wp-smiley\" />  I saw something in my files that deeply disturbed me and I was hoping someone could help me figure out if it was a practical joke or really a virus. Because it&#8217;s not funny if it is a virus&#8230;.but I am willing to laugh at the cleverly of putting something in the encoding of your &#8220;virus&#8221; that brings me to this website&#8230;. so love me, hate me whatever&#8230;</p>\n<p>~Lindsey</p>"
+    },
+    {
+      "id": "104299",
+      "author": "Bitkisel Ürünler",
+      "url": "http://www.ekoal.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>!’wOw’! Thank you very too much…</p>"
+    },
+    {
+      "id": "104309",
+      "author": "altın çilek",
+      "url": "http://www.altincilek.tk",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>For some reason when I use this it returns “auto” for top and left values. The object I am interrogating has no styling applied, but I was hopinh it would tell me where it was located.</p>"
+    },
+    {
+      "id": "104347",
+      "author": "Dan",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I found code inside jQuery based on this &#8220;solution&#8221;. Has anyone thought that for a TOP, for example, we shouldn&#8217;t use left &amp; pixelLeft for figuring out the actual value? I have a css with LEFT and TOP of 10% and go figure, they end up having the same value when using the CSS function, when obviously the parent isn&#8217;t a square. </p>\n<p>Unbelievable that this code made it into jQuery as it is.</p>"
+    },
+    {
+      "id": "104372",
+      "author": "wordpress themes",
+      "url": "http://www.3code.cn",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I found code inside jQuery based on this “solution”. Has anyone thought that for a TOP, for example, we shouldn’t use left &amp; pixelLeft for figuring out the actual value? I have a css with LEFT and TOP of 10% and go figure, they end up having the same value when using the CSS function, when obviously the parent isn’t a square.</p>\n<p>Unbelievable that this code made it into jQuery as it is.</p>"
+    }
+  ]
+}
+---
+<p>Most JS frameworks and libraries I&#8217;ve seen have a function similar to this:</p>
+<pre><code>function getStyle(el, prop) {
+  if (document.defaultView &amp;&amp; document.defaultView.getComputedStyle) {
+    return document.defaultView.getComputedStyle(el, null)[prop];
+  } else if (el.currentStyle) {
+    return el.currentStyle[prop];
+  } else {
+    return el.style[prop];
+  }
+}</code></pre>
+<p>So what is wrong with this you might ask? Lets add some background and then<br />
+we can get back to that question.</p>
+<h3>Computed Style</h3>
+<p>Computed style represents the actual computed value of a style in absolute<br />
+units. For example &#8217;100px&#8217; (for width) or &#8216;left&#8217; (for text-align). The computed<br />
+value is never &#8216;auto&#8217;, &#8216;inherit&#8217;, &#8217;50%&#8217;, &#8216;smaller&#8217;, &#8217;1.5em&#8217; etc. These values are<br />
+relative to something and the browser needs to convert these values to absolute<br />
+values first.</p>
+<h3>Cascaded Style</h3>
+<p>Cascaded style is the real style value that is applied to an element when the<br />
+style value is set to &#8216;inherit&#8217;. Inherit means that it should get its value from<br />
+the first ancestor that has a non &#8216;inherit&#8217; value. A few CSS properties have<br />
+their value set to &#8216;inherit&#8217; by default. Most common of these are probably<br />
+&#8216;color&#8217; and &#8216;font-size&#8217;. If you change the font size of a paragraph you want the<br />
+links in the paragraph to change their font size as well.</p>
+<h3>Inline Style</h3>
+<p>Inline style is the style value you have added to the style attribute on you<br />
+element or the style properties you have set in script using<br />
+element.style.propertyName.</p>
+<h3>Example</h3>
+<pre><code>&lt;style>
+
+div {
+  width: 500px;
+  font-size: 12px;
+}
+
+p {
+  width: 50%;
+  font-size: 1em;
+}
+
+a {
+  font-size: inherit;
+}
+
+&lt;/style>
+
+&lt;div>
+&lt;p>Some text with &lt;a id=a href=#>a link&lt;/a>.
+More &lt;b style="font-size:150%">text&lt;/b>&lt;/p>
+&lt;/div></code></pre>
+<table>
+<tr>
+<th></th>
+<th>Computed Style</th>
+<th>Cascaded Style</th>
+<th>Inline Style</th>
+</tr>
+<tr>
+<th>p width</th>
+<td>&#8220;250px&#8221;</td>
+<td>&#8220;50%&#8221;</td>
+<td>&#8220;&#8221;</td>
+</tr>
+<tr>
+<th>p fontSize</th>
+<td>&#8220;12px&#8221;</td>
+<td>&#8220;1em&#8221;</td>
+<td>&#8220;&#8221;</td>
+</tr>
+<tr>
+<th>a fontSize</th>
+<td>&#8220;12px&#8221;</td>
+<td>&#8220;1em&#8221;</td>
+<td>&#8220;&#8221;</td>
+</tr>
+<tr>
+<th>b fontSize</th>
+<td>&#8220;18px&#8221;</td>
+<td>&#8220;150%&#8221;</td>
+<td>&#8220;150%&#8221;</td>
+</tr>
+</table>
+<h3>Browser Support</h3>
+<p>All browsers except IE has a way to get the computed style. The way to do<br />
+this is to use document.defaultView.getComputedStyle. Only IE has a way to get<br />
+the cascaded style. This is done using element.currentStyle.</p>
+<p>All browsers supports getting the inline style (even IE4) but inline style is<br />
+not that interesting because it is empty unless you already set it, and in that<br />
+case you don&#8217;t really need to query it.</p>
+<h3>Conclusion</h3>
+<p>Back to our earlier question. What is wrong with our getStyle function? It<br />
+should be pretty obvious now. It will give very different and sometimes<br />
+unexpected results depending both on browsers and on the value set by the page<br />
+author and even worse, set by user style sheets.</p>
+<p>So how do we solve this? We stop supporting IE of course&#8230; seriously, with<br />
+the market share IE has that is not an option. The best solution is to remove<br />
+functions like these from shared code and instead add more specific functions.<br />
+One can for example, often calculate the computed value based on the cascaded<br />
+value and the ancestors. A good example of that is &#8216;visibility&#8217;. Computing that<br />
+is pretty easy. If the value is &#8216;inherit&#8217; check the parents until a non inherit<br />
+value is found. For things like left, width etc you will be better of using<br />
+offsetLeft, offsetWitdh etc. There are a lot of cases and sometimes it is just<br />
+not possible (or requires iterative testing with different absolute sized<br />
+elements).</p>
+<h3>Comments</h3>
+<h4>Override style</h4>
+<p>There is one more style type that is worth mentioning and that is the<br />
+override style. This is called document.defaultView.getOverrideStyle in the W3C<br />
+DOM and element.runtimeStyle in IE. It allows you to override the style property<br />
+in such a way that it has (a) highest priority and (b) not serialized from the<br />
+DOM when you do things like cssText and innerHTML. getOverrideStyle is not<br />
+supported in Gecko so it is still only useful to IE specific code.</p>
+<p>It is a bit strange to me that the W3C DOM never added a way to get the<br />
+cascaded style. The usecases for this are few but they do exists.</p>
+<p>What is even more strange is that MS did not realize the need for a way to<br />
+get the compouted style back in the days when they believed in Trident as a<br />
+platform.</p>

@@ -1,0 +1,71 @@
+---json
+{
+  "title": "More Gears",
+  "date": "2007-05-30T19:06:10-08:00",
+  "permalink": "/archives/2007/05/30/19.06.10/",
+  "tags": [
+    "Google"
+  ],
+  "comments": [
+    {
+      "id": "102107",
+      "author": "Dimitri Glazkov",
+      "url": "http://glazkov.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Fail or no fail &#8212; I already have a perfect use case, and I plan to start playing with this as soon as I have even a smidget of time.</p>"
+    },
+    {
+      "id": "102112",
+      "author": "David Håsäther",
+      "url": "http://hasather.net/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Nice to finally see what you&#8217;ve been working on. Just watched Aaron&#8217;s presentation[1], and it looks really cool.</p>\n<p>Congrats <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":-)\" class=\"wp-smiley\" /> </p>\n<p>[1] <a href=\"http://www.youtube.com/watch?v=cQyha30nm6k\" rel=\"nofollow\">http://www.youtube.com/watch?v=cQyha30nm6k</a></p>"
+    },
+    {
+      "id": "102237",
+      "author": "nitro2k01",
+      "url": "http://gameboygenius.8bitcollective.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I watched the presentation, and it looks cool. (Although I have some opinions about the way some things are done, but that&#8217;s something I&#8217;ll have to post on the mailing list)<br />\nBut one thing I really wonder about: Why is executeSql a moethod of document?<br />\nAlso, if you can answer, are there any news about Opera compatibility?</p>"
+    },
+    {
+      "id": "102276",
+      "author": "Site Ekle",
+      "url": "http://www.vynet.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Nice to finally see what you’ve been working on. Just watched Aaron’s presentation[1], and it looks really cool.</p>"
+    },
+    {
+      "id": "102458",
+      "author": "Jared Nuzzolillo",
+      "url": "http://www.protoscript.net/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hey Erik. <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":-)\" class=\"wp-smiley\" />  Congrats on releasing a great tool.</p>\n<p>Send me an email sometime so I know you&#8217;re alive. I wanted to chat with you.</p>\n<p>Best!<br />\nJared</p>\n<p>ps. Telle Emil hello</p>"
+    }
+  ]
+}
+---
+<p>It has been pretty hard not being able to tell people what I work on. Most of the time that I didn&#8217;t say &#8220;no comment&#8221; I said I was working on the Firefox team here at Google and sometimes I said Gmail. None of these are true as you now know. What I&#8217;ve been working on is Google Gears. A plugin/extension that allows you to write applications that work offline.</p>
+<p>It has been a very interesting project so far and I expect it to be even more interesting now that we have released it as an open source project.</p>
+<p>I&#8217;ve heard some people say that this will fail because it is a plugin and people don&#8217;t want to install plugins. Well, how many of you have the Adobe Flash plugin installed? Also, my hope is that Firefox, Opera and eventually Safari will support these APIs. We want to make this into an open standard and we are working with Adobe, Mozilla and Opera and you should expect a proposal being sent to WHATWG/W3C some time soon. It will most likely not have exactly the same names for things but I don&#8217;t see that as a big issue. Gears has a good model for versioning and I believe people will do things like this:</p>
+<pre><code>if (document.executeSql) {
+  document.executeSql(dbName, sqlStatement, args);
+} else if (window.google &#038;&#038; google.gears) {
+  var db = google.gears.factory.create('database', '1.0'); // no beta here :-)
+  db.open(dbName);
+  db.execute(sqlStatement, args);
+} else {
+  installGoogleGears();
+}</code></pre>
+<p>Also we&#8217;ve heard people say that until IE supports these APIs it will not take off. IE before version 7 did not support XMLHttpRequest. You had to use a plugin. I think the same will happen with Gears and eventually MS will catch up to the leading browsers.</p>
+<p>The current release is a beta and it has some rough edges. For example we haven&#8217;t yet added the quota system so any application that you allow can theoretically fill up your hard drive. During the beta we plan to keep the security dialog for this reason. Once we got the qouta system in place we expect that the dialog will only come up when an application has reached its quota.</p>

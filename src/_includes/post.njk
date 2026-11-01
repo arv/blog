@@ -1,0 +1,51 @@
+---
+layout: base.njk
+bodyClass: single single-post
+---
+{% set prev = collections.posts | getPreviousCollectionItem %}
+{% set next = collections.posts | getNextCollectionItem %}
+{# collections.posts is newest-first, so "previous" in collection order is the newer post #}
+<nav class="singlenav cf">
+	<div class="older">{% if next %}&laquo; <a href="{{ next.url }}" rel="prev">{{ next.data.title | safe }}</a>{% endif %}</div>
+	<div class="newer">{% if prev %}<a href="{{ prev.url }}" rel="next">{{ prev.data.title | safe }}</a> &raquo;{% endif %}</div>
+</nav>
+
+<article class="post hentry cf{% for tag in tags %} tag-{{ tag | tagSlug(tagSlugs) }}{% endfor %}">
+
+	<h1>
+		<a href="{{ page.url }}" title="{{ title | stripHtml }}" rel="bookmark">{{ title | firstpart | safe }}</a>
+	</h1>
+
+	<div class="post-footer">
+		<time datetime="{{ date | dateIso }}">{{ date | dateFormat("d MMM yyyy") }}</time>
+		{% if tags and tags.length %}&nbsp;&nbsp;| {% for tag in tags %}<a href="/archives/tag/{{ tag | tagSlug(tagSlugs) }}/" title="View all posts in {{ tag }}" rel="category tag">{{ tag | safe }}</a>{% endfor %}{% endif %}
+	</div>
+
+	<div class="post-bodycopy cf">
+		{{ content | safe }}
+	</div>
+
+</article>
+
+{% if comments and comments.length %}
+<div id="comments">
+	<h3 id="comments-title">{{ comments.length }} <span>comment{% if comments.length != 1 %}s{% endif %}</span></h3>
+	<ol class="commentlist">
+	{% for c in comments %}
+		<li class="comment depth-{{ c.depth or 1 }}{% if c.byAuthor %} bypostauthor{% endif %}" id="comment-{{ c.id }}">
+			<div>
+				<div class="comment-author">{% if c.url %}<a href="{{ c.url }}" rel="external nofollow">{{ c.author }}</a>{% else %}{{ c.author }}{% endif %}</div>
+				{% if c.date %}<div class="comment-date-link">{{ c.date }}</div>{% endif %}
+				<div class="comment-text">{{ c.html | safe }}</div>
+			</div>
+		</li>
+	{% endfor %}
+	</ol>
+	<p class="comments-closed">Comments are closed.</p>
+</div>
+{% endif %}
+
+<nav class="singlenav cf" id="singlenav2">
+	<div class="older">{% if next %}&laquo; <a href="{{ next.url }}" rel="prev">{{ next.data.title | safe }}</a>{% endif %}</div>
+	<div class="newer">{% if prev %}<a href="{{ prev.url }}" rel="next">{{ prev.data.title | safe }}</a> &raquo;{% endif %}</div>
+</nav>

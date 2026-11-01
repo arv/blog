@@ -1,0 +1,233 @@
+---json
+{
+  "title": "Opera 9 Preview",
+  "date": "2005-10-21T08:43:05-08:00",
+  "permalink": "/archives/2005/10/21/08.43.05/",
+  "tags": [
+    "Opera",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "5808",
+      "author": "Anne van Kesteren",
+      "url": "http://annevankesteren.nl/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>The difference with canvas is that Firefox and Opera wait with updating the drawing till after all iterations are made. Opera will actually paint all 300 times as the specification currently requires.</p>\n<p>See also <a href=\"http://virtuelvis.com/archives/2005/10/opera-merlin#cid3018\" rel=\"nofollow\">http://virtuelvis.com/archives/2005/10/opera-merlin#cid3018</a> and follow-up comments. See also <a href=\"http://virtuelvis.com/archives/2005/10/canvas-mandelbrot\" rel=\"nofollow\">http://virtuelvis.com/archives/2005/10/canvas-mandelbrot</a> on why we not suck that badly <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":-)\" class=\"wp-smiley\" /> </p>\n<p>Web Forms 2 is still experimental. Constructive feedback appreciated.</p>"
+    },
+    {
+      "id": "5810",
+      "author": "Arve Bersvendsen",
+      "url": "http://virtuelvis.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Re: Canvas.</p>\n<p>As the spec has been read, Opera is the one actually doing the right thing in the provided test case: The path is never closed, which means that it&#8217;ll draw first one, then two, then three, ad nauseaum up to 200.</p>\n<p>Whether the spec makes sense or not, is a different question.</p>"
+    },
+    {
+      "id": "5811",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>So the test case is wrong? I wonder why that was never mentioned in the bug tracking system for this test case?</p>"
+    },
+    {
+      "id": "5812",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I&#8217;ve fixed the test case. Now it is almost usable in Opera but I still think Opera is too slow. In Firefox it is instant but in Opera it still takes some time.</p>\n<p><a href=\"/playground/canvas0000.xhtml\" rel=\"nofollow\">/playground/canvas0000.xhtml</a></p>"
+    },
+    {
+      "id": "5813",
+      "author": "Anne van Kesteren",
+      "url": "http://annevankesteren.nl/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>This was mentioned, it was one of the first bugs reported. (Please moderate my first comment.) If you have access, you want bug 175635.</p>\n<p>What I think that happens is that Firefox waits with drawing, while Opera tries to draw every step. Not sure what is better.</p>"
+    },
+    {
+      "id": "5814",
+      "author": "Arve Bersvendsen",
+      "url": "http://virtuelvis.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik: Add some timing info to your test: Opera is, at least on either of my test machines just as fast as FF1.5 beta2.</p>\n<p>What confuses people here is the incremental drawing process, not the actual speed.</p>"
+    },
+    {
+      "id": "5816",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Anne, You are right of course&#8230; I for some reason missed the notification that the bug I was refering to had been marked as a duplicate of 175635. With the timed test cases in the BTS it is obvious that Opera is actually faster. This all comes down to percieved performance. NN4 used to redraw everything after every change wheras Trident and now Gecko, never redraws anything while in a JS thread. This gives a better performance in general and gives a more stable UI.</p>"
+    },
+    {
+      "id": "6106",
+      "author": "John Fishman",
+      "url": "http://www.saintefamille.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>What you tihnk about Opera VS Mozilla (Firefox)? I think Firefox more usability.</p>"
+    },
+    {
+      "id": "6112",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I prefer Firefox. It is a lot more usable and it has less bugs when in its rendering engine/dom support.</p>\n<p>However, Opera is a lot better than Safari and years ahead of IE.</p>\n<p>Opera has some nice features that I think could improve Firefox.</p>"
+    },
+    {
+      "id": "6130",
+      "author": "Susan",
+      "url": "http://www.swoclassifieds.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>O, i didn&#8217;t know that. Thanks for openning my eyes.<br />\nI thinks that Opera is more comfortable than Firefox. By the way it is quicker and safer. But tastes differ.</p>"
+    },
+    {
+      "id": "6180",
+      "author": "Nataly",
+      "url": "http://www.soho15.org/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Omg, i&#8217;ve just payed for my Opera 8 and they are doing the ninth version now :).</p>"
+    },
+    {
+      "id": "103315",
+      "author": "language",
+      "url": "http://stairway.phreesite.com/language3554.html",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>gdpau kbhp bfwc</p>"
+    },
+    {
+      "id": "103317",
+      "author": "language",
+      "url": "http://abalone.sitebooth.com/language5723.html",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>teasm wredlcz lijsn atircn</p>"
+    },
+    {
+      "id": "103318",
+      "author": "language",
+      "url": "http://abalone.seitenclique.net/language7628.html",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>pvnoa</p>"
+    },
+    {
+      "id": "103320",
+      "author": "language",
+      "url": "http://stamford.rack111.com/language498.html",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>zrct</p>"
+    },
+    {
+      "id": "103321",
+      "author": "st",
+      "url": "http://katy444.hostinggratisargentina.com/st3119.html",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>txrdaqy xfyuc</p>"
+    },
+    {
+      "id": "103323",
+      "author": "the",
+      "url": "http://strache230.101freehost.com/the1350.html",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>izcevn jtavoy wvxsuo gpqjk</p>"
+    },
+    {
+      "id": "103325",
+      "author": "de",
+      "url": "http://baty2.977mb.com/de9122.html",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>cpdsx zbfyuto gjbdyi ojcbul</p>"
+    },
+    {
+      "id": "103326",
+      "author": "de",
+      "url": "http://baty2.977mb.com/de9122.html",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>rjfsiv</p>"
+    },
+    {
+      "id": "103332",
+      "author": "free",
+      "url": "http://ribs-forn.freewebhosting360.com/free4438.html",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>zhrbpi lijuc rawudyj omqz</p>"
+    },
+    {
+      "id": "103333",
+      "author": "by",
+      "url": "http://clintblack.hostinggratisargentina.com/by6190.html",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>cvui axtcuhl</p>"
+    },
+    {
+      "id": "103336",
+      "author": "com",
+      "url": "http://djess444.freewebhosting360.com/com3586.html",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>gardiy htfkir</p>"
+    }
+  ]
+}
+---
+<p>Some highlights/rants of a <a href="http://snapshot.opera.com/windows/">great product</a>.</p>
+<h3>Improved SVG support</h3>
+<p>Initial DOM support. In 8.5 one could not manipulate the SVG using scripting.<br />
+Opera now partially supports using CSS with SVG (no :hover support).</p>
+<h3>Canvas Support</h3>
+<p><a href="http://undefined.org/js/canvas0000.html">This</a> is dog slow&#8230;<br />
+they really need to do something about it or remove it entirely.</p>
+<h3>Web Forms 2</h3>
+<p>Basic support for Web Forms 2 (part of HTML5). The controls look pretty bad and<br />
+obviously has not gone through usability testing. Still it is good that there<br />
+are more implementations available than the IE one.</p>
+<h3>XSLT and XPath</h3>
+<p>XSLT can now be used to both style XML documents as well as used for scripting using the<br />
+Mozilla interface, XSLTProcessor. XPath is available to scripting using DOM<br />
+Level 3 interfaces.</p>
+<h3>Windowless Plugins</h3>
+<p>Allow HTML elements to appear in front of iframes and plugins I thought Opera<br />
+were going to make all plugins window less no matter what but it seems I had my<br />
+hopes too high. Only windowless plugins work as expected (same bugs as in IE).</p>
+<h3>WYSIWYG</h3>
+<p>Support for <code>document.designMode</code> &#8211; The <a href="http://www.mozilla.org/editor/midasdemo/">demo</a> created for Midas<br />
+works pretty well.</p>

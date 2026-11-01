@@ -1,0 +1,10 @@
+<nav class="multinav" id="{{ navId }}">
+{% set current = pagination.pageNumber + 1 %}
+{% for p in current | pageNumbers(pagination.pages.length) %}
+	{% if p == "dots" %}<span class="page-numbers dots">&hellip;</span>
+	{% elif p == current %}<span class="page-numbers current">{{ p }}</span>
+	{% else %}<a class="page-numbers" href="{{ pagination.hrefs[p - 1] }}">{{ p }}</a>
+	{% endif %}
+{% endfor %}
+{% if pagination.href.next %}<a class="next page-numbers" href="{{ pagination.href.next }}">Next &raquo;</a>{% endif %}
+</nav>

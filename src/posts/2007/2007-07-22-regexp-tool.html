@@ -1,0 +1,108 @@
+---json
+{
+  "title": "RegExp Tool",
+  "date": "2007-07-22T16:34:22-08:00",
+  "permalink": "/archives/2007/07/22/16.34.22/",
+  "tags": [
+    "DHTML",
+    "JavaScript"
+  ],
+  "comments": [
+    {
+      "id": "102271",
+      "author": "Stephen Clay",
+      "url": "http://mrclay.org/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>You may also want to check out: <a href=\"http://osteele.com/tools/rework/\" rel=\"nofollow\">http://osteele.com/tools/rework/</a><br />\nThis got me through some hard times <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "102272",
+      "author": "Paul Colton",
+      "url": "http://www.aptana.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Looks great. Do you have any issues with my integrating this into our Aptana IDE? If so, please contact me at paul at aptana dot com.</p>"
+    },
+    {
+      "id": "102289",
+      "author": "tom h",
+      "url": "http://www.straightnochaser.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Nice tool, but some form labels wouldn&#8217;t hurt. Took me a few trys and a crash in order to figure out that I was entering the regex in the wrong field.</p>"
+    },
+    {
+      "id": "102420",
+      "author": "Lonnie Lee Best",
+      "url": "http://www.lonniebest.com/News/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Regular Expression: [^L]*<br />\nSample Text: Lonnie is here</p>\n<p>Result should be: onnie is here<br />\nResult is: [nothing]</p>"
+    },
+    {
+      "id": "102425",
+      "author": "Lonnie Lee Best",
+      "url": "http://www.lonniebest.com/News/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Also, the expression and sample (mentioned previously) also generates an endless loop when all options are checked.</p>\n<p>I like what your trying to do. JavaScript currently provides an incomplete regular expression engine. It doesn&#8217;t support ?</p>"
+    },
+    {
+      "id": "102426",
+      "author": "Lonnie Lee Best",
+      "url": "http://www.lonniebest.com/News/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Your validation cut off my message. It apparently won&#8217;t allow (? </p>"
+    },
+    {
+      "id": "102427",
+      "author": "Lonnie Lee Best",
+      "url": "http://www.lonniebest.com/News/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Instead off deleting stuff in brackets you should convert brackets to their html code.<br />\nHere&#8217;s the remainder of my message (hand encoded):</p>\n<p>?&lt;= positive look-behind or ?&lt;! negative look-behind. I hope those features are soon supported though.</p>\n<p>Another tool:<br />\n<a href=\"http://www.ultrapico.com/Expresso.htm\" rel=\"nofollow\">http://www.ultrapico.com/Expresso.htm</a></p>"
+    },
+    {
+      "id": "102428",
+      "author": "Lonnie Lee Best",
+      "url": "http://www.lonniebest.com/News/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>It was the left brackets above that prevented my message from posting earlier.</p>"
+    },
+    {
+      "id": "102541",
+      "author": "Chris Phillips",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Dosen&#8217;t work in IE6</p>"
+    },
+    {
+      "id": "103089",
+      "author": "Graham",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Very cool, saved me some time figuring my little problem out.</p>"
+    }
+  ]
+}
+---
+<p>My favorite text editor of all time is <a href="http://www.activestate.com/Products/komodo/">ActiveState Komodo</a>. I used to use the full/pro version of this but since I was too lazy to buy it so I kept redownloading the trial version every month. A while back ActiveState released a free version of the editor called <a href="http://www.activestate.com/products/komodo_edit/">Komodo Edit</a>.</p>
+<p>Komodo Edit has almost all the features I use. Almost. One feature that I missed pretty soon after changing was the RegExp editor. It is a pretty simple tool that allows you to type in a regular expression, some sample text and it would show you the groups etc. So, I decided I would just reimplement this in DHTML (no AJAX here).</p>
+<p><a href="/playground/regexp/regexp.html">Regular Expression Tool</a></p>
+<p>The implementation is pretty simple. It uses input/propertychange events to track changes to the text areas and then applies the regular expression to the test text and displays the result in a tree. For the tree I used xTree2b which has been in beta for a few years now&#8230;</p>
+<p><strong>Updated:</strong> I added labels to the textfields and the result area.</p>

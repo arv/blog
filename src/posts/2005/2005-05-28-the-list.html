@@ -1,0 +1,59 @@
+---json
+{
+  "title": "The List",
+  "date": "2005-05-28T01:34:16-08:00",
+  "permalink": "/archives/2005/05/28/01.34.16/",
+  "tags": [
+    "JavaScript",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "3715",
+      "author": "Diabolics",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Shit&#8230;.. I did not really belive it but&#8230;. You have really given up WoW!<br />\n <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "5834",
+      "author": "Craig Buchek",
+      "url": "http://craigbuchek.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Number 6 has been done: <a href=\"http://www.tiddlywiki.com/\" rel=\"nofollow\">http://www.tiddlywiki.com/</a></p>"
+    },
+    {
+      "id": "5835",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>TiddlyWiki is nice but I&#8217;m not sure it actually solves the issue in general. It solves it for a specifix scenario and relies on the user saving the file. What I would like to see is GMail working in offline mode and then once it goes online it would sync with the server.</p>"
+    }
+  ]
+}
+---
+<p><a href="http://me.eae.net">Emil</a> reminded me of <a href="http://www.joelonsoftware.com/articles/APIWar.html">Joel Spolsky&#8217;s list</a> of things that cannot be well done in a web application</p>
+<blockquote>
+<ol>
+<li>Create a fast drawing program</li>
+<li>Build a real-time spell checker with wavy red underlines</li>
+<li>Warn users that they are going to lose their work if they hit the close box of the browser</li>
+<li>Update a small part of the display based on a change that the user makes without a full roundtrip to the server</li>
+<li>Create a fast keyboard-driven interface that doesn&#8217;t require the mouse</li>
+<li>Let people continue working when they are not connected to the Internet</li>
+</ol>
+</blockquote>
+<p>So lets go through them and see where we are today.</p>
+<p>1. This one is still not yet done. I believe that with SVG, Canvas and some smart server side image processing it can be achieved. I&#8217;m just waiting for somone to do it. Doron of Mozilla fame did a <a href="http://weblogs.mozillazine.org/doron/archives/008187.html">simpe SVG/XBL demo</a>. It is not very rich and I&#8217;ve seen better ones in VML (Emil: Where did WebFX Web Draw go?)</p>
+<p>2. <a href="http://me.eae.net/archive/2005/05/27/dhtml-spell-checker/">Emil did it!</a></p>
+<p>3. <a href="http://www.google.com/search?q=window%20onbeforeclose">Yawn</a>.</p>
+<p>4. This is what the whole AJAX craze is all about. <a href="http://malmer.nu">Fredrik</a> did a lot of this in the old HTC version of WebOS. I don&#8217;t know when the really usable usages began. One thing that comes to my mind is all the DHTML chats that was hyped a while back. <a href="http://www.pwhitrow.com/">Paul Whitrow&#8217;s</a> NetCom comes to my mind because it was actually actively being used back then.</p>
+<p>5. Another no brainer. <a href="http://bindows.net">Bindows</a> is an example of a badly named product with excellent keyboard navigation.</p>
+<p>6. This one is still missing. I guess you can achieve a lot using server side caching and do the syncing once online. <a href="http://trimpath.com/project/wiki/TrimQuery">TrimPaths SQL engine</a> seems like it might be useful here. However I believe the browser architecture needs to evolve a bit to allow the user to shut down the browser and restart it in offline mode and still have access to the data (Cookie size limitation).</p>
+<p>Conclusion. 1 and 6 remains to be fulfilled but I believe we will most likely see number 1 being implemented within a year or so by Google/Picasa or maybe Yahoo!/Flickr!. I think nr 6 do require changes to the browser model and it might take quite some time before Microsoft allows something this powerful be available to something not controlled by them.</p>

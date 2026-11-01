@@ -1,0 +1,148 @@
+---json
+{
+  "title": "JS: The Good, the Bad and the Ugly",
+  "date": "2005-07-14T18:28:12-08:00",
+  "permalink": "/archives/2005/07/14/18.28.12/",
+  "tags": [
+    "JavaScript",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "5030",
+      "author": "Tom Trenka",
+      "url": "http://www,dept-z.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Byte Arrays!  You forgot byte arrays!</p>\n<p>Oh, and full on operator overloading would just f*cking rock <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "5031",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Yes. Totally. Using arrays with Number/Boolean is very slow and using Numbers with bitwise operator is limited to 32 bits. I guess the best thing to do today is to use a combination of the 2?</p>\n<p>Yeah, why limit the operator overloading to []? I would really love to be able to overload &#8216;+&#8217; so that we can implement event listeners like in C#.</p>\n<p>I also like the unit things from JS2 but the line has to be drawn somewhere.</p>"
+    },
+    {
+      "id": "5032",
+      "author": "M. Schopman",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I would love to see &#8220;metadata&#8221; features so we can automatically generate documentation. The scripts become larger and more complex, documentation is necessary. Something like C# has, with /// summary</p>\n<p>Not to mention a simple super scope. Absolutely necessary <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>\n<p>In overall beter focus on providing editors with more information and features for Javascript coding. </p>"
+    },
+    {
+      "id": "5033",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Metadata for documentation is not really needed in my opinion. It works well with jsdoc and similar tools already. JS2 has support for attributes (like JScript.NET)</p>\n<p>Super scope? Necessary? not really, but convenient. You can invoke super and super methods using call and apply on the function objects in question.</p>\n<p>I agree that editors totally suck today but I don&#8217;t think it is a problem that the syntax and semantics of the language should care about.</p>"
+    },
+    {
+      "id": "5036",
+      "author": "Dean Edwards",
+      "url": "http://dean.edwards.name/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>If we just got getters and setters I&#8217;d be happy.</p>"
+    },
+    {
+      "id": "5038",
+      "author": "Jeremy",
+      "url": "http://www.wdonline.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I&#8217;m with Dean.  While the list is nice, I&#8217;d be jumping up and down with joy if getters and setters were implemented.  What a wonderful world life would be.</p>"
+    },
+    {
+      "id": "5039",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I agree with getters and setters being the most important thing here. I&#8217;m using ul elements because the list is unordered <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";-)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "5157",
+      "author": "Nicholas",
+      "url": "http://www.nczonline.net/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Oh man, date weeks drive me nuts. I had to come up with an algorithm for that at my last job, and it was painful. So many different standards, so little time.</p>\n<p>In regards to stringbuilder: Firefox actually fixed the problem with string concatenation. I had created a StringBuffer object for my book before Firefox 1.0 was released, and now I find that Firefox&#8217;s native string concatenation is actually faster than my StringBuffer (IE&#8217;s is still significantly slower). While having a native StringBuffer would be nice, it would also be nice if JavaScript worked the same way as Java in that behinds the scenes it used a string buffer so we didn&#8217;t have to worry about it. </p>\n<p>Marking fields as enumerable is a big one for me as well. I&#8217;m sick of overriding toString() only to have it show up in a for..in loop.</p>"
+    },
+    {
+      "id": "5158",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I guess += can be optimized for strings but it makes other things a lot harder to implement (in the interpreter that is). But as long as it works I&#8217;m happy. I didn&#8217;t know Java optimized this. I know JS.NET gives a warning when you use += on Strings.</p>"
+    },
+    {
+      "id": "6125",
+      "author": "Garrett Smith",
+      "url": "http://dhtmlkitchen.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Those would be very good things to have, Erik. Very practical and wouldn&#8217;t be that hard to add to the language. </p>\n<p>* String could also have instance methods:<br />\n trim, startsWith and endsWith.</p>\n<p>* string.match and RegExp.exec should both be fixed to always return and array, and never null, thus eliminating the need to make an extra check for null. So you could do this:</p>\n<p>var matches = &#8220;foo&#8221;.match(/o/);<br />\nfor(i = 0; i </p>"
+    },
+    {
+      "id": "6129",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Garrett: You ended up sending your comment to the JS1.6 thread</p>"
+    }
+  ]
+}
+---
+<p>An <a href="http://webcoder.info/reference/vbsvsjs.html">article comparing JScript and VBS</a> got me some ideas about what I think should be added to JS 1.6.</p>
+<h3>Date</h3>
+<p>I like the Date object in JS but it needs a lot of improvements. These following things are really missing:</p>
+<ul>
+<li>Localized weekday name</li>
+<li>Localized month name</li>
+<li>Week start day</li>
+<li>Week number (localized because it is not the same all over the world</li>
+<li><code>parse</code> is totally useless because it only accepts US date format. It should allow a localized date string and take second argument containing the pattern.</li>
+<li>There should be a way to get the pattern, much like how <a href="http://java.sun.com/j2se/1.4.2/docs/api/java/text/SimpleDateFormat.html">SimpleDateFormat</a> works in Java.</li>
+</ul>
+<h3>String</h3>
+<p>We definately need a format method that works much like <code>printf</code> in C and the <code>%</code> operator in Python. This one should work with the date time format mentioned above.</p>
+</p>
+<p>There is also a need for a <code>StringBuilder</code> class since concatenation is too slow to do on imutable <code>String</code> objects. This is easy to implement in JS but letting the host environment implement this could improve performance quite a bit.</p>
+<h3>Array</h3>
+<p>See <a href="/archives/2005/06/05/17.53.19/">Array Extras</a>.</p>
+<p>These methods should also work on hashes (<code>Object</code>) and other collection like objects like the DOM <code>NodeList</code>.</p>
+<h3>Object</h3>
+<ul>
+<li>There is often a need for a <code>toHashCode()</code> method that returns a unique id of the object</li>
+<li>Getters and setters (Mozilla has these in JS1.5) but they need to be widely supported to allow real world usage</li>
+<li>Marking fields as enumarable or not. ActionScript has had this for a long time.</li>
+<li>A way to override the <code>[]</code> operator. I mean right now there is no good way to extend <code>Array</code> or <code>Object</code> to make it behave like a collection without adding a method.</li>
+</ul>
+<h3>Other</h3>
+<ul>
+<li>Constants like in JS1.5</li>
+<li><code>for each</code> loops that loops over the elements in an <code>Array</code> and the fields in an <code>Object</code>. (E4X really blew it here and broke the for in loop semantics.)</li>
+<li>Depreciate <code>with</code> since it is really bad in dynamic lanugages</li>
+<li>Add tuples support</li>
+<li>Fix the <code>constructor</code> property so that it points at the constructor used to create the object.</li>
+<li>Allow sub classing of built in objects like <code>Array</code>, <code>Function</code> and <code>Date</code> as well as DOM objects. Just imagine being able to create a class that extends <code>Element</code></li>
+<li><code>yield</code>/generator support like in Boo or Python.
+</li>
+</ul>

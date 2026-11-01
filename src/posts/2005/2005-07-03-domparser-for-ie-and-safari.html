@@ -1,0 +1,126 @@
+---json
+{
+  "title": "DOMParser for IE and Safari",
+  "date": "2005-07-03T20:19:18-08:00",
+  "permalink": "/archives/2005/07/03/20.19.18/",
+  "tags": [
+    "JavaScript",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "5026",
+      "author": "Matt Seeley",
+      "url": "http://mattseeley.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Very useful. Only recommendation is to change the PROGID value for IE. Seems &#8220;Msxml2.DOMDocument&#8221; is the best bet as it will always get the most recent version (</p>"
+    },
+    {
+      "id": "5027",
+      "author": "Matt Seeley",
+      "url": "http://mattseeley.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>up until v4.0.</p>\n<p>Burst has some nice documenation about this</p>\n<p><a href=\"http://burstproject.org/build/apidoc/html/classburst_1_1xml_1_1XmlDoc.html\" rel=\"nofollow\">http://burstproject.org/build/apidoc/html/classburst_1_1xml_1_1XmlDoc.html</a></p>\n<p>sorry about the double post.</p>"
+    },
+    {
+      "id": "5028",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Thanks for the link. The only reason I can see for not using IXMLDOMDocument is that one might want to use XPath and then IXMLDOMDocument2 must be used.</p>"
+    },
+    {
+      "id": "5128",
+      "author": "Randy Reddig",
+      "url": "http://shaderlab.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>It&#8217;s been added to recent Safari 2.0 seeds.</p>"
+    },
+    {
+      "id": "5129",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Yeah, I saw that when browsing their source code</p>"
+    },
+    {
+      "id": "5200",
+      "author": "Bosco",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I used the code above but I could only get error code: No such interface supported&#8230; but when I tried to print out the nodes the structure of the returned object seems to be well constructed.</p>\n<p>Please advise</p>"
+    },
+    {
+      "id": "23891",
+      "author": "jiajia",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Would you mind tell me which editor you are using for javascript file?</p>"
+    },
+    {
+      "id": "102285",
+      "author": "n[ate]vw",
+      "url": "http://www.extinguishedscholar.com/wpglob/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Shouldn&#8217;t the line:</p>\n<p>if (req.overrideMimeType) { req.overrideMimeType(contentType); }</p>\n<p>be instead:</p>\n<p>if (contentType &amp;&amp; req.overrideMimeType) { req.overrideMimeType(contentType); }</p>\n<p>as the lines above treat contentType as an optional argument?</p>"
+    },
+    {
+      "id": "104214",
+      "author": "Dee",
+      "url": "http://facebook.",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I keep getting this phrase &#8216;DOMparser&#8217; is unefined when I try loggin into face</p>"
+    },
+    {
+      "id": "104326",
+      "author": "Rajib",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>thanks</p>"
+    }
+  ]
+}
+---
+<p>A few days ago Dave over at the WebGraphics blog posted about <a href="http://web-graphics.com/mtarchive/001606.php">how to parse a string into a DOM tree for Safari</a>. </p>
+<p>I commented <cite>&#8220;How about implementing the DOMParser object in js?&#8221;</cite> and before I knew it I did it myself and adding IE compatibility on the way:</p>
+<pre><code>if (typeof DOMParser == "undefined") {
+   DOMParser = function () {}
+	
+   DOMParser.prototype.parseFromString = function (str, contentType) {
+      if (typeof ActiveXObject != "undefined") {
+         var d = new ActiveXObject("MSXML.DomDocument");
+         d.loadXML(str);
+         return d;
+      } else if (typeof XMLHttpRequest != "undefined") {
+         var req = new XMLHttpRequest;
+         req.open("GET", "data:" + (contentType || "application/xml") +
+                         ";charset=utf-8," + encodeURIComponent(str), false);
+         if (req.overrideMimeType) {
+            req.overrideMimeType(contentType);
+         }
+         req.send(null);
+         return req.responseXML;
+      }
+   }
+}</code></pre>
+<p>Both Opera and Mozilla already have this object</p>

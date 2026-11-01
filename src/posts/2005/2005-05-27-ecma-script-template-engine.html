@@ -1,0 +1,182 @@
+---json
+{
+  "title": "Ecma Script Template Engine",
+  "date": "2005-05-27T01:03:26-08:00",
+  "permalink": "/archives/2005/05/27/01.03.26/",
+  "tags": [
+    "JavaScript",
+    "Personal",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "3641",
+      "author": "soy",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>That&#8217;s just sad, Erik.</p>\n<p>The world is finally moving away from code intermixed with content and you help bring it back to life? <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>\n<p>When I saw that terrible JST I was sincerely hoping no one in their right mind would think to use it. Templates that allow code are just recipes for disaster, see the traditional uses of PHP, ASP, etc. A maintainance nightmare and very little encapsulation and logic.</p>\n<p>Even MS realized this and moved to the ASP.NET model, which is terrible for many other reasons, but at least it had the right idea.</p>\n<p>Ideally, data should be returning in raw format from the server (XML, &#8216;JSON&#8217;, CSV) and properly encapsulated and componentized code should handle the data in context. Returning extended logic from the server via &#8216;Templates&#8217; will only continue the trend of messy unmanagable applications.</p>\n<p>Now, I know you know all this, because Bindows (regardless of how badly it was named) is done properly and directs the developer towards a cleaner development concept, with data binding and encapsulated namespaces. This is why I&#8217;m so surprised by your attempt to join the templates wagon :-\\.</p>"
+    },
+    {
+      "id": "3650",
+      "author": "Guilherme Blanco",
+      "url": "http://www.pontukom.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Soy: templates exist to abstract the intermix of languages. =)<br />\nImagine you have to do this:<br />\nHello Mr(s) document.write(sUsername);!<br />\nIt&#8217;s much moe better to build a template that does the hard job to you.</p>\n<p>Erik: I really enjoyed the idea&#8230; if possible, I wanna try to help you. But&#8230; I think you should change the syntax (not use the JSP!). If a page is written using Java Server Pages, it could crash and return weird errors.<br />\nHave you thought to use your own syntax&#8230; for example&#8230; instead of , why do not build as this: </p>\n<p>ASP and JSP uses , PHP uses , CF (I don&#8217;t know what the heel this language uses, but you could create your own: . You should probably don&#8217;t break any other existent technology by displaying weird errors on screen.</p>\n<p>That&#8217;s it&#8230; contact me if you need some help.</p>\n<p>Cheers,</p>"
+    },
+    {
+      "id": "3656",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>soy: Templates actually fit very well in the concept of MVC. The template is the view. It is a problem when you cannot seperate the view and model but templates, if used correctly helps separate them. Given the following two views. Which is easier?</p>\n<p><a href=\"/playground/este/tunagetemplate.txt\" rel=\"nofollow\">/playground/este/tunagetemplate.txt</a><br />\n<a href=\"/playground/tunage/tunage-text.js\" rel=\"nofollow\">/playground/tunage/tunage-text.js</a></p>\n<p>&#8230; now that I look at them with comparison in mind I think the pure js one is nicer. There should have been a nicer writer interface but besides from that the js solution is good. However, I do believe there are places where templates are useful (and it was quite fun to write).</p>\n<p>Guilherme: I agree the syntax is a bit ugly but switching from &lt;% %&gt; to ${ } does not cut it for me. And adding specific structurers like ${for foo in hash} &#8230; ${/for} requires a new language. I like the fact that it is still js being used and not another markup to reinvent the wheel.</p>"
+    },
+    {
+      "id": "5145",
+      "author": "Gustavo Amigo",
+      "url": "http://ajax-pages.sourceforge.net/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hi,</p>\n<p>that&#8217;s so cool, i had exactly the same ideas and feelings recently that i created a project on sourceforge for that. It&#8217;s called Ajax Pages. I&#8217;ve done a first implementation and i got some good examples.  Here is the url:<br />\n<a href=\"http://ajax-pages.sourceforge.net/\" rel=\"nofollow\">http://ajax-pages.sourceforge.net/</a></p>\n<p>Let&#8217;s talk about it better, i really think we can join forces and make a great tool for Ajax developers.</p>\n<p>Thanks,<br />\nGustavo Amigo</p>"
+    },
+    {
+      "id": "5146",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Gustavo: I think you&#8217;ll notice that ESTE is a lot faster than AjaxPages. The main reason for this is that you are using += and I&#8217;m using a text writer (array push). When you do string manipulation of this calibre you really must not use += because it is very slow (not only in JS, it is also very slow in Java and C#).</p>\n<p>ESTE currently does not have a license but I&#8217;m willing to make it MIT if you want to reuse some code from there. I&#8217;ll be happy to help you out here.</p>"
+    },
+    {
+      "id": "5147",
+      "author": "Gustavo Amigo",
+      "url": "http://ajax-pages.sourceforge.net/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hi Erik,</p>\n<p>Thanks for the reply. </p>\n<p>I´ll change the code to use the text writer instead of +=. The code i realesed is just a start, kind of a proof of concept. I developed it locally, when i uploaded to Sourceforge, i found that there are many issues that should be treated better. ESTE is faster not only because of the way it treats string, but because Ajax Pages is using XMLHtttpRequest the wrong way, it should be used assyncronous and i am making syncronous calls to the server which makes the browser hang a little bit and makes thins slower. I´ll look at your code carefully to see if i can reuse something or make some parts of Ajax Pages´ code better. </p>\n<p>Steve Yen from JST Templates gave an idea which i think is good. He thinks that a solution for a JavaScript Template should be unique, standard. We shouldn´t have a 100 alternatives to the same problem. I agree with him, if you help we can certanly make that a reality.<br />\n<a href=\"http://trimpath.com/forum/viewtopic.php?pid=373#p373\" rel=\"nofollow\">http://trimpath.com/forum/viewtopic.php?pid=373#p373</a></p>\n<p>I´ve set up a developers mailing list on sourceforge, i´d be glad if you  join it.<br />\n<a href=\"http://lists.sourceforge.net/lists/listinfo/ajax-pages-developers\" rel=\"nofollow\">http://lists.sourceforge.net/lists/listinfo/ajax-pages-developers</a></p>\n<p>Thanks again,<br />\nGustavo Amigo<br />\ngustavo.amigo (@) gmail.com</p>"
+    },
+    {
+      "id": "5362",
+      "author": "jiming",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I&#8217;d like to have a feature to support server side.</p>\n<p>For example, i can put a java object into template and the code in template can access its content, just like Rhino supported.</p>\n<p>Thanks</p>"
+    },
+    {
+      "id": "5414",
+      "author": "Daniel LaLiberte",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>A couple years ago, I prototyped an XML-JS based template system which runs entirely in the browser, but could also be precompiled and run in the server if the data is known at that time.  </p>\n<p>The main idea is that a template is an XML document, and every nested { &#8230; } is a JS expression. This applies recursively, so that any nested XML elements inside the JS expression are output as text.  This results in a very simple and elegant syntax.  One complication is use of  and &amp; in the JS expressions.  For example:</p>\n<p>  {<br />\n    for (var i = 0; i != rows.length; i++)</p>\n<p>         {<br />\n           var row = rows[i];<br />\n           for (var j = 0; j != row.length; j++)</p>\n<p>               { row[j] }</p>\n<p>         }</p>\n<p>  }</p>"
+    },
+    {
+      "id": "5415",
+      "author": "Daniel LaLiberte",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Dang.. this blog doesnt encode your postings, or preserve whitespace, so my example was screwed up.  There should be TABLE TR and TD elements in the appropriate places.</p>"
+    },
+    {
+      "id": "5567",
+      "author": "Theodor Zoulias",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Some news about JavaScript Templates. <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /><br />\nThere is an alternate implementation available, optimized for speed:<br />\n<a href=\"http://trimpath.com/forum/viewtopic.php?id=155\" rel=\"nofollow\">http://trimpath.com/forum/viewtopic.php?id=155</a></p>\n<p>There are also some instructions to transfer processing server-side, with JScript.NET:<br />\n<a href=\"http://trimpath.com/forum/viewtopic.php?id=150\" rel=\"nofollow\">http://trimpath.com/forum/viewtopic.php?id=150</a></p>"
+    },
+    {
+      "id": "6191",
+      "author": "troels",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Since javascript is happening in a browser anyway (or atleast for most purposes it is), we would normally have access to a xslt processor of one kind or another. Wouldn&#8217;t it be more befitting to use this as a template-engine instead ?</p>"
+    },
+    {
+      "id": "8567",
+      "author": "David Fu",
+      "url": "http://blog.netbeans.jp/roller/page/fchoong",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hi Erik,<br />\nFirecat is a Server-Side JavaScript Webserver which uses  to delimit the start and end of Server-Side JavaScript. So this will probably not mix too well&#8230;</p>\n<p><a href=\"http://firecat.nihonsoft.org\" rel=\"nofollow\">http://firecat.nihonsoft.org</a></p>"
+    },
+    {
+      "id": "34419",
+      "author": "Michael Mathews",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Would you consider releasing este.js under a LGPL license Erik?</p>"
+    },
+    {
+      "id": "34543",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I can do ASL2 if that is sufficient?</p>"
+    },
+    {
+      "id": "34711",
+      "author": "Michael Mathews",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>You mean <a href=\"http://www.opensource.org/licenses/apache2.0.html\" rel=\"nofollow\">http://www.opensource.org/licenses/apache2.0.html</a> ? That&#8217;s cool. I&#8217;d like to distribute your templating engine with the JSDoc tool, starting with version 2.0, which is currently under development.</p>\n<p>If you have no objections and agree to apply an Apache License v2, I&#8217;ll happily add your stuff to our code!</p>"
+    },
+    {
+      "id": "34892",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I added the Apache Software License header and cleaned up the JSDoc a bit.</p>"
+    }
+  ]
+}
+---
+<p>Lately, I&#8217;ve been feeling quite creative. I guess I can thank World of Warcraft for that. Or actually the other way around. I got out of my addiction after a week in USA and I decided that I would not touch it again.</p>
+<p>Lately I&#8217;ve been looking at simpler ways to output data received from an RPC/REST backend (usually JSON) and I even played around a bit with <a href="http://www.trimpath.com/project/wiki/TrimPathDownload">TrimPath&#8217;s JavaScript Templates</a> (JST). However I didn&#8217;t like JST a whole lot. It introduces new syntax and it just felt inneficient not being able to use JavaScript syntax and semantics. And of course there was the NIH issue as well <img src="/wp-includes/images/smilies/icon_wink.gif" alt=";-)" class="wp-smiley" /> </p>
+<p>So, while riding home from work I thought; Why not use <abbr title="Java Server Pages">JSP</abbr> syntax? It should be trivial to implement and implementing the actual template engine didn&#8217;t take more than an hour or so. The engine supports the following 4 JSP constructs:</p>
+<pre><code>&lt;%-- Comment --%&gt;
+&lt;%= &quot;String Expression&quot; %&gt;
+&lt;% expression %&gt;
+&lt;% out.write(&quot;String Expression&quot;) %&gt;</code></pre>
+<p><code>out</code> is an object that implements <code>write</code> and <code>writeln</code>, for example the <code>document</code> in an HTML document. This allows more procedural code to be used instead of the sometimes very verbose and distracting JSP syntax.</p>
+<p>My initial name for this was JsTemplate but that was a bit too similars to what TrimPath was using (I wasn&#8217;t even thinking about a name when I started this&#8230; I just wanted to prove that such a thing could easily be implemented and also prove that it is quite useful.) After brain storming about a name with <a href="http://me.eae.net">Emil</a> we came up with <strong>ESTE &#8211; EcmaScript Template Engine</strong>.</p>
+<p>Enough talking. How about some sample code?</p>
+<pre><code>var templateString = &quot;&lt;p&gt;hello&quot; +
+   &quot;&lt;% for (var i =0; i < 100; i++) {%&gt;&quot; + 
+      &quot;&lt;%-- this is a comment --%&gt;&quot; +
+      &quot;&lt;%= \&quot;world \&quot; + i %>!&lt;br&gt;&quot; + 
+   &quot;&lt;% } %&gt;&quot; +
+   &quot;&lt;/p&gt;&quot;;
+TemplateEngine.parse(templateString , document);</code></pre>
+<p>There is a quite extensive <a href="/playground/este/estetest.html">demo</a> in <a href="/playground/este/">/playround/este/</a>.</p>
+<p>Once I got the basic template engine I thought about a few scenarios and since I&#8217;ve been doing a lot of JSON lately I thought that I should try to make it easier to use the engine with data  encoded using JSON.</p>
+<pre><code>
+var s = TemplateEngine.parse(&quot;My name is < %= name.first %> < %= name.last %>&quot;, 
+   writer,
+   &#39;{&quot;name&quot;:{&quot;first&quot;:&quot;Erik&quot;,&quot;last&quot;:&quot;Arvidsson&quot;}}&#39;);</code></pre>
+<p>In general it isn&#8217;t too nice to write these templates inside javascript strings so you might want to use a function like <code>readTextFile</code>.</p>

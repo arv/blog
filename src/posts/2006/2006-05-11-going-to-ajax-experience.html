@@ -1,0 +1,116 @@
+---json
+{
+  "title": "Going to Ajax Experience",
+  "date": "2006-05-11T10:02:59-08:00",
+  "permalink": "/archives/2006/05/11/10.02.59/",
+  "tags": [
+    "Ajax",
+    "DHTML",
+    "Google",
+    "JavaScript"
+  ],
+  "comments": [
+    {
+      "id": "13366",
+      "author": "Hakan Bilgin",
+      "url": "http://www.challenger.se",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>&#8220;&#8230;I guess it is time for me to figure out what all this Ajax hype is all about&#8230;&#8221;</p>\n<p>haha&#8230;&#8221;may fools day&#8221;?</p>\n<p>Why aren&#8217;t you among the speakers?</p>"
+    },
+    {
+      "id": "13380",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I don&#8217;t know jack about ajax. I know a few things about JS and DHTML but those are not cool any more <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";-)\" class=\"wp-smiley\" /> </p>\n<p>Seriously I&#8217;m not a good speaker and I&#8217;m way too shy.</p>"
+    },
+    {
+      "id": "13382",
+      "author": "Brad Neuberg",
+      "url": "http://codinginparadise.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik, it was great meeting and talking with you at the show!</p>\n<p>Best,<br />\n  Brad</p>"
+    },
+    {
+      "id": "13415",
+      "author": "Mark Williams",
+      "url": "http://Helpmeerikyouremyonlyhope",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Sorry that this has nothing to do with the post.</p>\n<p>I&#8217;m trying to find an answer to a problem and can&#8217;t seem to find one &#8211; I&#8217;m guessing you might be able to help.</p>\n<p>I use a number of prototyped methods in FF to simulate IE methods, which I&#8217;m sure you&#8217;ll be familiar with. For instance this one</p>\n<p>\t// to simulate IE&#8217;s .selectNodes<br />\n\tDocument.prototype.selectNodes = function(sExpr, contextNode) {<br />\n\t\tvar oResult = this.evaluate(sExpr, (contextNode? contextNode : this), this.createNSResolver(this.documentElement), XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);<br />\n\t\tvar nodeList = new Array(oResult.snapshotLength);<br />\n\t\tnodeList.expr = sExpr;<br />\n\t\tfor(i=0;i</p>"
+    },
+    {
+      "id": "13417",
+      "author": "Hakan Bilgin",
+      "url": "http://www.challenger.se",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Mark, this is one way of doing it:</p>\n<p>Document.prototype.selectNodes = function(XPath, XNode) {<br />\n\tif(!XNode) XNode = this;<br />\n\tthis.ns = this.createNSResolver(this.documentElement);<br />\n\tthis.qI = this.evaluate(XPath, XNode, this.ns, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);<br />\n\taResult = [];<br />\n\tfor(i=0; i 0)? this.xI[0] : null ;<br />\n}<br />\nElement.prototype.selectNodes =\tfunction(XPath) {<br />\n\treturn this.ownerDocument.selectNodes(XPath, this);<br />\n}<br />\nElement.prototype.selectSingleNode = function(XPath) {<br />\n\treturn this.ownerDocument.selectSingleNode(XPath, this);<br />\n}</p>\n<p>/hbi</p>"
+    },
+    {
+      "id": "13418",
+      "author": "Hakan Bilgin",
+      "url": "http://www.challenger.se",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Mark, unfortunatelly the brackets messed it up&#8230;a new try:</p>\n<p>Document.prototype.selectNodes = function(XPath, XNode) {<br />\n\tif(!XNode) XNode = this;<br />\n\tthis.ns = this.createNSResolver(this.documentElement);<br />\n\tthis.qI = this.evaluate(XPath, XNode, this.ns, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);<br />\n\taResult = [];<br />\n\tfor(i=0; i&lt;this.qI.snapshotLength; i++)<br />\n\t\taResult[i] = this.qI.snapshotItem(i);<br />\n\treturn aResult;<br />\n}<br />\nDocument.prototype.selectSingleNode = function(XPath, XNode) {<br />\n\tif(!XNode) XNode = this;<br />\n\tthis.xI = this.selectNodes(XPath, XNode);<br />\n\treturn (this.xI.length &gt; 0)? this.xI[0] : null ;<br />\n}<br />\nElement.prototype.selectNodes =\tfunction(XPath) {<br />\n\treturn this.ownerDocument.selectNodes(XPath, this);<br />\n}<br />\nElement.prototype.selectSingleNode = function(XPath) {<br />\n\treturn this.ownerDocument.selectSingleNode(XPath, this);<br />\n}</p>"
+    },
+    {
+      "id": "13435",
+      "author": "nitro2k01",
+      "url": "http://soundandcomplete.wordpress.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Speaking of which, are you one the dev&#8217;ers behind this: <a href=\"http://googleblog.blogspot.com/2006/05/making-ajax-development-easier.html#links\" rel=\"nofollow\">http://googleblog.blogspot.com/2006/05/making-ajax-development-easier.html#links</a> ?</p>"
+    },
+    {
+      "id": "13440",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I&#8217;m not involved in that product.</p>"
+    },
+    {
+      "id": "13442",
+      "author": "Mark Williams",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Thanks Hakan, I&#8217;ll give that a go and write back here with progress.</p>"
+    },
+    {
+      "id": "13651",
+      "author": "Oliver Tse",
+      "url": "http://www.skypoet.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik,</p>\n<p>Great to see you again!<br />\nHopefully, you will speak in the 2007 event and who cares if you&#8217;re shy!</p>\n<p>Oliver</p>"
+    },
+    {
+      "id": "103711",
+      "author": "wintervssummer",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I very much love summer <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /><br />\nSomeone very much loves winter <img src=\"/wp-includes/images/smilies/icon_sad.gif\" alt=\":(\" class=\"wp-smiley\" /><br />\nI Wish to know whom more <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /><br />\nFor what you love winter?<br />\nFor what you love summer? Let&#8217;s argue <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    }
+  ]
+}
+---
+<p>I&#8217;ll be standing in the Google booth at the <a href="http://theajaxexperience.com/">Ajax Experience</a> conference on Friday afternoon. </p>
+<p>I guess it is time for me to figure out what all this Ajax hype is all about.</p>

@@ -1,0 +1,19 @@
+---
+layout: base.njk
+pagination:
+  data: collections.months
+  size: 1
+  alias: month
+permalink: "/archives/{{ month.key }}/"
+eleventyComputed:
+  title: "{{ month.label }}"
+bodyClass: archive date
+eleventyExcludeFromCollections: true
+---
+<h2 class="page-title">Archive: <span>{{ month.label }}</span></h2>
+
+<div class="post-list">
+{% for post in month.posts %}
+	{% include "post-list-item.njk" %}
+{% endfor %}
+</div>

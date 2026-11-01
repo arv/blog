@@ -1,0 +1,26 @@
+---json
+{
+  "title": "Thunderbird 0.6",
+  "date": "2004-05-03T18:22:58-08:00",
+  "permalink": "/archives/2004/05/03/18.22.58/",
+  "tags": [
+    "Mozilla"
+  ],
+  "comments": [
+    {
+      "id": "777",
+      "author": "foO",
+      "url": "http://www.forgetfoo.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>design. design. design.</p>\n<p>it&#8217;s where the users at <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";)\" class=\"wp-smiley\" /> </p>"
+    }
+  ]
+}
+---
+<p>Today <a href="http://www.mozilla.org/products/thunderbird/download.html">Mozilla Thunderbird 0.6</a> was released. I don&#8217;t think I would have been able to use email at all if it wasn&#8217;t for TB. This version has some very nice improvements but I still think that <a href="http://www.scott-macgregor.org/">Scott MacGregor</a> should take a step back do some real polishing. I don&#8217;t get the same nice feeling that I get from the clean and simple, yet usable UI, of Firefox.</p>
+<p>Featurewise, I think TB is of 1.0 quality but it just doesn&#8217;t feel right. There are plenty of UI glitches and it just doesn&#8217;t feel as snappy and clean as Outlook Express.</p>
+<p>One example that gives me the creeps is that the junk mail filtering kicks in after the message tree has been populated. This means that it first updates the list, then downloads all the new message bodies, marks them as junk and then once all the messages are done the messages are moved to the Junk folder. This means that I can&#8217;t really use the message tree during this time because it might change at some random occasion leaving me comletely lost. A much better way would be to handle the junk before the message tree is updated&#8230; and this should of course happen in a low priority background thread so I can do more important stuff in the meantime (including communicating with tha IMAP server).</p>
+<p>Another very annoying <a href="http://bugzilla.mozilla.org/show_bug.cgi?id=241555">bug</a> that always hits me in the face is that when doing multiple selection using the keyboard the shown message is not changed and once X seconds has passed since the message was loaded it marks all selected messages as read. My common scenario for marking mail as junk is to select the messages and then press &#8216;j&#8217;&#8230; but half way through the adding of messages the selected items are marked read even though I never ever saw what they contain.</p>
+<p>It is these kind of bugs that makes using TB a bit scary and we all know that scary interfaces will lead to dissatisfied customers. I really hope that there is a plan for a huge UI polish boost before 1.0.</p>

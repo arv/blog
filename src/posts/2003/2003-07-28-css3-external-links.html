@@ -1,0 +1,83 @@
+---json
+{
+  "title": "CSS3 External Links",
+  "date": "2003-07-28T01:47:10-08:00",
+  "permalink": "/archives/2003/07/28/01.47.10/",
+  "tags": [
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "48",
+      "author": "bofe",
+      "url": "http://www.bastardfamily.com/bofester/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>erik,</p>\n<p>this isn&#8217;t probably the best approach, but this will work in all browsers with a hint of dhtml support:</p>\n<p>var THIS_SITE=&#8221;<a href=\"http://www.bastardfamily.com/\"></a><a href=\"http://www.bastardfamily.com/\" rel=\"nofollow\">http://www.bastardfamily.com/</a>&#8220;;<br />\nvar THIS_SITE2=&#8221;<a href=\"http://bastardfamily.com/\"></a><a href=\"http://bastardfamily.com/\" rel=\"nofollow\">http://bastardfamily.com/</a>&#8220;;</p>\n<p>function internal()<br />\n{</p>\n<p>  for (var i=0; i&lt;=(document.links.length-1); i++)<br />\n  {<br />\n    if(document.links[i].href.indexOf(THIS_SITE)&lt;0 &#038;&#038; document.links[i].href.indexOf(THIS_SITE2)&lt;0)<br />\n\t{<br />\n\t\tif(document.links[i].className != &#8216;footer&#8217;)<br />\n\t\t{<br />\n\t\t\tdocument.links[i].className = &#8216;external&#8217;;<br />\n\t\t}<br />\n\t}</p>\n<p>  }<br />\n}</p>\n<p>added that to my global header, an onload call to internal()</p>\n<p>my external CSS class:<br />\n.external {<br />\n     \t\tpadding-right: 12px;<br />\n     \t\tbackground-image: url(/bofester/css/aoutside.gif);<br />\n\t        background-repeat: no-repeat;<br />\n     \t\tbackground-position: right;<br />\n     \t\twhite-space: nowrap;<br />\n\t}</p>"
+    },
+    {
+      "id": "49",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Of course this can be done in IE by changing the semantics of the page (the DOM) but compare that to the one css rule solution&#8230; and it works today.</p>\n<p>This page is going to be mostly Gecko, Opera and KHTML with fallback to plain HTML for Lynx, Netscape 4 and IE6.</p>"
+    },
+    {
+      "id": "50",
+      "author": "hzr",
+      "url": "http://hzr.dzygn.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik, it doesn&#8217;t seem to work. I think it is because Mozilla isn&#8217;t &#8220;supporting&#8221; the double colons before the ::before psuedo element yet. By using only a single colon it&#8217;ll probably work.</p>"
+    },
+    {
+      "id": "51",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>You need 1.5a or later.</p>"
+    },
+    {
+      "id": "52",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Ooops&#8230; not done yet&#8230; The &#8216;::&#8217; is the CSS3 way to do this and Moz just recently changed from using &#8216;:&#8217; to &#8216;::&#8217; for pseudo elements.</p>"
+    },
+    {
+      "id": "53",
+      "author": "hzr",
+      "url": "http://hzr.dzygn.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Ahh, had 1.4 installed. Downloaded 1.5a &#8211; looks nice =)</p>"
+    },
+    {
+      "id": "54",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I actually changed from using ::after to using a background image because I was getting rendering artefacts in Moz :&#8217;(</p>"
+    }
+  ]
+}
+---
+<p>I&#8217;ve added icons to external links. This is acheived using the <a href="http://www.w3.org/TR/css3-selectors/">CSS3</a> <code>not()</code> selector and the new starts-with attribute selector.</p>
+<pre><code>
+a[href]:not([href^="/"])::after {
+   padding-left: 0.2em;
+   content:      url(/images/globe.12.png);
+}
+</code></pre>
+<p>Too bad this will not be seen by the majority of the users for at least 2 more years. (IE rant #2).</p>

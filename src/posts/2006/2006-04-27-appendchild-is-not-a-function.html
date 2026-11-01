@@ -1,0 +1,119 @@
+---json
+{
+  "title": "appendChild is not a Function",
+  "date": "2006-04-27T17:50:15-08:00",
+  "permalink": "/archives/2006/04/27/17.50.15/",
+  "tags": [
+    "Internet Explorer",
+    "JavaScript",
+    "Microsoft",
+    "Rant"
+  ],
+  "comments": [
+    {
+      "id": "13223",
+      "author": "Steve",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik,</p>\n<p>This may be irelivant here, but if I recall correctly&#8230; the structure of appendChild is:</p>\n<p>appendChild( arg_0 );</p>\n<p>(e.g. arity == 1)</p>\n<p>That, coupled with the fact that appendChild is a &#8220;method&#8221; on a DOM node, this scenario is a bit whacky.</p>\n<p>Finally, you can&#8217;t add a text node, to {document}&#8230; if you wanted to, you could add it to say&#8230; document.getElementsByTagName(&#8216;body&#8217;)[0]</p>\n<p>E.g.</p>\n<p>document.getElementsByTagName(&#8216;body&#8217;)[0].appendChild(document.createTextNode(&#8216;Huh?&#8217;));</p>\n<p>Now, that all said, the following code, as you mentioned, still doesn&#8217;t work. <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";-)\" class=\"wp-smiley\" /> </p>\n<p>var f = document.getElementsByTagName(&#8216;body&#8217;)[0].appendChild;<br />\nalert(f); //Native Function&#8230;<br />\nalert(f.arity); //1 (only 1 argument expected)&#8230;<br />\nf.call( document.createTextNode(&#8216;Huh?&#8217;) );</p>\n<p>Cheers,<br />\nSteve</p>"
+    },
+    {
+      "id": "13228",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Steve: Yes, that is irrelevant&#8230; text node in document was just an example&#8230; badly chosen&#8230; It would have been better to use document.body.</p>\n<p>I&#8217;ll change the example.</p>"
+    },
+    {
+      "id": "13232",
+      "author": "Nicholas",
+      "url": "http://www.nczonline.net/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>It has always bugged me that DOM and BOM elements don&#8217;t derive from the native JavaScript objects. Why IE chose to implement DOM methods as something other than JS functions is completely beyond me. And while we&#8217;re on the subject, why can&#8217;t DOM elements inherit from Object? Maybe someday.</p>"
+    },
+    {
+      "id": "13235",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>All objects, DOM and other browser objects, inherits from Object in Mozilla.</p>"
+    },
+    {
+      "id": "13329",
+      "author": "Garrett Smith",
+      "url": "http://dhtmlkitchen.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>In IE, no JS object properties/methods are not available on COM objects. </p>\n<p>valueOf, hasOwnProperty, et c. Not avaliable.</p>\n<p>Interestingly, toString is available. </p>\n<p>What is even more interesting: acts like a &#8220;DontEnum&#8221; property, so for(prop in node) , &#8220;toString&#8221; won&#8217;t be exposed. </p>\n<p>IE doesn&#8217;t actually implement the internal &#8220;DontEnum&#8221; property correctly (at least in my interpretation of the ECMAScript Spec.</p>\n<p>so</p>\n<p>Carp = {<br />\n    &#8220;toString&#8221; : function(){ return &#8220;Carp, carp, carp&#8221;; }<br />\n}</p>\n<p>for(var prop in Carp)<br />\n    alert(Carp[prop]);<br />\n}</p>\n<p>IE thinks that the &#8220;toString&#8221; defined in Carp has a DontEnum property on it, and this is what I think is incorrect. I think IE is iterating through a list of strings (&#8220;toString&#8221;, &#8220;valueOf&#8221;) and skips any prop that matches the string.</p>"
+    },
+    {
+      "id": "13330",
+      "author": "Garrett Smith",
+      "url": "http://dhtmlkitchen.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>alert(document.body.toString())</p>\n<p>I&#8217;m still trying to find a practical use for IE&#8217;s implementation of toString on COM&#8217;s&#8230;</p>"
+    },
+    {
+      "id": "13333",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>A couple of hours ago I went through the painful process o filing exactly this bug to MSFT. The problem as I see it is that they do not check the DontEnum flag on the right object (if any proto has it, the property is not enumerated). The same problem occurs if you create a new String and changes replace for example</p>"
+    },
+    {
+      "id": "17275",
+      "author": "splintor",
+      "url": "http://splintor.wordpress.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>&#8220;it looks like native methods don&#8217;t get listed when enumerating the members of an object&#8221;<br />\nfrom <a href=\"http://blog.monstuff.com/archives/000287.html\" rel=\"nofollow\">http://blog.monstuff.com/archives/000287.html</a></p>"
+    },
+    {
+      "id": "102269",
+      "author": "ingilizce tercume",
+      "url": "http://www.tercumesiteleri.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I’m still trying to find a practical use for IE’s implementation of toString on COM’s&#8230;</p>"
+    },
+    {
+      "id": "102572",
+      "author": "çeviri",
+      "url": "http://www.prestijtercume.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>All objects, DOM and other browser objects, inherits from Object in Mozilla&#8230;</p>"
+    }
+  ]
+}
+---
+<p>Another day another rant. Now it is time for me ranting how bad IE DOM/COM objects and ActiveX objects integrate with JScript.</p>
+<p>Given:</p>
+<pre><code>var f = document.body.appendChild;
+f.call(document.body, document.createTextNode('Huh?'));</code></pre>
+<p>This throws an exception because DOM/COM methods are not really instance of <code>Function</code>. Why is this an issue you might ask? Assume we have an ActiveX object that takes variable number of arguments:</p>
+<pre><code>object.method(arg0, arg1, arg2, ...)</code></pre>
+<p>&#8230; and then we want to create a JS function that also takes variable arguments and calls the method of the ActiveX object:</p>
+<pre><code>function doSomething(message) {
+  print(message);
+  var args = Array.prototype.slice.call(arguments, 1);
+  object.method.apply(object, args);
+}</code></pre>
+<p>This is a pretty common scenario that horrendously fails for DOM/COM and ActiveX objects.</p>
+<p>Thankfully, <a href="http://youngpup.net">Aaron</a> <a href="http://www.google.com/search?q=youngpup+apply">solved</a> this problem in 2000</p>

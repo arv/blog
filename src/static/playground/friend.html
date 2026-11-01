@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style>
+
+</style>
+<script>
+
+
+var A;
+
+(function() {
+
+var KEY = {};
+
+function getPrivate(obj) {
+  return obj._getPrivateWithKey(KEY);
+}
+
+function setPrivate(obj, state) {
+  obj._getPrivateWithKey = function(key) {
+    if (key === KEY) {
+      return state;
+    }
+    throw Error('Permission denied');
+  };
+}
+
+A = function (a) {
+  var P = {
+    a: a
+  };
+
+  setPrivate(this, P);
+}
+
+A.prototype.getA = function() {
+  return getPrivate(this).a
+};
+
+A.initFriends = function() {
+  B.isMyFriend('A', KEY);
+};
+
+var friendKeys = {};
+
+A.isMyFriend = function(id, key) {
+  friendKeys[id] = key;
+}
+
+function getFriendState(obj, id) {
+  return obj._getPrivateWithKey(friendKeys[id]);
+}
+
+})();
+
+
+var B;
+(function() {
+
+var KEY = {};
+
+function getPrivate(obj) {
+  return obj._getPrivateWithKey(KEY);
+}
+
+function setPrivate(obj, state) {
+  obj._getPrivateWithKey = function(key) {
+    if (key === KEY) {
+      return state;
+    }
+    throw Error('Permission denied');
+  };
+}
+
+B = function (b) {
+  var P = {
+    b: b
+  };
+
+  setPrivate(this, P);
+}
+
+B.prototype.getB = function() {
+  return getPrivate(this).b;
+};
+
+B.prototype.getA = function(a) {
+  return getFriendState(a, 'A').a;
+};
+
+
+B.initFriends = function() {
+  A.isMyFriend('B', KEY);
+};
+
+
+var friendKeys = {};
+
+B.isMyFriend = function(id, key) {
+  friendKeys[id] = key;
+}
+
+function getFriendState(obj, id) {
+  return obj._getPrivateWithKey(friendKeys[id]);
+}
+
+})();
+
+
+</script>
+</head>
+<body>
+
+<script>
+
+A.initFriends();
+B.initFriends();
+
+var a = new A(0);
+document.write(a.getA() + '<br>');
+var b = new B(1);
+document.write(b.getB() + '<br>');
+document.write(b.getA(a) + '<br>');
+
+</script>
+
+</body>
+</html>

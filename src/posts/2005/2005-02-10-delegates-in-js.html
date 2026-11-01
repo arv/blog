@@ -1,0 +1,165 @@
+---json
+{
+  "title": "Delegates in JS",
+  "date": "2005-02-10T22:26:03-08:00",
+  "permalink": "/archives/2005/02/10/22.26.03/",
+  "tags": [
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "1212",
+      "author": "protoscript",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 10th, 2005 at 23:11",
+      "html": "<p>That&#8217;s funny Erik&#8230; I had just extended Object in the same way about two weeks ago. As always, I am jealous of your coding style (and your writing style, esp since English is not your native language!). I really enjoyed State of the Nation, too.</p>\n<p>Hope to speak to you soon, my friend.</p>"
+    },
+    {
+      "id": "1213",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 10th, 2005 at 23:55",
+      "html": "<p>There are of course serious draw backs to extending Object and I would not do it in a real world application because it breaks the usage of Objects as hash tables. Therefore the other alternative is better (making it a static method of Function might make more sense).</p>\n<p>The reason I posted this today was becasue I saw that they were doing something similar in Google maps.</p>\n<p>Object.prototype.eventHandler = function (sMeth) {<br />\n   var self = this;<br />\n   return function (e) {<br />\n      if (!e) e = window.event;<br />\n      if (!e.target) e = e.srcElement;<br />\n      // I would add preventDefault and stopPropagation as well<br />\n      return self[sMeth](e);<br />\n   };<br />\n};</p>"
+    },
+    {
+      "id": "1214",
+      "author": "Dean Edwards",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 11th, 2005 at 02:09",
+      "html": "<p>Good tip Erik. I&#8217;ll point out that IE5.0 does not support <i>Function</i>.apply. But many people have stopped supporting this browser (even MS themselves on the new MSN Serach). So maybe this is not an issue. Except that it still has more share than Opera and Safari&#8230;</p>\n<p>Keep posting these tips btw. As protoscript says, you have a clear writing and coding style.</p>"
+    },
+    {
+      "id": "1215",
+      "author": "Tom Trenka",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 11th, 2005 at 17:20",
+      "html": "<p>I try to not &#8220;tout my own horn&#8221;, as it were, but you might want to take a look at the Events system I set up in f(m) (<a href=\"http://fm.dept-z.com/index.asp?get=/Resources/Reference/System/Events\" rel=\"nofollow\">http://fm.dept-z.com/index.asp?get=/Resources/Reference/System/Events</a>  is a decent place to start)&#8230;it&#8217;s modeled directly on the .NET delegate system, and solves this problem by forcing the event handler in question to take 2 arguments instead of one&#8211;the object that fired the event, and an event arguments object.</p>\n<p>Nice thing about it is that 1.  it can be applied to anything and 2. it preserves the original scope in a way that is very clear.</p>\n<p>Thought you might be interested.</p>"
+    },
+    {
+      "id": "1216",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 11th, 2005 at 17:48",
+      "html": "<p>Tom: I looked at f(m) a week or so back. It is very nice. Yesterday I also saw dojo. Also nice. I&#8217;ll try to comment on that at a later time.</p>\n<p>For commercial APIs I recommend using what you are suggesting or doing what we are doing in Bindows.</p>\n<p>Bindows:</p>\n<p>this.obj.addEventLsitener(&#8220;foo&#8221;, this.handleFoo, this)</p>\n<p>f(m)?</p>\n<p>this.obj.OnFoo.Add(new Events.EventHandler(this.handleFoo));</p>\n<p>The documentation was a bit confusing here. I could not read out how to do it in the right way to get this.handleFoo working as expected. You say that it takes 2 arguments so then I hope it would finally end up something like this:</p>\n<p>this.obj.OnFoo.Add(this.handleFoo, this)</p>\n<p>The good thing with this over the W3C/Bindows model is that the events can be discovered more easily. The bad thing is that custom events require an interface change.</p>"
+    },
+    {
+      "id": "1217",
+      "author": "Tom Trenka",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 11th, 2005 at 23:15",
+      "html": "<p>Hmm.  It looks like my quick docs suck then <img src='/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>\n<p>Here&#8217;s the deal:  *your* function takes two args. So:</p>\n<p>function myHandler(src, ea) {<br />\n// do something<br />\n}</p>\n<p>this.obj.OnFoo.Add(new Events.EventHandler(myHandler))</p>\n<p>&#8230;like that.  I suppose I should really go through and make that clearer&#8230;</p>"
+    },
+    {
+      "id": "1218",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 12th, 2005 at 11:38",
+      "html": "<p>Tom: Isn&#8217;t the src argument same as event.target (in DOM)?</p>\n<pre>a.b.OnFoo.Add(new Events.EventHandler(a.handleFoo))</pre>\n<p>How would I get to a in a.handleFoo (when called from the event handler)? I get the impression that src would point to a.b? At least that is how .NET does it.</p>"
+    },
+    {
+      "id": "1219",
+      "author": "Tom Trenka",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 12th, 2005 at 17:05",
+      "html": "<p>If you&#8217;re attaching the event handler to a DOM object, yes, it is the equivilent of target, absolutely.</p>\n<p>The difference is that the event handler is executed in the scope of &#8220;a&#8221; in your example, *not* in the scope of &#8220;b&#8221;; in this particular case, the src arg of your event handler *should* be a reference to &#8220;b&#8221;.  So yes, it works very much like the way .NET does (which was the point, a lot of the aim of f(m) is to bring some of the cleanliness of the .NET framework to JS).</p>\n<p>The big difference with what I&#8217;ve done is that it&#8217;s a unified model; it works the same whether or not you are firing custom events on your own objects, or you&#8217;ve attached them to DOM objects.  Which is pretty nice.  I was kind of impressed with myself when I was able to pull something like this:</p>\n<p>document.getElementById(&#8220;myFoo&#8221;).onclick = (new Events.Listener()).Invoke ;<br />\ndocument.getElementById(&#8220;myFoo&#8221;).onclick.Add(new Events.MouseEventHandler(myHandlerFunc)) ;<br />\n <img src='/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>"
+    },
+    {
+      "id": "1220",
+      "author": "Tom Trenka",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 12th, 2005 at 17:10",
+      "html": "<p>Sorry, quick follow up.</p>\n<p>In your example:<br />\na.b.OnFoo.Add(new Events.EventHandler(a.handleFoo))</p>\n<p>Supposing this is the actual method:</p>\n<p>a.handleFoo = function(src, ea) {<br />\nthis.something = &#8220;something&#8221;; // this would be on &#8220;a&#8221;<br />\nsrc.something = &#8220;somethingElse&#8221; ;  // this would be on &#8220;b&#8221;<br />\n}</p>\n<p>Make sense?  By passing the object that fired the event as the first arg to the handler function, I&#8217;m able (through some trickery in Events.Listener.Invoke) to preserve the scope of the original handler function, while passing the object that fired the event.</p>\n<p>Honestly, for me it&#8217;s made writing event-based code a lot simpler; I don&#8217;t have to worry about the problem that you posted about at all now, since I know that &#8220;this&#8221; will always refer to the lexical scope that I defined in the first place.</p>\n<p>(It&#8217;s for things like this that I love Javascript, btw)</p>"
+    },
+    {
+      "id": "1221",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 13th, 2005 at 12:02",
+      "html": "<p>The onliclick.Add feature is very nice.</p>\n<p>I&#8217;m still not sure how you solve it because to me it seems you are solving an equation with 2 unknowns.</p>\n<pre>var tmp = a.handleFoo;\na.b.OnFoo = (new Events.Listener).Invoke;\na.b.OnFoo.Add(new Events.EventHandler(tmp));</pre>\n<p>I&#8217;m missing the in param that passes a to the event handler&#8230; I&#8217;m off to look at the f(m) code to see if it can explain this.</p>"
+    },
+    {
+      "id": "1222",
+      "author": "Tom Trenka",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 14th, 2005 at 07:05",
+      "html": "<p>Yeah, it&#8217;s a bit confusing.  The basic deal is that Events.EventHandler wraps the original function (the one arg you pass it), and hangs onto a reference to it, as well as defines what EventArgs object is passed to it.</p>\n<p>Then in the Listener.Invoke code, the internal array of EventHandlers is executed.  Here&#8217;s the code:\n<pre>this.Invoke = function(e) {\n\tvar t = [] ;\n\tfor (var i = 0; i &lt; handlers.length; i++) t.push(handlers[i]) ;\n\twhile (t.length &gt; 0) {\n\t\tvar h = t[t.length - 1] ;\n\t\t(h.GetHandler())(this, new (h.GetArgsClass())(e)) ;\t// invoke the event handler\n\t\tif (h.RunOnce) me.Remove(h) ;\n\t\tt.pop() ;\n\t}\n} ;\n</pre>\n<p>Ignoring the h.RunOnce stuff, basically what&#8217;s happening is the following:<br />\n1.  the context of execution is the target object (the scope issue you mentioned in this post).<br />\n2.  The EventHandler objects in the handlers array wrap the original reference, and executes it directly (as opposed to in any particular scope).</p>\n<p>Here&#8217;s the money line:</p>\n<pre>(h.GetHandler())(this, new (h.GetArgsClass())(e)) ;</pre>\n<p>h.GetHandler() returns a reference to your original function, without changing the execution scope.</p>\n<p>h.GetArgsClass() returns a new instance of the particular EventArgs object you&#8217;ve defined for that EventHandler.</p>\n<p>&#8220;this&#8221; is passed as the first arg to your function.</p>\n<p>It&#8217;s pretty confusing to figure out how it works, but it does work pretty well. Of course, if you figure out a situation where it doesn&#8217;t work as advertised, I&#8217;m all ears.</p>"
+    },
+    {
+      "id": "1223",
+      "author": "Tom Trenka",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 14th, 2005 at 07:08",
+      "html": "<p>Dammit.  I keep posting an explanation without putting an example up&#8230;taking the functions from your last one, the money line would look like this:</p>\n<p>(a.handleFoo)(a.b, new EventArgs(e)) ;</p>\n<p>That&#8217;s basically how it&#8217;s executed.  Does that help explain the second unknown at all?</p>"
+    },
+    {
+      "id": "16479",
+      "author": "Simonboris",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "June 7th, 2006 at 18:31",
+      "html": "<p>For those who refuse to use the Function.apply because old browser do not support it, copy paste this in you js files.</p>\n<p>If Function.apply is not available in a browser, this will be run and it do the smae thing:</p>\n<p>if(!Function.prototype.apply)<br />\n{<br />\n\tFunction.prototype.apply = function(o,a)<br />\n\t{<br />\n\t\tvar r, e;<br />\n\t\tif(!o) var o \t= window;<br />\n\t\tif(!a) var a \t= new Array();<br />\n\t\tvar b \t\t= new Array();<br />\n\t\tfor(var i=0;i<a></a></p>"
+    },
+    {
+      "id": "16480",
+      "author": "Simonboris",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "June 7th, 2006 at 18:32",
+      "html": "<p>if(!Function.prototype.apply)<br />\n{<br />\n\tFunction.prototype.apply = function(o,a)<br />\n\t{<br />\n\t\tvar r, e;<br />\n\t\tif(!o) var o \t= window;<br />\n\t\tif(!a) var a \t= new Array();<br />\n\t\tvar b \t\t= new Array();<br />\n\t\tfor(var i=0;i<a></a></p>"
+    }
+  ]
+}
+---
+<p>I think we&#8217;ve all made the mistake while we are doing OOP in JavaScript with <code>this</code> not pointing to what we expected.</p>
+<pre><code>this.obj.onfoo = this.handleFoo;</code></pre>
+<p>In the code above <code>this</code> inside <code>handleFoo</code> would point at <code>this.obj</code> and not at <code>this</code>. This is usually worked around with the cumbersome code:</p>
+<pre><code>var self = this;
+this.obj.onfoo = function (e) {
+   return self.handleFoo(e);
+};</code></pre>
+<p>This can be simplified a lot by simply extending Object with the following:</p>
+<pre><code>Object.prototype.createDelegate = function (sMethodName) {
+   var self = this;
+   return function () {
+      return self[sMethodName].apply(self, arguments);
+   };
+};</code></pre>
+<p>or</p>
+<pre><code>function createDelegate(oObject, sMethodName) {
+   return function () {
+      return oObject[sMethodName].apply(oObject, arguments);
+   };
+}</code></pre>
+<p>With the above code we get the following:</p>
+<pre><code>this.obj.onfoo =  this.createDelegate("handleFoo");</code></pre>
+<p>or</p>
+<pre><code>this.obj.onfoo = createDelegate(this, "handleFoo");</code></pre>
+<p>A big warning is needed here. Do not do this for DOM/COM objects in IE or you&#8217;ll end up with serious memory leaks.</p>
+<p>In the Bindows world we went a different route and added an extra parameter to the EventTarget interface to solve the most common case:</p>
+<pre><code>this.obj.addEventListener("foo", this.handleFoo, this);</code></pre>

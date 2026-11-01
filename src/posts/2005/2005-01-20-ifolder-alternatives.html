@@ -1,0 +1,41 @@
+---json
+{
+  "title": "iFolder Alternatives?",
+  "date": "2005-01-20T21:42:09-08:00",
+  "permalink": "/archives/2005/01/20/21.42.09/",
+  "tags": [
+    "Software"
+  ],
+  "comments": [
+    {
+      "id": "1207",
+      "author": "EAE",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "January 20th, 2005 at 21:58",
+      "html": "<p>If you don&#8217;t mind installing cygwin (or at least a subset of it) rsync does pretty much what you want, and it just works.</p>\n<p>If that&#8217;s not an option there are a ton of folder synchronization applications for windows, just google for it. Or, if you&#8217;re feeling lucky, you might even get the &#8216;briefcase&#8217; thing in windows to work.</p>"
+    },
+    {
+      "id": "1208",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "January 20th, 2005 at 22:39",
+      "html": "<p>I want it automated and instant. As soon as I change a file a want it to update the files on the other machines (a few minutes lag should be fine). I also want it to do the synchronization when 2 computers can see each other. Turning on the lap top when I get home or transfering the files over the internet if there is an internet connection.</p>\n<p>I did search google and tucows to no avail&#8230; I&#8217;ll give it another shot</p>"
+    },
+    {
+      "id": "1209",
+      "author": "EAE",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "January 21st, 2005 at 13:51",
+      "html": "<p>Hmmm, I used to have a program that worked just like that, I&#8217;ll try to find it when I get home.</p>\n<p>Anyway, you could easily create a small shell script that runs every minute or so (using cron or windows scheduling) and checks if the laptop is available, and if it is starts rsync.<br />\nRequires cygwin and takes some time to set up properly, but once it&#8217;s working you won&#8217;t have to worry about it ever again. You could even configurate it to occasionally rsync to /home/backup/erik on shark.eae.net if you want it backed up to tape.</p>"
+    }
+  ]
+}
+---
+<p>I just bought a new laptop and now I want to keep certain folders synchronized.</p>
+<p>My first idea was to use <a href="http://www.ifolder.com">iFolder</a> (mono) but after testing it I found that it was way too imature and I could not get it to work. iFolder seems like the perfect product, if it worked. Does anyone one know of a similar product that do work today?</p>

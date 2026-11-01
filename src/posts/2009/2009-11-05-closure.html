@@ -1,0 +1,162 @@
+---json
+{
+  "title": "Closure",
+  "date": "2009-11-05T22:27:29-08:00",
+  "permalink": "/archives/2009/11/05/22.27.29/",
+  "tags": [
+    "Uncategorized",
+    "Google",
+    "JavaScript"
+  ],
+  "comments": [
+    {
+      "id": "103923",
+      "author": "Nicolas",
+      "url": "http://thejit.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Thanks for releasing and working on this code <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>\n<p>Actually, I have a (design?) question:</p>\n<p>I feel like the inheritance pattern used in Closure is a little bit, well, not so developer friendly:</p>\n<p>You need to explicitly &#8220;call&#8221; the constructor for the Super class with SuperClass.call(this, etc) instead of using some special property like this.__super();</p>\n<p>Also, you have to do that &#8220;extra&#8221; step to augment the current class with the Superclass&#8217; methods with the inherits function.</p>\n<p>Is there a (perhaps performance) reason why you chose to do this instead of using something like the MooTools Class class?</p>"
+    },
+    {
+      "id": "103926",
+      "author": "kangax",
+      "url": "http://thinkweb2.com/projects/prototype/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Very nice, Erik!</p>\n<p>Now if only Closure didn&#8217;t rely on browser sniffing so often <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "103927",
+      "author": "Dan Pupius",
+      "url": "http://pupius.co.uk",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>kangax: object detection has it&#8217;s own issues.  It means you can&#8217;t compile out browser specific code.  In some cases, for example getting rid of IE code, this can reduce the JS size by 5% or more.</p>"
+    },
+    {
+      "id": "103928",
+      "author": "Alex Russell",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Congrats! Closure is impressive, all the moreso for the tight compiler integration.</p>"
+    },
+    {
+      "id": "103929",
+      "author": "Eugene Lazutkin",
+      "url": "http://lazutkin.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Great stuff! Looking forward to cooperation between Dojo and Closure.</p>"
+    },
+    {
+      "id": "103930",
+      "author": "Aaron",
+      "url": "http://www.aaronboodman.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Nicolas: one reason not to have something like this.__super() is that it requires an extra property be stored to point back to the parent on every object instance.</p>"
+    },
+    {
+      "id": "103934",
+      "author": "Fredrik",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Really like your move! when inspecting google code in the past it was obvious you had developed a compiler/linker tool. I hope to have time to try it out in the not too distant future. </p>\n<p>Regarding MochiKit, don&#8217;t forget the Dom-helper. I added a note about it here also:<br />\n<a href=\"http://groups.google.com/group/mochikit/browse_thread/thread/532e95132a4eeb29#\" rel=\"nofollow\">http://groups.google.com/group/mochikit/browse_thread/thread/532e95132a4eeb29#</a></p>\n<p>Lycka till I fortsättningen!</p>"
+    },
+    {
+      "id": "103937",
+      "author": "kangax",
+      "url": "http://thinkweb2.com/projects/prototype/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@Dan I was surprised to see a lot of unneeded sniffs for webkit in dom.js, for example. Do you ever compile out that code too? I&#8217;m also curious how this browser-specific separation happens: is browser type determined based on userAgent, before sending files to a client?</p>"
+    },
+    {
+      "id": "103941",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Nicolas: __super cannot be implemented efficiently. MooTools and others inspect all methods and check their source for __super and then wraps the current function in another function that sets this.__super, calls the original function and then restores super.</p>\n<p>Aaron: I wish it was that simple. Just putting a __super on every instance will break when you have more than one layer of inheritance.</p>\n<p>Kangax: Like Dan said, object detection does not allow us to compile out non needed code. This is very important for our iPhone apps. We used to support Safari 3 and 2 and it&#8217;s DOM support was just really bad. We have removed most of that code but I wold not be surprised if we can remove more WEBKIT checks. We discussed trying to compile out the object detection code by keeping a huge mapping between user agents and their support.</p>\n<p>Fredrik: DomHelper was inspired by MochiKit. Deferred was a straight port. goog.iter was inspired by Python and I did look at the MochiKit API (but not its code) to make sure we got the most important helper functions.</p>"
+    },
+    {
+      "id": "103955",
+      "author": "Louis Gray",
+      "url": "http://blog.louisgray.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik, thanks for your code, your writeups and sharing with the community. I had a great conversation with Mihai Parparita, and shared his observations on Closure in a post today. I was of course more than happy to link to this post.</p>\n<p>The Story of Google&#8217;s Closure: Advanced JavaScript Tools<br />\n<a href=\"http://blog.louisgray.com/2009/11/story-and-impact-of-closure-googles.html\" rel=\"nofollow\">http://blog.louisgray.com/2009/11/story-and-impact-of-closure-googles.html</a></p>"
+    },
+    {
+      "id": "103962",
+      "author": "Bill Higgins",
+      "url": "http://billhiggins.us/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>&gt; At the time we were considering using Dojo as our base for this new library. We were very impressed with Dojo but back then Dojo was too unstable and we had heard too many horror stories of upgrade migration head aches. </p>\n<p>When was &#8220;back then&#8221;?</p>"
+    },
+    {
+      "id": "103963",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Bill: I believe Dojo was at 0.1 or 0.2 at the time.</p>"
+    },
+    {
+      "id": "104048",
+      "author": "David Mark",
+      "url": "http://www.cinsoft.net/mylib.html",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Are we looking at the same script(s)?  It&#8217;s an outdated pipe dream.  Full of browser sniffing, as well as other poor inferences, inefficiencies and bad practices.  Doesn&#8217;t matter if the &#8220;compiler&#8221; is designed for browser-specific filtering and it is tied to the client side sniffing.  That was a mistake too.  Not surprising at all that neophytes in 2005-6 would produce something like this.  <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";)\" class=\"wp-smiley\" /> </p>\n<p>Anyone who thinks this is a good thing is sadly mistaken.  It actually manages to make jQuery look good.  So look again.  <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "104183",
+      "author": "T.J. Crowder",
+      "url": "http://www.crowdersoftware.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@Erik:</p>\n<p>Re inheritance: Not trying to pimp anything here, but there are reasonably efficient ways to set up inheritance without running into decompilation or strict mode issues and without creating functions on-the-fly at call-time. I describe one in this blog entry: <a href=\"http://blog.niftysnippets.org/2009/09/simple-efficient-supercalls-in.html\" rel=\"nofollow\">http://blog.niftysnippets.org/2009/09/simple-efficient-supercalls-in.html</a><br />\nSomething along those lines, which works uncompiled and so meets that need, could then be taken a step further with compiler support replacing/optimizing some of the runtime plumbing&#8230;</p>\n<p>&#8211; T.J. <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":-)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "104184",
+      "author": "Mike Riley",
+      "url": "http://yelirekim.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I usually don&#8217;t take time to post snarky comments like this, especially on subjects that I&#8217;m not quite qualified to weigh in on, but here it goes:</p>\n<p>How in the name of god do any of you expect to provide meaningful feedback as to closure&#8217;s shortcomings in a blog comment? It&#8217;s unfathomable that between ~400 google engineers, over a period of several years, they wouldn&#8217;t have at some point at least considered or attempted to flesh out every issue to the point that it couldn&#8217;t be resolved in a short (chest beating) comment flame <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";)\" class=\"wp-smiley\" /> </p>\n<p>Great work on this Google team <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    }
+  ]
+}
+---
+<p>Today we finally announced and released Closure (or Closure Library as the JS library is officially known as).</p>
+<h3>History</h3>
+<p>Me and <a href="http://pupius.co.uk/blog/">Dan Pupius</a> started the JS library at Google a long time ago. At the time there was a lot of good JS code at Google but there was really no order to it and the code was spread out all over the code base. This of course made it hard to discover which in turn lead to the same code being reimplemented over and over. As you might guess the code that existed was not very consistent and sometimes did not even work in the presence of other code. Closure was an attempt to bring a <a href="http://en.wikipedia.org/wiki/Closure_(psychology)">closure</a> to this mess. The name is also a play on the <a href="http://en.wikipedia.org/wiki/Closure_(computer_science)">programming language feature</a> as well as the desire to make our js library be a <a href="http://en.wikipedia.org/wiki/Transitive_closure">closure</a> of all the existing js code at Google.</p>
+<p>At the time we were considering using <a href="http://www.dojotoolkit.org/">Dojo</a> as our base for this new library. We were very impressed with Dojo but back then Dojo was too unstable and we had heard too many horror stories of upgrade migration head aches. We also looked at <a href="http://mochikit.com/">MochiKit</a> which was more stable but it did not really solve any of our problems. (<a href="third_party">*</a>)</p>
+<h3>Today</h3>
+<p>We have had more than 400 Google engineer contributing code to Closure. The code is constantly evolving but I feel like it has stabilized a lot over the last year or so. It is used by almost all of Google&#8217;s web applications and the amount of QA and usage these apps have is unheard of for any web application.</p>
+<p>I&#8217;m very happy that <a href="http://www.nanaze.com/">Nathan</a> and <a href="http://www.ginnotvodka.com/">Daniel</a> took upon themselves to release this because neither me nor Dan has had the bandwidth to do it.</p>
+<h3>Future</h3>
+<p>I hope we can see more code being shared among the different open source JS libraries out there. We would love to be able to <code>goog.require</code> some Dojo code (especially their data model code) and I&#8217;m sure they would love to be able to <code>dojo.require</code> our data structures and i18n code.</p>
+<h3>Closure Compiler</h3>
+<p>Closure relies heavily on the <a href="http://code.google.com/closure/compiler/">Closure Compiler</a> to concatenate files, doing static type analysis, as well as code optimizations such as inlining and dead code removal. Closure Library is great for prototyping but it gets slow real fast due to all the network request that are done at startup as well as downloading all the code that you do not really need. The compiler solves both these problems.</p>
+<h4 id="third_party">Third Party Code</h4>
+<p>We ended up using both Dojo (we use Acme for <a href="http://code.google.com/p/closure-library/source/browse/trunk/third_party/closure/goog/dojo/dom/query.js">goog.dom.query</a>) and we use MochiKit&#8217;s Deferred in <a href="http://code.google.com/p/closure-library/source/browse/trunk/third_party/closure/goog/mochikit/async/deferred.js">goog.async.Deferred</a>.</p>

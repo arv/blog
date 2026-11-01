@@ -1,0 +1,75 @@
+---json
+{
+  "title": "RCC moves out of SVG 1.2",
+  "date": "2004-03-24T23:54:23-08:00",
+  "permalink": "/archives/2004/03/24/23.54.23/",
+  "tags": [
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "719",
+      "author": "Jim",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "March 25th, 2004 at 18:55",
+      "html": "<p>Hi Erik,<br />\nI tested out your Bindows and it is truly interesting and very attractive. However, one thing I couldn&#8217;t exactly see is why someone should use it? That is, it is definitely a useful tool, but you see there are many other solutions, like java applets, .net web forms, xul etc&#8230;</p>\n<p>This framework seems to be inappropriate for the web sites, because web sites has to work with various number of browsers. It seems to be it is way more expensive to use bindows for web sites (not the bindows license, but the amount of time you put into the development, cause you have to develop for two sets of browsers at least). If the web site owner targets the Internet Explorer, then I do believe it is a good solution, however I can not think of many web sites that require this much of complexity on the client side. That is if they develop something that works, it is still good for them. And also it seems that you have a more steep learning curve with Bindows and somewhat restricted by what you can do with it, cause there are not too much free articles for it. For example, if I choose to use normal HTML I can check out what other people do and quickly solve my problem, but if I choose Bindows I have to learn how to use it and restricted by what I have there. Also with normal HTML/DHTML I can extend or modify it anyway I want.</p>\n<p>If the Bindows target the internal networks, then I am wondering why not use java, .net web forms and so on. They seem to be more attractive for intranets.</p>\n<p>Finally, I wonder how can someone or a third party supply its own widgets for your framework. Is there a plan for it? Say can I produce one and sell as a third party?</p>\n<p>I think it is an excellent piece of work. In fact, nobody would believe that it is all done with dhtml. However, I couldn&#8217;t figure out where is the true value of this solution, cause it seems to be a world in its own, rather than part of DHTML itself. That is it uses DHTML, but nobody who is expert on DHTML claim to be an expert in Bindows, cause it has its own set of rules and logic.</p>\n<p>If you can bring some light to these concerns/questions I would be really happy. Cause I am puzzled on exactly how this excellent framework bring value. It is an excellent piece of work, there is no doubt about it, but why should someone use it. The only logical answer I was able to come up with is when someone wants to target IE 5.5 or later and they want to be as responsive as possible on the client side.</p>\n<p>Great inspiring work btw. </p>\n<p>I copied my post here, in case you didn&#8217;t notice it before.</p>"
+    },
+    {
+      "id": "720",
+      "author": "Jim Ley",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "March 27th, 2004 at 17:21",
+      "html": "<p>Hi Erik,</p>\n<p>I&#8217;m interested in what you think the problems with XBL are?  from reading your marquee implementation I seem to see your biggest complaint being scripting scope of your components?</p>\n<p>I believe the XBL spec will say something like:</p>\n<p><i>This implies that scripts from different bindings in the same binding source bound to different elements in the same top-level document share the same scripting scope.</i></p>\n<p>Which means we can scope js to within the document scope, indeed it&#8217;s communication across script scopes that become difficult.</p>\n<p>Jim.<br />\n(responses via email would be appreciated)</p>"
+    }
+  ]
+}
+---
+<p>In the exisiting working draft for <a href="http://www.w3.org/TR/2004/WD-SVG12-20040318/"><abbr title="Scalable Vector Graphics">SVG</abbr> 1.2</a> the W3C adds something called <a href="http://www.w3.org/TR/2004/WD-SVG12-20040318/#rcc"><abbr title="Rendering Custom Context">RCC</abbr></a>. RCC is a way to define custom elements in SVG. It is very similar to <abbr title="XML Binding Language">XBL</abbr> and tries to solve the same issues as both XBL and Microsoft&#8217;s behaviors has tried to solve before this.</p>
+<p>I&#8217;ve <a href="http://lists.w3.org/Archives/Public/www-svg/2003Jul/0046.html">previously commented</a> about the duplicate effort of RCC and that I thought RCC should be taken out of SVG and coordinated with XBL and related efforts. In the latest update of the SVG 1.2 WD there is a note saying just this.</p>
+<blockquote><p>
+The RCC feature set is expected to be moved to a separate specification from the next publication of this document. Discussions are already under way to merge the functionality with the <a href="http://www.w3.org/TR/2001/NOTE-xbl-20010223/">XML Binding Language (XBL)</a> that has been implemented in some HTML browsers. This will not delay the SVG 1.2 specification, and will allow the features to be used in multiple document formats (including both SVG and XHTML). A new XBL specification is being developed by the SVG Working Group with liaison with other W3C Working Groups. It is highly likely that the first official W3C version of XBL will address the requirements of SVG 1.2, where future versions add some features needed by other document languages.
+</p></blockquote>
+<p>On the same topic, <a href="http://www.croczilla.com/">Alex Fritze</a> of Mozilla SVG fame is adding another variant trying to solve the same thing, called <a href="http://www.croczilla.com/xtf">XTF</a> (eXtensible Tag Framework). XTF is much more similar to <a href="http://www.w3.org/TR/1998/NOTE-spice-19980123.html">Spice</a> (submitted to the W3C by HP even before Microsoft proposed the <a href="http://www.w3.org/Submission/1998/17/">HTML Components</a>. XTF uses JS, C++ or any other XPCOM language to implement a specific interface describing how to render the element. This is much more similar to binary behaviors and IE and the way custom components are implemented in Avalon. The good tihng with this is that it is more powerful but the downside is that it is harder to learn.</p>
+<p>This leaves us with 3 implemented variants (and a half for XTF) and one more proposal submitted to the W3C (Action Sheets totall ignored).</p>
+<table>
+<thead>
+<tr>
+<td>Name</td>
+<td>W3C Status</td>
+<td>Implementaions</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.w3.org/Submission/1998/03/">Spice</a></td>
+<td>W3C Submission</td>
+<td>None</td>
+</tr>
+<tr>
+<td><a href="http://www.w3.org/Submission/1998/17/">HTML Components</a></td>
+<td>W3C Submission</td>
+<td>IE5+ Win32</td>
+</tr>
+<tr>
+<td><a href="http://www.hixie.ch/specs/xbl/xbl-2-full" title="Links to version 2">XBL</a></td>
+<td>Draft Proposal (Adobe, Opera &amp; Apple)</td>
+<td>Mozilla</td>
+</tr>
+<tr>
+<td><a href="http://www.w3.org/TR/2004/WD-SVG12-20040318/#rcc">RCC</a></td>
+<td>Part of SVG 1.2 WD</td>
+<td>Adobe SVG Viewer v6</td>
+</tr>
+<tr>
+<td><a href="http://www.croczilla.com/xtf">XTF</a></td>
+<td>None</td>
+<td>Mozilla branch</td>
+</tr>
+</tbody>
+</table>
+<p>At the moment it seems like XBL will be the final solution. I&#8217;m not sure I&#8217;m totally satisfied with this. I have several issues with XBL that you will most likely notice by looking at the <a href="http://webfx.eae.net/dhtml/xblmarquee/xblmarquee.html">XBL Marquee</a> at <a href="http://webfx.eae.net/">WebFX</a>.</p>
+<p>I hope I can get back to this topic because this topic is something that lies close to my heart. I would like to disguss what kind of features I see as essential for something like this (and where existing solutions fall short).</p>

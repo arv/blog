@@ -1,0 +1,149 @@
+---json
+{
+  "title": "ExplorerCanvas",
+  "date": "2006-03-28T12:05:59-08:00",
+  "permalink": "/archives/2006/03/28/12.05.59/",
+  "tags": [
+    "DHTML",
+    "Google",
+    "Internet Explorer",
+    "JavaScript",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "11365",
+      "author": "Kevin Yank",
+      "url": "http://www.sitepoint.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Your SourceForget project link is wrong.</p>"
+    },
+    {
+      "id": "11369",
+      "author": "Dean Edwards",
+      "url": "http://dean.edwards.name/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>This looks really good. It&#8217;s about time we released the Web Forms 2.0 stuff I guess.</p>"
+    },
+    {
+      "id": "11373",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Thanks Kevin. I&#8217;ve now fixed it.</p>"
+    },
+    {
+      "id": "11384",
+      "author": "Martijn",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Very impressive!</p>"
+    },
+    {
+      "id": "11386",
+      "author": "callum",
+      "url": "http://ubrowser.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Great job on the canvas work!</p>\n<p><a href=\"http://ubrowser.com/screenshots/ub-3dcanvas.jpg\" rel=\"nofollow\">http://ubrowser.com/screenshots/ub-3dcanvas.jpg</a><br />\n3d on a canvas in a browser on a texture on a flag in an app etc.. <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "11848",
+      "author": "Mark Kahn",
+      "url": "http://www.jslibrary.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>There&#8217;s a bug when drawing an arc in contextPrototype.arc.</p>\n<p>yEnd occasionally comes out to a non-whole number like 29.9999999997.  If this happens only a single pixel of the arc is actually drawn. Simple solution is to round yEnd, although it looks like a floating point problem so rounding xStart, yStart and xEnd as well couldn&#8217;t hurt.</p>"
+    },
+    {
+      "id": "11849",
+      "author": "Mark Kahn",
+      "url": "http://www.jslibrary.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>wish I could edit&#8230;</p>\n<p>Anyway, the ultimate problem is this:</p>\n<p>var yEnd = aY + (Math.sin(aEndAngle) * aRadius);</p>\n<p>aEndAngle is 2*Pi, so Math.sin(aEndAngle) -should- evaluate to 0.  It doesn&#8217;t since Math.Pi is a floating point.  It evaluates to a very small number (e-16 or so).  When aRadius is large enough in an inverse relation to the aY it actually does the math and comes up with 2.9999999999997 for example.  Often times aY+2.9&#8230;97 will evaluate to aY+3 so it&#8217;s not always an issue.</p>\n<p>I would say just drop the calculations for yStart and yEnd and set them to aY, but I guess you need it for whenever partial arcs are implemented.</p>\n<p>So rounding is the best solution I can come up with.</p>"
+    },
+    {
+      "id": "11851",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I thought we did rounding on all numbers. I&#8217;ll take a look at this.</p>"
+    },
+    {
+      "id": "11852",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Yeah, the rounding is done in the stroke method.</p>"
+    },
+    {
+      "id": "11859",
+      "author": "Mark Kahn",
+      "url": "http://www.jslibrary.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Yeah, it looks like you are, but you&#8217;re rounding the wrong way.  You&#8217;re flooring everything in stroke which causes 29.99&#8230;7 to be 29 which causes the bug.</p>\n<p>Simple test: draw a large circle (stroked) on the top left of a canvas.  It&#8217;ll be invisible except for a small like at 0 deg (the right side of the circle).</p>"
+    },
+    {
+      "id": "11910",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>We just fixed this. Previously the lines where off by a half pixel as well and sub pixel rendering didn&#8217;t work very well.</p>"
+    },
+    {
+      "id": "54363",
+      "author": "R Mowatt",
+      "url": "http://mowattmedia.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Im having the same problem as the one noted above. Have you released the updated version? The only version I can find is the original.<br />\nThanks!</p>"
+    },
+    {
+      "id": "103118",
+      "author": "lopez",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>if (typeof G_vmlCanvasManager != &#8220;undefined&#8221;) {<br />\n  G_vmlCanvasManager.initElement(c);<br />\n}</p>\n<p>THANK U SOOOOO MUCH <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /><br />\nlopez</p>"
+    }
+  ]
+}
+---
+<p>Over the last few months, me, <a href="http://glenmurphy.com/blog/2006/03/explorercanvas.html">Glen</a> and <a href="http://me.eae.net/archive/2006/03/28/explorercanvas/">Emil</a> have been working on an open source version of <a href="http://whatwg.org/specs/web-apps/current-work/#scs-dynamic">canvas</a> for Internet Explorer.</p>
+<p>The implementation uses VML and IE style filters (for image rotation, rgba and <a href="http://whatwg.org/specs/web-apps/current-work/#globalalpha">globalAlpha</a>). It implements most of the specification but some areas are a not implemented (for example composite drawing, patterns, radial gradients, coord size and clearRect clears everything).</p>
+<p><a href="http://glenmurphy.com/blog/2006/03/explorercanvas.html">Glen writes</a> how this project evolved over the months. He also links to a <a href="http://bodytag.org/excanvas1/">demo</a> that he wrote. We should really link to more demos but one thing at a time. For example most of the demos written for the <a href="http://developer.mozilla.org/">Mozilla Developer Center</a> <a href="http://developer.mozilla.org/en/docs/Canvas_tutorial">canvas tutorial</a> works by just including the js file.</p>
+<p><a href="http://me.eae.net/archive/2005/12/29/canvas-in-ie/">Emil&#8217;s initial implementation</a> uses a behavior. However, the canvas tag is not recognised in IE so you get a invalid DOM. The ExplorerCanvas does not use a behavior and it only uses one js file. This makes it a bit simpler and allows more control over the element. Normally, the canvas elements are initialized when the page is loaded but if you want to create canvas elements on the fly (or use them before the page has loaded) the following code should work:</p>
+<pre><code>var c = document.createElement("canvas");
+document.body.appendChild(c);
+// we need to init this for IE
+if (typeof G_vmlCanvasManager != "undefined") {
+  G_vmlCanvasManager.initElement(c);
+}</code></pre>
+<p>There is one more quirk. The canvas elements are recreated when initialized so do not store a reference to them before they are actually used.</p>
+<ul>
+<li><a href="http://www.sourceforge.net/projects/excanvas/">SourceForge project</a></li>
+<li><a href="http://glenmurphy.com/blog/2006/03/explorercanvas.html">Glen&#8217;s post</a></li>
+<li><a href="http://me.eae.net/archive/2006/03/28/explorercanvas/">Emil&#8217;s post</a></li>
+</ul>

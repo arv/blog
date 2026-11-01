@@ -1,0 +1,157 @@
+---json
+{
+  "title": "Associative Arrays Must Die",
+  "date": "2006-05-18T10:31:01-08:00",
+  "permalink": "/archives/2006/05/18/10.31.01/",
+  "tags": [
+    "JavaScript"
+  ],
+  "comments": [
+    {
+      "id": "13545",
+      "author": "Dean Edwards",
+      "url": "http://dean.edwards.name/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hooray! Now I can extend the Array object and not feel guilty. <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":-)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "13970",
+      "author": "Julian Turner",
+      "url": "http://www.baconbutty.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I noted that there was some suggestion that the author did not rule out &#8220;custom properties&#8221; to &#8220;augment&#8221; the Array object.</p>\n<p>This may still be a concern, if these &#8220;custom properties&#8221; were more than simply extensions to the Array prototype.  For instance, if you created on a given instance of Array some properties to record some additional &#8220;state&#8221; information relating to that particular instance, then this could be a slippery slope, and would it not provide some difficulties if you wished to serialise into a JSON string &#8211; i.e. you would need to use the Object literal &#8220;{ }&#8221; to serialise that additional &#8220;state&#8221; information, rather than simply an Array literal &#8220;[  ]&#8220;.</p>"
+    },
+    {
+      "id": "19517",
+      "author": "Brad Neuberg",
+      "url": "http://codinginparadise.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I use Arrays as hashtables in a special situation: if I want my data to be linear for quick iterating over, while also wanting random access by key with O(1) lookup. For example, imagine I have a list of contacts in my address book, keyed against their email address:</p>\n<p>key &#8211;&gt;           value<br />\n&#8212;               &#8212;&#8211;<br />\nJim Jones &#8211;&gt;     <a href=\"mailto:jim@gmail.com\">jim@gmail.com</a><br />\nBrad Neuberg &#8211;&gt;  <a href=\"mailto:bkn3@columbia.edu\">bkn3@columbia.edu</a><br />\nBilly Bob &#8211;&gt;     <a href=\"mailto:toothless@hillbilly.com\">toothless@hillbilly.com</a></p>\n<p>Lets say sometimes I want to enumerate over everything, which a hashtable can&#8217;t give me; and sometimes I want quick random access, which an array can&#8217;t give me. This is especially important for large data sets, since I can also sort using the sort function on arrays. </p>\n<p>An example of all of this:</p>\n<p>var contacts = new Array();</p>\n<p>// add data</p>\n<p>// Jim Jones<br />\ncontacts[contacts.length] = {name: &#8220;Jim Jones&#8221;, email: &#8220;jim@gmail.com&#8221;};<br />\ncontacts[\"_Jim Jones\"] = {name: &#8220;Jim Jones&#8221;, email: &#8220;jim@gmail.com&#8221;};</p>\n<p>// Brad Neuberg<br />\ncontacts[contacts.length] = {name: &#8220;Brad Neuberg&#8221;, email: &#8220;bkn3@columbia.edu&#8221;};<br />\ncontacts[\"_Brad Neuberg\"] = {name: &#8220;Brad Neuberg&#8221;, email: &#8220;bkn3@columbia.edu&#8221;};</p>\n<p>// etc.</p>\n<p>// enumerating over entries<br />\nfor(var i = 0; i </p>"
+    },
+    {
+      "id": "19518",
+      "author": "Brad Neuberg",
+      "url": "http://codinginparadise.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I use Arrays as hashtables in a special situation: if I want my data to be linear for quick iterating over, while also wanting random access by key with O(1) lookup. For example, imagine I have a list of contacts in my address book, keyed against their email address:</p>\n<p>key &#8211;&gt;           value<br />\n&#8212;               &#8212;&#8211;<br />\nJim Jones &#8211;&gt;     <a href=\"mailto:jim@gmail.com\">jim@gmail.com</a><br />\nBrad Neuberg &#8211;&gt;  <a href=\"mailto:bkn3@columbia.edu\">bkn3@columbia.edu</a><br />\nBilly Bob &#8211;&gt;     <a href=\"mailto:toothless@hillbilly.com\">toothless@hillbilly.com</a></p>\n<p>Lets say sometimes I want to enumerate over everything, which a hashtable can&#8217;t give me; and sometimes I want quick random access, which an array can&#8217;t give me. This is especially important for large data sets, since I can also sort using the sort function on arrays. </p>\n<p>An example of all of this:</p>\n<p>var contacts = new Array();</p>\n<p>// add data</p>\n<p>// Jim Jones<br />\ncontacts[contacts.length] = {name: &#8220;Jim Jones&#8221;, email: &#8220;jim@gmail.com&#8221;};<br />\ncontacts[\"_Jim Jones\"] = {name: &#8220;Jim Jones&#8221;, email: &#8220;jim@gmail.com&#8221;};</p>\n<p>// Brad Neuberg<br />\ncontacts[contacts.length] = {name: &#8220;Brad Neuberg&#8221;, email: &#8220;bkn3@columbia.edu&#8221;};<br />\ncontacts[\"_Brad Neuberg\"] = {name: &#8220;Brad Neuberg&#8221;, email: &#8220;bkn3@columbia.edu&#8221;};</p>\n<p>// etc.</p>\n<p>// enumerating over entries<br />\nfor(var i = 0; i &lt; contacts.length; i++){<br />\n  var entry = contacts[i];<br />\n  alert(entry.name + &#8220;: &#8221; + entry.email);<br />\n}</p>\n<p>// random access<br />\nvar bradNeuberg = contacts[\"_Brad Neuberg\"];</p>\n<p>// sorting<br />\ncontacts.sort(); // you will want to pass your own comparator in, or<br />\n                 // provide a toString() method on object literal</p>\n<p>Note the _ when keying; this is to handle an important edge condition, where the key might be a number; if I don&#8217;t add a _ before a numbered key, such as 24, then this will be interpreted as an array index and will overwrite the entry that was there before:</p>\n<p>contacts[\"24\"] = // bad!<br />\ncontacts[\"_24\"] = // good!</p>\n<p>So associative arrays using Array aren&#8217;t necessarily bad; they&#8217;ve saved my butt in some situations <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>\n<p>Best,<br />\n  Brad Neuberg</p>"
+    },
+    {
+      "id": "19519",
+      "author": "Brad Neuberg",
+      "url": "http://codinginparadise.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>You need to escape &lt; and &gt; in comments, since they are going into the HTML and munging things.</p>\n<p>Best,<br />\n  Brad</p>"
+    },
+    {
+      "id": "19632",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I don&#8217;t think your example was very good. You could have used a for-in-loop over an Object here.</p>\n<p>If you want a random contact there is a good idea to use an array because you could just generate a random number but in that case you could have used an Array and an Object.</p>\n<p>(Yeah, I know the Word Press comment field sucks but I don&#8217;t know if I&#8217;ll do anything about that.)</p>"
+    },
+    {
+      "id": "20108",
+      "author": "Irfan",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Its a good .. here is a question<br />\ncontacts.sort(); this will sort the array by NAME<br />\nHow can be done if need is to sort by email?</p>"
+    },
+    {
+      "id": "20114",
+      "author": "Irfan",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>contacts.sort(); bydefault sort the array by Name<br />\nhow Can I sort the array by email</p>"
+    },
+    {
+      "id": "20153",
+      "author": "Brad Neuberg",
+      "url": "http://codinginparadise.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>But doesn&#8217;t a for-in-loop over an object not necessarily guarantee that you will get the same ordering that you put in, unlike an Array?</p>"
+    },
+    {
+      "id": "20368",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>The ECMAScript standards says that the order is not guaranteed but all implementations do guarantee the order.</p>"
+    },
+    {
+      "id": "20369",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Irfan: Using Brad&#8217;s contacts array:</p>\n<p>contact.sort(function(c1, c2) {<br />\n  if (c1.email &lt; c2.email) {<br />\n    return -1;<br />\n  }<br />\n  if (c1.email &gt; c2.email) {<br />\n    return 1;<br />\n  }<br />\n  return 0;<br />\n});</p>"
+    },
+    {
+      "id": "21002",
+      "author": "Pedro Andujar",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hello.<br />\nI&#8217;m Spanish<br />\nI speak little English<br />\nMy code based on forEach.</p>\n<p>Array.prototype.for_each= function(f,obj){</p>\n<p>\tvar lg = this.length;<br />\n\tvar temp = this;<br />\n\tif(lg &#8220;);<br />\n\tif(element.email == &#8220;bkn3@columbia.edu&#8221;) array[index].email = &#8220;brad@columbia.edu&#8221; ;</p>\n<p>}</p>\n<p>var contacts = new Array();<br />\ncontacts[\"_Jim Jones\"] = {name: &#8220;Jim Jones&#8221;, email: &#8220;jim@gmail.com&#8221;};<br />\ncontacts[\"_Brad Neuberg\"] = {name: &#8220;Brad Neuberg&#8221;, email: &#8220;bkn3@columbia.edu&#8221;};</p>\n<p>contacts.for_each(write_contacts);<br />\ncontacts.for_each(write_contacts);</p>\n<p>function write_number(element,index, array){<br />\n\tdocument.write(&#8220;[\" + index + \"] = &#8221; + element + &#8220;&#8221;);<br />\n}</p>\n<p>var number = [\"zero\",\"one\",\"two\"];<br />\nnumber.for_each(write_number);</p>\n<p>Good bye. <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "21003",
+      "author": "Pedro Andujar",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Array.prototype.for_each = function(f,obj){</p>\n<p>var lg = this.length;<br />\nvar temp = this;<br />\nif(lg </p>"
+    },
+    {
+      "id": "21005",
+      "author": "Pedro Andujar",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Error.</p>\n<p>I&#8217;m sorry. I can&#8217;t send complete code.</p>"
+    },
+    {
+      "id": "21011",
+      "author": "Pedro Andujar",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>You will be able to see complete code here, <a href=\"http://www.andrewdupont.net/2006/05/18/javascript-associative-arrays-considered-harmful/\" rel=\"nofollow\">http://www.andrewdupont.net/2006/05/18/javascript-associative-arrays-considered-harmful/</a></p>\n<p>Good bye.</p>"
+    },
+    {
+      "id": "102587",
+      "author": "James",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>But what actually makes them &#8220;harmful&#8221;?  Nothing.</p>"
+    }
+  ]
+}
+---
+<p>Andrew Dupont wrote an <a href="http://www.andrewdupont.net/2006/05/18/javascript-associative-arrays-considered-harmful/">excellent post</a> explaining why using <code>Array</code> for maps/hashes/asssociative arrays are considered harmful. If you use <code>Arrays</code> for hashes in JavaScript you should be ashamed of yourself <img src="/wp-includes/images/smilies/icon_wink.gif" alt=";-)" class="wp-smiley" /> </p>

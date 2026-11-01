@@ -1,0 +1,311 @@
+---json
+{
+  "title": "Visual C# Express Sucks",
+  "date": "2005-06-04T00:16:38-08:00",
+  "permalink": "/archives/2005/06/04/00.16.38/",
+  "tags": [
+    "Rant",
+    "Software"
+  ],
+  "comments": [
+    {
+      "id": "3970",
+      "author": "Emil A Eklund",
+      "url": "http://me.eae.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>That reminds me of vs6&#8230; from 1998. Guess things remain the same. Speaking of that, visual assist (<a href=\"http://www.wholetomato.com/\" rel=\"nofollow\">http://www.wholetomato.com/</a>) is really nice, makes vs6 seem up to date.</p>"
+    },
+    {
+      "id": "3977",
+      "author": "Guilherme Blanco",
+      "url": "http://www.pontukom.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Also reminds me Eclipse with TruStudio plugin in the first time I installed. A lot of errors while loading and all my projects being erased. =\\</p>\n<p>But&#8230; we&#8217;re talking about a M$ technology, and as they say all the time&#8230; they have thousands of programmers working to make the things better. We&#8217;ll have to wait and see until the beta1.</p>\n<p>Cheers,</p>"
+    },
+    {
+      "id": "3987",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I don&#8217;t mind a crash or 2 in beta product but when I save things I expect them to be saved.</p>"
+    },
+    {
+      "id": "4291",
+      "author": "Sargon",
+      "url": "http://www.stileproject.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Learn from the ground up. Write your code in notepad and then compile with NANT for the build process. Also look at SharpDevelop it&#8217;s a open source tool similar to Visual Studio&#8230;.</p>\n<p>Only the weak minded need code completion&#8230;.<br />\n(Some grizzled over the hill programmer)</p>"
+    },
+    {
+      "id": "4292",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>&#8220;Only the weak minded need code completion….&#8221; </p>\n<p>Hahaha&#8230; I think code completion is one of the most important improvements in development procedures during the last 10 years.</p>\n<p>However, I agree&#8230; you should always use a plain text editor and a compiler when you learn things. Ant and Nant are not good here. Just use the command line compiler the first few times&#8230; but, there is no need to manually do this over and over. Once you understand it, use whatever tools that improves your productivity.</p>\n<p>SharpDevelop is pretty nice&#8230; I follow the Mono community a bit because compilers and related things used to be one of my main interests.</p>"
+    },
+    {
+      "id": "4996",
+      "author": "Dan Fernandez",
+      "url": "http://blogs.msdn.com/danielfe/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hi Erik,</p>\n<p>I&#8217;m the C# Product Manager at Microsoft and your blog post was forwarded to me by Robert Scoble and I wanted to respond. First off, my apologies that you lost your code. I know how frustrating that can be so my apologies. You may also want to double check and verify that you did in-fact lose your work. In Visual Studio 2005, we have a new feature called &#8220;impact-less&#8221; projects that save projects to a temporary directory rather then your &#8220;My Documents&#8221; folder. We did this because our customers kept creating projects to test some simple feature and would end up with hundreds of directories like &#8220;WindowsApplication108&#8243; in their file system. The new location for the temporary projects is at: </p>\n<p>&#8220;C:\\Documents and Settings\\%user%\\Local Settings\\Application Data\\Temporary Projects\\&#8221;</p>\n<p>Check that directory and see if your code is hiding in there (crossing fingers). If you want to<br />\nturn off &#8220;impact-less&#8221; projects, you can do so by going to: &#8220;Tools&#8230;Options&#8230;Projects and Solutions&#8230;&#8221; and clicking the checkbox &#8220;Save new projects when created.&#8221; You may need to click the &#8220;Show All Settings&#8221; checkbox in the Options dialog box to see the menu items. </p>\n<p>While C# Express is still a beta product and we are working hard to improve product stability, we have also added another feature that you may want to use to automatically save your projects (a la Microsoft Word). Go to Tools&#8230;Options&#8230;AutoRecover and click the checkbox to enable AutoRecovery and adjust the AutoRecover time as you see fit.</p>\n<p>Again, my apologies that you lost your code, we&#8217;re working on making Visual C# 2005 Express a rock-solid product that you can depend on. If you have any other questions or suggestions please feel free to email me (danielfe@nospam.microsoft.com).</p>\n<p>Thanks,<br />\nDan Fernandez<br />\nC# Product Manager</p>"
+    },
+    {
+      "id": "4997",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Dan: I don&#8217;t have that folder and after I lost the work I searched htrough my drives for all cs files so I know it was lost.</p>\n<p>The thing that is bothering me was that I pressed ctrl-s and I had already previewed the result several times.</p>\n<p>Never mind, I rewrote the program and the second time it was a breeze because I&#8217;d already done all the research <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";-)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "5411",
+      "author": "Kevin Foisy",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I too just lost an entire C# project with VisualStudio 2005 Beta 2.  I save religiously&#8230;explicitly click the save button.  Yet, somehow, magically&#8230;my project content is gone and has reverted back to a basic framework that I started prior to the four or five hours of coding.  I recall having VS in the background while working on other tasks and seeing something about auto-recovery of files.  Of course, I&#8217;m busy with something else and really not worried about it because *I save all the time!*.  Surprise, surprise.. my code is gone.  I checked my VS preferences and they&#8217;re already set as Dan (C# prod mgr) specified.  No temp folder and the backups somewhat behind my actual code.</p>\n<p>All these fancy recovery options are nice toys, but when they compromise the reliability of fundamental SAVE&#8230;they leave me very unhappy &#8211; I&#8217;d much rather live without and continue working old-school under the assumption that the IDE will eventually crash, so save and save often, but in Beta2 that doesn&#8217;t seem to help (at least not in my case).</p>\n<p>Having come off a rant from losing my code, to be fair I have to say the folks on the VS team have done a superb job building this IDE &#8211; it&#8217;s a dream to work in&#8230;now just make sure I don&#8217;t lose my code.</p>\n<p>Kevin</p>"
+    },
+    {
+      "id": "16373",
+      "author": "mahendran",
+      "url": "http://-",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>sir,<br />\niam mahendran,<br />\ni want the coding keyboard control in asp.net or c#<br />\nwhenever press any key or particular key it will call submit button so at the<br />\n time save all the details like submit button<br />\nplease reply me</p>"
+    },
+    {
+      "id": "17402",
+      "author": "Rick",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Same here. The main reason for my stupidity would be that I&#8217;m coming from a C++ background (I have the -that- Express version too), and in that environment you just CAN&#8217;T build without having all the files saved physically. Assuming that with every build the files were saved, I developed for hours, but then the crash came.. Poof! Boom! All lost.</p>"
+    },
+    {
+      "id": "19940",
+      "author": "Maurice K",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>You people are lucky.  I can&#8217;t even get a working installation.  I install, start the program, try an internet or help link and get an error with an option to contact microsoft.  The the thing restarts. (Does this on vb express too.)  Anybody know whether .net 1.1 and .net 2.0 can live together?  I need 1.1 for media connect.  Otherwise it&#8217;s a pretty garden variety  windows PC.</p>"
+    },
+    {
+      "id": "27885",
+      "author": "Mark F",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>&#8220;Now when you open up the project again it resets the cs files to the last time the actual project was saved and that was… ehmm never, so I lost all work. What a stupid behavior.&#8221;</p>\n<p>Gotta agree there.  Not saving your work is INCREDIBLY stupid behavior.  *:o)</p>"
+    },
+    {
+      "id": "43888",
+      "author": "steve",
+      "url": "http://www.techwiseideamachine.com/blog",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I got hit by this Not-save behaviour. Ouch. Woke up this morning, after leaving my computer over night, and somehow the power got turned off/on.</p>\n<p>Lost two structures, one major class with properties involving some generic ILists.</p>\n<p>Lost some code that I wrote for a formload handler, to serialize some data: first time using this serialization.</p>\n<p>In other words, &#8230; damn</p>\n<p>I do remember just compiling, thinking that the Ide naturally saves. I never clicked on that SaveAll toolbar button, unfortunately.</p>"
+    },
+    {
+      "id": "101948",
+      "author": "Julie",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I can&#8217;t believe this&#8211;it&#8217;s not Beta anymore, shouldn&#8217;t this be fixed by now?  C# Express crashed, I reopened the IDE and my whole project was gone. No .cs files anywhere on my hard drive. And I DID hit save explicitly and repeatedly.  Perhaps not Save All, so I guess I could understand if the project file were somehow missing, but all my cs and xaml files?!? What gives?  Why doesn&#8217;t save mean save?!!!!!!!  I know I&#8217;m ranting because it&#8217;s 2 a.m., but I was on a roll and had a lot of code written and now, argh!!!</p>"
+    },
+    {
+      "id": "102448",
+      "author": "Beau Gunderson",
+      "url": "http://www.beaugunderson.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Still broken using the latest version as of 8/16/2007.</p>\n<p>I too am missing the folder that Dan Fernandez mentioned as well.</p>\n<p>I wonder if he&#8217;s still C# Product Manager? <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "102940",
+      "author": "Rim",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Problem still persists to this date and the folder mentioned is nowhere to be found. Grand, simply grand.</p>"
+    },
+    {
+      "id": "103022",
+      "author": "Ingmar",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I think I&#8217;ve run into the same problem, although (fortunately) before writing any worthwhile code. I wanted to specify the project directory, but couldn&#8217;t find any settings for that. When I create a new project, it&#8217;s immediately placed in &#8220;%USERPROFILE%\\Local Settings\\Application Data\\Temporary Projects&#8221;, as Dan says, and I don&#8217;t see an option anywhere to specify a (different) location. When I close C# Express, it&#8217;s gone (duh, it&#8217;s temporary!).</p>\n<p>The simple, but working solution for me is to create a new project, then copy the entire project directory out of &#8220;Temporary Projects&#8221; to where I want it (before closing or crashing C# Express). Then close C# Express just to be safe. Finally open the project from its new location. No more problems.</p>\n<p>I don&#8217;t see why the people at MS don&#8217;t make it more obvious that initial new projects will be temporary (read: deleted as soon as you close C# Express). The &#8220;our customers kept creating projects to test some simple feature [and got their directories cluttered,  aww]&#8221; excuse sounds pretty poor to justify such a misfeature.</p>\n<p>Or maybe I&#8217;m just missing something here (&#8220;Save Project As&#8230;&#8221; anyone?). But I think these comments show that it&#8217;s a common issue.</p>"
+    },
+    {
+      "id": "103390",
+      "author": "Alfredo",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I just lost my entire project using Visual C# 2008. No trace of any file after I had saved and run the project several times.</p>\n<p>Thanks to Microsoft for wasting my time.</p>"
+    },
+    {
+      "id": "103394",
+      "author": "Tim",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I too lost hours of work to this Microsoft &#8220;Feature&#8221;.  How could anyone ship with such a monstrosity??</p>"
+    },
+    {
+      "id": "103654",
+      "author": "Martin Fabian",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Exact same thing happened to me, right now! (Visual C# Express 2008 v 9.0.30729.1 SP (.NET 3.5 SP1) on WinXP Pro sp3) I find no dir such as Dan Fernandez talks about. I did a full search of the HD, and all I could find was two exe&#8217;s with corresponding pdb&#8217;s in C:\\Documents and Setting\\%user%\\Application Data\\Microsoft\\VCSExpress\\9.0\\ProjectAssemblies. No project files, no cs-files, nada!</p>\n<p>As the OP say, this s***s, big time! What on earth are those MicroSofties thinking? Should this be acceptable behavior of commercial (well, free, but still) code? NOT!</p>"
+    },
+    {
+      "id": "103655",
+      "author": "Martin Fabian",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>The M$ guy Dan Fernandex is no longer on the Visual Studio Express team, but he answered my email on this topic, and cc&#8217;ed two persons that appearently have something with VC# Express to do. I&#8217;m now awaiting their input.</p>\n<p>I think the problem is that when VC# Express creates the files (and dir?) it uses the FILE_ATTRIBUTE_TEMPORARY flag, which makes XP cache the file, not writing it to disk. This is sane by XP, since the files are temporary and will soon be deleted anyway. But, if VC# Express is then abnormally terminated (as in my case when I had to force shutdown the comp) the cache is lost and the files never written to physical medium. Probably this was not a problem on comps with small memory, but as memory grows, so does the cache and hence less of the temporary files are actually written to the disk. That&#8217;s my guess&#8230;</p>"
+    },
+    {
+      "id": "103843",
+      "author": "Paul",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I know that complaining won&#8217;t help&#8230;</p>\n<p>But I&#8217;m really really angry about this stupid behaviour of the Express Edition. I usually work with the full edition, had to use Express, IDE crashed and twelve hours of work, gone.</p>\n<p>Very painful.</p>"
+    },
+    {
+      "id": "103847",
+      "author": "Frederick",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Got the same problem with Express 2008 and lost 5 hours of work. I saved several times (I know I instinctively press CTRL-S every line I write) and following an IDE crash I couldn&#8217;t find the files anywhere on my system. This is the worst behaviour I ever experienced from a development software, EVER.</p>"
+    },
+    {
+      "id": "103859",
+      "author": "Urr",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>As Kyle would say &#8220;Oh My God, they lost my work! You !#$%$#@!&#8221;. I too lost 3 days of work <img src=\"/wp-includes/images/smilies/icon_sad.gif\" alt=\":(\" class=\"wp-smiley\" />  on visual c# express edition 2008.</p>"
+    },
+    {
+      "id": "103877",
+      "author": "Cajmrn",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>UGH, this is so annoying!, I have a full install of Visual Studio and was developing an application for work and constantly saving, taking snapshots (manually copying to separate folders with a time stamp for the folder name). Anyways i open my latest version, with the explorer, then I open a past version, I close VS and boom the latest version disappears right before my eyes. Is that normal behavior? I&#8217;d like to think&#8230; No. <img src=\"/wp-includes/images/smilies/icon_sad.gif\" alt=\":(\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "104186",
+      "author": "Drak",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Yay, the 2010 C# edition still shows the same behaviour. Had my program running, the IDE crashed, poof 3 hours of work gone. You&#8217;d expect that they&#8217;d make the safest option the default not this dangerous behaviour.</p>"
+    },
+    {
+      "id": "104202",
+      "author": "Zwer",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Drak, you&#8217;re lucky&#8230; I just lost 2 full days of work the same way. Ah, well, like one could expect something sane from Microsoft.</p>\n<p>#$@%#$%#$</p>"
+    },
+    {
+      "id": "104238",
+      "author": "Matt",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Yup, Drak, Zwer&#8211;I just discovered this feature in VS 2010 C# as well.</p>\n<p>Microsoft, are you listening?  This is the most abhorrent, retarded &#8220;feature&#8221; one could think of.  I save, save, save, save, save, and then my computer crashes&#8230;and I&#8217;m left without a single trace of any of my work?  REALLY???</p>\n<p>Unbelievable.</p>\n<p>Sigh.</p>"
+    },
+    {
+      "id": "104274",
+      "author": "Dave",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Aaaarrrgh! Yeah, same thing happened to me. Didn&#8217;t think to hit the &#8220;Save All&#8221;. Even worse, I published the thing multiple times. So Microsoft, I work on the code for three days, hit Ctrl-S all the time, build and publish &#8230; but you still aren&#8217;t sure I want to keep the !@$# project? Pathetically lame beyond all measure. I agree with Drak, the safe option should be the default. This seems like a classic case of someone who made a decision because it &#8220;makes sense to them&#8221; and can&#8217;t admit that they were wrong.</p>"
+    },
+    {
+      "id": "104295",
+      "author": "Giovanni C.",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Just happened to me, three days of work, I even saved the executable in some other folder. Now I have the executable created, but all my project is gone. No way to recover after the c# crash.<br />\nUnbelievable no data has been written to disk, even though I&#8217;ve seen the files.<br />\nThanks MS for the free ide, but frustrating the bug that does not save actually the code.</p>"
+    },
+    {
+      "id": "104381",
+      "author": "James Cronen",
+      "url": "http://www.jamescronen.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Yup, I got burned too. VS2010. A week of work.</p>\n<p>What I don&#8217;t understand is why the .cs files aren&#8217;t saved ANYWHERE to disk. I&#8217;ve saved each of them individually a million times; I guess I had never remembered to save the solution. Or if they are saved, why are they immediately overwritten when the tool relaunches? This is absolutely asinine.</p>\n<p>I&#8217;m an amateur UX enthusiast and this absolutely boggles my mind why something like this is allowed to happen. Fortunately these were &#8220;studies&#8221; I was taking on before a much larger project so it&#8217;s not the end of the world. Still, really Microsoft?</p>"
+    },
+    {
+      "id": "104496",
+      "author": "Mike",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Same thing happened to me. Two days of work, gone. Hello, Microsoft? It&#8217;s been 6 years! Still haven&#8217;t fixed this yet?</p>\n<p>Pretty frustrating.</p>"
+    },
+    {
+      "id": "104619",
+      "author": "Chris",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Yup, lost a day&#8217;s work. MICROSOFT. WTF.</p>"
+    }
+  ]
+}
+---
+<p>Visual C# Express 2005 Express Edition Beta 2 is actually a quite nice IDE for developing C# applications. It has a lot of features that make navigating and figuring out the framework a breeze. The reason I think  it sucks is the following: I had developed an application for a few hours and to be able to compile the application one must save the cs files. All is good until the IDE crashes. Now when you open up the project again it resets the cs files to the last time the actual project was saved and that was&#8230; ehmm never, so I lost all work. What a stupid behavior. Searching for the cs file on my computer only finds the new blank one that the project just created and overwrote the exisitng file. :&#8217;( Well, at least now I know how to achieve what I want so it should be a lot faster the second time&#8230; not as fast as only writing it once but I need this application.</p>

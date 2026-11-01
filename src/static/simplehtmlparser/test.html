@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+
+</style>
+<script type="text/javascript" src="simplehtmlparser.js"></script>
+<script type="text/javascript" src="filterhtmlhandler.js"></script>
+<script type="text/javascript">
+
+function sanitize()
+{
+	var s = document.body.innerHTML
+	var p = new SimpleHtmlParser;
+	var f = new FilterHtmlHandler;
+	p.contentHandler = f;
+	p.parse(s);
+	document.body.innerHTML = f.toString();
+	alert( s + "\n---------------------\n" + f )
+}
+
+
+</script>
+</head>
+<body>
+
+<p title = hello >hi
+<input type="radio" checked onclick="alert(123)" style="behavior: foo; binding: foo; -moz-binding: foo; foo: expression('foo')">
+
+<style>
+	* { color: red; }
+</style>
+
+<!--comment-->
+<link type="text/css" rel="stylesheet" href="foo" />
+
+<a href="javascript:alert(123)">Alert 123</a>
+
+<button onclick="sanitize()"
+		type="button">Remove Dangerous stuff</button>
+
+</body>
+<script>
+    //alert(document.body.innerHTML)
+
+	var s = document.body.innerHTML;
+
+	var p = new SimpleHtmlParser;
+	var f = new FilterHtmlHandler;
+	p.contentHandler = f;
+	p.parse(s);
+	alert(f);
+	/*
+	simpleHtmlParser.contentHandler = filterHtmlHandler;
+
+	var s2 = simpleHtmlFilterer.parse(s);
+	var s3 = simpleHtmlFilterer.parse(s);
+
+	alert( s );
+	alert( s2 );
+	*/
+
+</script>
+</html>

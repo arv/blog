@@ -1,0 +1,98 @@
+---json
+{
+  "title": "The Good, the Bad and the Ugly",
+  "date": "2008-03-06T11:09:51-08:00",
+  "permalink": "/archives/2008/03/06/11.09.51/",
+  "tags": [
+    "DHTML",
+    "Internet Explorer",
+    "JavaScript"
+  ],
+  "comments": [
+    {
+      "id": "102973",
+      "author": "Diego",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>My IE8 makes 17/100 in Acid3&#8230; but, ugly too.</p>"
+    },
+    {
+      "id": "102977",
+      "author": "Jeff Schiller",
+      "url": "http://blog.codedread.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Can you provide a link to where MS mentions future Beta and VML? </p>\n<p>Thanks,<br />\nJeff</p>"
+    },
+    {
+      "id": "102982",
+      "author": "Ralf Stoltze",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik,</p>\n<p>You state that Opera implements DOM storage. Could you point me to a resource which supports this? Same with Webkit. I know they have DB storage, but DOM storage?<br />\n<a href=\"http://bugs.webkit.org/show_bug.cgi?id=11245\" rel=\"nofollow\">http://bugs.webkit.org/show_bug.cgi?id=11245</a></p>\n<p>Side note: Quite funny to see that MS picked up the name &#8220;DOM storage&#8221; from the Mozilla guys. Seems like HTML 5&#8242;s &#8220;Client-side session and persistent storage of name/value pairs&#8221; isn&#8217;t that catchy. <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>\n<p>Thanks!</p>"
+    },
+    {
+      "id": "102983",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Ralf: You are correct.  Neither Opera 9.5 or nightly webkits supports HTML5 storage&#8230; I&#8217;ll update my post</p>"
+    },
+    {
+      "id": "102985",
+      "author": "Robert Nyman",
+      "url": "http://www.robertnyman.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<blockquote><p>\nquerySelector and querySelectorAll… nuf said\n</p></blockquote>\n<p>Well, not really. I was impressed at first, but from what I&#8217;ve seen, their support only covers up to CSS 2.1 and <em>some</em> CSS 3 features. Since WebKit, and any other web browser implementing this soon, will naturally support CSS 3 completely as well, this means yet another check and workaround, which in many cases will render <code>querySelectorAll</code> useless.</p>"
+    },
+    {
+      "id": "102991",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Robert: I don&#8217;t agree with you.  CSS2.1 might miss some useful selectors but most of the CSS3 one are pretty useless, especially in the context of scripting.  Which ones do you think are crucial?  If these stops you from using querySelector then we need to make sure that MS understands this.</p>\n<p>Also, see John Resig&#8217;s post about CSS3 selectors that people actually use, <a href=\"http://ejohn.org/blog/selectors-that-people-actually-use/\" rel=\"nofollow\">http://ejohn.org/blog/selectors-that-people-actually-use/</a> If you remove the ones that people don&#8217;t really use then there are not that many left for MS to add and they seemed to be willing to add parts of CSS3 as needed (they added box-sizing).</p>"
+    },
+    {
+      "id": "103053",
+      "author": "Robert Nyman",
+      "url": "http://www.robertnyman.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Sorry for a late reply:</p>\n<p>I think that in CSS 3, the new attribute selectors, <code>nth-child</code> variants and pseudo-classes such as <code>:checked</code> etc definitely can be useful, while not all the time.</p>\n<p>With all respect to John, his post is interesting and definitely good information since I believe that those selectors are amongst the most common ones, but there a lot more web sites out there who use other selectors as well.</p>\n<p>I think, just as it has been for other web browsers, if they get the general support into their CSS base then it will be a fairly easy feat to get it into <code>querySelectorAll</code> as well.</p>"
+    }
+  ]
+}
+---
+<h2>The Good</h2>
+<p>Attribute handling in the DOM is finally working.  MS said that this was one of the hardest things to fix and yet they did it.</p>
+<p><code>hashchange</code> events simplify history management.  I wish they implemented more of the HTML5 proposals when it comes to history state management but getting an event when the hash changes is so much better than what we have today.</p>
+<p>Acid2</p>
+<p><code>querySelector</code> and <code>querySelectorAll</code>&#8230; nuf said</p>
+<p>JScript is faster.  There is a lot of room for improvements but this is a big step in the right direction.</p>
+<p><code>postMessage</code>.  Now that all new browsers support it we can finally get rid of all those ugly, complicated and slow cross domain hacks that tons of sites rely on today.</p>
+<p>Standard mode as good as possible by default.  No need to opt in to get the best possible renderer.</p>
+<p>Changes to namespaces in XHTML allowing third party to, in theory, implement binary behaviors for SVG embedded in XHTML.</p>
+<p>ARIA support.  I remember the hoops we had to go through to get Bindows 508 compliant.  If there was only ARIA support back then it would have saved several months worth of frustrating work.</p>
+<h2>The Bad</h2>
+<p>VML is not currently supportd in IE8 mode.  This would not be so bad if canvas or SVG was supported but today sites have come to rely on being able to use vector graphics in web pages. MS says &#8220;Layout and rendering behaviors, proprietary features upon which VML is built, are not yet implemented in IE8 standards mode.  Look for this feature in a future beta release.&#8221;</p>
+<p>No <code>opacity</code>, <code>rgba()</code> nor any rounded corners in sight.</p>
+<p>Yet another browser check needed.  We used to only need to check the user agent, then we also had to check the document.compatMode and now we have to also check document.documentMode.  Would it not have made more sense to just return MSIE7 in the user agent if IE8 is operating in IE7 mode?</p>
+<p>No bug fixes to JScript.  MS has an excellent paper covering their deviations from ES3 but yet they managed to improve on that situation.  MS is waiting in ES3.1 but I think it would have been safe to fix some of these issues already.  ES3.1 is on the fast track but I doubt there is room for any differences to what is already available in WebKit, Firefox and Opera today (which have tons of ES3.1 features and bug fixes today).</p>
+<p>Still no way to get the computed style.</p>
+<h2>The Ugly</h2>
+<p>HTML5, and the W3C Web App group has a proposed standard for doing cross site XHR that is implemented in WebKit, Firefox (and Opera?).  Yet, Microsoft introduces <code>XDomainRequest</code> which is very crippled.</p>
+<p>MS built their DOM storage implementation on top of their old persistence behavior which uses XML files to store the data and since it does disk writes MS decided that their implementation would not be good enough to follow the proposed spec they made the whole API asynchronous. DOM storage is implemented in <del datetime="2008-03-09T00:52:31+00:00">WebKit, </del>Firefox<del datetime="2008-03-09T00:52:31+00:00"> and Opera</del>.</p>
+<p>Where is the DOM?  MS kept asking what people wanted and every list I&#8217;ve seen has included DOM Level 2 events and DOM level 2 in general.</p>
+<p>Acid3. 16/100 is not acceptable</p>

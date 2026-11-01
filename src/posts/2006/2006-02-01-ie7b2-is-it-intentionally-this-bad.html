@@ -1,0 +1,121 @@
+---json
+{
+  "title": "IE7b2, is it intentionally this bad?",
+  "date": "2006-02-01T12:10:34-08:00",
+  "permalink": "/archives/2006/02/01/12.10.34/",
+  "tags": [
+    "Internet Explorer",
+    "JavaScript",
+    "Microsoft",
+    "Rant",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "7880",
+      "author": "Tino Zijdel",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>They didn&#8217;t even bother to fix substr() <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "8324",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>iframeObject.contentDocument&#8230; come on, how hard can this be. Someone could do this in less than 5 minutes if they already have the build working.</p>"
+    },
+    {
+      "id": "8354",
+      "author": "boohiss",
+      "url": "http://www.mgroves.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Well, it IS a beta, after all.  Not saying you shouldn&#8217;t bring these issues up, but I wouldn&#8217;t cry havoc and release the dogs of war until there&#8217;s a final version released.</p>"
+    },
+    {
+      "id": "8408",
+      "author": "José Jeria",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>What worries me the most is that Microsoft is not part of the &#8220;Web Applications 1.0&#8243; conversations&#8230;</p>"
+    },
+    {
+      "id": "8795",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>boohiss: MS has said that IE7b2 is feature complete and I doubt they are going to touch DOM/JS after beta two when they haven&#8217;t touched this in 5 years.</p>"
+    },
+    {
+      "id": "9328",
+      "author": "Rob",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Just to ditto what Erik said.  MS is done with IE7.  Don&#8217;t expect much more but IE6 in a new wrapper.</p>"
+    }
+  ]
+}
+---
+<p>Here are just a few things that are incorrect, horribly broken or totally non-existent in Internet Explorer Beta 2. (This is far from a complete list. I&#8217;m assembling this list as I&#8217;m writing this post.)</p>
+<h3>DOM Level 1 Core</h3>
+<ul>
+<li>Comments are still incorrect</li>
+<li>Attributes are still horribly broken</li>
+</ul>
+<h3>DOM Level 2 Views</h3>
+<ul>
+<li>document.defaultView</li>
+<li>getComputedStyle</li>
+<li>getOverrideStyle</li>
+</ul>
+<h3>CSS</h3>
+<ul>
+<li>box-sizing</li>
+<li>opacity</li>
+<li>:active</li>
+<li>:focus</li>
+</ul>
+<h3>Events</h3>
+<ul>
+<li>No DOM Level 2 Events support at all</li>
+<li>document.onclick = function (e) { alert(e) };</li>
+<li>No capture phase</li>
+<li>event.target</li>
+<li>event.currentTarget</li>
+<li>event.relatedTarget</li>
+<li>event.stopPropagation()</li>
+<li>event.preventDefault()</li>
+<li>No mutation events</li>
+<li>No activate event (the device independent event)</li>
+<li>No input event</li>
+<li>No DOMFocusIn (it still has focusin)</li>
+<li>No DOMFocusOut (it still has focusout)</li>
+</ul>
+<h3>General</h3>
+<ul>
+<li>DOM Level 2 Style. IE implements most of this in slightly different ways. A lot of the bugs here should be something an intern could fix in a few days (just rename a few things basically).
+</li>
+<li>Maybe I should just say DOM Level 2 because IE7 is just lagging behind by about 5 years.</li>
+<li>No JS interfaces to DOM (for exapmle Document, HTMLElement)</li>
+<li>No JS1.6 support</li>
+</ul>
+<h3>Good Stuff</h3>
+<p>All is not rotten in IE7b2. There are a few goodies in here.</p>
+<ul>
+<li>I really appreciate the effort they put into fixing CSS. They now support CSS2 selectors (although some are horribly broken, see above) and they fixed most of the known CSS bugs.</li>
+<li>I&#8217;m happy that they finally fixed the select element bug.</li>
+</ul>
+<h3>Conclusion</h3>
+<p>I&#8217;ve yet to find even one bug fix or new feature when it comes to DOM and scripting. I hope that Microsoft goes back to the drawing board and realizes that releasing IE7 in its current state is as bad as it would have been for Netscape to release Navigator 5 in 2002.</p>

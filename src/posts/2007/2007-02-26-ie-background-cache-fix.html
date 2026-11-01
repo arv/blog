@@ -1,0 +1,116 @@
+---json
+{
+  "title": "IE Background Cache Fix",
+  "date": "2007-02-26T13:13:48-08:00",
+  "permalink": "/archives/2007/02/26/13.13.48/",
+  "tags": [
+    "DHTML",
+    "Internet Explorer",
+    "Rant"
+  ],
+  "comments": [
+    {
+      "id": "85149",
+      "author": "Nicholas C. Zakas",
+      "url": "http://www.nczonline.net/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I&#8217;ve actually wondered about this &#8220;bug&#8221; for a while. I&#8217;m sure somewhere along the line this decision was made for a logical reason&#8230;maybe they didn&#8217;t anticipate how much background images would be used, or maybe they thought there was some use case under which it would be desirable not to cache the background image. I&#8217;m generally not big on overriding things that seem to be design decisions (which this seems to be). I&#8217;ve never really thought this was a &#8220;bug&#8221;&#8230;bugs don&#8217;t usually have switches that say &#8220;turn off bug&#8221;. <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "85192",
+      "author": "Thomas Frank",
+      "url": "http://www.thomasfrank.se",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Brilliant :-D, though it has been mentioned before:<br />\n<a href=\"http://www.mister-pixel.com/#Content__state=is_that_simple\" rel=\"nofollow\">http://www.mister-pixel.com/#Content__state=is_that_simple</a></p>\n<p>@Nicholas:<br />\nI agree  &#8211; it&#8217;s not a bug.<br />\nIt&#8217;s yet another Microsoft conspiracy ;-), revealed here:<br />\n<a href=\"http://www.bazon.net/mishoo/articles.epl?art_id=958#gen5\" rel=\"nofollow\">http://www.bazon.net/mishoo/articles.epl?art_id=958#gen5</a></p>"
+    },
+    {
+      "id": "85235",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>It is fixed in IE7 by the way so I would definitely call this a bug. A bug by design <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":-)\" class=\"wp-smiley\" /> </p>\n<p>Thomas: I saw that this had been mentioned before but since I didn&#8217;t know about it before I thought I would spread the word.</p>"
+    },
+    {
+      "id": "98332",
+      "author": "Patrick Corcoran",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>This is a helpful tip.</p>\n<p>I have noticed only one problem with this, and it seems to occur in IE6 on Windows Server 2003 platforms.  The execCommand fails and throws an &#8220;Invalid Argument&#8221; error.</p>\n<p>A try/catch around the command seems to do the trick.</p>"
+    },
+    {
+      "id": "98710",
+      "author": "Pai",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I am a new to Programming and held up with this issue&#8230;.. I got an image as a background image for my header.(header is 10% of my screen). when ever the page refreshes and gets time to load, i see that the image missing giving the user a feel that it is not there.Once the page is loaded completely it appears again. I tried the above solution by giving that code in my onload function. But it didnt help. can any one help me to solve this?</p>"
+    },
+    {
+      "id": "99834",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Yeah, at Google we use a try catch around it for exactly that reason.</p>"
+    },
+    {
+      "id": "102246",
+      "author": "Nir Segev",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Having the same issue with a map on aspx page, with update panel located on the same page.<br />\nevery time the update panel being updated the map flickers,<br />\ndoes anyone know a way to prevent this from happening?<br />\nI am using IE7</p>"
+    },
+    {
+      "id": "102660",
+      "author": "pl",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>It does not work, if you change css dinamicly (menu for example).<br />\nTo prevent this, add any tag with your style and set it invisible.</p>\n<p>imho, if there is no element uses any style, IE will download background image every time element with this style appears.</p>"
+    },
+    {
+      "id": "103698",
+      "author": "greg",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>i have been chasing this around for days now &#8211; I have tried this fix, the php hack, the htacess fix &#8211; nada &#8211; tried on windows XP, vista, 6 and 7.</p>\n<p>the background redraws &#8211; no matter what.  The only way I can get it not to is to include the css styles in the html document &#8211; which I can&#8217;t do &#8211; way too many includes.</p>\n<p>Here are the files &#8211; if you go between them &#8211; the background should repaint -that is my experience..</p>\n<p><a href=\"http://www.por7al.com/chargersguide/2.html\" rel=\"nofollow\">http://www.por7al.com/chargersguide/2.html</a><br />\n<a href=\"http://www.por7al.com/chargersguide/1.html\" rel=\"nofollow\">http://www.por7al.com/chargersguide/1.html</a></p>\n<p>Any help is appreciated</p>\n<p>There are no issues in ffox or on a mac.</p>"
+    },
+    {
+      "id": "103902",
+      "author": "Miriam",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I am having the same issue with background flickering in Explorer and from my experience it is not fixed in IE 7. Any other workaround?</p>"
+    },
+    {
+      "id": "104205",
+      "author": "Gooitzen",
+      "url": "http://www.ecodelphinus.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>The CSS solution on this page:</p>\n<p><a href=\"http://ieflicker.com/\" rel=\"nofollow\">http://ieflicker.com/</a></p>\n<p>Worked for me in IE8 and in the compatibility mode. </p>\n<p>YMMV.</p>"
+    }
+  ]
+}
+---
+<p>A while back a lot of people where covering how to work around the bug that IE always reloads background images from the server, leading to your UI flickering. <a href="http://dean.edwards.name/my/flicker.html">Dean</a> wrote one and lots of others wrote the same thing. Today, I saw this simple workaround (from a fellow Googler who worked at Microsoft before):</p>
+<pre><code>document.execCommand("BackgroundImageCache", false, true)</code></pre>
+<p>Much simpler but makes me wonder why this is not the default setting?</p>

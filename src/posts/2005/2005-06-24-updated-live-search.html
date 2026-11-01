@@ -1,0 +1,77 @@
+---json
+{
+  "title": "Updated Live Search",
+  "date": "2005-06-24T00:02:28-08:00",
+  "permalink": "/archives/2005/06/24/00.02.28/",
+  "tags": [
+    "JavaScript",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "4990",
+      "author": "Claudio",
+      "url": "http://gmk.com.br",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Can&#8217;t I use it in BLOG / SITE local live search form?? It&#8217;s is so complete!!</p>"
+    },
+    {
+      "id": "5379",
+      "author": "Hakan Bilgin",
+      "url": "http://www.challenger.se",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>GreaseMonkey, either I don&#8217;t get it or&#8230;isn&#8217;t this a dangerous feature?</p>\n<p>A malicious developer can create and execute scripts on sites that are using Ajax, for instance. Isn&#8217;t this (almost) exactly the same as injection of code in IE, that isn&#8217;t undesirable? Or have I missed out on something?</p>\n<p>If I have interpreted it correct, then this is Ajax enemy #1.</p>"
+    },
+    {
+      "id": "5380",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>No, GreaseMonkey is something that you have to install, just like any other extensions. Someone can make a user script that posts data to a rogue server but the user would first have to install that script. The same issues apply to extensions (even in IE).</p>\n<p>It is injection of code but the end user is the one injecting the code.</p>"
+    },
+    {
+      "id": "5381",
+      "author": "Hakan Bilgin",
+      "url": "http://www.challenger.se",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Exactly. Let me try one more time:<br />\nI am the malicious guy. I create and install a GM-script on my own browser and start executing Ajax and RPC stuff that reside on your site or Bindows. Isn&#8217;t this dangerous and undesirable for you?</p>\n<p>And then we have bank sites and other more sensitive sites.</p>"
+    },
+    {
+      "id": "5383",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Undesirable, maybe. Dangerous, nope. You can do that in tons of ways without GreaseMonkey. Nothing changes from a server side perspective. Take bookmarklets for example: Bookmarklets are basically the same except that bookmarklets are not run automatically. With GM you can say that you want a script to run on all pages that matches a regexp.</p>"
+    },
+    {
+      "id": "5385",
+      "author": "Hakan Bilgin",
+      "url": "http://www.challenger.se",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>We&#8217;re interpreting dangerous differently&#8230;When MS first introduced wsh, the intensions were good but it were used for virus creation. It shouldn&#8217;t take long before GM will be used for tailored attacks.</p>\n<p>This will probably result in blocking of browsers that support GM (if its possible, since you probably can override that with GM).</p>\n<p>A little dramatic I know, but I have a bad feeling about this.</p>"
+    },
+    {
+      "id": "5387",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>But you can only tailor attacks against yourself. And that isn&#8217;t half as fun.</p>\n<p>Blocking: All browsers supports javascript bookmarks and all browsers I know now have GM like features. Opera has it built in from the beginning. I don&#8217;t remember the name of the IE plugin and I&#8217;m pretty sure Safari has this as well (Pimp my Safari). </p>\n<p>I don&#8217;t think you understand how GM works? You cannot do anything with GM that you cannot do without it. It only makes things easier to do. I can always open a HTTP connection and do whatever I want towards the server. You don&#8217;t want to block the internet do you? It all comes down to that it is you that decide what should be run. If you want to install the Google toolbar you can do that and that even have access to your local OS.</p>"
+    }
+  ]
+}
+---
+<p>I took the time to update the <a href="/playground/googlelivesearch.user.js">Google Live Search</a> Greasemonkey script a bit to make it a bit more defensive. While I was messing with I also added code to update the links above the search field to go to the search terms  that the last result used (instead of the search term the initial page was loaded with).</p>

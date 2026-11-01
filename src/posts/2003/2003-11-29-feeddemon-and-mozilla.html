@@ -1,0 +1,47 @@
+---json
+{
+  "title": "FeedDemon and Mozilla",
+  "date": "2003-11-29T16:00:16-08:00",
+  "permalink": "/archives/2003/11/29/16.00.16/",
+  "tags": [
+    "Mozilla"
+  ],
+  "comments": [
+    {
+      "id": "556",
+      "author": "Bob Chao",
+      "url": "http://140.117.199.85/bclog/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hello!<br />\nIs this work in the final version of FeedDemon? After I press the &#8220;patch&#8221; button, I still got &#8220;Nothing to patch&#8221;&#8230;</p>"
+    },
+    {
+      "id": "557",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I realized that FD1.0 cannot be pathced. I&#8217;ll test it tonight with the new Mozilla 1.6 ActiveX control and see if it is still the case.</p>"
+    },
+    {
+      "id": "558",
+      "author": "Bob",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Active-X is working in Mozilla 1.6 after I installed the plugin.  When I run IE to Mozilla patcher I too get &#8220;Nothing to patch.&#8221;</p>"
+    }
+  ]
+}
+---
+<p>I&#8217;ve been using <a href="http://www.bradsoft.com/feeddemon/index.asp">FeedDemon</a> as my aggregator lately. Unfortunately it uses IE as the internal browser so I was forced to open up all pages in an external instance of Mozilla Firebird. This works fairly well but it is a bit annoying.</p>
+<p>However, today I managed to patch FeedDemon to use Adam Lock&#8217;s Mozilla ActiveX Control 1.5. This was really easy.</p>
+<ol>
+<li><a href="http://www.iol.ie/~locka/mozilla/control.htm#download">Download Mozilla ActiveX Control 1.5</a> and install it. I guess one could use the one packaged with Mozilla Firebird but this one did not work out of the box.</li>
+<li>Download a small program called <a href="http://www.iol.ie/~locka/mozilla/control.htm#porting">IEPatcher</a>. I found this from a <a href="http://aab.spin.ee/misc/ie2mozilla/">different site</a> that has some good information.</li>
+<li>Run the IEPatcher.exe and select the FeedDemon directory and patch the FeedDemon.exe file</li>
+<li>This creates a file called moz_FeedDemon.exe. Run this and update all your shortcuts to point to this exe file instead.</li>
+</ol>

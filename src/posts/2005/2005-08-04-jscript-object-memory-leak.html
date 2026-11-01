@@ -1,0 +1,50 @@
+---json
+{
+  "title": "JScript Object Memory Leak",
+  "date": "2005-08-04T21:38:18-08:00",
+  "permalink": "/archives/2005/08/04/21.38.18/",
+  "tags": [
+    "Internet Explorer",
+    "JavaScript"
+  ],
+  "comments": []
+}
+---
+<p>We all know that the memory leaks in Internet Explorer are horrible. However we&#8217;ve found ways (often making beautiful code really ugly) around these issus. My general guideline has always been to make sure that you don&#8217;t keep any reference betwen JScript objects and DOM/COM objects (and the other way around) as well as make sure that no DOM/COM object is in the scope when you use anonymous functions (since the closure will contain a reference to the DOM/COM object).</p>
+<p>I usually say that as long as you are using only native JScript objects the garbage collector will collect these. However I&#8217;ve found a case where this is not the case. The reason for the problem is <a href="http://blogs.msdn.com/ericlippert/archive/2004/10/07/239289.aspx">described be Eric Lippert here</a>. I&#8217;ll show you when this problem manifests itself and then discuss ways to get around it.</p>
+<pre><code>var obj = {};
+...
+obj.foo = ...
+...
+delete obj.foo</code></pre>
+<p>That&#8217;s all. The problem here is that even though we delete the field <code>foo</code> JScript keeps this key occupied and adds a flag so that it looks like it has been removed to JScript code. The reason according to Eric Lippert is that COM caches the references to the field and adding another key with the same name should be still be accessible from the cached reference. (Why?).</p>
+<p>Here is a larger code snippet that does the above a lot of times so that you can actually see that it leaks memory.</p>
+<pre><code>// create an object to use as a hash/dictionary/cache/lookup table
+var obj = {};
+
+// define a function to make the testing easier
+function addAndRemove() {
+   var key;   
+   for (var i = 0; i < 10000; i++) {
+      // generate fairly unique key
+      key = Math.random();
+      
+      // add key value pair
+      obj[key] = key; // the value is not relevant
+      
+      // and then remove the key
+      delete obj[key];
+   }
+}
+
+window.setInterval("addAndRemove()", 50);</code></code></pre>
+<p>This does not leak very much memory but if you have a hash table like structure that is long lived where a lot of add and removes are done to it you might run into problems. This is usually the case for caches and other lookup tables. So in these cases it makes sense to work around this JScript issue.</p>
+<p>One way to work around this is to clone the object and let it replace the old object. This is fast if the hash is empty but O(n) otherwise where n is the number of keys currently in the hash.</p>
+<pre><code>var tmp = {};
+for (var k in obj) {
+   if (obj.hasOwnProperty(k)) {
+      tmp[k] = obj[k];
+   }
+}
+obj = tmp;</code></pre>
+<p>You might want to build your own class to handle this internally. When the ratio between the count of the items added to the actual items in the hash is greater than a certain value you can replace the old hash object with a new one as done above.</p>

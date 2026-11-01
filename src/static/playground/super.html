@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style>
+
+</style>
+</head>
+<body>
+<pre id=out></pre>
+<script>
+
+function print(s) {
+  var out = document.getElementById('out');
+  out.appendChild(document.createTextNode(s +'\n'));
+}
+
+function createSuper(self, opt_constr) {
+  var constr = opt_constr || arguments.callee.caller;
+  function supr() {
+    return constr.superClass.apply(self, arguments);
+  };
+  supr.__noSuchMethod__ = function(name, args) {
+    if (typeof constr.superClass.prototype[name] == 'function') {
+      return constr.superClass.prototype[name].apply(self, args);
+    }
+    throw Error('No such method, ' + name);
+  };
+  return supr;
+}
+
+// Everyone should have this method in their snippets.
+function inherits(child, parent) {
+  var f = function() {};
+  f.prototype = parent.prototype;
+  child.prototype = new f;
+  child.prototype.constructor = child;
+  child.superClass = parent;
+}
+
+
+function A(x) {
+  print('In A constructor, x = ' + x);
+}
+A.prototype.a = function(x) {
+  print('In A.prototype.a, x = ' + x);
+};
+
+
+function B(x) {
+  print('In B constructor');
+  var supr = createSuper(this);
+
+  supr(x || 'From B');
+  var className = 'B';
+  this.a = function(x) {
+    print('In ' + className + '.a');
+    supr.a(1);
+  };
+}
+inherits(B, A);
+
+
+function C(x) {
+  print('In C constructor');
+  var supr = createSuper(this);
+
+  supr(x || 'From C');
+}
+inherits(C, B);
+C.prototype.a = function() {
+  var supr = createSuper(this, C);
+  print('In ' + 'C' + '.a');
+  supr.a('supr.a called from a c object');
+};
+
+
+print('Creating an instance of B');
+b = new B;
+b.a(2);
+
+print('');
+print('Creating an instance of C');
+c = new C;
+c.a();
+
+</script>
+</body>
+</html>

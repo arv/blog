@@ -1,0 +1,194 @@
+---json
+{
+  "title": "Using catch-alls to implement super in SpiderMonkey",
+  "date": "2008-11-27T12:54:49-08:00",
+  "permalink": "/archives/2008/11/27/12.54.49/",
+  "tags": [
+    "JavaScript",
+    "Mozilla"
+  ],
+  "comments": [
+    {
+      "id": "103708",
+      "author": "Dan",
+      "url": "http://technomedia.co.uk/blog/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Wow &#8211; just like PHP&#8217;s magic methods <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" />  I&#8217;ve starting to realise that trying to emulate classical inheritence just isn&#8217;t worth it in a lot of cases &#8211; I think a mixin implementation (that applys scope to the original method rather than simply copying methods to other objects) works better in a lot of cases.</p>"
+    },
+    {
+      "id": "103709",
+      "author": "Grey",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Wait &#8211; so all this effort is just to be able to write</p>\n<p>supr.method(&#8230;);</p>\n<p>instead of</p>\n<p>supr.prototype.method(&#8230;);</p>\n<p>(assuming supr == superClass in the latter case)?</p>\n<p>Hmm, I had not heard of __noSuchMethod__ before.. it&#8217;s interesting <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" />  Though Gecko-only&#8230; I don&#8217;t suppose there&#8217;s something like __noSuchProperty__ (at least it doesn&#8217;t appear here: <a href=\"https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Object\" rel=\"nofollow\">https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Object</a> )?</p>"
+    },
+    {
+      "id": "103710",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Dan: Can you elaborate what you mean with mixin here? Most time when I see people do mixin in js it is just copying methods from one object onto another object.</p>\n<p>Grey: No, all this work was to be able to write</p>\n<p>B.prototype.method = function(&#8230;) {<br />\n  &#8230;<br />\n  supr.method(&#8230;);<br />\n};</p>\n<p>instead of:</p>\n<p>B.prototype.method = function(&#8230;) {<br />\n  B.superClass.method.call(this, &#8230;);<br />\n};</p>\n<p>I still thought it was a fun exercise <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":-)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "103715",
+      "author": "Malte",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hey, you might also be interested in the way Joose implements the override method modifier (affectively achieving the affect that you describe):<br />\n<a href=\"http://code.google.com/p/joose-js/wiki/BuildingAClass#override\" rel=\"nofollow\">http://code.google.com/p/joose-js/wiki/BuildingAClass#override</a></p>\n<p>The relevant code is in the default meta class for methods:<br />\n<a href=\"http://code.google.com/p/joose-js/source/browse/trunk/lib/Joose/Method.js#46\" rel=\"nofollow\">http://code.google.com/p/joose-js/source/browse/trunk/lib/Joose/Method.js#46</a></p>\n<p>I like Joose&#8217;s approach to JS OOP much better because you actually declare that do want to achieve something instead of building/using the bare bones of the language every single time.</p>"
+    },
+    {
+      "id": "103716",
+      "author": "Grey",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@Erik: Uh, yeah, should&#8217;ve seen that, my bad. And yes, I do think exercises like these are a lot of fun, even when they&#8217;re fruitless (well, not completely, just not really practical :P). Yours even motivated me to pick up a project I had abandoned a few months ago (doesn&#8217;t have anything to do with inheritance, though); thanks for that.</p>"
+    },
+    {
+      "id": "103717",
+      "author": "Dan",
+      "url": "http://technomedia.co.uk/blog",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@Eric: To clarify, Instead of just copying methods into your mixed object, I was recently playing around with something like this:</p>\n<p>MyApp.MyMixableModule = {<br />\n\tmixin : function(subject){<br />\n\t    for (var p in this) {<br />\n\t\tif (this.hasOwnProperty(p) &amp;&amp; p !== &#8216;mixin&#8217; &amp;&amp; subject[p] === undefined) {<br />\n\t\t    subject[p] = (function(sub, func){<br />\n\t\t\treturn function(){<br />\n\t\t\t    func.apply(sub, arguments);<br />\n\t\t\t};<br />\n\t\t    })(subject, this[p]);<br />\n\t\t}<br />\n\t    }<br />\n\t}<br />\n}</p>\n<p>This is not polished or tested yet, but I have plans to continue playing around in this space and writing a blog post about it.</p>\n<p>Any thoughts?</p>"
+    },
+    {
+      "id": "103718",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Dan: This is the classic mixin pattern as used by dojo and others and it does copy the function.  Your solution seems to automatically bind the methods to the instance as well.</p>"
+    },
+    {
+      "id": "103724",
+      "author": "Attila",
+      "url": "http://none",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Dear Eric,</p>\n<p>I have been banging my head to understand the inherit method since a long time (it is what ExtJS uses, too). I tried to ask others to shed a light for me but so far couldn&#8217;t find any decent explanation on what happens there and why. Would you mind explaining it in a post or in email for me?</p>\n<p>thank you,<br />\nAttila</p>"
+    }
+  ]
+}
+---
+<p>Another thing that always been bothering me about OOP in JS is that calling super is such a pain.  Some libraries do ugly hacks like checking the source (by calling <code>toString</code> on their constructor and method function objects) and then wrap the original function in another function that encapsulates a variable called super. Other libraries do even worse things like rewriting the code of the function and eval&#8217;ing it. These hacks work in most cases (not in Opera for mobile phones) but it is very inefficient.</p>
+<p>Yesterday morning (when reading a lengthy email to es-discuss) I realized that I could probably use catch-alls to emulate super. Catch-alls is a SpiderMonkey feature that allows an object to have a method that will be called when a non existing method is called.  Catch-alls are proposed for ES-Harmony. The idea I had was to create a super object that uses the catch-all mechanism to call the method on the super <em>class</em> with this bound to the current object. I wanted to achieve something like this:</p>
+<pre><code>function B() {
+  supr(1, 2, 3);
+  this.method = function(x) {
+    supr.method(x);
+    ...
+  };
+}
+inherits(B, A);</code></pre>
+<p>Instead of having to write:</p>
+<pre><code>function B() {
+  A.call(this, 1, 2, 3);
+  this.method = function(x) {
+    A.prototype.method.call(this, x);
+    ...
+  };
+}
+inherits(B, A);</code></pre>
+<p>So <code>supr</code> needs to be a function which has the <code>__noSuchMethod__</code> method set to call the method of the <code>[[Prototype]]</code> object.</p>
+<p>Take one:</p>
+<pre><code>function B() {
+  var self = this;
+  var supr = function() {
+    return A.apply(self, arguments);
+  };
+  supr.__noSuchMehod__ = function(name, args) {
+    return A.prototype[name].apply(self, args);
+  };
+
+  supr(1, 2, 3);
+  this.method = function(x) {
+    supr.method(x);
+    ...
+  };
+}
+inherits(B, A);</code></pre>
+<p>Lets take a look at the inherits function. It is something all js dev heads should have in their repertoire.  It is extremely useful and it allows you to declare inheritance without having to create an instance of the super class.</p>
+<pre></code>function inherits(child, parent) {
+  var f = function() {};
+  f.prototype = parent.prototype;
+  child.prototype = new f;
+  child.prototype.constructor = child;
+  child.superClass = parent;
+}</code></pre>
+<p>The last two lines are important because JS does not maintain the mapping to the <code>constructor</code> and by adding the <code>superClass</code> property it allows us to easily get access to the parent constructor.</p>
+<p>With the innards of the <code>inherits</code> function known combined with take one above we can write a helper function that makes creating the supr object a lot easier.</p>
+<pre><code>function createSuper(self, opt_constr) {
+  var constr = opt_constr || arguments.callee.caller;
+  function supr() {
+    return constr.superClass.apply(self, arguments);
+  };
+  supr.__noSuchMethod__ = function(name, args) {
+    if (typeof constr.superClass.prototype[name] == 'function') {
+      return constr.superClass.prototype[name].apply(self, args);
+    }
+    throw Error('No such method, ' + name);
+  };
+  return supr;
+}</code></pre>
+<p>And then we can use this.</p>
+<pre><code>function A(x) {
+  print('In A constructor, x = ' + x);
+}
+A.prototype.a = function(x) {
+  print('In A.prototype.a, x = ' + x);
+};
+
+
+function B(x) {
+  print('In B constructor');
+  var supr = createSuper(this);
+
+  supr(x || 'From B');
+  var className = 'B';
+  this.a = function(x) {
+    print('In ' + className + '.a');
+    supr.a(1);
+  };
+}
+inherits(B, A);
+
+
+function C(x) {
+  print('In C constructor');
+  var supr = createSuper(this);
+
+  supr(x || 'From C');
+}
+inherits(C, B);
+C.prototype.a = function() {
+  var supr = createSuper(this, C);
+  print('In ' + 'C' + '.a');
+  supr.a('supr.a called from a c object');
+};
+
+
+print('Creating an instance of B');
+b = new B;
+b.a(2);
+
+print('');
+print('Creating an instance of C');
+c = new C;
+c.a();</code></pre>
+<p><a href="/playground/super.html">Try this</a> (Firefox only)</p>
+<p>This works because <code>supr</code> is recreated for every constructor and is bound lexically Don&#8217;t do <code>this.supr = supr</code> and think you can reuse it. It will not work. This does not require that you put the methods that needs super inside the constructor but if you don&#8217;t you will have to call <code>createSuper</code> and pass in your constructor from your method which is not very efficient and it is hardly much better than using the straight forward way to call super by just getting the function of the super class prototype and call it by name (<code>A.prototype.a.call(this, 1)</code>).</p>
+<h3>Conclusion</h3>
+<p>Once again I find that adding code to make things simpler in JS is unsuccessful. The costs for adding better ways to do things don&#8217;t pay for itself. (Except for the inherits function of course.)</p>

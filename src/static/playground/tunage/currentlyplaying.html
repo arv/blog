@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+<title>Currently Playing Demo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+
+html, 
+body {
+	background:	ThreeDFace;
+	border:		0;
+	margin:		0;
+}
+
+body {
+	padding:	10px;
+	font:	icon;
+}
+
+td {
+	font:	icon;
+}
+
+</style>
+<script type="text/javascript" src="tunage.js"></script>
+</head>
+<body>
+
+<table summary="Currently playing info">
+	<tbody>
+		<tr>
+			<td>Is playing:</td>
+			<td id="is-playing-cell"></td>
+		</tr>
+		<tr>
+			<td>Artist:</td>
+			<td id="artist-cell"></td>
+		</tr>
+		<tr>
+			<td>Album:</td>
+			<td id="album-cell"></td>
+		</tr>
+		<tr>
+			<td>Title:</td>
+			<td id="title-cell"></td>
+		</tr>
+		<tr>
+			<td>Started at:</td>
+			<td id="started-at-cell"></td>
+		</tr>
+	</tbody>
+</table>
+
+<p id="long-playing-sentence">
+
+<script type="text/javascript">
+
+function setElementText(id, s) {
+	var el = document.getElementById(id);
+	while(el.hasChildNodes()) {
+		el.removeChild(el.lastChild);
+	}
+	el.appendChild(document.createTextNode(s));
+}
+
+function appendElementText(el, s, tagName, attributeMap) {
+	var node;
+	if (tagName) {
+		node = document.createElement(tagName);
+		for (var attrName in attributeMap) {
+			node.setAttribute(attrName, attributeMap[attrName]);
+		}				
+		node.appendChild(document.createTextNode(s));
+	} else {
+		node = document.createTextNode(s)
+	}
+	el.appendChild(node);
+	return node;
+}
+
+function niceDate(d) {
+	var now = new Date;
+	if (d.getFullYear() == now.getFullYear() &&
+		d.getMonth() == now.getMonth() &&
+		d.getDate() == now.getDate()) {
+		return d.toLocaleTimeString();
+	}
+	return d.toLocaleString();
+}
+
+var t = new Tunage;
+t.setUri("http://erik.eae.net/playground/tunage/?action=currentlyplaying");
+t.onchange = function () {
+	setElementText("is-playing-cell", t.getIsPlaying() ? "yes" : "false");
+	setElementText("artist-cell", t.getArtist());
+	setElementText("album-cell", t.getAlbum());
+	setElementText("title-cell", t.getTitle());
+	setElementText("started-at-cell", t.getStartedAt());
+	
+	// long version
+	var el = document.getElementById("long-playing-sentence");
+	while (el.hasChildNodes()) {
+		el.removeChild(el.lastChild);
+	}
+	appendElementText(el, t.getIsPlaying() ? "Currently listening to " : "Last song listened to was ");
+	appendElementText(el, t.getTitle(), "strong");
+	appendElementText(el, " by ");
+	appendElementText(el, t.getArtist(), "a", {href: "http://www.discogs.com/artist/" +
+													  encodeURIComponent(t.getArtist()),
+											   title: "Information provided by Discogs"});
+	appendElementText(el, " from ");
+	appendElementText(el, t.getAlbum(), "a", {href: "http://www.discogs.com/search?type=releases&q=" +
+													 encodeURIComponent(t.getAlbum()),
+											  title: "Information provided by Discogs"});
+	if (!t.getIsPlaying()) {
+		appendElementText(el, " at " + niceDate(t.getStartedAt()));
+	}
+};
+	
+</script>
+</body>
+</html>

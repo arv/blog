@@ -1,0 +1,223 @@
+---json
+{
+  "title": "Inheritance Antipattern",
+  "date": "2009-11-09T21:12:16-08:00",
+  "permalink": "/archives/2009/11/09/21.12.16/",
+  "tags": [
+    "Uncategorized",
+    "JavaScript"
+  ],
+  "comments": [
+    {
+      "id": "103966",
+      "author": "Alex Dunae",
+      "url": "http://dialect.ca/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Thanks for this clear and concise summary.  </p>\n<p>I&#8217;ve read countless articles on JS patterns and very few say *why* a certain class pattern should be used, only that the different options are a matter of personal preference.  Obviously, they&#8217;re not.</p>"
+    },
+    {
+      "id": "103967",
+      "author": "Michael Bolin",
+      "url": "http://blog.bolinfest.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hi Erik, thanks for the pointer and for running the experiment across various browsers. As for declaring a list of keys on the prototype, I did not mean to imply that there would no longer be a constructor function or that goog.inherits() would no longer be used &#8212; I just meant that some number of bytes could be saved if all the method declarations were done at once rather than restating Foo.prototype.methodName each time. The compiler helps with this, but it is not as compact as declaring all of the methods on a single object literal, which is Foo.prototype.</p>\n<p>And more importantly, thanks for creating Closure with Dan Pupius!</p>"
+    },
+    {
+      "id": "103970",
+      "author": "John-David Dalton",
+      "url": "http://www.twitter.com/jdalton",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@Erik keep in mind Opera does not support `__proto__` either.</p>\n<p>Another way to have inheritance is to do something like</p>\n<p>// avoid executing the Phone constructor<br />\nfunction SubClass() { }<br />\nSubClass.prototype = Phone.prototype;<br />\n// hook up<br />\nSmartPhone.prototype = new SubClass;<br />\n// correct reference (optional)<br />\nSmartPhone.prototype.constructor = SmartPhone;<br />\n// extend prototype<br />\nSmartPhone.prototype.sendEmail = &#8230;;</p>"
+    },
+    {
+      "id": "103971",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>John-David: This is what goog.inherits does.</p>\n<pre>\ngoog.inherits = function(childCtor, parentCtor) {\n  /** @constructor */\n  function tempCtor() {};\n  tempCtor.prototype = parentCtor.prototype;\n  childCtor.superClass_ = parentCtor.prototype;\n  childCtor.prototype = new tempCtor();\n  childCtor.prototype.constructor = childCtor;\n};\n</pre>\n<p><a href=\"http://code.google.com/p/closure-library/source/browse/trunk/closure/goog/base.js#1203\" rel=\"nofollow\">http://code.google.com/p/closure-library/source/browse/trunk/closure/goog/base.js#1203</a></p>"
+    },
+    {
+      "id": "103973",
+      "author": "Sergey Ilinsky",
+      "url": "http://www.ilinsky.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Common guys, it should not have taken 15 years to figure this out!</p>"
+    },
+    {
+      "id": "103975",
+      "author": "Laurens Holst",
+      "url": "http://www.grauw.nl/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I don’t get the private local var argument, you were already wrapping your statements in a function were you not? So what additional benefit would it then have to do this in the constructor?</p>\n<p>new function() {<br />\n    function extend(cBase) {<br />\n        var cPrototype = new Function;<br />\n        cPrototype.prototype = cBase.prototype;<br />\n        return new cPrototype;<br />\n    }<br />\n    var SubClass = function() {<br />\n        this.property = &#8216;abc&#8217;;<br />\n    }<br />\n    SubClass.prototype = extend(AnotherClass);<br />\n    SubClass.prototype.method1 = function() {<br />\n        return &#8216;xyz&#8217;;<br />\n    }<br />\n    // expose SubClass<br />\n    window.SubClass = SubClass;<br />\n}</p>"
+    },
+    {
+      "id": "103978",
+      "author": "peter",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>&#8220;an instance of the class you are inheriting from.&#8221;</p>\n<p>There are no &#8220;classes&#8221; in javascript. Objects.</p>"
+    },
+    {
+      "id": "103979",
+      "author": "Patrick Dubroy",
+      "url": "http://dubroy.com/blog",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hi Erik,</p>\n<p>Do you have a reference for the &#8220;100 times slower&#8221; claim? I didn&#8217;t see anything in Michael&#8217;s articles. A quick test in Firefox 3.5 and Chrome 3.0 shows method dispatch on a functionally-created object to be twice as fast in Firefox, and about the same in Chrome. That is without using the Closure Compiler though. Are you referring only to methods that are inlined by the compiler?</p>"
+    },
+    {
+      "id": "103980",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Sergey: I&#8217;m not sure what that is a reference to? I assume you are referring to me and Michael Bolin but the whole point of this article is to inform people that the functional pattern, which is gaining foothold is the wrong way to go. I know people like you get it but there are a lot of people with less experience than you.</p>\n<p>Laurens: Take a look at how phoneNumber is encapsulated by the closure for getPhoneNumber. If there are other vars in the constructor these are visible inside the method bodies but not outside the constructor. So if someone has a reference to a Phone the only way to get the phoneNumber is to call the public method getPhoneNumber. In the classical pattern phoneNumber is assigned to this.phoneNumber_ which allows external access to what is supposed to be internal data. Does that make sense?</p>\n<p>Peter: Duh! That is why there are quotes around them. Actual there are classes in ES, but there is no way for a user to create them. Array, String etc are classes in the spec term.</p>\n<p>Patrick: This is at creation time. Method dispatch should be slightly faster using the functional pattern since there is no need to walk up the prototype chain. I only have the test in my dropbox atm. I&#8217;ll move it to the web server later:  <a href=\"https://dl.dropbox.com/u/182043/inheritance-perf.html\" rel=\"nofollow\">https://dl.dropbox.com/u/182043/inheritance-perf.html</a></p>"
+    },
+    {
+      "id": "103981",
+      "author": "Patrick Dubroy",
+      "url": "http://dubroy.com/blog",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Ok, that makes more sense. Sorry, not sure why I thought you were referring to method dispatch.</p>\n<p>But&#8230;in my testing, I only see it to be about 5 times slower in Chrome, definitely far from 100 times slower. This is creating 5 million objects like in your example.</p>\n<p>Interestingly, on Firefox, method dispatches are twice as fast on the functionally-created object (as you pointed out, because it doesn&#8217;t have to walk the prototype chain). Given that most objects would likely have methods called on them many times over the object&#8217;s lifetime, that might eliminate the speed advantages of the classical creation.</p>"
+    },
+    {
+      "id": "104176",
+      "author": "Julian Turner",
+      "url": "http://www.baconbutty.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Here is another approach (not original I know):-</p>\n<p>var phone = (function(){ </p>\n<p>\tvar id = 0;<br />\n\tvar numbers = [];</p>\n<p>\tfunction phone(number)<br />\n\t{<br />\n\t\tthis.id = id++;<br />\n\t\tnumbers[this.id] = number;<br />\n\t}</p>\n<p>\tphone.prototype.getNumber = function() {<br />\n\t\treturn numbers[this.id];<br />\n\t};</p>\n<p>\treturn phone;<br />\n})();</p>"
+    },
+    {
+      "id": "104197",
+      "author": "Julian Turner",
+      "url": "http://www.baconbutty.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>My above approach has one glaring error &#8211; &#8220;this.id&#8221; is public and so can be changed.  </p>\n<p>Perhaps:-</p>\n<p>var phone = (function(){ </p>\n<p>var id_count = 0;<br />\nvar numbers = [];</p>\n<p>function phone(number)<br />\n{<br />\nvar id = id_count++;<br />\nthis.id = function(){return id;};<br />\nnumbers[id] = number;<br />\n}</p>\n<p>phone.prototype.getNumber = function() {<br />\nreturn numbers[this.id()];<br />\n};</p>\n<p>return phone;<br />\n})();</p>"
+    },
+    {
+      "id": "104258",
+      "author": "Mike",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Your example/tests may not be fair.  changing:</p>\n<p>var N = 1e5;<br />\nvar d0 = new Date;<br />\nfor (var i = 0; i &lt; N; i++) {<br />\n  new Classic(i);<br />\n}<br />\nvar d1 = new Date;<br />\nfor (var i = 0; i &lt; N; i++) {<br />\n  Functional(i);<br />\n}</p>\n<p>in your example to:</p>\n<p>var N = 1e5;<br />\nvar d0 = new Date;<br />\nfor (var i = 0; i &lt; N; i++) {<br />\n  new Classic(i);<br />\n}<br />\nvar d1 = new Date;<br />\nfor (var i = 0; i &lt; N; i++) {<br />\n  new Functional(i);<br />\n}</p>\n<p>greatly reduces the performance drop (from 30:1 to 4:1 in my tests on FF and Chrome).  The classical pattern is still admittedly faster though.</p>"
+    },
+    {
+      "id": "104265",
+      "author": "Daniel",
+      "url": "http://www.dasa.cc",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I prefer prototypal based inheritance myself and is one of the reasons i created js.js (prototype.js was taken ..)</p>\n<p>It&#8217;s in the public domain, <a href=\"http://js.dasa.cc\" rel=\"nofollow\">http://js.dasa.cc</a></p>"
+    },
+    {
+      "id": "104278",
+      "author": "laelli",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I prefer prototypal based inheritance myself and is one of the reasons i created js.js (prototype.js was taken ..)</p>\n<p>It’s in the public domain, <a href=\"http://js.dasa.cc\" rel=\"nofollow\">http://js.dasa.cc</a></p>"
+    },
+    {
+      "id": "104337",
+      "author": "Juan Mendes",
+      "url": "http://js-bits.blogspot.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I think  closure based inheritance is great: truly private variables, doesn&#8217;t try to imitate JAVA. However, about 10 years ago, when I started writing OO JS, I noticed that methods is a lot more memory intensive so I stopped using it.</p>\n<p>Another reason is that I constantly find myself monkey patching libraries. If they had been written with closure inheritance, I would have to change their source files.</p>\n<p>I wrote an article talking about what makes for &#8216;correct&#8217; inheritance in JS <a href=\"http://js-bits.blogspot.com/2010/08/javascript-inheritance-done-right.html\" rel=\"nofollow\">http://js-bits.blogspot.com/2010/08/javascript-inheritance-done-right.html</a></p>"
+    }
+  ]
+}
+---
+<p><a href="http://blog.bolinfest.com/">Michael Bolin</a> wrote an excellent blog post about the <a href="http://blog.bolinfest.com/2009/11/closure-compiler-turns-pattern-into.html">inheritance antipattern</a> that is gaining a lot of foothold among JavaScript developers these days. The post also links to <a href="http://bolinfest.com/javascript/inheritance.php">an article</a> giving a lot more depth on the topic.</p>
+<blockquote cite="http://blog.bolinfest.com/2009/11/closure-compiler-turns-pattern-into.html"><p>
+When I attended The Ajax Experience 2009, I saw a number of &#8220;misguided&#8221; things that people were doing with JavaScript. [snip].. I wanted to get up and yell, &#8220;Stop &#8212; you&#8217;re all doing it wrong!&#8221;
+</p></blockquote>
+<p>Although I agree with almost everything Michael writes I think it is worth pointing out some things.</p>
+<h3>Background</h3>
+<p>For those too lazy to read Michael&#8217;s post and article here is an example of the classic inheritance pattern as well as the functional inheritance pattern. This example is intentionally very simple.</p>
+<h4>Classic inheritance pattern</h4>
+<pre>
+function Phone(phoneNumber) {
+  this.phoneNumber_ = phoneNumber;
+};
+
+Phone.prototype.getPhoneNumber = function() {
+  return this.phoneNumber_;
+};
+</pre>
+<h4>Functional inheritance pattern</h4>
+<pre>
+function Phone(phoneNumber) {
+  var that = {};
+  that.getPhoneNumber = function() {
+    return phoneNumber;
+  };
+  return that;
+};
+</pre>
+<h3>Compilation</h3>
+<p>Michael argues that the functional pattern is not good because methods cannot be inlined and the end result is much larger. He also says that it uses more memory. I think it is important to realize that it uses a LOT more memory and is significantly slower. Given a <i>class</i> with 1 methods It is about 100 times slower in Chrome, 20 times slower in Safari and about 10 times slower in Firefox.</p>
+<h3>Prototype object literal</h3>
+<p>Michael also mentions the following pattern:</p>
+<pre>
+function Phone(phoneNumber) {
+  this.phoneNumber_ = phoneNumber;
+}
+Phone.prototype = {
+  getPhoneNumber: function() {
+    return this.phoneNumber_;
+  }
+};
+</pre>
+<p>I like this pattern but it has one serious drawback. It cannot be used to extend existing <i>classes</i> because in that case the protytype must be an instance of the <i>class</i> you are inheriting from.</p>
+<p>If you do not care about IE support this can be done by using <code>__proto__</code> like this:</p>
+<pre>
+function SmartPhone(phoneNumber) {
+  Phone.call(this, phoneNumber);
+}
+SmartPhone.prototype = {
+  <b>__proto__: Phone.prototype,</b>
+  sendEmail: function(email) {
+    ...
+  }
+};
+</pre>
+<h3>Semantics</h3>
+<p>I understand why people like Douglas Crockford preaches the functional inheritance pattern. Due to its closure the local variable is truly private and this is important when you are doing mashups and other security sensitive code. However, when it comes to building large scale applications like Gmail you cannot afford this extra memory and performance overhead.</p>
+<h3>Conclusion</h3>
+<p>Prototype based inheritance is the way to go if you care about memory usage and performance. If you are planning to use the <a href="http://code.google.com/closure/compiler/">Closure Compiler</a> you will also see greater code size reduction using this pattern.</p>
+<h3>Update</h3>
+<p>As some people pointed out method dispatch is slightly slower using the classic inheritance pattern because we have to walk the prototype chain to find the method. I&#8217;m also posting my tests and results for reference:</p>
+<ul>
+<li><a href="https://dl.dropbox.com/u/182043/inheritance-perf.html">Create test</a></li>
+<li><a href="https://dl.dropbox.com/u/182043/inheritance-call-perf.html">Method dispatch test</a></li>
+<li><a href="http://spreadsheets.google.com/pub?key=tNL6gDY557Bb4aQjSb6rQ9g&#038;output=html">Table of results</a></li>
+</ul>
+<p>You might need to reduce the number of runs to get this to wrok in IE. The only surprising thing here is that the classical pattern is faster in Firefox nightlies.</p>

@@ -1,0 +1,45 @@
+---json
+{
+  "title": "Harmony Collections",
+  "date": "2011-12-29T12:00:11-08:00",
+  "permalink": "/archives/2011/12/29/12.00.11/",
+  "tags": [
+    "JavaScript",
+    "Chrome",
+    "JavaScript"
+  ],
+  "comments": []
+}
+---
+<p>Simple maps and sets allow you to create a <a href="http://wiki.ecmascript.org/doku.php?id=harmony:simple_maps_and_sets<br />
+">Map</a> with an object as the key. Normally people use <code>Object.create(null)</code> as a map but that limits the keys to strings. The <a href="http://wiki.ecmascript.org/doku.php?id=harmony:simple_maps_and_sets<br />
+">Set</a> constructor is similar and it allows a set containing objects. Neither of these currently support a way of iteration since iteration is planned to be covered by the <a href="http://wiki.ecmascript.org/doku.php?id=harmony:iterators">iteration</a> proposal which is not yet implemented.</p>
+<pre><code>var map = new Map;
+map.set('a', 'A');
+map.get('a');  // 'A'
+var b = {};
+map.set(b, 'B');
+map.get(b);  // 'B'
+map.has(b);  // true
+</code></pre>
+<pre><code>var set = new Set;
+set.add('a');
+set.has('a');  // true
+var b = {};
+set.add(b);
+set.has(b);  // true
+</code></pre>
+<p>Harmony also provides another kind of map called <code>WeakMap</code>. This has the same API as <code>Map</code> but it has different GC semantics. A normal <code>Map</code> using an object as a key prevents the object from being garbage collected but with a <code>WeakMap</code> the object can be garbaged collected. This is useful when you associate data with someone else&#8217;s object.</p>
+<pre><code>var map = new WeakMap;
+map.set(elementA, 'A');
+map.get(elementA);  // 'A'
+map.set(elementB, 'B');
+map.get(elementB);  // 'B'
+map.has(elementB);  // true
+</code></pre>
+<p>In the above example, if the element is removed from the DOM and the script has no references to it the element can be garbage collected.</p>
+<p>Unlike <code>Map</code> and <code>Set</code>, <code>WeakMap</code> will never have a way to iterate over the items since that would expose the GC behavior.</p>
+<p><!--</p>
+<p>http://wiki.ecmascript.org/doku.php?id=harmony:simple_maps_and_sets</p>
+<p>http://wiki.ecmascript.org/doku.php?id=harmony:weak_maps</p>
+<p>--></p>

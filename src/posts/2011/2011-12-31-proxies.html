@@ -1,0 +1,25 @@
+---json
+{
+  "title": "Proxies",
+  "date": "2011-12-31T00:00:01-08:00",
+  "permalink": "/archives/2011/12/31/00.00.01/",
+  "tags": [
+    "JavaScript",
+    "Chrome",
+    "JavaScript"
+  ],
+  "comments": []
+}
+---
+<p>V8 currently implements the same <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Proxy">Proxy API as Firefox</a>. The API for proxies has <a href="http://wiki.ecmascript.org/doku.php?id=harmony:direct_proxies">changed a bit</a> since then so be extra careful when testing this.</p>
+<p>Proxies are a very low lever construct. The are very powerful and they allow an object to intercept any access to its properties as well as intercept things like <code>[[Call]]</code> and <code>[[Construct]]</code>. There are some limitations though; the <code>[[Prototype]]</code> cannot change once created and there is currently no way to intercept internal properties such as <code>[[Class]]</code>.</p>
+<p>The basic idea is that you create a new object (the proxy) that has a handler. The handler has a bunch of functions that will get called when different operations are done to the proxy object. For example when someone sets a property the <code>set</code> set trap of the proxy is called.</p>
+<pre><code>var handler = {
+  set: function(receiver, name, value) {
+    console.log(name, 'was set to', value, 'on', receiver);
+  }
+};
+var proxy = Proxy.create(handler, {});
+proxy.meaning = 42;  // Logs 'meaning' was set to 42 on [Object object]
+</code></pre>
+<p>Proxies are useful to emulate DOM as well as for doing membranes etc. I don&#8217;t expect anyone but library authors to ever have to use them directly.</p>

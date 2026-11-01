@@ -1,0 +1,33 @@
+---json
+{
+  "title": "Internet Explorer is removing support for URIs",
+  "date": "2004-01-28T20:24:47-08:00",
+  "permalink": "/archives/2004/01/28/20.24.47/",
+  "tags": [
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "674",
+      "author": "Jason Mauer",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 18th, 2004 at 23:55",
+      "html": "<p>Actually, the change results in IE now conforming to the standard. The URL spec explicitly states that username and password are not allowed for HTTP.</p>\n<p>Check it out at <a href=\"http://www.ietf.org/rfc/rfc1738.txt\">http://www.ietf.org/rfc/rfc1738.txt</a> &#8211; look for Section 3.3 (HTTP) and the following:</p>\n<p>An HTTP URL takes the form:</p>\n<p>      <a href=\"http://:/?\"></a><a href=\"http://:/\" rel=\"nofollow\">http://:/</a>?</p>\n<p>   where  and  are as described in Section 3.1. If :<br />\n   is omitted, the port defaults to 80.  No user name or password is<br />\n   allowed.   is an HTTP selector, and  is a query<br />\n   string. The  is optional, as is the  and its<br />\n   preceding &#8220;?&#8221;. If neither  nor  is present, the &#8220;/&#8221;<br />\n   may also be omitted.</p>\n<p>So if you&#8217;re pushing the standards argument, you could have complained about it before the patch, but not after <img src='/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>"
+    },
+    {
+      "id": "675",
+      "author": "brian parker",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "May 17th, 2004 at 15:41",
+      "html": "<p>No Eric, you are not an idiot.  Their is an RFC that microsoft links to legitimizing the use of the user:pw@domain syntax.  See RFC 1738 (<a href=\"http://www.ietf.org/rfc/rfc1738.txt\" rel=\"nofollow\">http://www.ietf.org/rfc/rfc1738.txt</a>)</p>\n<p>And Here&#8217;s the snip&#8230;</p>\n<p>3.1. Common Internet Scheme Syntax</p>\n<p>   While the syntax for the rest of the URL may vary depending on the<br />\n   particular scheme selected, URL schemes that involve the direct use<br />\n   of an IP-based protocol to a specified host on the Internet use a<br />\n   common syntax for the scheme-specific data:</p>\n<p>        //:@:/</p>\n<p>   Some or all of the parts &#8220;:@&#8221;, &#8220;:&#8221;,<br />\n   &#8220;:&#8221;, and &#8220;/&#8221; may be excluded.  The scheme specific<br />\n   data start with a double slash &#8220;//&#8221; to indicate that it complies with<br />\n   the common Internet scheme syntax. The different components obey the<br />\n   following rules:</p>\n<p>    user<br />\n        An optional user name. Some schemes (e.g., ftp) allow the<br />\n        specification of a user name.</p>\n<p>    password<br />\n        An optional password. If present, it follows the user<br />\n        name separated from it by a colon.</p>\n<p>   The user name (and password), if present, are followed by a<br />\n   commercial at-sign &#8220;@&#8221;. Within the user and password field, any &#8220;:&#8221;,<br />\n   &#8220;@&#8221;, or &#8220;/&#8221; must be encoded.</p>\n<p>   Note that an empty user name or password is different than no user<br />\n   name or password; there is no way to specify a password without<br />\n   specifying a user name. E.g.,  has an empty<br />\n   user name and no password,  has no user name,<br />\n   while  has a user name of &#8220;foo&#8221; and an<br />\n   empty password.</p>"
+    }
+  ]
+}
+---
+<p><strong>Forget everything I say below. I&#8217;m an idiot. Read the comments to see why.</strong></p>
+<p>As I mentioned in an earlier post IE is having some very serious problems with URIs that contains user names and passwords. Support for user name and passwords is a <strong>required</strong> part of the URI specification. Now, instead of fixing the real bug Microsoft is planning to <a href="http://support.microsoft.com/default.aspx?scid=kb;%5bLN%5d;834489">break their support for the URI standard</a>.</p>
+<p>This is the second time in a short time Microsoft chooses to break IE instead of fixing it in a satisfactory way. (Last time they broke window.moveTo because they didn&#8217;t manage to fix a drag and drop bug/exploit.) Would it not be better to hide the user name and password section in the status bar and address bar? Hiding it in the status bar is trivial and does not have any undesired side effects. Hiding it in the address bar might have some negative side effects. For example if I type <code>http://erik:ruls@www.domain.com/</code> and since I misspelled the password I will not be able to log in. Now it would show <code>http://www.domain.com</code> and I would not know that I misstyped the password.</p>

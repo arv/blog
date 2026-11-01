@@ -1,0 +1,34 @@
+---json
+{
+  "title": "Sortable Table Update",
+  "date": "2004-01-27T23:21:06-08:00",
+  "permalink": "/archives/2004/01/27/23.21.06/",
+  "tags": [
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "664",
+      "author": "Dean Edwards",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "February 17th, 2004 at 20:13",
+      "html": "<p>Dr Detlef Groth has built a sortable table framework  using DHTML Behaviors:<br />\n<a href=\"http://goblet.molgen.mpg.de/moz-behaviors-example/findex.html\">http://goblet.molgen.mpg.de/moz-behaviors-example/findex.html</a></p>"
+    }
+  ]
+}
+---
+<p>It&#8217;s been almost a whole year since we last posted any real updates to WebFX. I finally got together and polished <a href="http://webfx.eae.net/dhtml/sortabletable/sortabletable.html">Sortable Table 1.1</a>. I hope this update makes a few people satisfied because it makes it very easy to add custom sort types.</p>
+<pre><code>function parseUsDate( s )
+{
+   var parts = s.split( "/" );
+   var d = new Date( 0 );
+   d.setYear( parts[2] );
+   d.setMonth( parts[0] - 1 );
+   d.setDate( parts[1] );
+   return d.valueOf();
+}
+
+SortableTable.prototype.addSortType( "UsDate", parseUsDate );</code></pre>
+<p>Place that in an external JS file and you can now sort by the <a href="http://www.cl.cam.ac.uk/~mgk25/iso-time.html">very confusing US date format</a> in your sortable tables.</p>

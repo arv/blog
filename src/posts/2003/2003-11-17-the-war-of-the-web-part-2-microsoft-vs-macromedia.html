@@ -1,0 +1,103 @@
+---json
+{
+  "title": "The War of the Web, Part 2: Microsoft vs Macromedia",
+  "date": "2003-11-17T22:37:56-08:00",
+  "permalink": "/archives/2003/11/17/22.37.56/",
+  "tags": [
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "550",
+      "author": "Emil",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Why?</p>"
+    },
+    {
+      "id": "551",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Why &#8220;Why?&#8221;?<br />\n <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":-)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "552",
+      "author": "Lucas Fletcher",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>The question I have never heard ask is what are the intrinsic limitations of DHTML that prevent it from being used for Rich Internet Applications? Why must advancements in architecture be a constant ongoing process of the child devouring its mother? I know coders love to start with a blank slate and corporations love to own standards, but still. It&#8217;s a cop-out quite frankly. It&#8217;s giving up. And it really pisses me off. Yes, integration of new technology into existing is a tough row to hoe, and it takes _creativity_ more than anything else. But it can be done, and the end result is not having to make trade-offs based on the platform you use.</p>"
+    },
+    {
+      "id": "553",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I believe that a lot can be done using DHTML (just see Bindows) but I think it is more suitable to create standardized widgets on a much lower level. Creating widgets at a DHTML level is possible but it is just like in the old DOS days when people created their own GUI toolkits. I think there needs to be a standard GUI toolkit with both speed, scalability and usability taken into account. If you look at the existing GUI toolkits built on top of DHTML or Macromedia Flash they usually lack in at least one of these fields. Heck, I have yet to see a usable Flash application. Somehow all the Macromedia people forgot that keyboard navigation should work as well (See Laszlo as a good example).</p>\n<p>Another serious downside to DHTML (except for scalability) is the fact that it is based on CSS2 for its rendering model. A modern GUI should be vector based. However this does not stop DHTML from being good enough today but I don&#8217;t think DHTML will be good enough in a few years.</p>"
+    },
+    {
+      "id": "554",
+      "author": "Lucas Fletcher",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Let me try to address some of the points you make, all of which are good:</p>\n<p>1. Speed &#8211; In my experience modern machines do not have problems rendering even very complicated DHTML-driven pages in sub-second times if they are written to pull dynamically &#8212; e.g. a tree control that fetches nodes from the server when the folder is opened. Certainly by the time systems meet the Longhorn requirements speed will just not be an issue at all.</p>\n<p>2. Scalability &#8211; Yes browser based caching is pretty crude (caching being the only thing I can think of that would affect server scalability.) but it couldn&#8217;t be very hard to imagine how one could build extensions to allow dynamic cache manipulation and access. (Think a more robust userData behavior.)</p>\n<p>3. Usability &#8211; Yes, because DHTML allows so much freedom that freedom is abused often (like PERL) but toolkits address this.</p>\n<p>4. Not vector based &#8211; The only advantage I can think of for this is to adapt to a wide range of dpi. To be backwards compatible Longhorn is having to scale pixel-based apps to fit the new monitors they envision, so in a sense pixel-based apps can be made scalable. (and though it may not be as clean looking as vectors it still looks quite good)</p>\n<p>Web standards are not going anywhere, they will be around for a very long time. It is probably the most locked-in platform that computing has ever seen. Given that, MS must really think the alternative browser crowd has their thumbs up their asses to stop innovation on IE.</p>"
+    },
+    {
+      "id": "555",
+      "author": "Ahmet Zorlu",
+      "url": "http://www.zoode.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>imho, XAML is specific to the upcoming Longhorn  OS and is something more generic: a declarative programming model for working with Common Language Runtime object graphs. It can be programmed with any .NET language and the environment comes free with the OS.</p>\n<p>MXML on the other hand, is a web-oriented system for serving swf files using a servlet model. MXML is more specific and (as far as I understand) target audience of FLEX is enterprise, and not the mainstream web developers (which is a big obstacle for its adoption, especially if MM will fail to release a developer version).</p>\n<p>One note about ActionScript 2.0; although the lexical structure of the language fits (to a great extent) EcmaScript v4. specs, when it is compiled to swf, it is compiled to almost exactly same bytecodes as AS 1.0. The runtime (currently) supports EcmaScript v.3 model. So namespaces are objects, classes are actually functions, and the inheritance is prototype-based. There is no method overloading, no run-time type checking. Programmers coming to AS 2.0 from class-based languages should be aware of this fact.</p>\n<p>Good blog, by the way.</p>"
+    }
+  ]
+}
+---
+<p>It is now more or less obvious that the browser wars are dead for good.<br />
+But that does not mean that the battle of the web is over. This time<br />
+the main battles are all about Rich Internet Applications. </p>
+<p>A few weeks back Microsoft introduced <a href="http://msdn.microsoft.com/longhorn/understanding/pillars/avalon/default.aspx">Avalon</a> and<br />
+<a href="http://longhorn.msdn.microsoft.com/lhsdk/core/overviews/about%20xaml.aspx">XAML</a>. Now it is time for<br />
+Macromedia to unveil their product, currently called <a href="http://www.macromedia.com/devnet/flex/">Flex</a>. Flex is<br />
+an XML UI language, much like <a href="http://www.mozilla.org/xpfe/xulref/">XUL</a>,<br />
+but contrary to XUL it requires both<br />
+a server side component and the Macromedia Flash player (which I don&#8217;t have<br />
+installed). However there is no need to update the client viewer. The server<br />
+compiles the MXML (the name of the Macromedia Flex XML format) to a normal<br />
+Flash movie that can then be used by the Flash player. This gives Flex a very<br />
+large user base since the coverage of Flash is supposed to be even larger than<br />
+the covarage of Internet Explorer. 98% for Flash according to Macromedia and<br />
+something like 90% for IE as far as I recall.</p>
+<p>Flex, unlike XAML, is heavily based on existing technologies so one does not<br />
+have to relearn everything (MSFT decided to scrap every known standard solution<br />
+that is working today). Of course, they (Macromedia) are not short to point this<br />
+out. Some of the more interesting technologies they have listed are:</p>
+<ul>
+<li><a href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/">DOM Level 3 Events</a>.<br />
+Basically this means that they will also need to support at least<br />
+<a href="http://www.w3.org/TR/DOM-Level-2-Core/">DOM Level 2 Core</a>.</li>
+<li>ECMAScript 4 (also known as <a href="http://www.mozilla.org/js/language/es4/">Javascript 2.0</a>,<br />
+<a href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/jscript7/html/jsoriProgrammingWithJScriptNET.asp">JScript<br />
+7 or Jscript.NET</a>)</li>
+<li>Cascading Style Sheets. There wasn&#8217;t much info about what parts of CSS they<br />
+plan to support. Macromedia has always been a bit behind when it comes to CSS<br />
+and the code snippets in the white papers contained a few CSS errors.</li>
+<li><a href="http://www.w3.org/Graphics/SVG/"><abbr title="Scalable Vector Graphics">SVG</abbr></a><br />
+for shapes and other vector drawings. This is very interesting since SVG is basically a Flash<br />
+killer technology. I wonder if they (or someone else) could output SVG 1.2 documents instead of<br />
+Flash movies at the server side?</li>
+</ul>
+<p>I&#8217;ve never been much of a Macromedia fan but I must say that Flex looks<br />
+pretty promising. It is indeed going to be some very interesting years ahead.</p>
+<p>ps. I wanted to do a few comparison comments to XUL but this post is long as it is. Maybe tomorrow.</p>

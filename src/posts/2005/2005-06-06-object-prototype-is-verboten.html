@@ -1,0 +1,250 @@
+---json
+{
+  "title": "Object.prototype is verboten",
+  "date": "2005-06-06T22:13:54-08:00",
+  "permalink": "/archives/2005/06/06/22.13.54/",
+  "tags": [
+    "JavaScript",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "83513",
+      "author": "Neil Grover",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I don&#8217;t get how someone can make such an authoritative claim that I can&#8217;t do something in a programming language when the language allows for it&#8230; you&#8217;re just asking for trouble if you think people will listen and then you continue to blindly use &#8220;for in&#8221; loops and hope that other peoples code won&#8217;t break yours because they&#8217;ve done something the language will allow&#8230;. wrong on so many levels. For one, an Object is not a Hash, so if you want a hash object then create one.. second, the problem doesn&#8217;t lie with Object.prototype, the problem is the assumption people have that a &#8220;for in&#8221; loop will iterate over their own user properties. Instead of crippling Javascript so you can continue to use &#8220;for in&#8221; loops over pseudo-Hash tables does not make any sense&#8230; I&#8217;d sooner not use &#8220;for in&#8221; loops and extend Object.prototype to have iterator-like capability (for example an &#8220;each&#8221; function). A possible solution (off the top) might look like:</p>\n<p>Object.prototype.each = function(func, args) {<br />\n  for (property in this) {<br />\n    if (!(typeof(this))[property]) {<br />\n      func(property, this[property], args);<br />\n    }<br />\n  }<br />\n};</p>\n<p>now just do this instead of &#8220;for in&#8221; loops:</p>\n<p>var x = {a:&#8217;a&#8217;, b:&#8217;b&#8217;, c:&#8217;c&#8217;};<br />\nx.each(function(property, value)) {<br />\n  alert(&#8216;property name &#8216;+property+&#8217;, value: &#8216;+value);<br />\n});</p>"
+    },
+    {
+      "id": "83514",
+      "author": "Neil Grover",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>couple typos above but I just tried it out and it works. you can probably copy/paste this into a file and try if you like:</p>\n<p>Object.prototype.each = function(func, args) {<br />\nfor (property in this) {<br />\nif (!(typeof(this))[property]) {<br />\nfunc(property, this[property], args);<br />\n}<br />\n}<br />\n};</p>\n<p>var x = {a:&#8221;a&#8221;, b:&#8221;b&#8221;, c:&#8221;c&#8221;};<br />\nx.each(function(property, value) {<br />\nalert(&#8216;property name &#8216;+property+&#8217;, value: &#8216;+value);<br />\n});</p>"
+    },
+    {
+      "id": "92425",
+      "author": "Alwin Blok",
+      "url": "http://www.alwinblok.nl",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Question: What is the desired behaviour of for .. in ?</p>\n<p>As Javascript is prototype based, it uses differential inheritance. So the question is, how far should (for .. in) look up into the prototype chain ??<br />\nMy guess is: not at all ?</p>\n<p>Ok&#8230;, these are not my last words on this issue, but for now, I suggest the following solution.</p>\n<p>Map = Object;<br />\nObject = function(){};</p>\n<p>And you&#8217;re done.<br />\nnew Map() does not inherit from Object.prototype. new Object() does.<br />\nObjects (Maps!) created with {}-literals do not inherit from Object.prototype. </p>\n<p>&#8230; At least, in Safari, IE and Opera.<br />\nUnfortunately, Frefox interprets {} as new Object(). and thus {} does inherit from Object.prototype.<br />\nMaybe someone can fix this. It is open source..</p>\n<p>It pretty much solves the problem, except for the use of new `Object()` statements in Firefox. You&#8217;ll have to use an `Object.create()` method.<br />\nOr one can use `new Object(null)` to create an object and `new Object()` to create a Map with the following:</p>\n<p>// for firefox &#8211; hack<br />\nObject.prototype.testff = &#8216;testff&#8217;<br />\nfor(var a in {}){<br />\n\tObject = function(){<br />\n\t\tif(arguments.length == 0)<br />\n\t\t\treturn this.__proto__ = null<br />\n\t}<br />\n\tbreak;<br />\n}<br />\ndelete Object.prototype.testff</p>"
+    },
+    {
+      "id": "100874",
+      "author": "HeroreV",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>With JavaScript 1.7 you can define an iterator for objects that only iterates over the local properties. That way you can load up Object.prototype to your heart&#8217;s content.</p>"
+    },
+    {
+      "id": "101313",
+      "author": "Garrett",
+      "url": "http://dhtmlkitchen.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I have been many times grateful for this post as a reference point.</p>"
+    },
+    {
+      "id": "101907",
+      "author": "Cecil Ward",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>[Off topic.]<br />\n@Randy: I should just add that the code above, posted a long time ago, which carries out a search for the &#8216;latest&#8217; version of MSXML should be amended to read as as follows<br />\n..<br />\n“MSXML2.XMLHTTP.6.0″,<br />\n“MSXML2.XMLHTTP.3.0″,<br />\n..<br />\nrather than checking for versions 5.0 or 4.0. Versions 5.0 and 4.0 are now deprecated, MSXML6 is the current recommended version, and MSXML3 as the recommended fallback.</p>\n<p>See article &#8220;Using the right version of MSXML in Internet Explorer&#8221; at the Microsoft XML Team blog on blogs.msdn.com.</p>"
+    },
+    {
+      "id": "102588",
+      "author": "coolpositive",
+      "url": "http://www.coolpositive.blogspot.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Here is how to do this in prototypejs fashion.</p>\n<p>Object.extend(String.prototype, {</p>\n<p>trim: function(){<br />\nreturn this.replace(/^\\s+|\\s+$/g, ”);<br />\n}<br />\n});</p>"
+    },
+    {
+      "id": "102589",
+      "author": "coolpositive",
+      "url": "http://www.coolpositive.blogspot.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>couple typos above but I just tried it out and it works. you can probably copy/paste this into a file and try if you like:</p>\n<p>Object.prototype.each = function(func, args) {<br />\nfor (property in this) {<br />\nif (!(typeof(this))[property]) {<br />\nfunc(property, this[property], args);<br />\n}<br />\n}<br />\n};</p>\n<p>var x = {a:”a”, b:”b”, c:”c”};<br />\nx.each(function(property, value) {<br />\nalert(’property name ‘+property+’, value: ‘+value);<br />\n});</p>"
+    },
+    {
+      "id": "102799",
+      "author": "Mike Amy",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>// How about this simple solution: ban the b**tards from fiddling with your {}!<br />\n// running this bit of code before anything else pulls the carpet from under their feet:</p>\n<p>var BaseObject = Object;<br />\nObject = function () { return new BaseObject(); }</p>\n<p>// what this does is separate the {} prototype from the Object prototype.<br />\n// However calling new Object() returns what you&#8217;d expect.</p>\n<p>Object.prototype.x = 5;</p>\n<p>var a = {a:1,b:2,c:3};<br />\nvar s = &#8221;;<br />\nfor (i in a)<br />\ns+=a[i];</p>\n<p>// s is now &#8217;123&#8242;, not &#8217;1235&#8242;<br />\n// I know there are other problems with this eg: </p>\n<p>[] instanceof Object == false; // it used to be true.</p>\n<p>// Can anyone suggest how can we deal with this?<br />\n// Mike Amy</p>"
+    },
+    {
+      "id": "102800",
+      "author": "Mike Amy",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>OK, I missed post number 56, and only tested my example in Safari 3.0.4 and 2.0.4.</p>\n<p>But as far as I can see from post 56, unless any third party script you then include uses the unusual ({}).prototype.property = &#8230;  </p>\n<p>instead of the far more common </p>\n<p>Object.prototype.property = &#8230; </p>\n<p>to override the base class, it should still work. You basically make the root class {}.<br />\nStill the problems of inheritance testing remain (even though testing for inheritance from Object seems strange as it should always be true)</p>"
+    },
+    {
+      "id": "102802",
+      "author": "Mike Amy",
+      "url": "http://isthisjersey.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>// I tried out some stuff with Firefox. If you do this:</p>\n<p>Hash = Object;<br />\nObject = function () {return new Hash();}</p>\n<p>/* And assuming Hash.prototype doesn&#8217;t change, then:<br />\n- Hash becomes something like the root of the heirarchy.<br />\n- {} and Object() return hashes (obviously). The prototype will be empty and this cannot be overridden.<br />\n- setting Object.prototype has no effect on new Objects or {}-literal objects.</p>\n<p>To solve the instanceof problem:</p>\n<p>For base classes, eg Array, if you do:<br />\n*/</p>\n<p>Function.prototype.extends = function (func) {<br />\n    this.prototype.__proto__ = func.prototype;<br />\n    return this;<br />\n}<br />\nArray.extends(Object);</p>\n<p>/* then instanceof works again:</p>\n<p>i.e. [] instanceof Object == true;</p>\n<p>You&#8217;d have to do this for the other &#8216;classes&#8217; too, otherwise they will use the vanilla prototypes.</p>\n<p>In addition to getting instanceof to work, overriding the Object.prototype WILL now affect arrays. So you can introduce new methods near the top of the &#8216;class&#8217; hierarchy as well as iterating easily over Objects with for (i in obj) {&#8230;}. Best of both worlds.</p>\n<p>I tested this in Firefox (Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1) with Venkman version 0.9.87.2.<br />\nI also tested it in Safari 3.0.4. , but not in IE.</p>\n<p>Lastly, if you want your own new base &#8216;class&#8217; to start your own hierarchy, i.e. start with a blank slate, it couldn&#8217;t be easier, you do nothing special:</p>\n<p>function MyObject() {};</p>\n<p>Voila.</p>\n<p>*/</p>"
+    },
+    {
+      "id": "102803",
+      "author": "Mike Amy",
+      "url": "http://isthisjersey.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>sorry, &#8216;extends&#8217; method should have been &#8216;extend&#8217;</p>"
+    },
+    {
+      "id": "103108",
+      "author": "Ricardo",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@Mike: doesn&#8217;t work for me in FF 2.0.0.14, the &#8220;Hashes&#8221; still inherit from Object, as do Array/Date/etc.</p>"
+    },
+    {
+      "id": "103795",
+      "author": "tantan",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I think it is very important. And other rule I think it is also important is that do not expand any native object,such as String or Function. Because in some projects, you do not know controls you buy or use,specially the project many teams program together, whether expand these native object,it causes very dangerous result.</p>"
+    },
+    {
+      "id": "103881",
+      "author": "Mosh Jahan",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>This is so funny.  What you (Erik) are suggesting is akin to telling a sports car driver to drive slow because driving fast is dangerous.  The driver should be capable of deciding how to operate the car within safe limits by employing checks.  I agree with all the posters that recommend adding checks to code and allowing people to utilize Object.protoype.  With modern compute power the performance overhead for additional checks is miniscule and not noticeable.  As for readability of code I&#8217;m all for it, but sometimes small sacrifices have to be made.</p>"
+    },
+    {
+      "id": "104193",
+      "author": "Michael D. Alexander",
+      "url": "http://alexander-web.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I almost can&#8217;t believe the patently false information you&#8217;re peddling here on your website. I hope you don&#8217;t get paid to program for a living&#8211;God help us!</p>\n<p>JavaScript is a class-less, prototype based language. So, if you don&#8217;t ever alter the default object that the runtime assigns to every function&#8217;s prototype property, how are you ever going to leverage inheritance???</p>\n<p>When the runtime sets the prototype property to point to a default (empty) prototype object, it also sets the constructor property to point to the functions definition.</p>\n<p>If you ever reassign the prototype, reassign the constructor property to point to the &#8220;constructor&#8221; and you won&#8217;t &#8220;break&#8221; your &#8220;objects-as-hash-tables&#8221; feature. It&#8217;s that simple Eric.</p>"
+    },
+    {
+      "id": "104194",
+      "author": "radom",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Here&#8217;s an interesting js object layout diagram:</p>\n<p><a href=\"http://mollypages.org/misc/js.mp\" rel=\"nofollow\">http://mollypages.org/misc/js.mp</a></p>"
+    },
+    {
+      "id": "104237",
+      "author": "gnark",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>why do all the people always go down on the &#8220;for..in&#8221; use case? that one just explains what is it all about. the meaning of it is far more than just how to &#8220;fix&#8221; a certain pattern.</p>\n<p>Object by definition IS a (or behaves like a) map. it represents the very native implementation of a hash map. javascript MEANS everything is built on top of that. finding yourself implementing own maps that utilize filtering or a self-rolled manual lookup algorithm you must have done something wrong.</p>\n<p>its not the other way round that an object must be specialized to represent a map implementation.</p>\n<p>whenever its about scripts on your homepage that do cool things all alone, mess with it. but whenever its about interoperability and composing things together it is just stupid to make yourself incompatible to the rest of the world.</p>\n<p>when i create client app that has a function</p>\n<p>APP.processItem = function(item) {<br />\n if (item.flags.remove) {<br />\n   this.removeItem(item);<br />\n   return;<br />\n }<br />\n // do other things with item<br />\n}</p>\n<p>and it falsely procs just because someone attached &#8220;remove&#8221; to the very super-model of all models then i am screwed. the lib or component (that needs to run within my very window scope) that did this to my runtime cannot be used anymore.</p>\n<p>today we need to rely on and confide in 3rd party components. otherwise this whole talking is useless and you can put it into a directive catalogue of your very own closed-source it company.</p>\n<p>just imagine all the config objects, all the json data, that would have to filter out potential polluted objects fields.</p>\n<p>put your &#8220;extension&#8221; to the prototype object in the chain where you need it and where it makes sense. &#8220;remove&#8221; function would go to (your) &#8220;Element&#8221; constructor, not to &#8220;Object&#8221;.</p>\n<p>parking your car right in the middle of a street, just because technology lets you to do so, is not very smart unless its your private property.</p>\n<p>inheritance itself is done by the prototype chain itself and does not rely on some &#8220;extend&#8221; method baked into the template of all objects. Object IS {}.</p>\n<p>manipulating the Object.prototype is probably not verboten but it is &#8220;obstrusive&#8221; and therefore WILL make others and finally your life harder.</p>"
+    },
+    {
+      "id": "104253",
+      "author": "Marcus Pope",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik you are flat out wrong &#8211; Object.prototype extensions do not break the &#8220;object-as-hash-tables feature in javascript&#8221; as you put it, but your lack of understanding about what &#8220;for..in&#8221; statements do underneath the hood however do lead to problems in your particularly flawed code examples.</p>\n<p>Just to clear up some confusion &#8211; this comment thread is full of misinformation and bad advice.  Check out my comments near the end of a related thread -</p>\n<p><a href=\"http://www.thomasfrank.se/object_prototype_is_erlaubt.html\" rel=\"nofollow\">http://www.thomasfrank.se/object_prototype_is_erlaubt.html</a> </p>\n<p>to find out why.</p>"
+    },
+    {
+      "id": "104254",
+      "author": "Marcus Pope",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Object.prototype extensions do NOT break for..in or if..in statements in javascript they operate without exception and as expected / designed unless you have incorrect expectations like Erik does.  But try it for yourself&#8230;</p>\n<p>Object.prototype.test = function() { };</p>\n<p>for (var x in {}) { };</p>\n<p>This code will execute without any errors in javascript &#8211; ALWAYS.  </p>\n<p>However, if some programmer doesn&#8217;t check the data type or hasOwnProperty attribute (or similar approach) of the values they are iterating over and their code breaks because of their bad programming practices then it&#8217;s their own fault that a bug in THEIR code broke the intended behaviors of javascript, not that of the person who extended the object prototype.</p>"
+    },
+    {
+      "id": "104255",
+      "author": "Marcus Pope",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>By Erik&#8217;s (and so saddly Dean Edward&#8217;s) perspective this must be a flaw of the person who wrote the extension or of the Javascript language itself.  Because if requiring the use of a hasOwnProperty check on an object iteration is not a legitimate practice, then neither is requiring the check of a variable&#8217;s null status before accessing properties of the non-existent data in said variable.  And the logical jump of course is to bannish a fundamental and intrinsicly powerful and amazing aspect of the language&#8217;s feature set to avoid fixing that bug.</p>"
+    },
+    {
+      "id": "104256",
+      "author": "Marcus Pope",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Ultimately the bug is in Erik&#8217;s code because he didn&#8217;t write it like this&#8230;</p>\n<p>for (var x in obj) { if (obj.hasOwnProperty(x)) { &#8230; }}</p>\n<p>in the same way you&#8217;d write this </p>\n<p>function(test) { if (test != null) { for (var x=0; x &lt; test.length; x++) { &#8230; }}}</p>\n<p>to prevent test.length throwing an error when test == null;</p>\n<p>(code oddly formed to get through the really buggy &lt;&gt; comment engine.)</p>"
+    },
+    {
+      "id": "104336",
+      "author": "Juan Mendes",
+      "url": "http://js-bits.blogspot.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@Marcus Pope: You&#8217;re just shifting the blame. You&#8217;re saying, everyone should be aware that Object.prototype may be modified and they just need to wrap every single for in loop in their app with a call to hasOwnProperty because I think augmenting Object.prototype is useful. You&#8217;re OK with that because, as you said, your app only has 4 of those loops. This article shifts the blame to people who augment Object.prototype.</p>\n<p>I would love to mess with Object.prototype, there are awesome possibilities. However, I am not willing to make for in loops more complicated than they should be. Once we can all set the enumerable flag on properties, then you can augment Object.prototype to your heart&#8217;s content.</p>\n<p>I&#8217;m not going to convince you, but I can say that I will never use a library that does so and neither will most developers. Prototype agreed with Erik and removed all its Object.prototype extensions.</p>"
+    },
+    {
+      "id": "104378",
+      "author": "Higgs",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I haven&#8217;t read all the comments so I don&#8217;t know if this has been said already but I think using Object.prototype is great, just make sure your new function isn&#8217;t enumerable, that way you you won&#8217;t break the &#8220;object-as-hash-tables feature&#8221; in javascript and you also won&#8217;t need to use hasOwnProperty() in every for in loop. I&#8217;m not sure if this worked back in 2005, but it does now.</p>"
+    },
+    {
+      "id": "104609",
+      "author": "John Middlemas",
+      "url": "http://webneurons.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>This problem is solved in JavaScript 1.8.5 (ECMAScript 5th Edition) as follows:-</p>\n<p>Object.prototype.foo = 1</p>\n<p>Object.defineProperty(Object.prototype, &#8220;foo&#8221;, {enumerable: false})</p>\n<p>Then foo will not appear in any for(name in obj) loop since it has been set not enumerable.</p>"
+    }
+  ]
+}
+---
+<p>It is not seldom that you see people messing with <code>Object.prototype</code>. This is <strong>very bad</strong> because it breaks the object-as-hash-tables feature in javascript. Basically, the following is a very common scenario:</p>
+<pre><code>var obj = {a: "A", b: "B", c: "C", d: "D"};
+for (var key in obj) {
+   doSomething(key, obj[key], obj);
+}
+
+if ("b" in obj) {
+   doSomethingElse();
+}</code></pre>
+<p>If someone modified the <code>Object.prototype</code> the for in loop would include any fields you&#8217;ve added.</p>
+<p>So let me say it in plain English: <strong><code>Object.prototype</code> is forbidden</strong> and should be treated as sealed / constant / final.</p>
+<p>PS. There are other issues with using objects-as-hash-tables in js, like for example <code>toString</code>, <code>valueOf</code> and others are not enumerated. If you need a totally fail safe hash table you need to implement that yourself. I leave that as an excercise to the readers (you can use the object-as-hash-table as a start).</p>

@@ -1,0 +1,52 @@
+---json
+{
+  "title": "Bindows in the Blogs",
+  "date": "2003-08-24T20:00:51-08:00",
+  "permalink": "/archives/2003/08/24/20.00.51/",
+  "tags": [
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "286",
+      "author": "Don Park",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "August 24th, 2003 at 21:05",
+      "html": "<p>Erik, I am aware of Bindows being a client-side DHTML framework.  Applications built with it is, however, vulnerable to application architecture thta depends heavily on dynamic server-side data.</p>\n<p>Looking at the chart demo, I don&#8217;t think the delay is entirely due to framework loading speed.</p>"
+    },
+    {
+      "id": "287",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "August 24th, 2003 at 23:38",
+      "html": "<p>Agree. There is definately something fishy going on with the LogChart app</p>"
+    },
+    {
+      "id": "288",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "August 24th, 2003 at 23:44",
+      "html": "<p>You can try the REST interface directly using</p>\n<p><a href=\"http://www.i-see.net/bindows/services/iislog.aspx\">http://www.i-see.net/bindows/services/iislog.aspx</a></p>\n<p>Params (all are optional):<br />\n   timeframe=hours|days|months|years<br />\n   logtype=sent|visitors|hits<br />\n   from=ISO DATE<br />\n   to=ISO DATE</p>\n<p>Just calling the above URI can take as much as a minute :&#8217;(</p>"
+    },
+    {
+      "id": "289",
+      "author": "Don Park",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "August 25th, 2003 at 03:13",
+      "html": "<p>Yup.  Something wacky going on.  Maybe you should upgrade your server to Atari 800?;-p</p>"
+    }
+  ]
+}
+---
+<p>There has been <a href="http://feedster.com/search.php?q=bindows">a few blogs</a> about <a href="http://www.i-see.net/bindows/">Bindows</a> while I&#8217;ve been on my vacation (as well as a few 100 messages in the Forum)</p>
+<p><a href="http://www.docuverse.com/blog/donpark/2003/08/22.html#a832">Don Park writes</a>:</p>
+<blockquote><p>It seems pretty slow though.  I suspect that most, but not all, of the slow speed is due to the server-side misdesigns.</p></blockquote>
+<p>Bindows is a <strong>client side</strong> only framework. However, the web server that is serving the files is a bit slow, especially from the States. You should try downloading the framework and install it on your local machine or on your intranet and you&#8217;ll hardly even notice the loading progress bar.</p>

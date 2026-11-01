@@ -1,0 +1,101 @@
+---json
+{
+  "title": "JS, Encoding and XMLHttpRequest",
+  "date": "2005-05-27T18:55:22-08:00",
+  "permalink": "/archives/2005/05/27/18.55.22/",
+  "tags": [
+    "JavaScript",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "3678",
+      "author": "Emil A Eklund",
+      "url": "http://me.eae.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>UTF-8 is the standard encoding for XML files, so it MSXML probably assumes that all files have that encoding if none is set.</p>\n<p>To have the web server set the charset for text files is quite painless haver you must either manually specify the charset for each file or assume that all files in a given location, or with a given name/extension.</p>\n<p>The problem is that there&#8217;s no way to tell the difference between an UTF-8 and an ISO-8859-1 file unless there are non-ansi character in it (assuming there&#8217;s no UTF-8 BOM) and even if it contains such characters the entire file must be scanned to determine the charset. </p>\n<p>The obvious solution here is, naturally, to always use UTF-8, as that will not only eliminate this kind of problems but also allow other languages to be used in the files, and users of such languages to use the technology. I can&#8217;t think of a single reason for using the ISO-8859-* encodings anymore. They are as obsolete as Netscape 4 and should die a very painful death.</p>"
+    },
+    {
+      "id": "3685",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>&#8220;UTF-8 is the standard encoding for XML files, so it MSXML probably assumes that all files have that encoding if none is set.&#8221;</p>\n<p>I&#8217;m aware of this and it explains why coding it in UTf-8 works fine.</p>\n<p>&#8220;I can’t think of a single reason for using the ISO-8859-* encodings anymore.&#8221;</p>\n<p>A customer said that they already had a lot of js files written using Latin-1 and that is the only reason I needed to investigate this. (Besides it being fun trying to learn how things work.)</p>"
+    },
+    {
+      "id": "3686",
+      "author": "Emil A Eklund",
+      "url": "http://me.eae.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Well guess that is a valid reason, you got me there.</p>"
+    },
+    {
+      "id": "12460",
+      "author": "Henrik Kjelsberg",
+      "url": "http://www.take.no",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Well!! If your from Norway and making an application with a whole lot of iso-8859-1 characters, you would be frustrated. I could convert all foreign characters into their hex value, but is&#8217;nt that just going threw a whole lot of trouble for no reason, that is if it was possible to use iso-8859-1 with xmlhttprequests.</p>"
+    },
+    {
+      "id": "13585",
+      "author": "Daniel Wolff",
+      "url": "http://bijur.wordpress.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Man, this is S-O GREAT!</p>\n<p>You just saved my life!<br />\nI Was doing (with PHP) a utf8_encode() in any string that gets in the way on the page&#8230;. but if I wasn´t using AJAX to load some content and display on a page (like in an include()) the code was turned into a mess!</p>\n<p>I never thought that all the content loaded by XHR (XmlHttpRequest) calls was coming only in UTF-8&#8230; now I´ve loaded the header with the correct content-type and the problem is gone!</p>\n<p>Thank you so much!<br />\nKeep up with the excellent content on your blog, Erik&#8230; and again: Thank you!</p>"
+    },
+    {
+      "id": "14170",
+      "author": "Tom Davis",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>If you have perl 5.8 or better compiled with perlio (standard) and can install the Encode module (it&#8217;s available on CPAN), it&#8217;s pretty easy to translate files from one encoding to another. Basically (from the Encode documentation):</p>\n<p>use Encode;</p>\n<p>open( LATIN, &#8220;) {print UTF8 $_; }<br />\nclose LATIN;<br />\nclose UTF8;</p>\n<p>I put all of that except the use clause into a sub and did a loop over all of the files, I wanted to change, 743 files in less than five seconds.</p>\n<p>NOTE: I thought my files were ISO-8859-1, but it turns out they are ms-1252, and that caused all kinds of problems because smart quotes and emdashes are not part of ISO-8859-1 and so get converted to something in utf8 that MANY applications recognize (correctly) as control characters, but that many browsers will (incorrectly) display as the smartquotes, etc. It might work regardless, but I got bitten. Rule of thumb, most windows apps produce ms-1252 rather than ISO-8859-1.</p>"
+    },
+    {
+      "id": "54258",
+      "author": "Laven",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hi,<br />\nI am having problem passing foreign (Nordic) characters in a queryString via xmlhttprequest (AJAX). When I examine the querystring in the server-side script, the foreign characters are blanked out, when I examine the querysting in the AJAX function, all fine.  Could someone help, please!!</p>"
+    },
+    {
+      "id": "102561",
+      "author": "Jeff Koenke",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>This was the exact problem I was having.  Your solution saved me hours of investigation.  THANKS!!!!!  Will strongly consider switching to UTF-8 in the future.</p>\n<p>Thanks again.<br />\nJeff</p>"
+    },
+    {
+      "id": "102571",
+      "author": "Fernando",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hi,</p>\n<p>I was in the middle of a related problem, serving data through XHR and almost lost in the encoding nightmare&#8230; <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";-)\" class=\"wp-smiley\" />  Your suggestion showed me the light. Thanks.</p>"
+    }
+  ]
+}
+---
+<p>I run into a quite strange issue today. Basically the problem was that a javascript file was encoded using ISO-8859-1 and contained some weird characters. It worked fine in a plain HTML script tag that included the external file. However it did not work when the file was loaded using an XMLHttpRequest (MSXML has exactly the same behavior).</p>
+<p>My first assumption was that the encoding of the file was incorrect and when I changed it to UTF-8 everything worked fine. However, it should work with ISO-8859-1 as well so I changed the encoding back and started sniffing the HTTP headers.</p>
+<p>It turns out that neither IIS nor Apache include the encoding of js files in the HTTP response headers. My guess is that when the file was loaded through the HTML script tag the browser did some heuristics to figure out that the file was actually ISO-8859-1. The same heuristics does not apply to the XMLHttpRequest and it assumes that the file is UTF-8 which it obviously isn&#8217;t.</p>
+<p>So to get this to work you need to set:</p>
+<pre><code>Content-Type: application/x-javascript; charset=ISO-8859-1</code></pre>
+<p>I guess the issue is that the web servers do not know that js files are text files and therefore don&#8217;t bother with the encoding. Does anyone know how to configure web servers to automatically insert the correct charset in the HTTP header?</p>
+<p>This is a real world problem that more and more people will run into as the world moves more and more towards using XMLHttpRequest to load JSON and other text based data formats.</p>

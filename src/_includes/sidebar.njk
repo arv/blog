@@ -1,0 +1,38 @@
+<aside class="widget widget_recent_entries cf">
+	<h3><span>{{ "Recent Posts" | firstpart | safe }}</span></h3>
+	<ul>
+	{% for post in collections.posts | head(5) %}
+		<li><a href="{{ post.url }}">{{ post.data.title | safe }}</a></li>
+	{% endfor %}
+	</ul>
+</aside>
+
+<aside class="widget widget_tag_cloud cf">
+	<h3><span>{{ "Tags" | firstpart | safe }}</span></h3>
+	<div class="tagcloud">
+	{% set maxCount = 1 %}
+	{% for tag in collections.tagList %}{% if tag.count > maxCount %}{% set maxCount = tag.count %}{% endif %}{% endfor %}
+	{% for tag in collections.tagList %}
+		<a href="/archives/tag/{{ tag.slug }}/" class="tagsize-{{ tag.count | tagSize(maxCount) }}" title="{{ tag.count }} post{% if tag.count != 1 %}s{% endif %}">{{ tag.name | safe }}</a>
+	{% endfor %}
+	</div>
+</aside>
+
+<aside class="widget widget_archive cf">
+	<h3><span>{{ "Archives" | firstpart | safe }}</span></h3>
+	<ul>
+	{% for m in collections.months %}
+		<li><a href="/archives/{{ m.key }}/">{{ m.label }}</a>&nbsp;({{ m.posts.length }})</li>
+	{% endfor %}
+	</ul>
+</aside>
+
+<aside class="widget widget_meta cf">
+	<h3><span>{{ "Meta" | firstpart | safe }}</span></h3>
+	<ul>
+		<li><a href="/archives/">All posts</a></li>
+		<li><a href="/feed.xml" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+		<li><a href="/atom.xml" title="Syndicate this site using Atom">Entries Atom</a></li>
+		<li><a href="{{ site.repo }}">GitHub</a></li>
+	</ul>
+</aside>

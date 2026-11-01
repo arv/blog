@@ -1,0 +1,23 @@
+---json
+{
+  "title": "Updated PNG Behavior",
+  "date": "2004-05-09T21:01:20-08:00",
+  "permalink": "/archives/2004/05/09/21.01.20/",
+  "tags": [
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "812",
+      "author": "foO",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "May 10th, 2004 at 03:03",
+      "html": "<p>schweeeeeeeeeeeet! <img src='/wp-includes/images/smilies/icon_wink.gif' alt=';)' class='wp-smiley' /> </p>\n<p>very kewl, man&#8230; very kewl&#8230;</p>"
+    }
+  ]
+}
+---
+<p>I&#8217;ve udpated the <a href="http://webfx.eae.net/dhtml/pngbehavior/pngbehavior.html">PNG Behavior</a> to work better when printing. I knew that the PNG images were not being printed but I thought it was just a matter of adding a print style sheet but IE is not detaching the behavior when printing so I had to revert to the IE proprietary events, <code>window.onbeforeprint</code> and <code>window.onafterprint</code> to turn off the filter and set the real image <code>src</code>.</p>
+<p>All WebFX downloads can be found at: <a href="http://webfx.eae.net/download/">http://webfx.eae.net/download/</a></p>

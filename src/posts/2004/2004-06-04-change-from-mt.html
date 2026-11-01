@@ -1,0 +1,31 @@
+---json
+{
+  "title": "Change from MT?",
+  "date": "2004-06-04T00:01:01-08:00",
+  "permalink": "/archives/2004/06/04/00.01.01/",
+  "tags": [
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "860",
+      "author": "Martey",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "June 4th, 2004 at 08:15",
+      "html": "<p>I actually switched from MT to WordPress (WP) yesterday. It was relatively painless, although I did have to do some MySQL database editing (WP creates a default &#8220;admin&#8221; user, so if you import your MT entries, a second user is created).</p>\n<p>You can customize URI structure, but I found that once I had created individual post pages, the links for monthly pages no longer worked. I changed back to the default WP URIs (<a href=\"http://www.blogsite.com/index.php?etc=0001\" rel=\"nofollow\">http://www.blogsite.com/index.php?etc=0001</a>) and used mod_rewrite stuff in my .htaccess to make sure my old MT links would still work.</p>"
+    }
+  ]
+}
+---
+<p>I&#8217;m considering switching from Movable Type to <a href="http://wordpress.org/">WordPress</a>. The main reason is that I fucking hate how MT has to rebuild everything all the fucking time. Why not build it upon first request and then cache it?</p>
+<p>Wanted features:</p>
+<ul>
+<li>Needs to run on BSD, Apache 2, MySQL or PostGreSQL (Perl, PHP, Mono, <a href="http://www.nemerle.org/" title="This points to Nemerle which looks really sweet">Whatever++</a>)</li>
+<li>Should be able to send as application/xhtml+xml whenever the UA supports it and fall back to text/html for Mosaic and IE</li>
+<li>Easy to use and configure&#8230; I don&#8217;t have the time to write my own blog engine</li>
+<li>Must be able to import from MT</li>
+<li>Sane URIs. No crap in the URIs please!</li>
+</ul>
+<p>I think WordPress migh fulfill my needs. Does anyone have any experience with it or knows any other free and/or open source blog engine?</p>

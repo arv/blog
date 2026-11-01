@@ -1,0 +1,100 @@
+---json
+{
+  "title": "Screen Readers Suck",
+  "date": "2005-07-19T21:02:16-08:00",
+  "permalink": "/archives/2005/07/19/21.02.16/",
+  "tags": [
+    "JavaScript",
+    "Rant",
+    "Software",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "5106",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "July 19th, 2005 at 21:21",
+      "html": "<p>Here are the pages at Mozilla.org. Try these in Deer Park Alpha 2 with MS Narrator (JAWS chokes)</p>\n<p><a href=\"http://www.mozilla.org/access/dhtml/\" rel=\"nofollow\">http://www.mozilla.org/access/dhtml/</a></p>"
+    },
+    {
+      "id": "5109",
+      "author": "Derek Featherstone",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "July 19th, 2005 at 23:13",
+      "html": "<blockquote><p>There are currently three ways to go here:</p>\n<p>   1. Shut out visually impared people. (Is this what Derek Featherstone is suggesting?)</p></blockquote>\n<p>No, actually, that is most definitely <em>not</em> what I was suggesting. To provide some context, I was actually making the following points:</p>\n<p>1. Screen reader software is getting better in its support for scripting<br />\n2. Where screen reader software fails (for example, in certain AJAXian techniques), if we&#8217;ve built things &#8220;correctly&#8221; using progressive enhancement, graceful degradation and unobtrusive scripting, we should be able to tell screen readers users to turn JS off so that they actually get a better experience.<br />\n3. Turning JS off may be more important for people using <em>older versions</em> of screen reader software.</p>\n<p>That&#8217;s what I was suggesting &#8211; certainly not suggesting that they be shut out, in any way shape or form.</p>\n<p>Hope that clarifies&#8230; </p>"
+    },
+    {
+      "id": "5110",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "July 19th, 2005 at 23:22",
+      "html": "<p>That makes a bit more sense. However I do not agree with you that people should turn off js to get a better experience. If you turn off js you will limit keyboard navigation and visually impared users are people that really make use of improved keyboard navigation.</p>\n<p>Take a tree as a good example. With scripting enabled you can allow the user to navigate using the arrow keys and you can make the tree have one tab index, instead of each item having its own entry in the focus chain.</p>"
+    },
+    {
+      "id": "5111",
+      "author": "Derek Featherstone",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "July 19th, 2005 at 23:49",
+      "html": "<blockquote><p>If you turn off js you will limit keyboard navigation and visually impared users are people that really make use of improved keyboard navigation.</p></blockquote>\n<p>That entirely depends on context and how the &#8220;thing&#8221; was built. I say &#8220;thing&#8221; because interacting with an application will be entirely different than interacting with a page, for example, that shows and hides content using DOM Scripting.</p>\n<p>The tree example you mention is a good example, in theory. It might still be a situation where a user of some older screen reader &#8220;insert version here&#8221; might not handle that interaction properly, and if so, if we&#8217;ve built things &#8220;correctly&#8221; even with JS off, that tree example might be less than optimally usable, but better than not being able to interact with it at all.</p>\n<p>Believe me &#8211; as a member of both the DOM Scripting Task Force, and the Accessibility/Assistive Devices Task Force &#8211; I want nothing more than to move this stuff forward so that we can use modern scripting techniques along side assistive tech in a complementary way, rather than in a limiting way.</p>"
+    },
+    {
+      "id": "5335",
+      "author": "Peter Krantz",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "September 11th, 2005 at 12:17",
+      "html": "<p>Good news is that screen readers are getting better. The mozilla DHTML accessibility support (<a href=\"http://www.mozilla.org/access/dhtml/#atsupport\" rel=\"nofollow\">http://www.mozilla.org/access/dhtml/#atsupport</a>) is apparently already supported by the upcoming version of Window Eyes 5.5 (beta 1: <a href=\"http://www.gwmicro.com/beta/\" rel=\"nofollow\">http://www.gwmicro.com/beta/</a>).</p>"
+    },
+    {
+      "id": "5843",
+      "author": "Web Site Accessibility Blog “ Joe Clark’s ScreenReader Rant",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "November 11th, 2005 at 12:21",
+      "html": "<p>[...] rently, the feeling in the industry is that   &#8220;screen readers suck&#8221;, and again &#8220;screen readers suck&#8221; 2.    Designers who are aware o [...]</p>"
+    },
+    {
+      "id": "47288",
+      "author": "Maria Carter",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "December 5th, 2006 at 01:38",
+      "html": "<p><strong>George Lewis&#8230;</strong></p>\n<p>The 2534 Dorothy Harris blog&#8230;</p>"
+    },
+    {
+      "id": "104636",
+      "author": "Is the Writing on the Wall for AJAX? | Richard Leggett",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "January 27th, 2013 at 09:40",
+      "html": "<p>[...] entry and thinking it still applies. Even complex Flash applications can be screenreader friendly (can DHTML?), alternatively offer a HTML version if it&#8217;s really suitable (sometimes I wonder why people [...]</p>"
+    }
+  ]
+}
+---
+<p>There has been some mumbling about accessibiliy and javascript for quite some time now and today I read the following at the <a href="http://domscripting.webstandards.org/?p=12">DOM Scripting Task Force blog</a>:</p>
+<blockquote><p>It’s also all but impossible for some applications, such as Google Maps. In fact, after some preliminary testing our own Derek Featherstone was so dismayed by the state of JavaScript in screen readers that he recommended screen reader users turn off JavaScript. Hardly an encouraging sign.</p></blockquote>
+<p>This makes me very dissapointed. The problem is not with javascript, it is with the most popular screen reader, <a href="http://www.freedomscientific.com/fs_products/JAWS_HQ.asp">JAWS</a>, from <a href="http://www.freedomscientific.com/">Freedom Scientific</a>. I&#8217;ve had the displeasure of using this crappy product for some time now and I must say I feel sorry for blind and visually impared users. (JAWS is not unique here, other products have other issues.)</p>
+<p>Let&#8217;s say you have created a <a href="http://bindows.net">product</a> that is fully keyboard navigatable. Then you start JAWS and for some reason keyboard navigation is no longer working? Why is this you may ask? It is because JAWS disables all the DOM keyboard events. Don&#8217;t visually impared people need to use the keyboard? Maybe they prefer the mouse which they have a hard time to see?</p>
+<p>To get the keyboard events to work at all you need to get JAWS into forms mode. However this cannot be done programmatically and it requires user interaction. This can be achieved in a fairly easy way but it decreases the usability when we are really striving to improve the user experience for visually impared users.</p>
+<p>The next issue is to get JAWS to read out information about the UI to the user. This is very tricky. How do you get JAWS to understand that the currently focused DIV is a slider? HTML does not have sliders and HTML is the only thing JAWS understands. And please don&#8217;t say use a text input. That is not acceptable. The UI must be the same and the screen reader should read out information that will help the visually impared person to understand what to do.</p>
+<p>There are currently three ways to go here:</p>
+<ol>
+<li>Shut out visually impared people. (Is this what Derek Featherstone is suggesting?)</li>
+<li>Create a less usable application that only uses text inputs, links and other non intuitive controls and continually go back to the server ala ASP.NET and make the user frustrated of the bad responsiveness of the application. Visually impared people don&#8217;t need less UI feedback. They need better UI feedback.</li>
+<li>Use complicated hacks and odd behaviors to get the major screen readers to treat your web application just like any other Microsoft Active Accessibility application (Win32 app).</li>
+</ol>
+<p>All is not lost here. Aaron Leventhal is doing a great job implementing the WAI roles in Mozilla. This means that you can set the wai:role attribute on your DIV, representing a slider, to &#8220;slider&#8221; (I&#8217;m not really sure that there is such a role.) and the screen reader will then only need to support MSAA (and they all do but some think they can do better for HTML which they clearly can&#8217;t). All you have to do is to make sure you set the role correctly and implement keyboard navigation (and get screen readers to not suck ass <img src='/wp-includes/images/smilies/icon_evil.gif' alt=':evil:' class='wp-smiley' /> )</p>

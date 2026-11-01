@@ -1,0 +1,217 @@
+---json
+{
+  "title": "Typed Programming",
+  "date": "2005-09-18T13:10:57-08:00",
+  "permalink": "/archives/2005/09/18/13.10.57/",
+  "tags": [
+    ".NET",
+    "Program Languages",
+    "Rant"
+  ],
+  "comments": [
+    {
+      "id": "5350",
+      "author": "Sebastian",
+      "url": "http://webmagics.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>A really nice example you have found there. But I (a python fan) could not find what you genereally find nice in typed programming. Mainly you have to write much more to get the same result there.</p>"
+    },
+    {
+      "id": "5351",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Static typing has type checking at compile time that prevents a few errors. It is also faster because less run time checks needs to be done.</p>\n<p>IMHO, the best of both worlds is type inference. Since you like Python (and so do I but I don&#8217;t have any real world experience with it) I think you shoud take a quick look at Boo (a Python like language for .NET).</p>"
+    },
+    {
+      "id": "5352",
+      "author": "Mark Cidade",
+      "url": "http://www.marxidad.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>You don&#8217;t *have* to write it that way. In C# 1.0, you can do this:</p>\n<p>using Microsoft.Msn.Hotmail;<br />\n/* &#8230; */<br />\nSortBy _sortBy = (SortBy) Emum.Parse(typeof(SortBy),aSortBy); </p>\n<p>Although, the functional equivelant of &#8220;var _sortBy = aSortBy&#8221; would be &#8220;string _sortBy = aSortBy&#8221;.</p>\n<p>In C# 3.0, you can also write &#8220;var _sortBy = aSortBy;&#8221; and instead of &#8220;var aFunction = function(x){return x+1;}&#8221;, you can write &#8220;var aFunction = x =&gt; x+1;&#8221; and have that checked at compile time.</p>"
+    },
+    {
+      "id": "5353",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>In C# 1.0 you still have to repeat the typename three times. That&#8217;s at least 2 times too often. By the way can&#8217;t one do something like Foo.Bar.EnumType.parse(val)?</p>"
+    },
+    {
+      "id": "5354",
+      "author": "Ron Buckton",
+      "url": "http://stage.bennettadelson.com/bennettadelson/blogs/rbuckton/default.aspx",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>In C# 3.0 the proposed &#8220;var&#8221; keyword provides pseudo-dynamic typing through compile-time type inference.  If aSortBy is a System.String or System.Object the type of _sortBy would be System.String or System.Object.</p>\n<p>so you would still have to do  (SortBy)Enum.Parse(typeof(SortBy), aSortBy); and you&#8217;re only saving yourself 3 characters compared to the normal syntax.  &#8220;var&#8221; is only being introduced to help deal with &#8220;types you can&#8217;t say&#8221; because they are compiler generated.  Also &#8220;var&#8221; can only be used in a local scope, not at the class level.</p>\n<p>e.g.</p>\n<p>var person = new { Name = &#8220;Bob Smith&#8221;, Phone = &#8220;(817) 555-1234&#8243; };<br />\nConsole.WriteLine(person.Name);</p>\n<p>What enum really needs is a generic version, however it was skipped because you can&#8217;t supply a constraint of &#8220;where T: Enum&#8221; because &#8220;Enum&#8221; is a special type.  Really the right way would be:</p>\n<p>SortBy _sortBy = Enum.Parse(aSortBy);</p>"
+    },
+    {
+      "id": "5355",
+      "author": "Ron Buckton",
+      "url": "http://stage.bennettadelson.com/bennettadelson/blogs/rbuckton/default.aspx",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>The bracketing didn&#8217;t show up. It would be:</p>\n<p>SortBy _sortBy = Enum&lt;SortBay&gt;.Parse(aSortBy);</p>"
+    },
+    {
+      "id": "5356",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Still that also requires you to write the type name 3 times. That whole concept is flawed. This is what one would like to achieve:</p>\n<p>SortBy _sortBy = aSortBy;</p>\n<p>or</p>\n<p>var _sortBy = (SortBy) aSortBy;</p>\n<p>the type of aSortBy is a string but enums may have a value associated with each value and in this case the values are the same so the compliler should be able to do this for you.</p>\n<p>I&#8217;ve been away from typed languages for too long and I&#8217;m getting lazy.</p>"
+    },
+    {
+      "id": "5357",
+      "author": "Mark Cidade",
+      "url": "http://www.marxidad.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>The comparison to &#8220;var _sortBy = aSortBy&#8221; is still invalid if you&#8217;re comparing that to JavaScript since JavaScript doesn&#8217;t even have enumerations at all.</p>\n<p>Another feature of C# 3.0 is that you can add extension methods to existing types at a syntax level, which is similar to extending prootypes in JavaScript. So where in JavaScript you would type &#8220;String.prototype.toEnum = function(enumType) {return Enum.Parse(enumType,this);}&#8221;, in C# you&#8217;d first have to write a static class, then import it:</p>\n<p>class StringExtension<br />\n{ static T ToEnum&lt;T&amp;gt where T : Enum (this string str) {return (T) Enum.Parse(typeof(T), str);}<br />\n}<br />\n&#8212;-<br />\nusing StringExtension;<br />\n/*&#8230;*/<br />\nvar _sortBy = aSortBy.ToEnum&lt;SortBy&gt;();</p>"
+    },
+    {
+      "id": "5358",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>We&#8217;re not even at C# 2.0 and you are already talking about C# 3.0 <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":-)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "5359",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Mark: Since you seem to have a good understanding of C# you might be able to explain to me why typof is needed? To me, doing typeof(T) where T is already a Type seems useless. I know it is required but I never took the time to understand the reasoning behind it.</p>"
+    },
+    {
+      "id": "5360",
+      "author": "Mark Cidade",
+      "url": "http://www.marxidad.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>My best guess as to why you can&#8217;t just use the naked type name to refer to the corresponding System.Type object is because writing a parser for that would be complicated if not impossible, because naked type names are used for member and variable declarations as well as in things like the casting operator. </p>\n<p>In Python, every class seems to be implemented as a callable object in the same way methods are, so if you leave out the parantheses, you&#8217;ll get the class (or method) object. Also, type names aren&#8217;t used as metadata in any kind of declaration so the appearance of a type name always refers to the class object in any context.</p>\n<p>In .NET, even though types are represented by instances of the System.Type class, type declarations don&#8217;t actually create new objects&#8211;System.Type objects are created on demand, like when you call GetType() on an object or use the typeof() operator. </p>\n<p>It may very well be possible to write a parser that allows for naked type names that refer to the System.Type object, but it may just be the language designers&#8217; choice to make it explicit by using the typeof operator. Otherwise, it may be too confusing for some people to have naked type names meaning different things in different contexts and it increases the chances of some errors, like when you type &#8220;x = (Int32);&#8221; but forgot to type the identifier for something that you want casted as an int (as in &#8220;x = (Int32) y;&#8221;), and so the compiler treats it as &#8220;x = typeof(Int32);&#8221;</p>"
+    },
+    {
+      "id": "5361",
+      "author": "Mark Cidade",
+      "url": "http://www.marxidad.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Also, right now it&#8217;s possible to have a static method on a user-defined type called MyClass.GetType(). If &#8220;MyClass&#8221; refered to typeof(MyClass), then MyClass.GetType() would always return typeof(System.Type) and I wouldn&#8217;t be able to have a user-defined static MyClass.GetType() that I could call. Not necessarily a bad thing, but that would make forbidden any static method names that were also instance names of System.Type, which is currently subject to change (by adding members) with each version of the framework.</p>"
+    },
+    {
+      "id": "5363",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>It got nothing to do with the parser. It is simple enough and not very confusing. A lot of languages supports this. The problem as I see it is that classes are not first class citizens i C# and the only reason for that that I can think of backwards compatibility with C++ which is backwards compatible with C and so on.</p>\n<p>Classes should be objects of type Type. Simple as that. The following works in JS2:</p>\n<p>const N : Type = Number;<br />\nfunction abs(n : N) : N {<br />\n  return n &lt; 0 ? -n : n;<br />\n}</p>\n<p>// not very useful example but shows that Types are first class<br />\n// citizens<br />\nfunction myInstanceOf(obj : Object, t : Type) : Boolean {<br />\n   return obj instanceof t;<br />\n}</p>\n<p>class A {}<br />\nvar a = new A;<br />\nmyInstanceOf(a, A)</p>"
+    },
+    {
+      "id": "5367",
+      "author": "Mark Cidade",
+      "url": "http://www.marxidad.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I think that the main reason C# doesn&#8217;t have classes as objects is because the .NET framework isn&#8217;t that way. One possible reason that the framework isn&#8217;t that way may be because then a lot of languages would have to change their semantics more than they would with the existing implementation. </p>\n<p>Your first example is equivelant to the following C#:</p>\n<p>using N = Number;<br />\n/* &#8230; */<br />\nN abs(N n) {return n &lt; 0 ? -n : n;}</p>\n<p>Using type names to refer to type objects seems to have something to do with the parser. In the JS2 spec, it says, &#8220;The language cannot syntactically distinguish type expressions from value expressions, so a type expression can be any compile-time constant expression that evaluates to a type. A type is also a value (whose type is Type) and can be used in expressions, assigned to variables, passed to functions, etc.&#8221;</p>\n<p>I don&#8217;t know how JS2 would deal with static members of user-defined types that are the same as Type&#8217;s instance members. The typeof operator is needed in C# for disambiguating in that situation. In Python, a type&#8217;s static methods hide any of the &#8220;type&#8221; type&#8217;s instance methods that have the same name (which in this case, isn&#8217;t a big deal, since all but &#8220;mro&#8221; use the reserved __doubleUnderscore__ convention).</p>"
+    },
+    {
+      "id": "5370",
+      "author": "Brad Neuberg",
+      "url": "http://codinginparadise.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>JavaScript 2.0, as implemented in the newer versions of Macromedia Flash, is pretty nice; the programmer gets to choose whether they want type checking or not:</p>\n<p>var priceItem:Number = 14.95;</p>\n<p>or</p>\n<p>var priceItem = 14.95;</p>\n<p>are both allowed. This can be really nice, since it can allow a programmer to use type checking to make things more clear, in method arguments for example:</p>\n<p>function play(location:URL) {<br />\n}</p>"
+    },
+    {
+      "id": "5372",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I haven&#8217;t used JS2 in Flash but I&#8217;ve seen a lot of code written for it and they have a tendency to use:</p>\n<p>var o : Object = new Foo;</p>\n<p>Doesn&#8217;t it support using Foo as the type?</p>"
+    },
+    {
+      "id": "5378",
+      "author": "Mark Cidade",
+      "url": "http://www.marxidad.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Flash&#8217;s ActionScript allows custom types for what they call strict typing. But it seems that type safety only applies to strictly typed variables that are assigned to other strictly typed variables, so I wouldn&#8217;t call it strongly typed. </p>\n<p>var myFoo : Foo = new Foo();<br />\nvar myString : String = &#8220;bar&#8221;;<br />\nvar notTyped = &#8220;baz&#8221;;<br />\nmyFoo = myString; //error<br />\nmyFoo = notTyped; //no error</p>\n<p>see <a href=\"http://livedocs.macromedia.com/flash/mx2004/main_7_2/wwhelp/wwhimpl/common/html/wwhelp.htm?context=Flash_MX_2004&#038;file=00000780.html\" rel=\"nofollow\">http://livedocs.macromedia.com/flash/mx2004/main_7_2/wwhelp/wwhimpl/common/html/wwhelp.htm?context=Flash_MX_2004&#038;file=00000780.html</a> and the comments on <a href=\"http://livedocs.macromedia.com/flash/8/main/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&#038;file=00001890.html\" rel=\"nofollow\">http://livedocs.macromedia.com/flash/8/main/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&#038;file=00001890.html</a></p>"
+    },
+    {
+      "id": "5982",
+      "author": ".net noobie",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>.NET rules<br />\nand<br />\n.NET 2.0 Kicks Butt+</p>\n<p>I find the Typed language and Visual Studios.NET&#8217;s Intellisence a god send <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "34659",
+      "author": "Marco",
+      "url": "http://www.weverwijk.eu",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hmm, .NET Rules? Is this supposed to become a discussion between &#8220;Typed Programming languages&#8221;? If so, i preffer JAVA!</p>"
+    },
+    {
+      "id": "101928",
+      "author": "peter",
+      "url": "http://insuranceready.googlepages.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>It got nothing to do with the parser. It is simple enough and not very confusing. A lot of languages supports this. The problem as I see it is that classes are not first class citizens i C# and the only reason for that that I can think of backwards compatibility with C++ which is backwards compatible with C and so on.</p>"
+    },
+    {
+      "id": "101993",
+      "author": "Brian",
+      "url": "http://jrdev.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Actually you never have to type out a namespace in .net, if you use visual studio.</p>\n<p>Microsoft.Msn.Hotmail.SortBy </p>\n<p>&#8220;M&#8221;, ctr+space, enter,&#8221;.&#8221;,  &#8220;M&#8221;, enter, &#8220;.&#8221;, &#8220;H&#8221;, enter,&#8221;S&#8221;,&#8221;o&#8221;, enter.  12 keystrokes.</p>"
+    },
+    {
+      "id": "102585",
+      "author": "proxy site",
+      "url": "http://www.fire-proxy.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>&#8230;I think that the main reason C# doesn’t have classes as objects is because the .NET framework isn’t that way. One possible reason that the framework isn’t that way may be because then a lot of languages would have to change their semantics more than they would with the existing implementation&#8230;.</p>"
+    }
+  ]
+}
+---
+<p>Typed programming can be nice but when you have to write something like this things have gone too far:</p>
+<pre><code>Microsoft.Msn.Hotmail.SortBy _sortBy = (Microsoft.Msn.Hotmail.SortBy)
+   Enum.Parse(typeof(Microsoft.Msn.Hotmail.SortBy), aSortBy);</code></pre>
+<p>Compared to a dynamic typed language:</p>
+<pre><code>var _sortBy = aSortBy;</code></pre>

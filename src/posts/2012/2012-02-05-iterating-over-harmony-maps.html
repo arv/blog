@@ -1,0 +1,26 @@
+---json
+{
+  "title": "Iterating over Harmony Maps",
+  "date": "2012-02-05T13:40:34-08:00",
+  "permalink": "/archives/2012/02/05/13.40.34/",
+  "tags": [
+    "JavaScript",
+    "JavaScript"
+  ],
+  "comments": []
+}
+---
+<p>A while ago Chrome <a href="/archives/2011/12/29/00.00.29/" title="JavaScript Harmony in Chrome">got</a> some JavaScript Harmony features (behind a flag). One of these features is the new <a href="/archives/2011/12/29/12.00.11/" title="Harmony Collections">Map</a> &#8220;class&#8221;. The current implementation does not provide a way to iterate over the keys or values because that depends on <a href="http://wiki.ecmascript.org/doku.php?id=harmony:iterators">Harmony iterators</a> which are not yet implemented in V8.</p>
+<p>However, we can create our own class that adds support for iteration. I&#8217;ve uploaded a <a href="https://github.com/arv/for-each-map">simple implementation</a> to GitHub.</p>
+<p>The implementation creates a new &#8220;class&#8221; since V8 does not correctly allow sub classing of <code>Map</code>. The name of this &#8220;class&#8221; is <code>ForEachMap</code> since it provides one additional method over the standard <code>Map</code>, a <code>forEach</code> method. The <code>forEach</code> method calls a function for every key-value pair in the map.</p>
+<p>Usage:</p>
+<pre><code>var map = new ForEachMap;
+map.set('a', 'A');
+map.set('b', 'B');
+map.forEach(function(value, key) {
+  console.log(key, value); 
+});
+</code></pre>
+<p>The iteration order is the same as the key-value pair creation order. Changes to the map is allowed during iteration and deleted keys are guaranteed to not be visited and new keys will be visited in the current iteration.</p>
+<p>The implementation uses a <code>WeakMap</code> as a side table for the private state of the map. The private state contains arrays with keys and values and a real <code>Map</code> that maps the key to the given index. It also keeps track of number of holes in these arrays so that we can reindex the arrays when there are too many holes.</p>
+<p>This wrapper is of course unfortunate but at least it makes the <code>Map</code> &#8220;class&#8221; more useful while we wait for implementations to add support for native iteration.</p>

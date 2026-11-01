@@ -1,0 +1,92 @@
+---json
+{
+  "title": "Mozilla Behavior Emulation",
+  "date": "2004-01-20T21:18:33-08:00",
+  "permalink": "/archives/2004/01/20/21.18.33/",
+  "tags": [
+    "Mozilla",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "660",
+      "author": "Dean Edwards",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "January 21st, 2004 at 00:54",
+      "html": "<p>the browser compatibility stuff was added at the last minute. i was more interested in loading and applying the behavioral interface to start with.</p>\n<p>i&#8217;ll look into to the clientWidth/Height properties (i kinda knew about borders and stuff but just plain forgot). it&#8217;s important to have some browser compatibility in the wrapper because people will expect it work &#8220;out of the box&#8221; (not that there&#8217;s a box).</p>\n<p>i&#8217;d appreciate some help in refining this wrapper, so if anyone out there is interested in developing cross-browser behaviors, please get in touch.</p>\n<p>thanks for your comments (really!)</p>\n<p>dean edwards</p>\n<p><a href=\"mailto:dean@edwards.name\">dean@edwards.name</a></p>"
+    },
+    {
+      "id": "661",
+      "author": "Dean Edwards",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "January 21st, 2004 at 01:43",
+      "html": "<p>just started looking at your ie-emu code. it looks great! i&#8217;m going to have to incorporate some of your ideas into the compatibility layer of my wrapper. i&#8217;ll accredit you accordingly <img src='/wp-includes/images/smilies/icon_wink.gif' alt=';)' class='wp-smiley' /> </p>\n<p>dean edwards</p>"
+    },
+    {
+      "id": "662",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "January 21st, 2004 at 11:42",
+      "html": "<p>Dean: Great. The currentStyle emulation I have in IE Emu is stupid. Yours is the way to go.</p>\n<p>HTMLElement.prorotype.__defineGetter__( &#8220;runtimeStyle&#8221;, function () {<br />\n   return this.ownerDocument.defaultView.getOverrideStyle( this, null );<br />\n} );</p>\n<p>The problem with currentStyle is that it is not the same as getComputedStyle. currentStyle gives the cascaded value (for example &#8220;auto&#8221;) where getComputedStyle always gives the value in a fixed unit. In some cases these are the same. I don&#8217;t think there is a way to get the cascaded value in Mozilla/DOM and there is no way to get the computed value in IE.</p>"
+    },
+    {
+      "id": "663",
+      "author": "Dean Edwards",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "January 21st, 2004 at 14:04",
+      "html": "<p>OOh i like your runtimeStyle. gonna use that for definite. i think i&#8217;m gonna support &#8220;document.all&#8221; by adapting your approach as well. there is a problem with getComputedStyle in that it is exactly what it says &#8211; computed. colours tend to be rgb values etc. i don&#8217;t think this is a major problem for dhtml apps &#8211; you are never going to get total harmony between the two platforms (there are differences between versions of IE as well).<br />\nit looks like between the of us we could build a pretty decent IE emulator. you seemed to have done more work than me in this area. so let&#8217;s stay in touch. i&#8217;ll keep an eye on your ie-emu page.<br />\nincidentally i&#8217;ve built a couple of behaviors that  make IE a bit more W3C compatible, take a look:</p>\n<p><a href=\"http://dean.edwards.name/my/behaviors/\">http://dean.edwards.name/my/behaviors/</a></p>\n<p>my site is a bit flaky at the moment (it&#8217;s running  off a box in my kitchen) but it&#8217;s never down for more than an hour.</p>\n<p>cheers</p>\n<p>dean</p>"
+    },
+    {
+      "id": "22657",
+      "author": "Markus Hartman",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "August 15th, 2006 at 17:41",
+      "html": "<p>Dean, Iam working with your code to set up a proof of concept, but there is only one thing i cant get working: the<br />\nfor example&#8230;<br />\nif i use it on a anchor tag like <a><br />\nit works fine for IE but on FF i get an error that it cant find  the property.</p>\n<p>any ideas?</a></p>"
+    },
+    {
+      "id": "22658",
+      "author": "Markus Hartman",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "August 15th, 2006 at 17:44",
+      "html": "<p>Oops that did&#8217;t work <img src='/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>\n<p>in htc:<br />\n&lt;public:property name=&#8221;hilitecolor&#8221;/&gt;</p>\n<p>in html<br />\n&lt;a hilitecolor=&#8221;blue&#8221; class=&#8221; ect ect&#8221; /&gt;</p>"
+    },
+    {
+      "id": "41193",
+      "author": "Nish",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "November 19th, 2006 at 23:49",
+      "html": "<p>Dean.. i am using a css entry as</p>\n<p> .abz{<br />\n    behavior: url(abz.htc) ;<br />\n    }</p>\n<p>and then using this class in the HTML. this obviously is not working for mozilla. how do i include your workaorund here?</p>"
+    },
+    {
+      "id": "102680",
+      "author": "Jayesh",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "November 22nd, 2007 at 04:27",
+      "html": "<p>I have one querry that is how can i use  is in HTC (where GetOwnerWindow is userdefined function) file and i want to use in XML file where i wrote the XBL binding<br />\nthanks in Advance<br />\nJayesh</p>"
+    }
+  ]
+}
+---
+<p><a href="http://dean.edwards.name/">Dean Edwards</a> has created an <a href="http://dean.edwards.name/moz-behaviors/">XBL binding that allows Mozilla to use IE behaviors</a>. This is something I&#8217;ve thought about doing but I put that on hold because Mozilla does not allow custom style properties. Dean, however came up with a pretty good solution. He uses the id of the binding as the URI to the HTC file.</p>
+<pre><code> img#ticker {
+   behavior: url(ticker.htc);
+   -moz-binding: url(moz-behaviors.xml#ticker.htc);
+}</code></pre>
+<p>The XBL binding use the XMLHTTPRequest object to read the HTC file and then parses that and creates the property getters/setters and methods and attaches the events.</p>
+<p>The emulation also does a minimal job of making IE specific code work in Mozilla, much like <a href="http://webfx.eae.net/dhtml/ieemu/">IE Emu</a>. There is a minor issue with his emulation and that is that he incorrectly emulates <code>clientWidth</code>/<code>clientHeight</code>. Client width is the width minus borders and possible space for the scroll bar. Not only is the emulation incorrect, Mozilla correctly supports <code>clientWidth</code> (since 1.4?) so the emulation is therefore not needed. (Sorry if I sound harsh, the binding is actually great.)</p>

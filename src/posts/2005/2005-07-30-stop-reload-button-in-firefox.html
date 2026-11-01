@@ -1,0 +1,142 @@
+---json
+{
+  "title": "Stop-Reload-Button in Firefox",
+  "date": "2005-07-30T21:20:10-08:00",
+  "permalink": "/archives/2005/07/30/21.20.10/",
+  "tags": [
+    "Mozilla",
+    "Software",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "5151",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I just realized that that makes the throbber useless&#8230; One less thing cluttering the UI&#8230;</p>"
+    },
+    {
+      "id": "5155",
+      "author": "Chris Poole",
+      "url": "http://chrispoole.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>That&#8217;s pretty cool Erik <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /><br />\nIf only more UIs could be as easily customised. This is one feature I love about Safari&#8217;s UI, so glad it can be implemented in IE too.</p>"
+    },
+    {
+      "id": "5156",
+      "author": "Chris Poole",
+      "url": "http://chrispoole.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>oops i&#8217;m too tired. for IE read Mozilla.</p>"
+    },
+    {
+      "id": "5199",
+      "author": "microfolx",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>&#8220;Chris Poole Says: oops i’m too tired. for IE read Mozilla. &#8221;</p>\n<p>if u are tird of IE, go and die.<br />\nWhat a hell are u talking about here?<br />\nThat there isn&#8217;t any good in improving?</p>"
+    },
+    {
+      "id": "5223",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>microfolx: Chris never wrote that he was tired of IE.</p>"
+    },
+    {
+      "id": "5252",
+      "author": "Thomas",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I don&#8217;t understand this code:</p>\n<p>#stop-button:not([disabled]) + #reload-button {<br />\n\tdisplay: none;<br />\n}</p>\n<p>I copy all your code but in my deer park (Mozilla/5.0 (Windows; U; Windows NT 5.1; fr; rv:1.8b4) Gecko/20050819 Firefox/1.0+) reload button is always visible :/</p>"
+    },
+    {
+      "id": "5253",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>The refresh and reload button must be placed next to each other (stop before reload)</p>"
+    },
+    {
+      "id": "5255",
+      "author": "Thomas",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Ok I understand now.</p>\n<p>We must place stop button, then reload button.</p>\n<p>Thanks you.</p>"
+    },
+    {
+      "id": "5345",
+      "author": "prakash",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Thomas says: &#8220;We must place stop button, then reload button.&#8221;</p>\n<p>In both firefox 1.0.5 and 1.5 Beta1 versions, the reload button is before the stop button. In this case, the second css rule does not trigger.</p>\n<p>So, the reload button is always visible.</p>\n<p>How do we place the stop button before the reload button? I mean, is there any css rule that can do this (not using any extension)?</p>"
+    },
+    {
+      "id": "5347",
+      "author": "prakash",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Never mind my previous question. I forgot about the toolbar &#8220;Customize&#8230;&#8221; option.</p>"
+    },
+    {
+      "id": "5368",
+      "author": "Tom (misfit)",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Thanks, great stuff<br />\nThis should be default</p>"
+    },
+    {
+      "id": "102947",
+      "author": "Maxim",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I tried it on Windows &#8211; it works. On Linux &#8211; doesn&#8217;t. what&#8217;s the problem?</p>"
+    },
+    {
+      "id": "103041",
+      "author": "Navi",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>It worked fine for me on Ubuntu 8.04 beta. Maybe you didn&#8217;t re-name it to userChrome.css?</p>"
+    }
+  ]
+}
+---
+<p>One nice little extension I usually install on Firefox is an extension that merges the reload and stop button. It hides the stop button when it is disabled and shows the reload button when the stop button is not available. However, the extension is not compatible with <abbr title="Deer Park alpha 2">DPA2</abbr> or the latest nighlies.</p>
+<p>After installing and uninstalling IE7 I realized that a merged stop-reload-button is something that I really enjoyed and since the extension no longer worked I decided to implement this myself. For this feature an extension is a bit of overkill. This feauter can easily be done using <a href="http://www.mozilla.org/support/firefox/edit#css">userChrome.css</a>.</p>
+<pre><code>#stop-button[disabled] {
+	display: none;
+}
+
+#stop-button:not([disabled]) + #reload-button {
+	display: none;
+}</code></pre>
+<p><img src="/images/stop-reload.png" style="width:600px;height:173px" /></p>
+<p>Another neat UI improvement in IE7b1 was the combined back and forward drop down menu. This one however, requires an extension.</p>

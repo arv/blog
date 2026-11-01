@@ -1,0 +1,124 @@
+---json
+{
+  "title": "Re: IE and XHTML",
+  "date": "2003-07-29T21:07:24-08:00",
+  "permalink": "/archives/2003/07/29/21.07.24/",
+  "tags": [
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "71",
+      "author": "foO",
+      "url": "http://www.forgetfoo.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>whoa&#8230;. *claps &#8216;n cheerz* very nice, erik! <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>\n<p>explains it ALOT better than i ever could, that&#8217;s for damn sure&#8230; i also understand what you were say&#8217;n alot better now, too &#8211; in regards to IE&#8217;s non-existent support for &#8216;true&#8217; XML+CSS, especially in regards to the header mime types.</p>\n<p>great example on the &#8216;document.documentElement.tagName&#8217; in the comments on my site, too&#8230; charon and i noticed that while working on the XML FooMenu, and i found it really curious that all the tags back back in uppercase, much less the BODY, HEAD, TITLE, etc&#8230;. neither of us quite understood what the hell that was all about, y&#8217;know?</p>\n<p>now i do <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>\n<p>hmmmmmmm&#8230; maybe this is why i just couldnt seem to get raw XML data to be properly &#8220;included&#8221; in an XHTML 1.0 Transitional document? i tried using different namespaces, to no avail&#8230; and i especially couldnt get an XSL sheet to apply to the included XML data inside the document, either. *mutters*</p>\n<p>again, that&#8217;s one of the great things that i thought was about &#8220;XHTML&#8221;&#8230; ugh.</p>"
+    },
+    {
+      "id": "72",
+      "author": "Pewprod",
+      "url": "http://www.pewprod.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I made a few experience with XML in IE, look at <a href=\"http://www.pewprod.com\" rel=\"nofollow\">http://www.pewprod.com</a> (WEBmr., Taratula and Wigboldus.info)<br />\nThey all just made for IE, and works not in another browser!<br />\nBut it works fine, but now to find out to made it that all browsers the site looks good.</p>\n<p>WEBmr. is a xhtml document that call&#8217;s data from XML docs, taratula and wigboldus.info are XML docs that use XSL.<br />\n(forum is just a simple php-mysql forum, not need to look at it <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";)\" class=\"wp-smiley\" />  )</p>"
+    },
+    {
+      "id": "73",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>webmr is text/html and it is not even well formed XML. Try renaming it to xml or xhtml and see what you&#8217;ll get.</p>\n<p>Taratula is raising an error because your web server is misconfigured. The mime type for XSLT is not text/plain. Use text/xml or application/xml.</p>\n<p>Wigboluds.info is incorrect due to the same reason.</p>"
+    },
+    {
+      "id": "74",
+      "author": "Pewprod",
+      "url": "http://www.pewprod.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I change something in the webmr code, now is the page almost valid, 9 to go <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";)\" class=\"wp-smiley\" /><br />\nThe only thing is the xml inport.</p>"
+    },
+    {
+      "id": "75",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>It&#8217;s still served as text/html. As long as you are not serving it using application/xhtml+xml you are not using XHTML.</p>"
+    },
+    {
+      "id": "76",
+      "author": "Pewprod",
+      "url": "http://www.pewprod.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>My page is now This Page Is Valid XHTML 1.0 Strict. I must change a little bit on the info navigation (next/back).</p>\n<p><a href=\"http://validator.w3.org/check?uri=http://webmr.pewprod.com/index.html&#038;charset=(detect+automatically)&#038;doctype=(detect+automatically)\">http://validator.w3.org/check?uri=http://webmr.pewprod.com/index.html&#038;charset=(detect+automatically)&#038;doctype=(detect+automatically)</a></p>\n<p>But how to change it from text/html to application/xml+xhtml</p>"
+    },
+    {
+      "id": "77",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I see that you use Apache. Add the following line to<br />\nyour httpd.conf file</p>\n<p>AddType application/xhtml+xml .xhtml</p>\n<p>After this you should be able to just rename your xhtml files to xhtml and they should be correctly sent.</p>"
+    },
+    {
+      "id": "78",
+      "author": "Pewprod",
+      "url": "http://www.pewprod.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Why is your website not Valid xhtml?</p>"
+    },
+    {
+      "id": "79",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>This weblog is not valid because too many users use IE and therefore I have to use text/html.</p>\n<p>There are other reasons and that is that Movable Type does not enforce well formed nor valid XHTML. I try to strive after well formedness but I guess there are some bugs due to missformed posts/messages.</p>"
+    },
+    {
+      "id": "80",
+      "author": "Houser",
+      "url": "http://www.houserdesign.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik &#8211; check your facts before you make me look like I don&#8217;t know what I am talking about in your posts. I am not <a href=\"mailto:Houser@ClearDensity.com\">Houser@ClearDensity.com</a> and my post to Foo had NOTHING to do with IE being fully XHTML compliant. My response to Foo&#8217;s blog post was simple to give him a working solution to a problem. That&#8217;s it.</p>"
+    },
+    {
+      "id": "81",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Houser: I never ment this as a response to your post alone. There is/was a common belief that IE supported XHTML and I wanted to add my opinions about this.</p>\n<p>Sorry for the missundertanding about who you were. I changed the post to point to your site instead.</p>\n<p>Too bad Foo removed the comment ability from his blog :&#8217;(</p>"
+    }
+  ]
+}
+---
+<p>In response to Houser @ <a href="http://www.houserdesign.com/">HouserDesign.com</a> and his <a href="http://www.forgetfoo.com/index.cfm?p=2&amp;BlogID=919">message</a> at <a href="http://www.forgetfoo.com/">Foo&#8217;s blog</a>:</p>
+<p>There seems to be some misunderstanding about that IE supports XHTML. IE supports XHTML equally good as Netscape Navigator 4.x and Mosaic. Just because you can write an HTML document using well formed XML does not mean that is XHTML. Neither does adding invalid HTML attributes and tags.</p>
+<p>To be correct XHTML your web server needs to send the <strong>application/xhtml+xml</strong> content type. Browsers that do understand this, use their XML parsers to parse the content and then applies the default XHTML CSS to this. If you send this content type to IE, it does not know what to do and it asks the user to save the file.</p>
+<p>An alternative would be to send the document as <strong>text/xml</strong>. This should work in all browsers supporting XML+CSS. Once again IE falls short even though it states that it does indeed support this. The problem is that it does not know that is should trigger the XML to HTML XSLT that it does when it encounters i stylesheet PI. (Remember that using XML+CSS does not give access to DOM HTML 1/2 nor DOM0 which prevents usage of cookies and many more crucial parts of the DOM).</p>
+<p>Note that IE uses HTML with custom elements in those few cases that it does know how to apply the CSS to XML. This means that it changes the tag names of all XHTML elements to uppercase. It also means that it adds HTML, HEAD and BODY elements which means that your CSS will most likely not work.</p>
+<p>Conclusion</p>
+<ul>
+<li>Mozilla 1.4 &#8211; Passed</li>
+<li>Opera 7.2 &#8211; Passed</li>
+<li>Opera before 7.2 &#8211; <span style="color:red">Failed</span></li>
+<li>IE6Sp1 &#8211; <span style="color:red">Failed</span></li>
+</ul>
+<p>Oh&#8230; I almost forgot (IE Rant #4)</p>

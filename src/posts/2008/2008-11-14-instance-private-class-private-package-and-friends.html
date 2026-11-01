@@ -1,0 +1,230 @@
+---json
+{
+  "title": "Instance private, class private, package and friends",
+  "date": "2008-11-14T23:47:04-08:00",
+  "permalink": "/archives/2008/11/14/23.47.04/",
+  "tags": [
+    "JavaScript"
+  ],
+  "comments": [
+    {
+      "id": "103679",
+      "author": "chris",
+      "url": "http://www.aleto.ch",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>This solves not really what you mention as disadvantage of the straight forwarded approach: for each new instance of A you create a new closure in the &#8216;setPrivate&#8217; call, meaning &#8216;obj._getPrivateWithKey = function(key)&#8217; is always a new copy.</p>"
+    },
+    {
+      "id": "103681",
+      "author": "Andrew Dupont",
+      "url": "http://andrewdupont.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>It&#8217;s quite refreshing to see someone demonstrate a quirky feature of JavaScript, but ultimately come to the conclusion that it&#8217;s simply not worth the effort. Things can be cool but useless. Good job.</p>"
+    },
+    {
+      "id": "103682",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Chris: With the given solution each instance of an object gets 1 closure to hide the state. Compare this with the other solution where you get one closure per instance and method, and these function objects are usually a lot bigger in practice. 2*n vs n*(m + 1) where n is the number of instances and m is the number of methods per object.</p>"
+    },
+    {
+      "id": "103683",
+      "author": "chris",
+      "url": "http://www.aleto.ch",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I see, you&#8217;re right.</p>"
+    },
+    {
+      "id": "103686",
+      "author": "henrah",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Another problem with this model is that the encapsulation is relatively easy to break. Even though the value of `KEY` is hidden inside a closure, this value gets passed into the obj._getPrivateWithKey() method every time it is called, and by overriding this method on a single instance of A, you can obtain the key object and gain access to the internal state of all other instances of A.</p>\n<p>I don&#8217;t think this is a shortcoming of Erik&#8217;s particular example implementation, but rather an inescapable limitation of encapsulation in javascript. No matter how private data is stored, methods on an object need to communicate changes in state to each other. Either this is done with side-effects on variables inside an individual closure for that instance, which incurs the cost of redeclaring all methods upon construction; or else the state is communicated by calling an externally-visible method on the object, in which case it is impossible to guarantee the method has not been redefined. There are tricks for attempting to guarantee the integrity of an object, and there are still other tricks to surreptitiously break its integrity.</p>\n<p>Ultimately, you have to either trust access conventions, enforce them with a capabilities-model preprocessor, or just use lexical closures which are the only real data hiding in the language. =)</p>"
+    },
+    {
+      "id": "103687",
+      "author": "Kevin Le",
+      "url": "http://kevin-le.appspot.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik,</p>\n<p>I have the following observations:</p>\n<p>- Friends feature in C++ is almost useless.  One can write solid OO C++ without ever having to use friends.  But this is not important if you can and already make it happen for free with your technique.</p>\n<p>- What&#8217;s more important is: do I need to have boiler plate for each object, i.e.<br />\nvar A;<br />\n(function() {<br />\n  var KEY = {};<br />\n  A = &#8230;;<br />\n  &#8230;<br />\n})();</p>\n<p>var B;<br />\n(function() {<br />\n  var KEY = {};<br />\n  B = &#8230;;<br />\n  &#8230;<br />\n})();</p>\n<p>Is there a way improve so that you would need the boiler plate code only once?</p>\n<p>- Have you thought about turning this into protected, and use it in JavaScript inheritance?  I think this could be useful (at least for me) if there&#8217;s not too much boiler plate code that gets in the way.</p>"
+    },
+    {
+      "id": "103690",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>henrah: You are correct. Like you said, anyone can override _getPrivateWithKey to get access to the private key. Doh!</p>"
+    },
+    {
+      "id": "103693",
+      "author": "Alan Pearce",
+      "url": "http://alttag.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>The technique below creates the guessPassword method on the Cartman objects prototype and keeps the &#8220;secret&#8221; variable private while only creating it once.</p>\n<p>function Cartman(){<br />\n\t//This is called only for the first instance<br />\n\tvar secret = &#8216;Tea party&#8217;;<br />\n\tCartman=function(){<br />\n\t\t//This becomes the new constructor<br />\n\t}<br />\n\tCartman.prototype.guessSecret = function(guess) {<br />\n  \t\treturn guess == secret;<br />\n\t};<br />\n\treturn new Cartman();<br />\n}</p>"
+    },
+    {
+      "id": "103705",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Alan: Interesting. That solution makes the secret shared between all instances which you probable do not want.</p>"
+    },
+    {
+      "id": "104298",
+      "author": "Duarte Cunha Leão",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>When I found your article I thought: &#8220;I&#8217;m gonna give up, someone has already tried it and failed!&#8221; The pattern you present I also got to it, and also found it was flawed&#8230;<br />\nBut I am so stubborn&#8230;And continued trying new variants of the pattern.<br />\nI finally found a way to achieve private instance state (and with normal prototype methods). Check it out: <a href=\"http://www.codeproject.com/KB/ajax/SafeFactoryPattern.aspx\" rel=\"nofollow\">http://www.codeproject.com/KB/ajax/SafeFactoryPattern.aspx</a></p>"
+    },
+    {
+      "id": "104301",
+      "author": "ildar",
+      "url": "http://with-love-from-siberia.blogspot.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>JavaScript is special programming language with own features. I don&#8217;t see urgent reasons to embed features from other languages. But if you really want or you need implement privates to your classes, you need strongly think &#8212; do you really this feature. Suggested examples with inner functions are weird and ugly because you create the public method to access to privates. Just you cover real privates with public method. I don&#8217;t have objection if you really need this. I can suggest the simpler code:</p>\n<p>// Example 1<br />\nfunction A()<br />\n{<br />\n\tvar privates = {};<br />\n\tthis.getPrivates = function()<br />\n\t{<br />\n\t\treturn privates;<br />\n\t};<br />\n};</p>\n<p>A.prototype.setX = function(x)<br />\n{<br />\n\treturn this.getPrivates().x = x;<br />\n};</p>\n<p>A.prototype.getX = function()<br />\n{<br />\n\treturn this.getPrivates().x;<br />\n};</p>\n<p>// Example 2<br />\nfunction A()<br />\n{<br />\n\tthis.getPrivates = function()<br />\n\t{<br />\n\t\treturn arguments.callee.privates = arguments.callee.privates || {};<br />\n\t};<br />\n};</p>\n<p>A.prototype.setX = function(x)<br />\n{<br />\n\treturn this.getPrivates().x = x;<br />\n};</p>\n<p>A.prototype.getX = function()<br />\n{<br />\n\treturn this.getPrivates().x;<br />\n};</p>\n<p>Of course, we declare an inner method in the both examples but this code is simpler and laconic.</p>"
+    },
+    {
+      "id": "104315",
+      "author": "hcg damla",
+      "url": "http://www.hcgdamlaturk.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Alan: Interesting. That solution makes the secret shared between all instances which you probable do not want.</p>"
+    },
+    {
+      "id": "104366",
+      "author": "Duarte Cunha Leão",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Ildar: How can x in: &#8220;a.getPrivates().x = 2&#8243; be considered private state?</p>"
+    }
+  ]
+}
+---
+<p>Update: This is flawed. See details at the end.</p>
+<p>This post was inspired by a&nbsp;<a href="http://www.robertnyman.com/2008/10/29/javascript-namespacing-an-alternative-to-javascript-inheritance/">post</a> that Robert Nyman wrote a while back. At the same time I was thinking about how to achieve private fields without the memory issues.</p>
+<p>JavaScript does not have private members as understood by a lot of other object oriented programming languages. However it can use closures to achieve the same effect. Below is a very typical code sample.</p>
+<pre><code>function Cartman() {
+  var secret = 'Tea party';
+  this.guessSecret = function(guess) {
+    return guess == secret;
+  };
+}</code></pre>
+<p>This is pretty straight forward and works because we define the public method in the scope of the local variable which now works like a private property. There are a pros and cons with this pattern:</p>
+<p>Pros: Simple and easy to understand.</p>
+<p>Cons: Very memory hungry since every instance needs its own function to encapsulate the local vars.</p>
+<p>Therefore most libraries that are object heavy uses a naming convention for private fields. The most common convention is to prefix the field with an underscore.</p>
+<pre><code>function Cartman() {
+  this._secret = 'Tea party';
+}
+
+Cartman.prototype.guessSecret = function(guess) {
+  return guess == this._secret;
+};</code></pre>
+<p>Now all instances can share the methods but we lost the integrity. Anyone can read <code>_secret</code> of an instance.</p>
+<p>I&#8217;ve been playing around with hybrid models that allows methods to be shared but still allow real private members.</p>
+<p>My first idea was to use a closure outside the actual constructor and define a key there. Then basically store the private state in an object that is guarded by that key. This turns out to change the model from instance private to class private. This means that all instances of a class can access the private state of all other instances of that class. Some OOP do this intentionally. Java does this for example.</p>
+<p>The code for this quickly gets ugly but below is a working example.</p>
+<pre><code>// Define variable outside anonymous block. Will be set inside the block.
+var A;
+(function() {
+  var KEY = {};
+
+  /**
+   * Helper function to get the private state object.
+   * @param {!Object} obj The object to get the private state for.
+   * @return {!Object} The private state object.
+   */
+  function getPrivate(obj) {
+    return obj._getPrivateWithKey(KEY);
+  }
+  
+  /**
+   * Store the private state object in a closure.
+   * @param {!Object} obj The object
+   * @param {!Object} state The state.
+   */
+  function setPrivate(obj, state) {
+    // Add a convenience method.
+    obj._getPrivateWithKey = function(key) {
+      if (key === KEY) {
+        return state;
+      }
+      throw Error('Permission denied');
+    };
+  }
+
+  // Set the external variable here.
+  A = function (a) {
+    var P = {
+      a: a
+    };
+    setPrivate(this, P);
+  };
+
+  A.prototype.getA = function() {
+    return getPrivate(this).a;
+  };
+})();</code></pre>
+<p><a href="/playground/private2.html">Try it</a>.</p>
+<p>This works because the object is associated with the key inside <code>setPrivate</code> using a closure. The function <code>getPrivate</code> which uses the <code>KEY</code> is only visible inside the anonymous function scope and therefore only code inside the anonymous function can get access to the private state.</p>
+<p>This actually leads to any code inside the anonymous function being able to see the private state of an object. You can therefore use this concept to allow different classes defined within the same anonymous function scope to see each others private state. This can be treated as a sealed package &#8212; a package that cannot be reopened after it has been closed.</p>
+<p>We can take this concept one step further and add support for C++ style friends by giving away our key to someone else. Something like:</p>
+<pre><code>var A;
+(function() {
+  var KEY = {};
+  A = ...;
+
+  var friendKeys = {};
+  A.addFriend = function(id, key) {
+    friendKeys[id] = key;
+  };
+
+  function getFriendPrivate(obj, id) {
+    return obj._getPrivateWithKey(friendKeys[id]);
+  }
+
+  A.prototype.accessFriendPrivate = function(obj) {
+    return getFriendPrivate(obj).b;
+  };
+})();
+
+var B;
+(function() {
+  var KEY = {};
+  B = ...;
+  A.addFriend('B', KEY);
+})();</code></pre>
+<p><a href="/playground/friend.html">Try it</a>.</p>
+<p>Now instances of A can access the private state of instances of B.</p>
+<h3>Conclusion</h3>
+<p>Is this really useful? I would say no. It adds too much boiler plate code without enough real gain. A lot of people try to apply known concepts from languages like Java and apply them to JavaScript. If you really need to be able to hide the state then I would use the instance private pattern first used in this post. It is easy to write and easy to understand and does not have a lot of boiler plate code. However, I would only use it where hiding the state really matters. In most cases it doesn&#8217;t. For example, Gmail was written without any true private members. We just use a naming convention.</p>
+<p>This also brings up a related topic which is using JS as an object capability language and Doug Crockford made an <a href="http://www.slideshare.net/webdirections/douglas-crockford-ajax-security-presentation">excellent presentation</a> about this a while back.</p>
+<h3>Update</h3>
+<p>henrah pointed out that this model is flawed since the key leaks. Anyone can override <code>_getPrivateWithKey</code> to get access to the key.</p>

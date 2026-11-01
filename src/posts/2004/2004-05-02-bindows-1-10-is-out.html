@@ -1,0 +1,60 @@
+---json
+{
+  "title": "Bindows 1.10 is Out",
+  "date": "2004-05-02T17:58:01-08:00",
+  "permalink": "/archives/2004/05/02/17.58.01/",
+  "tags": [
+    "Bindows",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "772",
+      "author": "Brian R. James",
+      "url": "http://www.alphafilter.com/go.foo/profile/?uid=67/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik, why go through all the hassle of creating pre-generated stubs (requiring python no less) for your v1.10 web service calls?  Would it not be more elegant to parse the WDSL at runtime to build the method list?  Admittedly, the app will take a slight performance hit while runtime parsing the WDSL, but you&#8217;ll be guaranteed to always have an updated web service mapping.</p>"
+    },
+    {
+      "id": "773",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I don&#8217;t know how much to say about this? The stub generates classes with methods names taken from the WSDL. However, the generated class still fetches the WSDL at runtime. I think that the generated classes should not download the WSDL again since we&#8217;ve already done the heavy work of parsing the WSDL&#8230; And the stubs do not hide the dirty parts of the MS web service behavior.</p>\n<p>A have lots of opponions about the WS generator but I prefer to keep these comments away from the public.</p>\n<p>Hopefully we will get it right the next time.</p>"
+    },
+    {
+      "id": "774",
+      "author": "Dylan Greene",
+      "url": "http://www.DylanGreene.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Congratultions on the new release!</p>"
+    },
+    {
+      "id": "775",
+      "author": "Darrell Rivers",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Eric,<br />\nWhere can I see an example of a treeview like the one Ilan Zisser did at <a href=\"http://www.bindows.net/bindows/samples/mysqlview/\" rel=\"nofollow\">http://www.bindows.net/bindows/samples/mysqlview/</a>?</p>"
+    },
+    {
+      "id": "2647",
+      "author": "Betty Bo",
+      "url": "http://www.akkus.jseek.de",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Really good work. I found a lot of profound information which can help me to go on. Thanks for all this input.</p>"
+    }
+  ]
+}
+---
+<p>Yup, on a Sunday. I don&#8217;t know why we said that we were going to release this on a Sunday but you got to keep what you promise.</p>
+<p>The most interesting part of <a href="http://www.bindows.net">Bindows 1.10</a> is the new tree view control. I was personally pretty stoked when I got a DOM document to work as the data model for the tree view. There is a <a href="http://www.bindows.net/bindows/samples/applauncher/">test application</a> (TreeView4.xml) that basically produces a tree like the one in the Mozilla DOM Inspector. This was the reason I was asking about <a href="/archives/2004/04/01/21.45.03/">MSXML GetHashCode</a> a while back. I ended up doing an ugly O(n) solution for MSXML where in Mozilla I could do a trivial O(1) solution. Go Moz!</p>

@@ -1,0 +1,141 @@
+---json
+{
+  "title": "And and Or in JS",
+  "date": "2005-07-11T23:35:49-08:00",
+  "permalink": "/archives/2005/07/11/23.35.49/",
+  "tags": [
+    "JavaScript",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "5007",
+      "author": "Robert Nyman",
+      "url": "http://www.robertnyman.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p><code>var el = e.target || e.srcElement;</code></p>\n<p>Hmm, that was interesting. Guess I never thought of it that way, I&#8217;ve always used the ternary expression you showcased.</p>\n<p>Would you say that the OR operator is good (better) practice in that case?</p>"
+    },
+    {
+      "id": "5008",
+      "author": "M. Schopman",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>As always, it depends. I personally tend to use the ternary and the shorthand ternary as little as possible since it makes code harder to understand, but the OR operator is almost always used in constructors where I set private members based on the arguments provided.</p>\n<p>config = {<br />\n  defaultValue : &#8216;my default value&#8217;<br />\n}</p>\n<p>function instance(value, parentNode){<br />\n   this.value = value || config.defaultValue;<br />\n   this.parentNode = parentNode || document.getElementsByTagName(&#8216;BODY&#8217;)[0];<br />\n}</p>"
+    },
+    {
+      "id": "5009",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I would second Micha here. Or is commonly suitable for assignments. These thing can be a bit hard to understand if used in more complex cases.</p>"
+    },
+    {
+      "id": "5012",
+      "author": "Robert Nyman",
+      "url": "http://www.robertnyman.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>When it comes to ternary expressions, I agree. Depends on how complex it is.<br />\nThe example in your post is ok, I think, but when you have more options it&#8217;s not the best way to go.</p>\n<p>For example, this is not desirable for me, <code>if...else</code> would be better in this case:</p>\n<p><code>var el = (e.target)? (bIsTuesday)? e.target : e.keyCode : e.srcElement;</code></p>"
+    },
+    {
+      "id": "5013",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Well, you usually use || if one of the alternative objects are avaialable. Ternary expression are useful but for different reasons. I agree that nesting ?: is usually a bad idea.</p>"
+    },
+    {
+      "id": "5014",
+      "author": "Jerem",
+      "url": "http://www.wdonline.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>It usually gets me in trouble (or I&#8217;m told it&#8217;s not proper)&#8230; but if it saves me lines, I run with it.  I have a line like this in one of my scripts:</p>\n<p>this.node  = oNode || false;<br />\nthis.value = sValue || (this.node &amp;&amp; this.node.text) || false;</p>\n<p>I don&#8217;t have a problem reading it, but that&#8217;s just me.</p>"
+    },
+    {
+      "id": "5015",
+      "author": "Jeremy",
+      "url": "http://www.wdonline.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>And I can&#8217;t even type my own effin&#8217; name.  hahaha</p>"
+    },
+    {
+      "id": "5273",
+      "author": "Patrick Corcoran",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I did some basic performance tests iterating over 1,000,000 iterations of each syntax, and no performance difference between the two syntaxes was noticeable.</p>\n<p>I would guess from this that they are identical after &#8220;compilation&#8221;.</p>"
+    },
+    {
+      "id": "5325",
+      "author": "Alberto",
+      "url": "http://www.unitedscripters.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>var el = e.target || e.srcElement;</p>\n<p>Ternary still looks clearer. Yet this one has always had its appeal.<br />\nThe only thing I always wondered about these approaches is: has anyone found a reliable way to benchamrk the both of them and see what type of performance gain there can be- if any?<br />\nThat is, without having to wait 2 hours (which no js interpreter would allow) before having a meaningful difference.</p>"
+    },
+    {
+      "id": "5329",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I don&#8217;t think you need to care about the performance here. The || operator should be slightly faster but compared to the slow DOM code browsers have it is just a drop in the ocean.</p>\n<p>The expressions are not identical because that would break semantics. When using the ternary operator the expression is executed twice. Here is a test case that shows that they are different:</p>\n<p>var c = 0;<br />\nfunction f() {<br />\n   return c++;<br />\n}</p>\n<p>var a = f() || &#8216;a&#8217;; // &#8216;a&#8217;<br />\nvar b = f() || &#8216;b&#8217;; // 1</p>\n<p>// reset<br />\nc = 0;</p>\n<p>a = f() ? f() : &#8216;a&#8217;; // &#8216;a&#8217;<br />\nb = f() ? f() : &#8216;b&#8217;; // 2</p>"
+    },
+    {
+      "id": "5382",
+      "author": "Theodor Zoulias",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>try {<br />\n  a<br />\n} catch(e) {<br />\n  alert(e)<br />\n}</p>\n<p>IE: [object Error]<br />\nFF: ReferenceError: a is not defined<br />\n&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />\ntry {<br />\n  throw &#8216;my error&#8217;<br />\n} catch(e) {<br />\n  alert(e.message)<br />\n}</p>\n<p>IE: undefined<br />\nFF: undefined<br />\n&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />\ntry {<br />\n  a<br />\n} catch(e) {<br />\n  alert(e.description || e.message || e)<br />\n}</p>\n<p>IE: &#8216;a&#8217; is undefined<br />\nFF: a in not defined</p>"
+    },
+    {
+      "id": "5384",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Theodor: I&#8217;m not sure what that was an answer to but those are some interesting code snippets. Here is another one:</p>\n<p>try {<br />\n   throw new Error(&#8220;my error&#8221;); // new can be omitted<br />\n} catch(e) {<br />\n   alert(e.message)<br />\n}</p>\n<p>IE: my error<br />\nFF: my error<br />\nOpera: my error</p>"
+    },
+    {
+      "id": "5386",
+      "author": "Theodor Zoulias",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Interesting. I&#8217;ve only used Error constructor server-side, with JScript. But is cross-browser supported? It seems that IE5 knows nothing about property &#8220;message&#8221; and returns undefined. <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" />  My purpose was just to give an example where OR operator becomes handy. Saves bytes too!</p>"
+    }
+  ]
+}
+---
+<p>The logical and (&amp;&amp;) and the logical or (||) are two really useful operators in JS. The following holds true:</p>
+<ul>
+<li><code>a || b</code> results in <code>a</code> if <code>Boolean(a) == true</code>, otherwise <code>b</code></li>
+<li><code>a &amp;&amp; b</code> results in <code>b</code> if <code>Boolean(a) == true</code>, otherwise <code>a</code></li>
+</ul>
+<p>Using this one can often simplify expression a lot. For example:</p>
+<pre><code>var el = e.target ? e.target : e.srcElement;</code></pre>
+<p>can be written as</p>
+<pre><code>var el = e.target || e.srcElement;</code></pre>
+<p>And using <code>&amp;&amp;</code> we can make sure that an object exists before we access a field:</p>
+<pre><code>var el = document.getElementById &amp;&amp; document.getElementById("my-el");</code></pre>

@@ -1,0 +1,19 @@
+---
+layout: base.njk
+title: Archives
+permalink: /archives/
+bodyClass: archive
+eleventyExcludeFromCollections: true
+---
+<h2 class="page-title">All <span>{{ collections.posts.length }} posts</span></h2>
+
+<div class="archive-index">
+{% for y in collections.years %}
+	<h3><a href="/archives/{{ y.year }}/">{{ y.year }}</a></h3>
+	<ul>
+	{% for post in y.posts %}
+		<li><span class="archive-date">{{ post.date | dateFormat("d MMM") }}</span> <a href="{{ post.url }}">{{ post.data.title | safe }}</a></li>
+	{% endfor %}
+	</ul>
+{% endfor %}
+</div>

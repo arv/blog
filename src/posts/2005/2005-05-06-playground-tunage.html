@@ -1,0 +1,81 @@
+---json
+{
+  "title": "playground/tunage",
+  "date": "2005-05-06T12:46:22-08:00",
+  "permalink": "/archives/2005/05/06/12.46.22/",
+  "tags": [
+    "JavaScript",
+    "Software",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "2950",
+      "author": "Micha Schopman",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Should JSON be compared to WDDX ? If I look at the type of output it is very much WDDX alike. </p>"
+    },
+    {
+      "id": "2951",
+      "author": "hzr",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>What about turning the artist and album into links, pointing to their respective pages at allmusic.com?</p>"
+    },
+    {
+      "id": "2952",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>One thing at a time <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";-)\" class=\"wp-smiley\" />  I have no experience with allmusic.com. I did take a quick glance at amazon to see if one could easily link there. I&#8217;ll see what kind of services allmusic.com provides.</p>"
+    },
+    {
+      "id": "2953",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I checked out allmusic.com and it seems pretty nice (IMDB for music). However, I could not figure out how to link to specific pages.</p>"
+    },
+    {
+      "id": "2954",
+      "author": "hzr",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>It takes this form: <a href=\"http://www.allmusic.com/cg/amg.dll?SQL=ARTIST&#038;OPT1=1&#038;Submit=Go&#038;P=amg\" rel=\"nofollow\">http://www.allmusic.com/cg/amg.dll?SQL=ARTIST&#038;OPT1=1&#038;Submit=Go&#038;P=amg</a></p>\n<p>However, there are sometimes problems when there are &#8220;special&#8221; characters and so on, where it goes to a search page instead.</p>\n<p>discogs.com seems to handle this better though, at least the few I tested.</p>"
+    }
+  ]
+}
+---
+<p>Since I&#8217;m now a proud <a href="http://www.musikcube.com/">musikCube</a> user I thought I would use one of its nice feature, called Tunage, to display the currently playing song here on my weblog. It sounded fun and most importantly small enough to do in a few hours. I had a pretty clear view of what I wanted in the end.</p>
+<p>I wanted:</p>
+<ul>
+<li>A Javascript object that had getters for Artist, Album, title and more</li>
+<li>The object should fire a change event when the currently playing song changes. Allowing the display of the currently playing song to be really live. No damn page reloads here!</li>
+</ul>
+<p>Simple enough? So lets se how this works. It all starts with musikCube doing a <code>GET</code> to the following address:</p>
+<pre><code>/playground/tunage/?action=add&#038;password=XXX&#038;artist=$ARTIST&#038;album=$ALBUM&#038;title=$TITLE&#038;duration=$DURATION</code></pre>
+<p>On the server side this is then stored in a data base along with the current time. This is the usual db juggling and nothing to see here. So lets go back to the client side for a while.</p>
+<p>The js class has a few properties with getters but the most important one is the <code>uri</code> property. This tells where the information about the currently playing song can be found. The client is using an <code>XMLHttpRequest</code> and the server uses <a href="http://json.org"><abbr title="JavaScript Object Notation">JSON</abbr></a> to <a href="http://pear.php.net/pepr/pepr-proposal-show.php?id=198">serialize a PHP object to a js file</a>. The text of the file is then <code>eval</code>ed. The returned js file can be seen at:</p>
+<p><a href="/playground/tunage/?action=currentlyplaying">/playground/tunage/?action=currentlyplaying</a></p>
+<p>The client side object then checks the remaining time and it schedules a reload for a later time.</p>
+<p>Basic usage:</p>
+<pre><code>var t = new Tunage;
+t.setUri("http://..../?action=currentlyplaying");
+t.onchange = updateCurrentlyPlaying;</code></pre>
+<p>Here are two basic demos:</p>
+<p><a href="/playground/tunage/currentlyplaying.html">/playground/tunage/currentlyplaying.html</a></p>
+<p id="tunage-text-demo">
+<p><script type="text/javascript" src="/playground/tunage/tunage.js"></script><script type="text/javascript" src="/playground/tunage/tunage-text.js"></script><br />
+<script type="text/javascript">/*< ![DATA[*/ bindTunageToElement('tunage-text-demo'); /*]]&gt;*/</script></p>
+<p>Conclusion: I&#8217;ve used some tried and true, and quite hyped methods like JSON and that Dutch city one. Unlike XMLHttpRequest, JSON is fairly new to me as a data format. I must say that it is really superior to XML when it comes to web applications. Although finding the information in the XML DOM is easy it is quite tedious and requires quite some code for something that you get for free in JSON. Not only that, the execution time to read the JSON is more or less instant, where reading huge XML files can be a real performance issue.</p>

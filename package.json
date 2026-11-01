@@ -1,0 +1,27 @@
+{
+  "name": "arv-blog",
+  "version": "1.0.0",
+  "description": "arv-o-matic — The Weblog of Erik Arvidsson, rebuilt with Eleventy",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "start": "serve _site -l tcp://0.0.0.0:${PORT:-3000}"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arv/blog.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "serve": "^14.2.6"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.7",
+    "@11ty/eleventy-plugin-rss": "^2.0.4",
+    "luxon": "^3.7.2"
+  }
+}

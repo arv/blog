@@ -1,0 +1,65 @@
+---json
+{
+  "title": "Block Scope",
+  "date": "2011-12-30T00:00:27-08:00",
+  "permalink": "/archives/2011/12/30/00.00.27/",
+  "tags": [
+    "JavaScript",
+    "Chrome",
+    "JavaScript"
+  ],
+  "comments": []
+}
+---
+<p>Did you know that ES5.1 does not support function declarations inside blocks? Browsers do allow it but they do not agree on the semantics. For ES Harmony we are specifying the semantics for <a hre="http://wiki.ecmascript.org/doku.php?id=harmony:block_functions">functions inside blocks</a>. Functions inside block use <code>let</code> scope, which means that they are limited to the current block scope.</p>
+<pre><code>function f() { console.log('outer'); }
+
+{
+  function f() { console.log('inner'); }
+  f();  // logs 'inner'
+}
+f();  // logs 'outer'
+</code></pre>
+<p>The <a href="http://wiki.ecmascript.org/doku.php?id=harmony:block_scoped_bindings">block scoped bindings</a> proposal also covers <a href="http://wiki.ecmascript.org/doku.php?id=harmony:let<br />
+"><code>let</code></a> and <a href="http://wiki.ecmascript.org/doku.php?id=harmony:const<br />
+"><code>const</code></a>. The <code>let</code> binding is like a <code>var</code> except that its scope is limited to the current block. <code>const</code> is like let but it requires an initializer and can only be written to once.</p>
+<pre><code>var functions = [];
+for (var i = 0; i &lt; 5; i++) {
+  var x = i;
+  functions.push(function() {
+    alert(x);
+  });
+}
+functions[0]();
+</code></pre>
+<p>The code above alerts <code>5</code> because that is what x is when the function is called. Now lets change the inner <code>var</code> to a <code>let</code>.</p>
+<pre><code>var functions = [];
+for (var i = 0; i &lt; 5; i++) {
+  let x = i;
+  functions.push(function() {
+    alert(x);
+  });
+}
+functions[0]();
+</code></pre>
+<p>This now alerts <code>0</code> since every iteration gets a fresh local variable.</p>
+<pre><code>const PI = 3.14159265;
+// ...
+PI = 'Apple Pie';  // throws because PI cannot be reassigned to.
+</code></pre>
+<p><!--</p>
+<p>http://wiki.ecmascript.org/doku.php?id=harmony:block_scoped_bindings</p>
+<p>http://wiki.ecmascript.org/doku.php?id=harmony:let</p>
+<p>http://wiki.ecmascript.org/doku.php?id=harmony:const</p>
+<p>http://wiki.ecmascript.org/doku.php?id=harmony:block_functions</p>
+<p>--></p>
+<p>To use these you currently need to use strict mode.</p>
+<pre><code>'use strict';
+// ...
+
+// or
+function f() {
+  'use strict';
+  // ...
+}
+</code></pre>

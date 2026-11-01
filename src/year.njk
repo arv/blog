@@ -1,0 +1,19 @@
+---
+layout: base.njk
+pagination:
+  data: collections.years
+  size: 1
+  alias: y
+permalink: "/archives/{{ y.year }}/"
+eleventyComputed:
+  title: "{{ y.year }}"
+bodyClass: archive date
+eleventyExcludeFromCollections: true
+---
+<h2 class="page-title">Archive: <span>{{ y.year }}</span></h2>
+
+<div class="post-list">
+{% for post in y.posts %}
+	{% include "post-list-item.njk" %}
+{% endfor %}
+</div>

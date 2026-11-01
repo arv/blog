@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Animating using CSS Transitions</title>
+<style>
+
+
+.card {
+  position: absolute;
+  margin: 1em;
+  padding: 0.5em;
+  min-height: 20em;
+  min-width: 30em;
+  background: white;
+  border: 1px solid black;
+  -webkit-box-shadow: black 3px 3px 5px;
+
+  z-index: 0;
+  opacity: 0;
+
+  -webkit-transition-property: -webkit-transform, opacity;
+  -webkit-transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-in-out;
+}
+
+.slow .card {
+  -webkit-transition-duration: 5s;
+}
+
+.card.current {
+  opacity: 1.0;
+  -webkit-transform: scale(1.0);
+  z-index: 1;
+}
+
+.card.next {
+  -webkit-transform: scale(0.66);
+}
+
+.card.previous {
+  -webkit-transform: scale(1.5);
+}
+
+</style>
+<script>
+
+function print(s) {
+  var el = document.getElementById('out');
+  el.textContent = String(s);
+}
+
+function $(s) {
+  return document.querySelector(s);
+}
+
+var currentCard = 0;
+
+function setClassName(i, c) {
+  var el = $('#test' + i);
+  if (el) {
+    el.className = 'card ' + c;
+  }
+}
+
+function fowardOneCard() {
+  currentCard++;
+  setClassName(currentCard - 1, 'previous');
+  setClassName(currentCard, 'current');
+  setClassName(currentCard + 1, 'next');
+  console.log(currentCard);
+}
+
+function backwardOneCard() {
+  if (currentCard <= 0) return;
+  currentCard--;
+  setClassName(currentCard - 1, 'previous');
+  setClassName(currentCard, 'current');
+  setClassName(currentCard + 1, 'next');
+  console.log(currentCard);
+}
+
+function makeSlow() {
+  document.body.className = 'slow';
+}
+
+function makeNormal() {
+  document.body.className = '';
+}
+
+document.onkeydown = function(e) {
+  switch (e.keyIdentifier) {
+    case 'Right':
+      fowardOneCard();
+      break;
+    case 'Left':
+      backwardOneCard();
+      break;
+    case 'Shift':
+      makeSlow();
+      break;
+  }
+};
+
+document.onkeyup = function(e) {
+  switch (e.keyIdentifier) {
+    case 'Shift':
+      makeNormal();
+      break;
+  }
+};
+
+</script>
+</head>
+<body>
+
+<pre id=out>&nbsp;</pre>
+
+<script>
+
+function createCard(i) {
+  var el = document.createElement('div');
+  el.id = 'test' + i;
+  el.className = 'card';
+  el.innerHTML = writeSomeFiller(i);
+  document.body.appendChild(el);
+}
+
+function writeSomeFiller(n) {
+  var s = '<h2>Slide {$n}</h2>';
+  s += '<ul>';
+  for (var i = 0; i < 5; i++) {
+    s += '<li>Item {$n}.1';
+  }
+  s += '</ul>';
+  return s.replace(/{\$n}/g, n);
+}
+
+window.addEventListener('load', function(e) {
+  for (var i = 0; i < 20; i++ ) {
+    createCard(i);
+  }
+  document.querySelector('#test0').className = 'card current';
+  document.querySelector('#test1').className = 'card next';
+}, false);
+
+</script>
+</body>
+</html>

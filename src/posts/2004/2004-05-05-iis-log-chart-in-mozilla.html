@@ -1,0 +1,68 @@
+---json
+{
+  "title": "IIS Log Chart in Mozilla",
+  "date": "2004-05-05T18:39:55-08:00",
+  "permalink": "/archives/2004/05/05/18.39.55/",
+  "tags": [
+    "Bindows"
+  ],
+  "comments": [
+    {
+      "id": "782",
+      "author": "Dylan Greene",
+      "url": "http://www.DylanGreene.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>How about something like XSL-translation from VML to SVG for Mozilla users?</p>"
+    },
+    {
+      "id": "783",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Since SVG is not included in the default builds we cannot rely on it. And using a plugin is not an acceptable option (even if it was we&#8217;d stick to Flash due to its user base).</p>\n<p>We are using DOM to build the VML document so XSLT would not help much here since we need to direct manipulations of the graphs. Transforming the VML tree to an SVG tree would just leave us witt two unconnected trees and it would not be a very clean solution. Instead it would be better to just override the specific classes and create SVG element instead of VML elements. This is basically what we did with BiGraph2 where we create xhtml:divs instead of vml:rect elements.</p>"
+    },
+    {
+      "id": "5840",
+      "author": "Mike Reaves",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Erik;</p>\n<p>I&#8217;m trying to get my XP/IIS web server to serve SVG files in ASP pages.  Any ideas why my config isn&#8217;t working would be appreciated.  I have:</p>"
+    },
+    {
+      "id": "5841",
+      "author": "Mike Reaves",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Configured the MIME types for SVG and SVGZ.  I have a file that only writes to the browser, no animation &#8230; here&#8217;s the file </p>\n<p> It&#8217;s not really SVG!</p>"
+    },
+    {
+      "id": "5842",
+      "author": "Mike Reaves",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>That&#8217;s interesting, your web page interpeted the code I pasted into the text box.  I&#8217;ll send you the file if you want.</p>"
+    },
+    {
+      "id": "102805",
+      "author": "trisna",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>i have organization chart module in my application. it has data inside every position in organization chart. that data dynamically change if the database is changed. i use Vector Markup Language to make the chart. but i have one problem&#8230;..when i change the data, the view of the chart became unstructured. i thin it has to do with the IIS configuration. i hope u can help my please. tell me what&#8217;s wrong with my module. thanks</p>\n<p>regard</p>\n<p>Trisna</p>"
+    }
+  ]
+}
+---
+<p>I&#8217;ve updated the <a href="http://bindows.net/documentation/samples/">Bindows IIS Log Chart</a> to work in Mozilla. The fix included using <a href="http://www.bindows.net/documentation/api/BiGraph2.html">BiGraph2</a> for Mozilla and disabling the line chart <a href="http://www.bindows.net/documentation/api/BiToolBarRadioButton.html">buttons</a>/<a href="http://www.bindows.net/documentation/api/BiRadioButtonMenuItem.html">menu items</a>.</p>
+<p>Here is a tip for those of you who are using Firefox: To get the API page for a class in Bindows type the following in the address bar &#8220;<a href="http://www.google.com/search?q=Bindows API BiGraph&amp;btnI=I'm Feeling Lucky">Bindows API BiGraph</a>&#8221; and it will take you directly to the correct page. This works because Google indexes the API pages and Firefox is using Google&#8217;s I&#8217;m Feeling Lucky feature.</p>

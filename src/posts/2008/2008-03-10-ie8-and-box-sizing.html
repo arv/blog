@@ -1,0 +1,158 @@
+---json
+{
+  "title": "IE8 and box-sizing",
+  "date": "2008-03-10T21:48:10-08:00",
+  "permalink": "/archives/2008/03/10/21.48.10/",
+  "tags": [
+    "DHTML",
+    "Internet Explorer",
+    "JavaScript",
+    "Microsoft"
+  ],
+  "comments": [
+    {
+      "id": "102992",
+      "author": "Kris Kowal",
+      "url": "http://cixar.com/javascript",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>My apologies; I don&#8217;t see how the IE relationship between -ms-box-sizing and MsBoxSizing is an exception to the rule.  Is it your argument that it should be msBoxSizing or MsBoxSizing?  Does the former function not transform -moz-box-sizing to MozBoxSizing?  Does the latter function not transform -o-box-sizing to OBoxSizing?  Is the thesis rather that the browser-specific prefix should be elided?  Is it rather that toCamelCase should convert even these prefixed names to camelCase instead of TitleCase?</p>"
+    },
+    {
+      "id": "102993",
+      "author": "Alexander Kirk",
+      "url": "http://alexander.kirk.at/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@Kris: check the second link in the post where it says &#8220;-ms-box-sizing Attribute | msBoxSizing Property&#8221;<br />\nThey have a lowercase first letter instead of an uppercase one, so in Erik&#8217;s post there is a typo where MsBoxSizing should be spelled msBoxSizing (in his second piece of code, the variable i indicates the offset, and everything fits together again <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /><br />\nIn the end he is arguing that it should be MsBoxSizing. For sure it makes sense to have it all named in the same way, but I am just wondering if there is a definition on how to do it somewhere?<br />\nObviously for something like CSS font-size it is fontSize in JavaScript, so I can see where IE is coming from, though I agree with Erik more <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "102995",
+      "author": "Lucky",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Perhaps a more efficient method?<br />\n<code><br />\nfunction toCamelCase(s) {<br />\n  return s.replace(/\\-(\\w)/g, function(_, c, i) {<br />\n    return /*@cc_on i == 0 ? c : @*/ c.toUpperCase();<br />\n  });<br />\n}<br />\n</code></p>"
+    },
+    {
+      "id": "102996",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Lucky: I used an if statement instead of the ternary conditional operator for clarity&#8217;s sake and using a conditional comment would make it even more obscure.</p>"
+    },
+    {
+      "id": "102997",
+      "author": "Dean Edwards",
+      "url": "http://dean.edwards.name/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>It&#8217;s little things like this that make you realise that the IE developers exist in a tiny little world of their own.</p>"
+    },
+    {
+      "id": "102999",
+      "author": "Kris Kowal",
+      "url": "http://cixar.com/javascript",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@Erik &amp; Alexander: thanks for the clarifications.</p>"
+    },
+    {
+      "id": "103005",
+      "author": "Garrett",
+      "url": "http://googlesucks.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@kris </p>\n<p>I too am failing to see the reason why browser detection is necessary to convert to camel case.</p>\n<p>var toCamelCaseExp = /-([a-z])/, r = window.RegExp;<br />\nfunction toCamelCase(s) {<br />\nfor(var exp = toCamelCaseExp; exp.test(s); s = s.replace(exp, R.$1.toUpperCase()));<br />\nreturn s;<br />\n}</p>\n<p>console.log(toCamelCase(&#8220;-moz-border-radius&#8221;));</p>\n<p>I usually don&#8217;t find it necessary to do this because it&#8217;s possible to just use the camel-cased value from the start. </p>\n<p>document.defaultView.getComputedStyle(el, &#8221;).MozBorderRadius;</p>\n<p>Shorthand values in Mozilla always return the empty string, so it&#8217;s necessary to specify each one individually.</p>\n<p>var el = document.getElementById(&#8216;accel&#8217;),<br />\n    view = document.defaultView;<br />\nview.getComputedStyle(,&#8221;).MozBorderRadiusTopright;</p>\n<p>Regards,</p>\n<p>Garrett</p>"
+    },
+    {
+      "id": "103006",
+      "author": "Garrett",
+      "url": "http://googlesucks.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Correction:</p>\n<p>view.getComputedStyle(el,”).MozBorderRadiusTopright;</p>"
+    },
+    {
+      "id": "103007",
+      "author": "Garrett",
+      "url": "http://googlesucks.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Sorry, another correction:</p>\n<p>var toCamelCaseExp = /-([a-z])/, R = window.RegExp;<br />\nfunction toCamelCase(s) {<br />\n  for(; toCamelCaseExp .test(s); s = s.replace(toCamelCaseExp , R.$1.toUpperCase()));<br />\n  return s;<br />\n}</p>\n<p>toCamelCase(&#8220;-moz-border-radius&#8221;);</p>\n<p>MozBorderRadius</p>"
+    },
+    {
+      "id": "103008",
+      "author": "Garrett",
+      "url": "http://googlesucks.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I see now Alexander Kirk&#8217;s explanation &#8212; </p>\n<p>You&#8217;re saying that the IE property is msBoxSizing, and that this is undesirable. Your argument is that the property should be MsBoxSizing. Sorry, I didn&#8217;t get that at first.</p>\n<p>The problem with your patch &#8212; of using browser detection to provide a custom camelCase for IE &#8212; is that if you inform enough people to do this, it will gain adoption and then internet explorer will not be able to change without breaking existing sites. </p>\n<p>This will lead to developers who used this property blaming Microsoft, when it&#8217;s really partially the fault of the developer who used such techniques.</p>\n<p>Garrett</p>"
+    },
+    {
+      "id": "103019",
+      "author": "Andrew Dupont",
+      "url": "http://andrewdupont.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@Erik, Dean: File a bug! The process is quite open this time around. And beta 1 is nowhere near feature-complete.</p>\n<p>If you two are not in the technical beta, you ought to be. Send Pete LePage an e-mail and I&#8217;m sure he&#8217;ll agree.</p>"
+    },
+    {
+      "id": "103021",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Andrew: I&#8217;m pretty sure I filed one for &#8220;msInterpolationMode&#8221; when it was introduced to IE7.  I&#8217;ll file another one for &#8220;msBoxSizing&#8221; if it hasn&#8217;t been reported yet.</p>"
+    },
+    {
+      "id": "103550",
+      "author": "Ray",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>@Erik, from the time this has been written, IE8 is in Beta2 now and the extract from the link <a href=\"http://msdn.microsoft.com/en-us/library/cc196965(VS.85)\" rel=\"nofollow\">http://msdn.microsoft.com/en-us/library/cc196965(VS.85)</a>.aspx says<br />\n&#8212;-<br />\nThis property requires Internet Explorer to be in IE8 mode rendering. </p>\n<p>The -ms- prefix is optional. You can use box-sizing instead of -ms-box-sizing (and boxSizing instead of boxSizing), and the effect will be the same. As box-sizing is defined in the Cascading Style Sheets (CSS), Level 2 Revision 1 (CSS2.1) specification, that form is preferred.<br />\n&#8212;-<br />\nI really hope by the time, IE8 is released, it would iron out most if not all the inconsistencies</p>"
+    },
+    {
+      "id": "103551",
+      "author": "Raghu",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Further more:<br />\nCSS Improvements in Internet Explorer 8 is listed @<br />\n<a href=\"http://msdn.microsoft.com/en-us/library/cc304082(VS.85)\" rel=\"nofollow\">http://msdn.microsoft.com/en-us/library/cc304082(VS.85)</a>.aspx</p>\n<p>I am no big fan of MS and their IE with such lagging support for standards and in fact most of times, taking a different road compared to other browsers.</p>\n<p>Still IE8 seems by far, Microsoft&#8217;s intent to atleast reaching towards the standards.</p>"
+    }
+  ]
+}
+---
+<p>One of my top feature request for IE8 was for it to support <a href="http://www.w3.org/TR/css3-ui/#box-sizing">box-sizing</a>.  I&#8217;m happy to see that <a href="http://msdn2.microsoft.com/en-us/library/cc196965(VS.85).aspx">IE8 does support <code>box-sizing</code></a> although it has a annoying quirk.  The DOM property name is not correct.  The rule for translating CSS property names to DOM property names is to replace a dash followed by a character by the uppercase character. Using JavaScript it can be written like this:</p>
+<pre><code>function toCamelCase(s) {
+  return s.replace(/\-(\w)/g, function(_, c) {
+    return c.toUpperCase();
+  });
+}</code></pre>
+<p>Since the CSS property for <code>box-sizing</code> in IE8 is <code>-ms-box-sizing</code> the DOM property name <del datetime="2008-03-11T15:18:38+00:00">is</del> <ins datetime="2008-03-11T15:18:38+00:00">should be</ins> <code>MsBoxSizing</code>. The <code>-ms-</code> prefix is a defacto standard for non standard CSS properties and Firefox, WebKit and Opera has tons of <code>-moz-</code>, <code>-webkit-</code> and <code>-o-</code> respectively.</p>
+<p>We would therefore have to add a browser check in our function above:</p>
+<pre><code>function toCamelCase(s) {
+  return s.replace(/\-(\w)/g, function(_, c, i) {
+    if (MSIE &#038;&#038; i == 0) {
+      return c;
+    }
+    return c.toUpperCase();
+  });
+}</code></pre>
+<p>Not only does this require more code it also adds a mental obstacle and one more quirk to add to the already overflowing quirk-filled brains of developers world wide.</p>

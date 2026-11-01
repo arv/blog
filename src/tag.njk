@@ -1,0 +1,19 @@
+---
+layout: base.njk
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+permalink: "/archives/tag/{{ tag.slug }}/"
+eleventyComputed:
+  title: "{{ tag.name }}"
+bodyClass: archive tag
+eleventyExcludeFromCollections: true
+---
+<h2 class="page-title">Tag: <span>{{ tag.name | safe }}</span></h2>
+
+<div class="post-list">
+{% for post in collections.posts | filterByTag(tag.name) %}
+	{% include "post-list-item.njk" %}
+{% endfor %}
+</div>

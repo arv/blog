@@ -1,0 +1,66 @@
+---json
+{
+  "title": "Bindows 1.01",
+  "date": "2004-03-06T18:32:36-08:00",
+  "permalink": "/archives/2004/03/06/18.32.36/",
+  "tags": [
+    "Bindows"
+  ],
+  "comments": [
+    {
+      "id": "684",
+      "author": "Jim",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "March 24th, 2004 at 03:55",
+      "html": "<p>Hi Erik,<br />\nI tested out your Bindows and it is truly interesting and very attractive. However, one thing I couldn&#8217;t exactly see is why someone should use it? That is, it is definitely a useful tool, but you see there are many other solutions, like java applets, .net web forms, xul etc&#8230;</p>\n<p>This framework seems to be inappropriate for the web sites, because web sites has to work with various number of browsers. It seems to be it is way more expensive to use bindows for web sites (not the bindows license, but the amount of time you put into the development, cause you have to develop for two sets of browsers at least). If the web site owner targets the Internet Explorer, then I do believe it is a good solution, however I can not think of many web sites that require this much of complexity on the client side. That is if they develop something that works, it is still good for them. And also it seems that you have a more steep learning curve with Bindows and somewhat restricted by what you can do with it, cause there are not too much free articles for it. For example, if I choose to use normal HTML I can check out what other people do and quickly solve my problem, but if I choose Bindows I have to learn how to use it and restricted by what I have there. Also with normal HTML/DHTML I can extend or modify it anyway I want. </p>\n<p>If the Bindows target the internal networks, then I am wondering why not use java, .net web forms and so on. They seem to be more attractive for intranets. </p>\n<p>Finally, I wonder how can someone or a third party supply its own widgets for your framework. Is there a plan for it? Say can I produce one and sell as a third party? </p>\n<p>I think it is an excellent piece of work. In fact, nobody would believe that it is all done with dhtml. However, I couldn&#8217;t figure out where is the true value of this solution, cause it seems to be a world in its own, rather than part of DHTML itself. That is it uses DHTML, but nobody who is expert on DHTML claim to be an expert in Bindows, cause it has its own set of rules and logic. </p>\n<p>If you can bring some light to these concerns/questions I would be really happy. Cause I am puzzled on exactly how this excellent framework bring value. It is an excellent piece of work, there is no doubt about it, but why should someone use it. The only logical answer I was able to come up with is when someone wants to target IE 5.5 or later and they want to be as responsive as possible on the client side.</p>\n<p>Great inspiring work btw.</p>"
+    }
+  ]
+}
+---
+<p>A week ago we released Bindows 1.01. I haven&#8217;t posted anything about this earlier because I&#8217;ve been too busy. If you haven&#8217;t checked out Bindows since our first beta I think you&#8217;ll see a lot of interesting new things. The most interestion feature (IMHO) added during the beta phase was to allow the UI to be defined using XML. The XML  format is a direct mapping to the Bindows object model so if you define your own classes you can use them directly in the markup.</p>
+<pre><code>&lt;?xml version="1.0"?&gt;
+
+&lt;Application
+   xmlns:xhtml="http://www.w3.org/1999/xhtml"&gt;
+   &lt;Window caption="Bindows Markup" width="400" height="400"&gt;
+      &lt;SplitPane left="10" right="10" top="10" bottom="10"&gt;
+         &lt;MyButton foo="bar"&gt;
+            With &lt;xhtml:strong&gt;XHTML&lt;/xhtml:strong&gt; support
+         &lt;/MyButton&gt;
+         &lt;List&gt;
+            &lt;ListItem&gt;List Item 1&lt;/ListItem&gt;
+            &lt;ListItem&gt;List Item 2&lt;/ListItem&gt;
+            &lt;ListItem&gt;List Item 3&lt;/ListItem&gt;
+            &lt;ListItem&gt;List Item 4&lt;/ListItem&gt;
+         &lt;/List&gt;
+      &lt;/SplitPane&gt;
+   &lt;/Window&gt;
+   &lt;Resources&gt;
+      &lt;Script&gt;&lt;![CDATA[
+
+         function MyButton( s )
+         {
+            BiButton.call( this, s );
+            this.setBackColor( "red" );
+            this.setForeColor( "white" );
+         }
+
+         MyButton.prototype = new BiButton;
+
+         MyButton.prototype._foo = "";
+
+         MyButton.prototype.setFoo = function ( v )
+         {
+            this._foo = v;
+         };
+
+         MyButton.prototype.getFoo = function ()
+         {
+            return this._foo;
+         };
+
+      ]]&gt;&lt;/Script&gt;
+   &lt;/Resources&gt;
+&lt;/Application&gt;</code></pre>

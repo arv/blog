@@ -1,0 +1,222 @@
+---json
+{
+  "title": "Array Extras",
+  "date": "2005-06-05T17:53:19-08:00",
+  "permalink": "/archives/2005/06/05/17.53.19/",
+  "tags": [
+    "JavaScript",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "4111",
+      "author": "Emil",
+      "url": "http://me.eae.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>That indexOf method will prove quite useful.<br />\nNice to see updates to the JavaScript language (implementation) again. </p>"
+    },
+    {
+      "id": "4306",
+      "author": "M. Schopman",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I hope to see more improvements in future, according to specifications. I have seen an ECMA specification once (dunno if it was a draft or final) where they talked about full support for private/public/protected/virtual/constructors/destructors/classes etc. Such would really improve the acceptance as Javascript as a real language for fat client development. </p>"
+    },
+    {
+      "id": "4425",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Micha: See the JS2 link in the first paragraph.</p>"
+    },
+    {
+      "id": "4670",
+      "author": "Geoff Moller",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Many thanks for posting the external implementation. Extremely handy <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "4931",
+      "author": "Mark Wubben",
+      "url": "http://novemberborn.net/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Thanks for the update. The link to the docs for &#8216;every&#8217; is broken, though <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "5202",
+      "author": "David Flanagan",
+      "url": "http://www.davidflanagan.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>The functions other than indexOf() and lastIndexOf() are getting moved to Function.prototype instead of Array.prototype.</p>\n<p>See <a href=\"https://bugzilla.mozilla.org/show_bug.cgi?id=304828\" rel=\"nofollow\">https://bugzilla.mozilla.org/show_bug.cgi?id=304828</a></p>"
+    },
+    {
+      "id": "5203",
+      "author": "David Flanagan",
+      "url": "http://www.davidflanagan.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I recently proposed an Array.prototype.append() method at my own blog.<br />\nOne of the commenters complained that adding enumerable properties to Array.prototype will break any code that uses for/in on an array.</p>\n<p>This argument is very true for Object.prototype: we really can&#8217;t add method there.  But I&#8217;d never heard it expressed for Array.prototype.  It is true that one can use for/in to iterate through the indexes of an array.  But does anyone actually do this?  If someone does this do they deserve to have their code break?</p>"
+    },
+    {
+      "id": "5204",
+      "author": "David Flanagan",
+      "url": "http://www.davidflanagan.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I have to keep submitting comments because I love the little popup that appears to show me that my comment has been added at the bottom!</p>"
+    },
+    {
+      "id": "5209",
+      "author": "Nick Van Weerdenburg",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>After the last comment, I need to add a comment.</p>"
+    },
+    {
+      "id": "5224",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>David: Thanks for pointing me to that Bugzilla bug. Lot&#8217;s of interesting stuff going on there.</p>\n<p>Using a for in loop to loop over an array is incorrect and error prone. It is not too uncommon to see people use it and it shows that people are not aware that it does not really work. See <a href=\"/archives/2005/06/06/22.13.54/#comment-5132\" rel=\"nofollow\">/archives/2005/06/06/22.13.54/#comment-5132</a></p>"
+    },
+    {
+      "id": "12125",
+      "author": "Jeoff Hines",
+      "url": "http://n/a",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>You use the for&#8230;in to find the keys in a hash array:<br />\nvar a = new Array();<br />\na[\"key1\"] = &#8220;test&#8221;;<br />\na[\"key2\"] = &#8220;test&#8221;;</p>\n<p>for(var key in a)<br />\n   alert(key);</p>\n<p>will show you &#8220;key1&#8243; and &#8220;key2&#8243;. If you add prototypes to Array it will show the names of those functions too and thus break the for/in. I use associative arrays a lot (I like strings) so this is very important to me. If you can think of another way to extract the keys from an associative array then please elucidate because I would love to know! Otherwise, you should leave the built-in objects alone I think.</p>"
+    },
+    {
+      "id": "12128",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Jeoff: Why are you using an Array here? The feature you want is a feature of Object, which Array extends. It is equally correct/incorrect to use a RegExp as an Array.</p>\n<p>Correct?:</p>\n<p>var a = new RegExp();<br />\na[”key1″] = “test”;<br />\na[”key2″] = “test”;</p>\n<p>for(var key in a)<br />\n  alert(key);</p>\n<p>Correct!:</p>\n<p>var a = {};<br />\na[”key1″] = “test”;<br />\na[”key2″] = “test”;</p>\n<p>for(var key in a)<br />\n  alert(key);</p>"
+    },
+    {
+      "id": "12523",
+      "author": "Dan Dean",
+      "url": "http://www.dandean.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hi Erik,<br />\nThanks for putting this together and releasing, I find it very useful.</p>\n<p>A note regarding IE5 compatability (yes, I should probably forget about IE5!): I&#8217;ve found some good Function.call() and Function.apply() methods at <a href=\"http://www.browserland.org/scripts/dragdrop/\" rel=\"nofollow\">http://www.browserland.org/scripts/dragdrop/</a>. With the addition of these, all of the above methods seem to work in IE5, as long as this is added to the beginning of each that utilize f.call()</p>\n<p>var obj = (obj != null) ? obj : this;</p>\n<p>Do you see any problems with the addition of this?</p>"
+    },
+    {
+      "id": "12619",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Dan: Yes, that would be wrong. If obj is not passed it is supposed to use [[Global]] (or window in a browser context) as the value for this.</p>\n<p>I do not care about JScript 5 (shipped with IE50). It has so many ECMAScript bugs that it is ridicilus and it is holding back development in a lot of scenarios. You would be doing yourself a favor in not supporting it and getting users onto something better and more secure.</p>\n<p>(The same applies to Safari before like the current nightly build and I suggest not supporting anything but the latest version of Safari.)</p>"
+    },
+    {
+      "id": "20110",
+      "author": "Thomas Frank",
+      "url": "http://www.thomasfrank.se",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Brilliant! Thanks!</p>"
+    },
+    {
+      "id": "35595",
+      "author": "Johan Sundström",
+      "url": "http://ecmanaut.blogspot.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>More of a reflection than suggestion: testing for Array.prototype.forEach and friends this way rather than by way of Array.prototype.hasOwnProperty(&#8216;forEach&#8217;) will find Object.prototype.forEach when no Array specific implementation exists. This is probably still often what you want, assuming that the Object prototype internally handles different data types differently in sane manners, but once in a while it might not be.</p>"
+    },
+    {
+      "id": "52417",
+      "author": "Jeff Walden",
+      "url": "http://whereswalden.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Your code for Array.prototype.lastIndexOf has a bug in it: when the second argument is a negative number and the sum of that argument and the array&#8217;s length is less than zero, you might erroneously return 0 when searching for the first element in the array.  For example:</p>\n<p>[2].lastIndexOf(2, -5)</p>\n<p>&#8230;will return 0 with your code, when according to the function&#8217;s description it should return -1.  The fix should be to replace |Math.max(0, this.length + fromIndex)| with |this.length + fromIndex| in the lastIndexOf implementation.</p>\n<p>Also, don&#8217;t bother testing behavior in Firefox, because Firefox has this bug (and an indexOf bug which is a little harder to duplicate). I&#8217;m checking whether non-Firefox implementations demonstrate this and the other bug to evaluate how feasible it is to fix this behavior in point releases to stable Firefox versions.  (The bug is <a href=\"https://bugzilla.mozilla.org/show_bug.cgi?id=364104\" rel=\"nofollow\">https://bugzilla.mozilla.org/show_bug.cgi?id=364104</a> if you&#8217;re interested.)</p>"
+    },
+    {
+      "id": "52418",
+      "author": "Jeff Walden",
+      "url": "http://whereswalden.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Actually, let me backtrack for a second &#8212; I&#8217;m not sure the docs I was referencing were canonical.  I&#8217;ll get back with more details later&#8230;</p>"
+    },
+    {
+      "id": "52846",
+      "author": "Jan van Casteren",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Thank you for this handy script. One question: is there any reason to have the obj parameter in the copy method? </p>\n<p>See:</p>\n<p>Array.prototype.copy = function (obj) {<br />\n\treturn this.concat();<br />\n};</p>"
+    },
+    {
+      "id": "55699",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Jan: That is just a typo. You should remove that.</p>"
+    },
+    {
+      "id": "103036",
+      "author": "Patrick Kwinten",
+      "url": "http://quintessens.wordpress.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>thanks for the help, I had some problem with using prototype and defining arrays, some how using</p>\n<p>var tagMap= new Array()</p>\n<p>causes that prototype adds other elements to the array <img src=\"/wp-includes/images/smilies/icon_confused.gif\" alt=\":-?\" class=\"wp-smiley\" /> </p>"
+    }
+  ]
+}
+---
+<p>With the upcoming Firefox 1.1 release (and other browsers based on Gecko 1.8) things are starting to move in javascript land. During the early years of javascript a lot happend but then came the ambitious plans of<a href="http://www.mozilla.org/js/language/js20/">JS2</a> and the improvements to js just kind of died away for no reason. It seems Mozilla is finally taking some actions in this field and they&#8217;ve added a few very useful methods to <code>Array</code>:</p>
+<ul>
+<li><a href="http://developer-test.mozilla.org/docs/Core_JavaScript_1.5_Reference:Objects:Array:indexOf">indexOf</a></li>
+<li><a href="http://developer-test.mozilla.org/docs/Core_JavaScript_1.5_Reference:Objects:Array:lastIndexOf">lastIndexOf</a></li>
+<li><a href="http://developer-test.mozilla.org/docs/Core_JavaScript_1.5_Reference:Objects:Array:forEach">forEach</a></li>
+<li><a href="http://developer-test.mozilla.org/docs/Core_JavaScript_1.5_Reference:Objects:Array:filter">filter</a></li>
+<li><a href="http://developer-test.mozilla.org/docs/Core_JavaScript_1.5_Reference:Objects:Array:map">map</a></li>
+<li><a href="http://developer-test.mozilla.org/docs/Core_JavaScript_1.5_Reference:Objects:Array:some">some</a></li>
+<li><a href="http://developer-test.mozilla.org/docs/Core_JavaScript_1.5_Reference:Objects:Array:every">every</a></li>
+</ul>
+<p>Since not everyone is running nightly builds (or <a href="http://mozillazine.org/talkback.html?article=6708">Deer Park alpha 1</a>) I&#8217;m now <a href="/playground/arrayextras/">providing these methods</a> for anyone who finds them interesting.</p>
+<p>I&#8217;ve also added the following useful methods. These greatly benefits from the native implementation of <code>indexOf</code>:</p>
+<ul>
+<li><code>contains</code></li>
+<li><code>copy</code></li>
+<li><code>insertAt</code></li>
+<li><code>insertBefore</code></li>
+<li><code>removeAt</code></li>
+<li><code>remove</code></li>
+</ul>

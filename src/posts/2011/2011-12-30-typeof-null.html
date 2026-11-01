@@ -1,0 +1,49 @@
+---json
+{
+  "title": "typeof null",
+  "date": "2011-12-30T12:00:40-08:00",
+  "permalink": "/archives/2011/12/30/12.00.40/",
+  "tags": [
+    "JavaScript",
+    "Chrome",
+    "JavaScript"
+  ],
+  "comments": []
+}
+---
+<p>In ES5 <code>typeof null</code> evaluates to <code>'object'</code>. This quirk was one of the changes we wanted to fix in ES5 but at the time we agreed that we did not want any semantic changes. With Harmony there will be a way to opt in (TBD) so when you opt in we can now provide a better value for <code>typeof null</code>.</p>
+<pre><code>
+typeof null  // 'null'
+</code></pre>
+<p>In V8 with the Harmony flag turned on this changes all the <a href="http://wiki.ecmascript.org/doku.php?id=harmony:typeof_null"><code>typeof</code></a> expressions so beware and please update your JS libraries to be future compatible to handle this correctly. Something along the following lines should make your code work both in ES5 and in future versions of ES:</p>
+<pre><code>
+switch (typeof expression) {
+  case 'boolean':
+    ...
+    break;
+  case 'function':
+    ...
+    break;
+  case 'number':
+    ...
+    break;
+  case 'string':
+    ...
+    break;
+  case 'undefined':
+    ...
+    break;
+  default:  // object or null
+    var isNull = expression === null;
+    ...
+}
+
+// Bad, because it included null in old ES versions
+typeof object === 'object'
+
+// Good
+object === null
+</code></pre>
+<p><!--</p>
+<p>http://wiki.ecmascript.org/doku.php?id=harmony:typeof_null</p>
+<p>--></p>

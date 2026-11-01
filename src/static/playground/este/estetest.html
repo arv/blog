@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	 "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+
+.template-output {
+	background:	#ffe;
+}
+
+</style>
+<script type="text/javascript" src="este.js"></script>
+
+</head>
+<body>
+
+<h1>Demo</h1>
+
+<h2>Basic Template</h2>
+
+<p>The text below is inserted using a template</p>
+
+<script type="text/javascript">
+
+/*
+var jst = new TemplateEngine;
+jst.parse("hello <% for (var i =0; i < 10; i++) {%><%= \"world \" + i %>!<% } %>");
+alert(jst.expression)
+alert(jst.evaluate())
+*/
+
+function readTextFile(sUri) {
+	var xmlHttp;
+	if (window.XMLHttpRequest) {
+		xmlHttp = new XMLHttpRequest;
+	} else if (window.ActiveXObject) {
+		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlHttp.open("GET", sUri, false);
+	xmlHttp.send(null);
+	return xmlHttp.responseText;
+}
+
+//TemplateEngine.parse("<p>hello <% for (var i =0; i < 100; i++) {%><%-- this is a comment --%><%= \"world \" + i %>!<br><% } %></p>", document);
+
+TemplateEngine.parse(readTextFile("template.txt"), document);
+//document.write(TemplateEngine.parse(readTextFile("template.txt")));
+
+/*
+var jst = new TemplateEngine(readTextFile("templatetest.txt"));
+jst.parse();
+alert(jst.expression);
+alert(jst.evaluate());
+*/
+
+</script>
+ 
+<h2>JSON Demo</h2>
+
+<p>The text below is inserted using JSON
+
+<script type="text/javascript">
+TemplateEngine.parse(readTextFile("jsontemplate.txt"), document, readTextFile("jsondata.js"));
+</script>
+
+<h2>Live Demo</h2>
+
+<p>This is only live if page is hosted at <a href="http://erik.eae.net">http://erik.eae.net</a></p>
+
+<p id="tunage"></p>
+
+<script type="text/javascript">
+	
+var te = new TemplateEngine(readTextFile("tunagetemplate.txt"));
+var el = document.getElementById("tunage");
+var uri = document.domain == "erik.eae.net" ? "http://erik.eae.net/playground/tunage/currentlyplaying.js" : "currentlyplaying.js";
+el.innerHTML = te.evaluate(null, readTextFile(uri));
+window.setInterval(function () {
+	el.innerHTML = te.evaluate(null, readTextFile(uri));
+}, 60000);
+	
+</script>
+
+	
+</body>
+</html>

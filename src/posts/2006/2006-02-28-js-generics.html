@@ -1,0 +1,111 @@
+---json
+{
+  "title": "JS Generics",
+  "date": "2006-02-28T00:39:52-08:00",
+  "permalink": "/archives/2006/02/28/00.39.52/",
+  "tags": [
+    "JavaScript",
+    "Mozilla",
+    "Program Languages",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "9218",
+      "author": "M. Schopman",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Makes me wonder, will something like this make it natively in Opera 9? Either way, nice job!</p>"
+    },
+    {
+      "id": "9220",
+      "author": "Emil A Eklund",
+      "url": "http://me.eae.net/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Nice one, will come in handy!</p>"
+    },
+    {
+      "id": "9282",
+      "author": "Sebastian Werner",
+      "url": "http://journal.webmagics.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Wow. Cool. Could we include your generics implementation in our open-source (LGPL) toolkit qooxdoo (<a href=\"http://qooxdoo.oss.schlund.de\" rel=\"nofollow\">http://qooxdoo.oss.schlund.de</a>)?</p>\n<p>Could please explain one thing I have found there:</p>\n<p>constr[methods[j]] = function (constr, name)<br />\n{<br />\n  return function (s) {<br />\n    var args = Array.prototype.slice.call(arguments, 1);<br />\n    return constr.prototype[name].apply(s, args);<br />\n  };<br />\n}(constr, name);</p>\n<p>What do the last line in this case? You define a function, but for what do you append this &#8220;(constr, name)&#8221;? Thank you for your help.</p>"
+    },
+    {
+      "id": "9285",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I have now licensed the file using Apache Software License 2.0. This is compatible with GPL so you can use it in qooxdoo.</p>\n<p>The ugly syntax is because constr and name changes during the loop and the extra function actually binds the values to the right values (if this was not done all the methods would do this:</p>\n<p>function (s) {<br />\n  var args = Array.prototype.slice.call(arguments, 1);<br />\n  return Stringprototype[\"slice\"].apply(s, args);<br />\n}</p>\n<p>not what one wants <img src=\"/wp-includes/images/smilies/icon_wink.gif\" alt=\";-)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "9322",
+      "author": "nitro2k01",
+      "url": "http://soundandcomplete.blogspot.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Elegant solution! This is javascript the way I like it!</p>"
+    },
+    {
+      "id": "10206",
+      "author": "Vincenzo Alcamo",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>The quote method has a bug: you have to replace \\ with \\\\<br />\nreturn &#8216;&#8221;&#8216; + this.replace(/\\\\/g, &#8220;\\\\\\\\&#8221;).replace(/\\&#8221;/g, &#8220;\\\\\\&#8221;&#8221;) + &#8216;&#8221;&#8216;;</p>\n<p>The quirk code can be made more readable in this way:<br />\nfunction extend(constr, name) {<br />\n  return function (s) {<br />\n    var args = Array.prototype.slice.call(arguments, 1);<br />\n    return constr.prototype[name].apply(s, args);<br />\n  };<br />\n}<br />\nif (!constr[name]) { constr[name] = extend(constr, name); }</p>"
+    },
+    {
+      "id": "10413",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Vincenzo: True and true</p>\n<p>I&#8217;ve now updated the script.</p>"
+    },
+    {
+      "id": "11185",
+      "author": "NoXi",
+      "url": "http://noxi.dk",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>apply( ) method is implemented in JavaScript 1.2, but the call( ) method is not implemented until JavaScript 1.5. according to the book &#8220;JavaScript: The Definitive Guide, 4th Edition&#8221;</p>"
+    },
+    {
+      "id": "11196",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Call is part of ECMAScript edition 3 and all dialects of JS supports that (or otherwise they are not even worth using).</p>"
+    },
+    {
+      "id": "11198",
+      "author": "Serge",
+      "url": "http://serge.f2o.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hi,<br />\nI&#8217;m not as advanced as you are but I am seeing this page with Opera and it throws these errors:</p>\n<p>Inline script thread<br />\nError:<br />\nname: TypeError<br />\nmessage: Statement on line 128: Expression evaluated to null or undefined and is not convertible to Object: xmlHttp<br />\nBacktrace:<br />\n  Line 128 of linked script <a href=\"/playground/newpost/newpost.js\" rel=\"nofollow\">/playground/newpost/newpost.js</a><br />\n    xmlHttp.onreadystatechange = function ()<br />\n{<br />\nif (xmlHttp.readyState == 4)<br />\n{<br />\nself.onLoad();<br />\n}<br />\n}<br />\n;<br />\n  Line 105 of linked script <a href=\"/playground/newpost/newpost.js\" rel=\"nofollow\">/playground/newpost/newpost.js</a><br />\n    this.reload();<br />\n  Line 98 of linked script <a href=\"/playground/newpost/newpost.js\" rel=\"nofollow\">/playground/newpost/newpost.js</a><br />\n    this.setUri(sUri);<br />\n  Line 2 of inline#1 script in <a href=\"/archives/2006/02/28/00.39.52/\" rel=\"nofollow\">/archives/2006/02/28/00.39.52/</a><br />\n    new NewPostChecker(&#8220;/playground/newpost/&#8221;);</p>\n<p>Inline script thread<br />\nError:<br />\nname: TypeError<br />\nmessage: Statement on line 33: Expression evaluated to null or undefined and is not convertible to Object: xmlHttp<br />\nBacktrace:<br />\n  Line 33 of linked script <a href=\"/playground/tunage/tunage.js\" rel=\"nofollow\">/playground/tunage/tunage.js</a><br />\n    xmlHttp.onreadystatechange = function ()<br />\n{<br />\nif (xmlHttp.readyState == 4)<br />\n{<br />\nself.onLoad();<br />\n}<br />\n}<br />\n;<br />\n  Line 10 of linked script <a href=\"/playground/tunage/tunage.js\" rel=\"nofollow\">/playground/tunage/tunage.js</a><br />\n    this.reload();<br />\n  Line 28 of linked script <a href=\"/playground/tunage/tunage-text.js\" rel=\"nofollow\">/playground/tunage/tunage-text.js</a><br />\n    t.setUri(&#8220;/playground/tunage/?action=currentlyplaying&#8221;);<br />\n  Line 1 of inline#2 script in <a href=\"/archives/2006/02/28/00.39.52/\" rel=\"nofollow\">/archives/2006/02/28/00.39.52/</a><br />\n    bindTunageToElement(&#8220;tunage-text&#8221;);</p>\n<p>Shouldn&#8217;t there be a way to avoid having these errors show in the javascript console?<br />\nI may be a bit offbeat&#8230;</p>"
+    }
+  ]
+}
+---
+<p>With JavaScript 1.6 Mozilla introduced generic version of a lot of the Array and String methods. Without broad support these very useful methods are in reality only available to Firefox and Firefox extension. Personally I&#8217;ve become too used to them to survive long without them. I&#8217;ve previously posted the <a href="/archives/2005/06/05/17.53.19/">JS 1.5 array extras</a> and I&#8217;ve also mentioned <a href="/archives/2005/09/09/23.05.56/">these methods</a> but now I&#8217;ve implemented them for JS1.3 (JScript 5.6 and whatever they call the JS version they use in Opera)</p>
+<p><a href="/playground/js16generics.js">js16generics.js</a></p>
+<pre><code>var arrayLike = {0: 3, 1: 2, 2: 1, 3: 0, length: 4};
+Array.sort(arrayLike);
+document.write(Array.join(arrayLike, "&lt;br&gt;"));</code></pre>
+<p><a href="/playground/js16generics.html">Demo</a></p>

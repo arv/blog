@@ -1,0 +1,95 @@
+---json
+{
+  "title": "JavaScript: Muddy Waters of Reflection",
+  "date": "2013-02-24T12:59:21-08:00",
+  "permalink": "/archives/2013/02/24/12.59.21/",
+  "tags": [
+    "JavaScript",
+    "ES6",
+    "JavaScript"
+  ],
+  "comments": [
+    {
+      "id": "104669",
+      "author": "lm",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Great, however this doesn&#8217;t solve serialization problem. I don&#8217;t care about Map object if it cannot be represented in JSON.</p>\n<p>In ideal world [] operator would access only own properties, and only the dot operator would search prototype chain. Also Object would have no standard members (all would be part of Object.prototype).</p>"
+    },
+    {
+      "id": "104695",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Im: There are plenty of ways one can encode a Map in JSON. Here is one:</p>\n<p>Map.prototype.toJSON = function() {<br />\n  return [for (entry of this) entry];<br />\n};</p>\n<p>> m = new Map;<br />\n> m.set(1, true);<br />\n> m.set(false, &#8216;f&#8217;);<br />\n> m.set(&#8216;b&#8217;, {});<br />\n> JSON.stringify(m)<br />\n// [[1, true], [false, \"f\"], [\"b\", {}]]</p>\n<p>Even, if you limit [] to own properties it would shadow methods and break the size usecase.</p>\n<p>I don&#8217;t understand the idea that Object would have no standard members? Are you referring to Object.keys etc?</p>"
+    }
+  ]
+}
+---
+<p>Just like a lot of other people I have a love-hate relationship with JavaScript. I love how expressive it is and I love that it runs everywhere but there are also some things where the languages falls very short.</p>
+<p>The gripe of the day is how JS makes reflection part of the everyday programming flow. And it is not reliable reflection, it is crippled reflection with lots of gotchas. I&#8217;ll focus on two reflection mechanisms in JS today, for-in loops and square bracket annotations (member lookup expression, <code>array['length']</code>). The foor-in loop is used to loop over the properties of an object. But it only includes enumerable properties. Also, it incudes the enumerable properties of the objects prototype. The member lookup expression is used to lookup a property based on its name, which is always a string.</p>
+<p>The problem is that people tend to use this reflective mechanism to do Map data structures. It is not surprising since there is no Map data structure in JS (before ES6) and the syntax is very convenient. Of course you want to write what you mean; <code>map[key] = value</code> instead of <code>map.set(key, value)</code>.</p>
+<p>Lets go on. What if I want to add a <code>size</code> getter on my map that returns the number of entries in the map? Now I can no longer add an entry with the key <code>"size"</code> since that would replace or shadow the <code>size</code> getter. This is a real problem and a lot of web site crash if you enter the string <code>"__proto__"</code> or the string <code>"hasOwnProperty</code>. For example Google Docs used to crash if you entered the former of those two.</p>
+<p>What if I wanted to have non string keys? Nope, only strings are allowed and the key will be the <code>toString()</code> string of the key object. The common solution to this is to build a Map data structure where the key is a unique ID (UID) and the UID gets added to the real key object. This of course breaks if the key is a non extensible objects and those of you who have been around for a long time might remember that Nodes coming from an XHR in IE where non extensible causing all kinds of head aches.</p>
+<h2>The Future</h2>
+<p>ES6 has a new kind of loop called for-of. The for of loop is not a reflective loop. It is an iteration loop. The object that you want to iterate over must have an iterator and by default <code>Object.prototype</code> does not. <code>Array.prototype</code> on the other hand has an iterator that iterates over the elements in the array. Just what you always wanted!</p>
+<pre><code>for (let value of [0, 'one', true]) {
+  console.log(value);
+}
+
+for (let value of {a: 1}) {  <span style="color: red">// throws not iterable</span>
+  console.log(value);
+}
+</code></pre>
+<p>ES6 has Map and Set which allows any value as a key. This solves some of the issues but we still have the mess with the member lookup expression.</p>
+<p>There is a <a href="http://wiki.ecmascript.org/doku.php?id=strawman:object_model_reformation">proposal on the ES wiki</a> that tries to reform the object model and decouple <code>[]</code> from property lookup. The basic idea is that any object can override the <code>[]</code> operations. Existing objects would continue to work as they do today but new objects could opt in to this new behavior.</p>
+<p>For example, we could extend the ES6 Map objects to allow <code>[]</code> and <code>[]=</code> like this:</p>
+<pre><code>import {elementGet, elementSet} from '@name';
+Map.prototype[elementSet] = function(key, value) {
+  return this.set(key, value);
+};
+Map.prototype[elementGet] = function(key) {
+  return this.get(key);
+};
+
+var m = new Map;
+var key = {};
+m[key] = 42;
+console.log(m[key]);
+</code></pre>
+<p>The reformed object model also allows us to finally explain how arrays work. It also allows us to implement all of the DOM interfaces in pure JavaScript. For example we could implement NodeList like this:</p>
+<pre><code>import {create, elementGet} from '@name';
+const ownerName = create();
+const lengthName = create();
+
+export function NodeList(owner) {
+  this[ownerName] = owner;
+}
+
+NodeList.prototype  = {
+  get length() {
+    let i = 0;
+    for (let node = this[ownerName].firstChild; node; node = node.nextSibling) {
+      i++;
+    }
+    return i;
+  },
+
+  [elementGet]: function(index) {
+    let i = 0;
+    for (let node = this[ownerName].firstChild; node; node = node.nextSibling) {
+      if (i++ === index)
+        return node;
+    }
+    return node;
+  }
+};
+</code></pre>
+<h2>Today</h2>
+<p>Map and Set are implemented in SpiderMonkey and V8 and is available under a <a href="/archives/2011/12/29/00.00.29/" title="JavaScript Harmony in Chrome">flag in Chrome</a> and in Firefox without a flag.</p>
+<p>For-of loops are available in Firefox. V8 hasn&#8217;t started working on for-of loops nor iterators so don&#8217;t expect to be able to use these without a transpiler any time soon.</p>
+<p>Both for-of loops and the reformed object model are available in the <a href="http://code.google.com/p/traceur-compiler/">Traceur</a> compiler. There is a naïve <a href="http://traceur-compiler.googlecode.com/git/example/collection.html">demo</a> of a string keyed map too. Note that [] keys are not yet supported in object/class literals so the demo uses assignment instead.</p>

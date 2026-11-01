@@ -1,0 +1,31 @@
+---json
+{
+  "title": "Simple HTML Parser",
+  "date": "2004-11-20T12:18:31-08:00",
+  "permalink": "/archives/2004/11/20/12.18.31/",
+  "tags": [
+    "Mozilla",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "1162",
+      "author": "EAE",
+      "url": "http://me.eae.net/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Sweet, seems to get the job done and it&#8217;s not too complex either.</p>"
+    }
+  ]
+}
+---
+<p>I&#8217;ve been searching high and low for a simple HTML parser. I need a simple HTML parser, written in JS, that has a SAX like interface so that I can filter out potentially unsafe content. I&#8217;ve looked at existing Perl, Java, C (and more) parsers but they are either too much or rely to much on existing frameworks.</p>
+<p>So I created my own. This one is not very strict&#8230; the goal is to take a string containing HTML, send it through the parser and build another HTML string. The resulting string would then be passed to Mozilla for rendering. So, if the original HTML is incorrect but works in Mozilla it should be ok that the resulting HTML contains the same error.</p>
+<p>The parser is a <a href="http://www.saxproject.org/">SAX</a> based parser with a content handler and then I have a specific content handler that filters out things that are dangerous.</p>
+<ul>
+<li><a href="/simplehtmlparser/test.html">test.html</a></li>
+<li><a href="/simplehtmlparser/simplehtmlparser.js">simplehtmlparser.js</a></li>
+<li><a href="/simplehtmlparser/filterhtmlhandler.js">filterhtmlhandler.js</a></li>
+</ul>
+<p>These files were created for <a href="http://sage.mozdev.org">Sage</a> so the will be available under MPL</p>

@@ -1,0 +1,77 @@
+---json
+{
+  "title": "MSXML + HTA = BUG",
+  "date": "2004-03-31T09:49:10-08:00",
+  "permalink": "/archives/2004/03/31/09.49.10/",
+  "tags": [
+    "Software"
+  ],
+  "comments": [
+    {
+      "id": "721",
+      "author": "Mark Thomas",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "March 31st, 2004 at 10:37",
+      "html": "<p>It works for me.<br />\nI have an hta that hosts an iframe (application=&#8221;yes&#8221;) pointing to a web server. I can use msxml from within this.</p>\n<p>Works on W2k IE5.5, IE6 and on XP</p>"
+    },
+    {
+      "id": "722",
+      "author": "Mark Thomas",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "March 31st, 2004 at 14:19",
+      "html": "<p>Try running this from .hta. Works for me</p>\n<p>var objXMLHTTP = new ActiveXObject(&#8220;MSXML2.XmlHttp&#8221;)<br />\nobjXMLHTTP.Open(&#8220;GET&#8221;, &#8220;http://www.google.com&#8221;, false);<br />\nobjXMLHTTP.SetRequestHeader(&#8220;Content-type&#8221;, &#8220;text/html&#8221;);<br />\nobjXMLHTTP.Send();<br />\nalert(objXMLHTTP.ResponseText)</p>\n<p>var objXML = new ActiveXObject(&#8220;MSXML.DomDocument&#8221;)<br />\nobjXML.async \t= &#8220;false&#8221;;<br />\nobjXML.load(&#8220;http://webfx.eae.net/dhtml/xloadtree/tree.xml&#8221;)<br />\nalert(objXML.documentElement.xml)</p>"
+    },
+    {
+      "id": "723",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "March 31st, 2004 at 16:33",
+      "html": "<p>Your code gives me a security warning&#8230; checking my IE settings&#8230; No, resetting to default does not help.</p>\n<p>I&#8217;m using IE6 SP1, 6.00.2800 with all the latest patches on Windows XP SP1 with all the latest patches.</p>\n<p>I got this bug report from someone else, I just could not believe it before testing it myself.</p>"
+    },
+    {
+      "id": "724",
+      "author": "Mark Thomas",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "March 31st, 2004 at 19:03",
+      "html": "<p>I&#8217;m on IE 6.0.2800.1106.xpsp2.030422-1633<br />\nWorks with default or high security settings.</p>"
+    },
+    {
+      "id": "725",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "March 31st, 2004 at 19:38",
+      "html": "<p>So, maybe they fixed the bug in XPSP2?</p>\n<p>Personnally I can&#8217;t use XPSP2 because it makes the active desktop unusable. (Yes, I have reported this.)</p>"
+    },
+    {
+      "id": "726",
+      "author": "Mark Thomas",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "April 1st, 2004 at 11:25",
+      "html": "<p>I&#8217;m XP Sp1 not Sp2</p>"
+    },
+    {
+      "id": "727",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "April 1st, 2004 at 14:43",
+      "html": "<p>Sorry, I didn&#8217;t realize that xpsp2 did not mean xp sp2 (in the about box).</p>\n<p>When resetting the Internet Zone, Local Intranet och  Restricted sites it now work. I still consider this a bug because if any zone should apply the My Computer Zone should be used</p>"
+    }
+  ]
+}
+---
+<p>Something is very wrong with <abbr title="Microsoft XML Core Services">MSXML</abbr>&#8230;</p>
+<p>An HTA is an HTML Application. It is an executable application format that hosts Internet Explorer in a fully trusted application. This application, like any other executable has full access to your <abbr title="Operative System">OS</abbr> and hardware. You can create and delete files, read the registry and more. When using a HTA you can use any COM object and you can for example open a socket to create an IRC application. <strong>But, you cannot use MSXML to retrieve an XML document from a web server without seeing a security warning!</strong></p>

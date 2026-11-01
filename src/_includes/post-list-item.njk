@@ -1,0 +1,30 @@
+<div class="post hentry cf{% for tag in post.data.tags %} tag-{{ tag | tagSlug(post.data.tagSlugs) }}{% endfor %}">
+
+	<h2>
+		<span class="post-format"></span>
+		<a href="{{ post.url }}" title="{{ post.data.title | stripHtml }}" rel="bookmark">{{ post.data.title | firstpart | safe }}</a>
+	</h2>
+
+	<div class="post-bodycopy cf">
+
+		<div class="post-date">
+			<p class="post-month">{{ post.date | dateFormat("MMM") }}</p>
+			<p class="post-day">{{ post.date | dateFormat("d") }}</p>
+			<p class="post-year">{{ post.date | dateFormat("yyyy") }}</p>
+		</div>
+
+		{{ post.templateContent | excerpt }}
+
+	</div>
+
+	<div class="post-footer">
+		<a class="post-readmore" href="{{ post.url }}" title="{{ post.data.title | stripHtml }}">read more &rarr;</a>
+		{% if post.data.tags and post.data.tags.length %}
+		<p class="post-categories">{% for tag in post.data.tags %}<a href="/archives/tag/{{ tag | tagSlug(post.data.tagSlugs) }}/" title="View all posts in {{ tag }}" rel="category tag">{{ tag | safe }}</a>{% endfor %}</p>
+		{% endif %}
+		{% if post.data.comments and post.data.comments.length %}
+		<a class="post-comments-count" href="{{ post.url }}#comments">{{ post.data.comments.length }} comment{% if post.data.comments.length != 1 %}s{% endif %}</a>
+		{% endif %}
+	</div>
+
+</div>

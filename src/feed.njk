@@ -1,0 +1,32 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+	<title>{{ site.title }}</title>
+	<atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
+	<link>{{ site.url }}/</link>
+	<description>{{ site.description }}</description>
+	<lastBuildDate>{{ collections.posts | getNewestCollectionItemDate | rfc822 }}</lastBuildDate>
+	<language>{{ site.language }}</language>
+	<generator>Eleventy</generator>
+{% for post in collections.posts | head(20) %}
+	<item>
+		<title>{{ post.data.title | stripHtml }}</title>
+		<link>{{ site.url }}{{ post.url }}</link>
+		<pubDate>{{ post.date | rfc822 }}</pubDate>
+		<dc:creator><![CDATA[{{ site.author }}]]></dc:creator>
+		{% for tag in post.data.tags %}<category><![CDATA[{{ tag }}]]></category>
+		{% endfor %}
+		<guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
+		<description><![CDATA[{{ post.templateContent | excerpt }}]]></description>
+		<content:encoded><![CDATA[{{ post.templateContent | htmlToAbsoluteUrls(site.url + post.url) | safe }}]]></content:encoded>
+	</item>
+{% endfor %}
+</channel>
+</rss>

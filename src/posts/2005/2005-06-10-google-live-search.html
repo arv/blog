@@ -1,0 +1,273 @@
+---json
+{
+  "title": "Google Live Search",
+  "date": "2005-06-10T22:21:42-08:00",
+  "permalink": "/archives/2005/06/10/22.21.42/",
+  "tags": [
+    "JavaScript",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "4419",
+      "author": "Emil",
+      "url": "http://me.eae.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Nice one, seems like a silly thing but it&#8217;s actually quite helpful to see the results for the given criteria as you type, and the speed is impressive.</p>\n<p>Too bad I can&#8217;t get greasemonkey to run under dpa1.</p>"
+    },
+    {
+      "id": "4422",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I&#8217;m getting really tired of the internal Firefox exception that always happen when working with text inputs:</p>\n<p>Error: [Exception... \"'Permission denied to get property XULElement.selectedIndex' when calling method: [nsIAutoCompletePopup::selectedIndex]&#8221;  nsresult: &#8220;0x8057001e (NS_ERROR_XPC_JS_THREW_STRING)&#8221;  location: &#8220;JS frame :: <a href=\"http://www.google.com/#gls=google%20live%20search\" rel=\"nofollow\">http://www.google.com/#gls=google%20live%20search</a> :: anonymous :: line 135&#8243;  data: no]<br />\nSource File: <a href=\"http://www.google.com/#gls=google%20live%20search\" rel=\"nofollow\">http://www.google.com/#gls=google%20live%20search</a><br />\nLine: 135</p>"
+    },
+    {
+      "id": "4432",
+      "author": "Emil",
+      "url": "http://me.eae.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I hear you, those kind of errors are frustrating and really should never happen. Seems to occur in a quasi-random fashion too (during similar circumstances but only occasionally)&#8230; which doesn&#8217;t make things easier to track down.</p>"
+    },
+    {
+      "id": "4434",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I believe they happen any time focus() is being called from script.</p>\n<p><a href=\"https://bugzilla.mozilla.org/show_bug.cgi?id=236791\" rel=\"nofollow\">https://bugzilla.mozilla.org/show_bug.cgi?id=236791</a></p>"
+    },
+    {
+      "id": "4435",
+      "author": "Emil",
+      "url": "http://me.eae.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hmm, figured it had something to do with focusing but I do seem to recall it happening when focus is gained in other ways too&#8230; </p>"
+    },
+    {
+      "id": "4446",
+      "author": "foO",
+      "url": "http://www.forgetfoo.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>damn, i cant even tell you how many times i&#8217;ve seen that damn error in the JS Concole in firefox of late&#8230; been driving me absolutely crazy, man.</p>\n<p>hell, i removed my little Comment Notifier (temporarily?) because i was getting random XML &#8220;Unknown.&#8221; errors, which i was never really able to track down properly, which sucks.</p>\n<p>this is really kewl, btw&#8230; it&#8217;s like that &#8220;Live Search&#8221;, but for Google <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>\n<p>luv&#8217;n it&#8230; heh.</p>"
+    },
+    {
+      "id": "4926",
+      "author": "Matt McCarthy",
+      "url": "http://www.reifysoft.com/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Neat!</p>\n<p>Works flawlessly on the home page.  I get a few errors on the search result page when I modify my search:<br />\n &#8211; elmAdvanced has no properties / 174 several times<br />\n &#8211; this.footerElement.parentNode has no properties / 125<br />\n &#8211; A Greasemonkey message saying &#8220;Exception when injecting : {}&#8221;</p>\n<p>Doesn&#8217;t work in Turnabout for IE yet, though.  Doesn&#8217;t look like it would be hard to port, though.  Do you have any plans to port it?  This (and equivalents for Yahoo and MSN) might be a good candidate for including with future releases.</p>"
+    },
+    {
+      "id": "4927",
+      "author": "Jesper Rønn-Jensen",
+      "url": "http://visitjesper.homeip.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Nice. This really motivates me to dive into these greasemonkey scripts.<br />\nAdrian Holovaty created a <a href=\"http://holovaty.com/blog/archive/2005/03/19/1826\" rel=\"nofollow\">similar script</a> which is more-or-less directly the functionality of Google Suggest.</p>"
+    },
+    {
+      "id": "4929",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Matt: I was actually planning to spend some work on this today but I had some high priority things holding me up the entire evening/night. I&#8217;ll look at it tomorrow.</p>"
+    },
+    {
+      "id": "4934",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Matt: elmAdvanced is not from my script</p>\n<p>I saw the Greasemonkey exception a few times when developing this but reinstalling the script solved that for me.</p>\n<p>I&#8217;m still investigating the this.footerElement.parentNode error. I don&#8217;t see this but I guess some other script tampering with innerHTML might be the cause for this (innerHTML is evil)</p>"
+    },
+    {
+      "id": "5237",
+      "author": "Edible Energy",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p><a href=\"http://www.metafilter.com/mefi/44485\" rel=\"nofollow\">I put a link up</a> to this script on Metafilter today, and someone noticed that going to google autosuggest causes an infinite loop.</p>"
+    },
+    {
+      "id": "5337",
+      "author": "Rafi B.",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>A solution for this error:<br />\nError: [Exception… “‘Permission denied to get property XULElement.selectedIndex’ when calling method: [nsIAutoCompletePopup::selectedIndex]”</p>\n<p>Just put autocomplete=&#8221;off&#8221; on an input you&#8217;re getting this error on,<br />\nor use this script to go through all your necessary elements and &#8220;fix&#8221; them:</p>\n<p>if (document.getElementsByTagName)<br />\n{<br />\n    var inputElements = document.getElementsByTagName(&#8220;input&#8221;);<br />\n    for (i=0; inputElements[i]; i++)<br />\n       inputElements[i].setAttribute(&#8220;autocomplete&#8221;,&#8221;off&#8221;);<br />\n}</p>\n<p>Still no word from Mozilla about this awful bug.<br />\n(<a href=\"https://bugzilla.mozilla.org/show_bug.cgi?id=236791\" rel=\"nofollow\">https://bugzilla.mozilla.org/show_bug.cgi?id=236791</a>)</p>"
+    },
+    {
+      "id": "5338",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Rafi: This bug has been fixed in 1.5 b1</p>"
+    },
+    {
+      "id": "6050",
+      "author": "ezuk",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>It just doesn&#8217;t work for me&#8230; I have Greasemonkey and FF1.5 and the script is enable for <a href=\"http://www.google.com/\" rel=\"nofollow\">http://www.google.com/</a>* under &#8220;Manage User Scripts&#8221;. And yet, no go&#8230;</p>"
+    },
+    {
+      "id": "6051",
+      "author": "ezuk",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>What it basically says in the Javascript console whenever I type a char and wait is:<br />\n&#8220;Error: XMLHttpRequest is not a constructor<br />\nSource File:<br />\nLine: 165&#8243;</p>\n<p>And right when I load google it says:<br />\n&#8220;Error: Selector expected.  Ruleset ignored due to bad selector.<br />\nSource File: <a href=\"http://www.google.com/\" rel=\"nofollow\">http://www.google.com/</a><br />\nLine: 5<br />\nError: Unexpected end of file while searching for closing } of invalid rule set.<br />\nSource File: <a href=\"http://www.google.com/\" rel=\"nofollow\">http://www.google.com/</a><br />\nLine: 6&#8243;</p>"
+    },
+    {
+      "id": "6679",
+      "author": "Anil Sharma",
+      "url": "http://www.vertexlogic.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>The following error seems to always occur when calling focus/ blur from a onkeydown event handler.</p>\n<p>Error: [Exception... \"'Permission denied to set property XULElement.selectedIndex' when calling method: [nsIAutoCompletePopup::selectedIndex]&#8221;  nsresult: &#8220;0x8057001e (NS_ERROR_XPC_JS_THREW_STRING)&#8221;  location: &#8220;JS frame :: </p>"
+    },
+    {
+      "id": "6712",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Anil: That is a known Firefox bug which has been fixed in 1.5 I believe.</p>"
+    },
+    {
+      "id": "8617",
+      "author": "Juan F. Moncada",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>   Hi all: I had the same problem (&#8220;Permission denied to set property&#8230;&#8221;) and I&#8217;ve been able to solve it with Rafi&#8217;s suggestion on September 12th (thanks for your help). I&#8217;m using Firefox 1.5.0.1, so this issue hasn&#8217;t been solved in 1.5.</p>"
+    },
+    {
+      "id": "8793",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>The bug is still in Firefox 1.5&#8230; I&#8217;m not sure about Firefox 2.0 alphas.</p>"
+    },
+    {
+      "id": "10546",
+      "author": "Dylan Doxey",
+      "url": "http://dylan.doxey.org/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Hi, in my DOM code I have generally used the convention of setting attributes like this:<br />\n\tvar inp = document.createElement(&#8216;input&#8217;);<br />\n\tinp.autocomplete = &#8216;off&#8217;;</p>\n<p>However this does not do the trick for the autocomplete attribute, because it is probably not added by the createElement() method.</p>\n<p>This does work:<br />\n\tvar inp = document.createElement(&#8216;input&#8217;);<br />\n\tinp.setAttribute(&#8216;autocomplete&#8217;,&#8217;off&#8217;);</p>\n<p>Thanks for the tip!</p>\n<p>Dylan</p>"
+    },
+    {
+      "id": "10877",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>The auto complete feature is a pretty strange beast. Setting this does not really do anything to the element. The auto complete system checks for an expando property called autocomplete instead.</p>\n<p>In Firefox there is a difference (rightly so) between JS/DOM properties and attributes and there isn&#8217;t any DOM property called autocomplete.</p>"
+    },
+    {
+      "id": "32318",
+      "author": "derak",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>You helped me fix a bug. Thank you.</p>"
+    },
+    {
+      "id": "33990",
+      "author": "EER",
+      "url": "http://www.eer.cc",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>You helped me fix an annoying message, thanks a lot <img src=\"/wp-includes/images/smilies/icon_smile.gif\" alt=\":)\" class=\"wp-smiley\" /> </p>"
+    },
+    {
+      "id": "74682",
+      "author": "dirar",
+      "url": "http://www.zanstudio.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Not fixed in 1.8, don&#8217;t know about 2&#8230; but autocomplete = &#8220;OFF&#8221; solved the problem</p>"
+    },
+    {
+      "id": "85467",
+      "author": "Steve Bearman",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>A simpler solution than setting &#8216;autocomplete&#8217; = &#8216;off&#8217; for each element is to set the property for the form itself.  The property is then inherited by all the form elements.</p>"
+    },
+    {
+      "id": "102135",
+      "author": "Spam Banjo @ The Hell Hole",
+      "url": "http://www.grimaldionline.co.uk",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>This worked for me.</p>\n<p>1          prev_field = document.forms['meterform'].elements[last_one] ;<br />\n2          prev_field.setAttribute(&#8220;autocomplete&#8221;,&#8221;off&#8221;);<br />\n3          prev_field.focus();</p>\n<p>If I remove line 2 I get the error. Otherwise it&#8217;s fine. I now employ this method as standard practice when manipulating field focus and it seems to work fine for me.</p>"
+    }
+  ]
+}
+---
+<p>This is a script for <a href="http://greasemonkey.mozdev.org/">Greasemonkey</a><br />
+that modifies the <a href="http://www.google.com">Google</a> search page to make<br />
+the results show up as you type.</p>
+<h3>Steps to install:</h3>
+<ol>
+<li><a href="http://greasemonkey.mozdev.org/">Install Greasemonkey</a></li>
+<li>Once that is done you can right click the following link and select<br />
+	<strong>Install User Script&#8230;</strong>: <a href="/playground/googlelivesearch.user.js">googlelivesearch.user.js</a></li>
+</ol>
+<h3>The Details</h3>
+<p>When the user types in the search field the browser fires the<br />
+<code>input</code> event. This event is dispatched any time the content changes<br />
+(for example when doing drag and drop or copy paste). When this happens a timer<br />
+is started and a few milliseconds later a HTTP <code>GET</code> request is sent<br />
+to <a href="http://www.google.com/search?q=">http://www.google.com/search?q=</a>. The<br />
+reason to use a timer here is to prevent a request to be sent after every change<br />
+and only send the request when the value of the input stabilizes. This request<br />
+is sent in the background using a <a href="http://webfx.eae.net/dhtml/xmlextras/xmlextras.html">XMLHttpRequest</a><br />
+object.</p>
+<p>Once we get the result we remove the old results from the page using DOM<br />
+level 1 methods. Then we analyze the returned string and use<br />
+<code>innerHTML</code> to input the result into the current page. You have to<br />
+use <code>innerHTML</code> because Mozilla cannot parse <code>text/html</code> without<br />
+creating a view (frame/window) for it.</p>
+<h4>Udpated:</h4>
+<p>I added a hash to <code>document.location</code> so that when one goes back the search page the result is remembered.</p>

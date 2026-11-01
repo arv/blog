@@ -1,0 +1,52 @@
+---json
+{
+  "title": "Noscript Expand Element",
+  "date": "2004-05-28T18:22:04-08:00",
+  "permalink": "/archives/2004/05/28/18.22.04/",
+  "tags": [
+    "Mozilla",
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "841",
+      "author": "Martijn",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "May 31st, 2004 at 22:48",
+      "html": "<p>That&#8217;s a great idea, Erik!<br />\nI really wish that you could use these kinds of things with all html elements. But it would probably not really belong into css anyway.<br />\nNow it is needed to use the checkbox element to get the :checked pseudo-class, which is a bit of a hack.</p>"
+    },
+    {
+      "id": "842",
+      "author": "Tim Scarfe",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "June 1st, 2004 at 09:10",
+      "html": "<p>Erik</p>\n<p>Please don&#8217;t truncate the content on your RSS feed!</p>\n<p>trs</p>"
+    },
+    {
+      "id": "843",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "June 3rd, 2004 at 23:40",
+      "html": "<p>Tim: The RSS uses an excerpt of the entry. Changing the length of the excerpt is not a good idea. I would need to change the MT template to use the XHTML content instead.</p>\n<p>I&#8217;ll most likely switch blog engine soon. MT is just too anoying with all its rebuilding&#8230; and at that time I should see if I can make the RSS feeds better.</p>"
+    }
+  ]
+}
+---
+<p>Scott MacGregor <a href="http://forums.mozillazine.org/viewtopic.php?t=76000&#038;postdays=0&amp;postorder=asc&amp;postsperpage=15&amp;start=0">wanted some help</a> with improving the way the vCard attachments are drawn in Thunderbird. Since Thunderbird uses the world leading rendering engine he felt that the old way to show the vCard was just too boring.</p>
+<p>Then TaSK came up with a <a href="http://forums.mozillazine.org/viewtopic.php?p=531158#531158">good looking Photoshop mock-up</a>. However, these have a serious issue and that is that scripting is turned off for the mail body.</p>
+<p>To make a long story short I thought that this should be doable using CSS3. I thought for a minute and I came to the conclusion that using the <code>:checked</code> pseudo class for check boxes would fit best with this scenario. To hide the container just make a CSS rule that switches the display property depending on the checked state.</p>
+<pre><code>input + div {
+   display: none;
+}
+
+input:checked + div {
+   display: block;
+}</code></pre>
+<p>The next step was to replace the default look of the checkbox with a background image. However, I did not manage to remove the borders, background color nor the color so I had to do some ugly hacks here. What I ended up doing is to have a transparent checkbox above the expand icon. Another, better solution would probably be to use a label for the expand icon and let that label be a label for a hidden checkbox.</p>
+<p><a href="/vcard/">See the end result!</a></p>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Animating using CSS Animations</title>
+<style>
+
+@-webkit-keyframes fade-out-forward {
+ from {
+   opacity: 1.0;
+   -webkit-transform: scale(1.0);
+ }
+ to {
+   opacity: 0;
+   -webkit-transform: scale(1.5);
+ }
+}
+
+@-webkit-keyframes fade-in-forward {
+ from {
+   opacity: 0;
+   -webkit-transform: scale(0.66);
+ }
+ to {
+   opacity: 1;
+   -webkit-transform: scale(1.0);
+ }
+}
+
+
+@-webkit-keyframes fade-out-backward {
+ from {
+   opacity: 1.0;
+   -webkit-transform: scale(1.0);
+ }
+ to {
+   opacity: 0;
+   -webkit-transform: scale(0.66);
+ }
+}
+
+@-webkit-keyframes fade-in-backward {
+ from {
+   opacity: 0;
+   -webkit-transform: scale(1.5);
+ }
+ to {
+   opacity: 1;
+   -webkit-transform: scale(1.0);
+ }
+}
+
+.fade-out-forward {
+  -webkit-animation-name: fade-out-forward;
+}
+
+.fade-in-forward {
+  -webkit-animation-name: fade-in-forward;
+}
+
+.fade-out-backward {
+  -webkit-animation-name: fade-out-backward;
+}
+
+.fade-in-backward {
+  -webkit-animation-name: fade-in-backward;
+}
+
+.card {
+  display: none;
+  position: absolute;
+  margin: 1em;
+  padding: 0.5em;
+  min-height: 20em;
+  min-width: 30em;
+
+  background: white;
+  border: 1px solid black;
+  -webkit-box-shadow: black 3px 3px 5px;
+
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-in-out;
+}
+
+.slow .card {
+  -webkit-animation-duration: 5s;
+}
+
+</style>
+<script>
+
+function print(s) {
+  var el = document.getElementById('out');
+  el.textContent = String(s);
+}
+
+window.onwebkitanimationend =  function(e) {
+  switch (e.animationName) {
+    case 'fade-out-forward':
+    case 'fade-out-backward':
+      e.target.style.display = 'none';
+      break;
+    case 'fade-in-forward':
+    case 'fade-in-backward':
+      e.target.style.display = 'block';
+      break;
+  }
+};
+
+function $(s) {
+  return document.querySelector(s);
+}
+
+function fade(el, type) {
+  if (el) {
+    el.style.display = 'block';
+    el.style.WebkitAnimationName = type;//className = 'card ' + type;
+  }
+}
+
+function fadeInForward(el) {
+  fade(el, 'fade-in-forward');
+}
+
+function fadeOutForward(el) {
+  fade(el, 'fade-out-forward');
+}
+
+function fadeInBackward(el) {
+  fade(el, 'fade-in-backward');
+}
+
+function fadeOutBackward(el) {
+  fade(el, 'fade-out-backward');
+}
+
+var currentCard = 0;
+
+function fowardOneCard() {
+  fadeOutForward($('#test' + currentCard));
+  currentCard++;
+  fadeInForward($('#test' + currentCard));
+}
+
+function backwardOneCard() {
+  fadeOutBackward($('#test' + currentCard));
+  currentCard--;
+  fadeInBackward($('#test' + currentCard));
+
+}
+
+function makeSlow() {
+  document.body.className = 'slow';
+}
+
+function makeNormal() {
+  document.body.className = '';
+}
+
+document.onkeydown = function(e) {
+  console.info(currentCard);
+  console.log(e);
+  switch (e.keyIdentifier) {
+    case 'Right':
+      fowardOneCard();
+      break;
+    case 'Left':
+      backwardOneCard();
+      break;
+    case 'Shift':
+      makeSlow();
+      break;
+  }
+};
+
+document.onkeyup = function(e) {
+  switch (e.keyIdentifier) {
+    case 'Shift':
+      makeNormal();
+      break;
+  }
+};
+</script>
+</head>
+<body>
+
+<pre id=out>&nbsp;</pre>
+
+<script>
+
+function createCard(i) {
+  var el = document.createElement('div');
+  el.id = 'test' + i;
+  el.className = 'card';
+  el.innerHTML = writeSomeFiller(i);
+  document.body.appendChild(el);
+}
+
+function writeSomeFiller(n) {
+  var s = '<h2>Slide {$n}</h2>';
+  s += '<ul>';
+  for (var i = 0; i < 5; i++) {
+    s += '<li>Item {$n}.1';
+  }
+  s += '</ul>';
+  return s.replace(/{\$n}/g, n);
+}
+
+window.addEventListener('load', function(e) {
+  for (var i = 0; i < 20; i++ ) {
+    createCard(i);
+  }
+  document.querySelector('.card').style.display = 'block';
+}, false);
+
+</script>
+</body>
+</html>

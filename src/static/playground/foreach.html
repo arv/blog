@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+<title>for each loop</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+
+var o = {a: "A", b: "B", c: "C"};
+for each (var v in o) {
+   alert(v);
+}
+
+var a = ["A", "B", "C"];
+for each (v in a) {
+   alert(v);
+}
+
+window.onload = function () {
+   var sb = [];
+   for each (var el in document.getElementsByTagName("*")) {
+      sb.push(el.tagName);
+   }
+   alert(sb.join("\n"));
+};
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

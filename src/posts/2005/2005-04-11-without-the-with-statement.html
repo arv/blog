@@ -1,0 +1,85 @@
+---json
+{
+  "title": "Without the with statement",
+  "date": "2005-04-11T18:39:51-08:00",
+  "permalink": "/archives/2005/04/11/18.39.51/",
+  "tags": [
+    "JavaScript"
+  ],
+  "comments": [
+    {
+      "id": "1870",
+      "author": "José Jeria",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>I really enjoy these tips. Keep it up!</p>"
+    },
+    {
+      "id": "2152",
+      "author": "Nicholas",
+      "url": "http://www.nczonline.net",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>The main problem with the with statement is that it introduces another scope. Scoping issues are big time in JavaScript and are the cause of a lot of mistakes.</p>"
+    },
+    {
+      "id": "2250",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>I was mostly considering performance reasons. I totally agree that the with statement makes code harder to read and maintain.</p>"
+    },
+    {
+      "id": "4182",
+      "author": "Brianiac",
+      "url": "http://webcoder.info/",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>The VB version of With, which uses an unambiguous syntax (a leading dot), seems to address both the efficiency and readability of the code. I wonder why this approach wasn&#8217;t used for JScript.</p>"
+    },
+    {
+      "id": "4239",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>It is never an issue with compiled languages because it is decided at compile time. It is for dynamic/interpreted languages the problems show up.</p>"
+    }
+  ]
+}
+---
+<p>The <code>with</code> statement is a powerful programming concept that Microsoft added to JScript because it was already in VB and VBScript. It later became part of ECMAScript because one of the major players had it.</p>
+<p>The with statement allows you to reference fields in an object without prefixing the field.</p>
+<pre><code>var x = 100;
+document.body.style.left = x + &quot;px&quot;;</code></pre>
+<p>Can be written using <code>with</code>:</p>
+<pre><code>var x = 100;
+with (document.body.style) {
+   left = x + &quot;px&quot;;
+}</code></pre>
+<p>This might look good on paper but this feature was designed for compiled languages where the <code>with</code> statement can be handled in the compile step and the running code would just work without any penalties. However, JS is dynamic and interpreted language and therefore the <code>with</code> statement becomes a series of test to test the existence of different fields.</p>
+<p>The semantics of the above <code>with</code> statement becomes something like this:</p>
+<pre><code>var x = 100;
+var $tmp = document.body.style;
+if (&quot;left&quot; in $tmp) {
+   if (&quot;x&quot; in $tmp) {
+      $tmp.left = $tmp.x + &quot;px&quot;;
+   } else {
+      $tmp.left = x + &quot;px&quot;;
+   }
+} else {
+   if (&quot;x&quot; in $tmp) {
+      left = $tmp.x + &quot;px&quot;;
+   } else {
+      left = x + &quot;px&quot;;
+   }
+}</code></pre>
+<p>And this is only for a case where there are 2 references within one <code>with</code> statement. As a matter of fact the worst case scenario for a <code>with</code> statement is O(n*m) where n is the number of nested <code>with</code> statements and m is the number of variables/references in it.</p>
+<p>So how do you get around this without having to write the same fields over and over again? Simple. Just use local variables.</p>

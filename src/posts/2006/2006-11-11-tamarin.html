@@ -1,0 +1,30 @@
+---json
+{
+  "title": "Tamarin",
+  "date": "2006-11-11T12:52:12-08:00",
+  "permalink": "/archives/2006/11/11/12.52.12/",
+  "tags": [
+    ".NET",
+    "Adobe",
+    "DHTML",
+    "JavaScript",
+    "Mozilla"
+  ],
+  "comments": []
+}
+---
+<p>I guess you all heard that <strike>Macromedia</strike>Adobe donated<br />
+their JIT compiler version of JavaScript to Mozilla. Tamarin is the JIT<br />
+for Action Script 3 (AS3) which is a version of ECMAScript 3rd Edition.<br />
+Using a JIT should improvement of JavaScript by at least 10x. This is of<br />
+course very good news. However a lot of people seem to think that this<br />
+will improve their DHTML applications by a factor 10 as well. This is of course not the<br />
+case since JavaScript is not the bottle neck in DHTML. The time spent in<br />
+pure JavaScript is less than 10% (number taken out of thin air). The<br />
+main bottle necks in an application today is COM/XPCOM, DOM and reflows.</p>
+<p>Another misunderstanding on a lot of blogs is that AS3 is an<br />
+implementation of JavaScript 2 (ECMAScript 4th Edition). This is not the<br />
+case. AS3 has a lot of features that are in the working drafts of JS2<br />
+but it also misses a lot of things that JS1.7 already supports.</p>
+<pre>JScript5.x &lt; JavaScript 1.5 &lt; JavaScript 1.7 &lt; JScript.NET &lt; AS3 &lt; JS2</pre>
+<p>This is of course not a linear relation but you get the point. If you remove the class and type system then AS3 and JScript.NET are less similar to JS2 than JS1.5.</p>

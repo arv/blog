@@ -1,0 +1,240 @@
+---json
+{
+  "title": "XAML: First Impressions",
+  "date": "2003-10-28T11:13:56-08:00",
+  "permalink": "/archives/2003/10/28/11.13.56/",
+  "tags": [
+    "Web"
+  ],
+  "comments": [
+    {
+      "id": "411",
+      "author": "foO",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "October 28th, 2003 at 14:43",
+      "html": "<p>this was the most informative post on XAML that i&#8217;ve read &#8211; by far! <img src='/wp-includes/images/smilies/icon_wink.gif' alt=';)' class='wp-smiley' /> </p>\n<p>been reading the PDC blogs and have read a crapload of generalizations and some good tidbits, but nothing specific&#8230; i practically Null on the XUL Box Model, but i sure know about the IE box model and the subsequent hacks involved with it&#8230; so i really REALLY hope they get the box model right with XAML.</p>\n<p>also, XAML seems great for interfaces and integration with .NET and WinFX &#8211; but how does this directly translate to basic web stuff like HTML, i wonder?  too soon to tell?</p>"
+    },
+    {
+      "id": "412",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "October 28th, 2003 at 16:24",
+      "html": "<p>As far as I can tell XAML has nothing, what-so-ever to do with XML + CSS, or (X)HTML.</p>\n<p>The box model consists of DockPanel, FlowPanel, Canvas, TextPanel, GridPanel and Table. A combination of DockPanel and FlowPanel can achieve the same effects as the box element in XUL. I&#8217;m just not sure yet if flex can be achieved with this box model.</p>\n<p>&lt;hbox><br />\n   &lt;button flex=&#8221;1&#8243;/&gt;<br />\n   &lt;button flex=&#8221;2&#8243;/&gt;<br />\n   &lt;button flex=&#8221;3&#8243;/&gt;<br />\n&lt;/hbox&gt;</p>\n<p>Adding another button with flex=&#8221;4&#8243; is simple. In XAML the only way I think this can be achieved is be recalculating the widths (using percentage).</p>\n<p>IN XAML packing and aligning requires extra boxes around the element.</p>"
+    },
+    {
+      "id": "413",
+      "author": "foO",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "October 28th, 2003 at 18:10",
+      "html": "<p>i&#8217;m sure more information will be coming out detailing XAML as we get closer and closer to a Longhorn release&#8230; most likely with the first wide-release Beta (1 or 2) next year *knocks on wood*</p>\n<p>i&#8217;m really curious to see how XAML can be used both in designing the structure of a web-app, and the Longhorn tie-ins to the underlye&#8217;n managed API&#8217;s that are open to you, y&#8217;know? could create a RSS reading app in no time and have it in your website or on your desktop (or accessible via the desktop), which would be kewl as shit.</p>\n<p>i&#8217;ve read that Indigo is abhere&#8217;n to the &#8220;standards&#8221; as far as webservices and XML goes, which is good to hear&#8230; i&#8217;m still curious about CSS2/3 support for the most part, though <img src='/wp-includes/images/smilies/icon_wink.gif' alt=';)' class='wp-smiley' /> </p>"
+    },
+    {
+      "id": "414",
+      "author": "Filipe Fortes",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "October 28th, 2003 at 19:23",
+      "html": "<p>Erik: You&#8217;re correct that mimicking the XUL sample you&#8217;ve shown can be tricky in Avalon. However, this is still an alpha for us, so we&#8217;re still looking into providing more functionality in the layout space (as well as everything else).</p>"
+    },
+    {
+      "id": "415",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "October 28th, 2003 at 20:40",
+      "html": "<p>I just hope that you consider also supporting the XUL box model for a later version since I think it is more consistant and more powerful than the DockPanel. ( <a href=\"http://www.xulplanet.com/tutorials/xultu/boxes.html\">http://www.xulplanet.com/tutorials/xultu/boxes.html</a> )</p>\n<p>Another feature request I have is support for docking using Canvas.Left and Canvas.Right. In CSS2 one can set both left and right, and in that case the width changes with the parent. This is a much more trivial way to do anchoring than the way it is currently done in WinForms. For an example of this see (IE 5.5 or later required):</p>\n<p><a href=\"http://www.i-see.net/bindows/bindows/samples/applauncher/\">http://www.i-see.net/bindows/bindows/samples/applauncher/</a> then launch AnchorTest.xml</p>\n<p>Is there some official place to submit XAML feedback?</p>"
+    },
+    {
+      "id": "416",
+      "author": "Filipe Fortes",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "October 28th, 2003 at 21:08",
+      "html": "<p>Feel free to post feedback to your weblog or the newsgroups. If it&#8217;s on your weblog, just make sure to ping me in case I miss it.</p>\n<p>As for your other comments, all I can say right now is that we&#8217;ll be continuing development and tweaking our models, and that all feedback is appreciated.</p>"
+    },
+    {
+      "id": "417",
+      "author": "Tom T.",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "October 28th, 2003 at 22:50",
+      "html": "<p>Erik, I&#8217;d have to say my first impressions are right along side yours&#8230;one of the biggest beefs I have with the XUL model is not so much that it&#8217;s XML-based (which actually is a problem for me) but more that in order to develop anything useful with it, I have to know 5 languages (XUL, XBL, CSS, RDF and Javascript, if memory serves me right).</p>\n<p>Why one would split the development of an application into that many markup/coding languages I have no idea (ok, I have a good idea, but I think the practical outweighs the ideological).</p>\n<p>As far as XAML goes, I suppose it will find a large audience, but all I can say (directed at Filipe) is thank you for making sure the actual object model is still accessible, so that I could code my apps using that and only that.</p>\n<p>Now one thing that would be seriously useful is for Avalon to be able to take an app that was coded using .NET and spit out an XAML file(s) so that deployment can be made using the serialized version&#8230;now THAT would be about as sweet as it gets.  You know, similar to the way the .NET runtime does a nice job of isolating one from doing daily SOAP plumbing with Web Services.</p>"
+    },
+    {
+      "id": "418",
+      "author": "foO",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "October 29th, 2003 at 04:35",
+      "html": "<p>wow. that&#8217;s a good one, tom!</p>\n<p>i&#8217;m still wondering how people are saying &#8220;XAML&#8221; here&#8230;. do you say it like &#8220;zammel&#8221; or what?</p>"
+    },
+    {
+      "id": "419",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "October 29th, 2003 at 11:20",
+      "html": "<p>Tom T: Now that I&#8217;ve looked more at XAML I might agree with you. Not using DOM and CSS might make it easier since only the specific WinFX object model is needed.</p>\n<p>But I still miss ways to use simpler code. Since I can use &#8220;Red&#8221; as a Background attribute I think it would make sense for me to have a way to set &#8220;Red&#8221; directly without going through the hustle of creating a brush every time. Maybe this is what SetValue is doing but it seems to work like this:</p>\n<p>element.SetValue( Panel.BackgroundProperty, MSAvalon.Windows.Media.Brushes.Red );</p>\n<p>vs</p>\n<p>element.setAttribute( &#8220;Background&#8221;, &#8220;Red&#8221; )</p>\n<p>Same applies to other areas. Since XAML is XML I expect to be able to achieve everything that the XML format provides just by understanding that.</p>"
+    },
+    {
+      "id": "420",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "October 29th, 2003 at 11:21",
+      "html": "<p>Foo: eX-A-eM-eL</p>"
+    },
+    {
+      "id": "421",
+      "author": "Tom T.",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "October 29th, 2003 at 18:28",
+      "html": "<p>That&#8217;s a good point Erik; the verbosity of creating an application with a programming language (as opposed to using a markup language) can be tedious.</p>\n<p>For me, it comes down to a choice: do I deal with the verbosity in favor of a single development environment, or do I learn the second of &#8220;more than one way to skin a cat&#8221;, so that productivity is, in theory, increased?</p>\n<p>Perhaps a way of defining a set of styles programmatically would be the way to go, like being able to create a library of structs or objects based on a skinning class that allows one to define all of the expected styles/properties in one place, and let all of the controls consume them instead of defining the drawing elements directly&#8230;like CSS, but a programmatic version.</p>\n<p>Hmmm, now I&#8217;m thinking in different directions&#8230;gives me some ideas&#8230;uh oh <img src='/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>\n<p>(The nice thing about doing an app with say C# as opposed to XAML is that what I just described is possible without jumping through major hoops.)</p>"
+    },
+    {
+      "id": "422",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "November 2nd, 2003 at 18:26",
+      "html": "<p>Tom T: Actually I&#8217;m more into using the right tool for the job. The good thing with XAML is that if you know the Avalon Framework and XML you will get XAML almost for free.</p>\n<p>Still, the W3C DOM is not going away any time soon and it is (IMHO) the right tool for the job when working with XML.</p>"
+    },
+    {
+      "id": "423",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "November 2nd, 2003 at 18:34",
+      "html": "<p>I missed Tom&#8217;s last paragraph. That was some good points. I think XAML needs to work without precompiling it. It is crucial to be able to serve text files from the web server if this is ever going to be used for web applications.</p>\n<p>I know things like these can be done with JScript7 and VSA. Heck, if Mozilla can precompile and cache XUL with JS1.5 in binare form why can&#8217;t MS do something similar for XAML with JScript7?</p>\n<p>On the topic of JScript; I always wondered why MS is dissing this language?</p>"
+    },
+    {
+      "id": "424",
+      "author": "Dylan Greene",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "November 3rd, 2003 at 19:39",
+      "html": "<p>Foo &#8211; I&#8217;ve heard it pronounced as &#8220;Zamel&#8221; by a friend on the Longhorn UI team.</p>"
+    },
+    {
+      "id": "425",
+      "author": "Erik Arvidsson",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "November 3rd, 2003 at 23:28",
+      "html": "<p>It is supposed to be zammel but it just sounds lame to me. Why not call XML for zemmel then? You don&#8217;t have to use the pronounciations that the company gives you. I don&#8217;t call XUL &#8220;zool&#8221;. I call it &#8220;xul&#8221; (or &#8220;zul&#8221;). But I do call C# &#8220;see sharp&#8221; <img src='/wp-includes/images/smilies/icon_wink.gif' alt=';-)' class='wp-smiley' /> </p>"
+    }
+  ]
+}
+---
+<p>Finally, the facts are out for<br />
+<a href="http://msdn.microsoft.com/longhorn/"><abbr title="Extensisible Application Language">XAML</abbr></a>.<br />
+I&#8217;ve been waiting for this <em>release</em> for a few years now. Prior to this<br />
+it has all been roumors and speculation.</p>
+<p>First impressions: <strong>Very Mixed</strong></p>
+<p>The first things that struck me was how MS reinvented everything. A lot of<br />
+your exisitng experience for writing applications are totally wasted, at least if<br />
+you come from a web background. This is beacuse even though XAML is said to be an<br />
+XML language it does not support any other<br />
+<abbr title="World Wide Web Consortium">W3C</abbr> technology. No<br />
+<abbr title="Document Object Model">DOM</abbr>, no<br />
+<abbr title="Cascading Style Sheets">CSS</abbr>. XAML is just not using an<br />
+<abbr title="Extensible Markup Language">XML</abbr> rendering engine as I first<br />
+hoped. It is just a serialization model for WinFX applications.</p>
+<p>On the other hand I think the reason for not using the W3C DOM is that it<br />
+makes the object model XAML uses more friendly to WinForms programmers. The<br />
+object model is also type safe, which is a good thing This has however a<br />
+serious downside. You need to know 2 different APIs, one for the XML format and<br />
+one for the object model. Even if you know how the attribute works you may not<br />
+know how the property works. Below are 2 examples that shows examples of this.</p>
+<pre><code>
+&lt;XAML&gt;
+&lt;Button ID="foo">Hello World&lt;/Button&gt;
+foo.Content = "Changed";
+&lt;/XAML&gt;
+
+&lt;XUL&gt;
+&lt;button id="foo" label="Hello World"/&gt;
+document.getElementById("foo").setAttribute("label", "Changed");
+&lt;/XUL&gt;
+</code></pre>
+<pre><code>
+&lt;XAML&gt;
+&lt;Text FontSize="12pt" Background="White"&gt;Hello World&lt;/Text&gt;
+el.FontSize = new FontSize(13, FontSizeType.Point);
+el.Background = Brushes.Red;
+&lt;/XAML&gt;
+
+&lt;XUL&gt;
+&lt;label label="Hello World" style="font-size: 12pt; background: white;"/&gt;
+el.style.fontSize = "13pt";
+el.style.background = "red";
+&lt;/XUL&gt;
+</code></pre>
+<p>A small comment here: <abbr title="XML User Interface Language">XUL</abbr><br />
+has bugs preventing DOM Style to work but that does not change the scenario.</p>
+<p>The main problem with XAML is that one cannot use W3C DOM. I don&#8217;t know why<br />
+this decision was made. It can&#8217;t be hard because WinFX already knows how to do<br />
+the type conversions.</p>
+<p>One thing that I do like about this is that it is tightly bound to the WinFX<br />
+API. An element directly maps to a class, in fact any class that has a<br />
+constructor without any arguments can be an element. All properties of the class<br />
+maps to a attributes of the element (how does the type conversion work?) and<br />
+finally all events also map to attributes. This model is way more conventient<br />
+and useful than both the XBL and behavior solution for extending the markup.</p>
+<p>Another nice thing is that properties of the class can actually be declared<br />
+as child nodes of the element. This allows more complex attributes to be used.</p>
+<pre><code>
+&lt;Button&gt;
+   Hello World
+   &lt;Button.Background&gt;
+      &lt;LinearGradientBrush &gt;
+         &lt;LinearGradientBrush.GradientStops&gt;
+            &lt;GradientStopCollection&gt;
+               &lt;GradientStop Color="Red" Offset="0" /&gt;
+               &lt;GradientStop Color="Blue" Offset="0.25"/&gt;
+               &lt;GradientStop Color="Orange" Offset="0.75"/&gt;
+               &lt;GradientStop Color="Yellow" Offset="1"/&gt;
+            &lt;/GradientStopCollection&gt;
+         &lt;/LinearGradientBrush.GradientStops&gt;
+      &lt;/LinearGradientBrush&gt;
+   &lt;/Button.Background&gt;
+&lt;/Button&gt;
+</code></pre>
+<p>Finally I wanted to mention something called style. Styles are note like W3C<br />
+Stylesheets, one of the best technologies MS has been pushing (was pushing).<br />
+Styles are more like templates. The thing that I like about them in favor of CSS<br />
+is that any attribute can be set. The thing that I don&#8217;t like about them is the<br />
+C of CSS and that is that the do not really cascade and the selectors seems just<br />
+way too simple. Just give me the CSS3 selectors will yah?</p>
+<pre><code>
+&lt;Style&gt;
+   &lt;VerticalSlider Width="50%" Margin="25%,0,25%,0"
+      Minimum="0" Maximum="255" 
+      SmallChange="1" LargeChange="16"
+      DockPanel.Dock="Fill"/&gt;
+&lt;/Style&gt;
+</code></pre>
+<p>Just when I thought I was finished I realized one more thing. I wish they<br />
+will add the XUL box model to this as well. Although XAML seems fairly nice when<br />
+it comes to writing UIs that scale it seems that the XUL box model is more<br />
+consistent. I hope someone/they adds box, hbox, vbox (with flex and all the<br />
+other goodies) before the API is finalized.</p>

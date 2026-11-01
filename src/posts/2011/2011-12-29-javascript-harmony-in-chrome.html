@@ -1,0 +1,77 @@
+---json
+{
+  "title": "JavaScript Harmony in Chrome",
+  "date": "2011-12-29T00:00:29-08:00",
+  "permalink": "/archives/2011/12/29/00.00.29/",
+  "tags": [
+    "JavaScript",
+    "Chrome",
+    "JavaScript"
+  ],
+  "comments": [
+    {
+      "id": "104389",
+      "author": "Mitch Skinner",
+      "url": "http://jbrowse.org",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>What are the chances of seeing generators in v8?</p>"
+    },
+    {
+      "id": "104390",
+      "author": "Brandon Benvie",
+      "url": "http://bbenvie.com",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Thanks for the heads up on this! Been waiting a long time. I just finished updating my shim for the Direct Proxies shim to work in both Node and the browser (just Chrome really since you can just use the original shim by itself in Firefox).</p>\n<p><a href=\"https://github.com/Benvie/Direct-Proxies-Shim-Shim-for-Node-and-Chrome\" rel=\"nofollow\">https://github.com/Benvie/Direct-Proxies-Shim-Shim-for-Node-and-Chrome</a></p>"
+    },
+    {
+      "id": "104391",
+      "author": "Doeke",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>What&#8217;s JavaScript Harmony?</p>"
+    },
+    {
+      "id": "104393",
+      "author": "Erik Arvidsson",
+      "url": "/",
+      "depth": 1,
+      "byAuthor": true,
+      "date": "",
+      "html": "<p>Chrome and V8 are dedicated to JavaScript and we plan to support ES.next/ES6. Generators have been approved for Harmony. Whether generators will make it into ES.next/ES6 remains to be seen but I am pretty sure it will. I expect V8 to have generators available under a flag by the end of 2012.</p>\n<p>These are my personal thoughts and does not reflect any official Google statements. I recommend keeping an eye on the V8 repo to see what they are working on.</p>"
+    },
+    {
+      "id": "104395",
+      "author": "Mitch Skinner",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Thanks!</p>"
+    },
+    {
+      "id": "106780",
+      "author": "Viktor",
+      "url": "",
+      "depth": 1,
+      "byAuthor": false,
+      "date": "",
+      "html": "<p>Thanks for implementing &#8220;Map.prototype.forEach&#8221; in v8!</p>"
+    }
+  ]
+}
+---
+<p>We recently added a way to turn on JavaScript Harmony features in Chrome. If you have a <a href="http://www.chromium.org/getting-involved/dev-channel">Canary</a> or a recent <a href="http://www.chromium.org/getting-involved/dev-channel">Developer Channel</a> build of Chrome you can turn on some Harmony features from <code>chrome://flags</code>. You need to manually enter that address in your browser. Look for an entry called &#8220;Enable Experimental JavaScript&#8221;</p>
+<p>The following 4 features are currently enabled if you turn on the experiment.</p>
+<ul>
+<li><a href="/archives/2011/12/29/12.00.11/">Collections (<code>Map</code>, <code>Set</code>, <code>WeakMap</code>)</a>
+<li><a href="/archives/2011/12/30/00.00.27/">Block scoped bindings</a>
+<li><a href="/archives/2011/12/30/12.00.40/"><code>typeof null === 'null'</code></a>
+<li><a href="/archives/2011/12/31/00.00.01/">Proxies</a>
+</ul>
+<p>Over the next couple days I&#8217;ll post individual posts about each of these.</p>
