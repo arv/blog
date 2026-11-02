@@ -1,6 +1,9 @@
 ---
 permalink: /feed.xml
 eleventyExcludeFromCollections: true
+# Render posts first so their content is available here.
+eleventyImport:
+  collections: [posts]
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"

@@ -6,6 +6,9 @@ pagination:
   alias: posts
 permalink: "{% if pagination.pageNumber == 0 %}/{% else %}/page/{{ pagination.pageNumber + 1 }}/{% endif %}"
 eleventyExcludeFromCollections: true
+# Render posts first so their content is available here.
+eleventyImport:
+  collections: [posts]
 ---
 {% set navId = "multinav1" %}{% include "multinav.njk" %}
 

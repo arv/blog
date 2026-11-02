@@ -3,6 +3,8 @@ import pluginRss from "@11ty/eleventy-plugin-rss";
 
 // The original WordPress site rendered all dates with a fixed UTC-8 offset.
 const SITE_ZONE = "UTC-8";
+// Posts can be written as HTML or Markdown.
+const POSTS_GLOB = ["src/posts/**/*.html", "src/posts/**/*.md"];
 
 function toDateTime(value) {
   if (value instanceof Date) return DateTime.fromJSDate(value).setZone(SITE_ZONE);
@@ -35,13 +37,13 @@ export default function (eleventyConfig) {
   eleventyConfig.ignores.add("src/static/**");
 
   eleventyConfig.addCollection("posts", (api) =>
-    api.getFilteredByGlob("src/posts/**/*.html").sort((a, b) => b.date - a.date),
+    api.getFilteredByGlob(POSTS_GLOB).sort((a, b) => b.date - a.date),
   );
 
   // Tag name -> { name, slug, count }
   eleventyConfig.addCollection("tagList", (api) => {
     const map = new Map();
-    for (const post of api.getFilteredByGlob("src/posts/**/*.html")) {
+    for (const post of api.getFilteredByGlob(POSTS_GLOB)) {
       for (const tag of post.data.tags || []) {
         const slug = post.data.tagSlugs?.[tag] ?? slugify(tag);
         const entry = map.get(tag) || { name: tag, slug, count: 0 };
@@ -55,7 +57,7 @@ export default function (eleventyConfig) {
   // Year/month archive index: [{ year, month, key, label, posts }]
   eleventyConfig.addCollection("months", (api) => {
     const map = new Map();
-    for (const post of api.getFilteredByGlob("src/posts/**/*.html")) {
+    for (const post of api.getFilteredByGlob(POSTS_GLOB)) {
       const dt = toDateTime(post.date);
       const key = dt.toFormat("yyyy/MM");
       const entry = map.get(key) || {
@@ -75,7 +77,7 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addCollection("years", (api) => {
     const map = new Map();
-    for (const post of api.getFilteredByGlob("src/posts/**/*.html")) {
+    for (const post of api.getFilteredByGlob(POSTS_GLOB)) {
       const year = toDateTime(post.date).toFormat("yyyy");
       if (!map.has(year)) map.set(year, { year, posts: [] });
       map.get(year).posts.push(post);

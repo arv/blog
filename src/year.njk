@@ -9,6 +9,9 @@ eleventyComputed:
   title: "{{ y.year }}"
 bodyClass: archive date
 eleventyExcludeFromCollections: true
+# Render posts first so their content is available here.
+eleventyImport:
+  collections: [posts]
 ---
 <h2 class="page-title">Archive: <span>{{ y.year }}</span></h2>
 

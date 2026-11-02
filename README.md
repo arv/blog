@@ -50,7 +50,16 @@ it, for example for a preview deployment.
 
 ## Writing a new post
 
-Create `src/posts/2026/2026-01-15-my-post.html`:
+```bash
+npm run new -- "My post title" JavaScript Chrome
+```
+
+creates `src/posts/<year>/<date>-my-post-title.md` with the title, the current
+date and the given tags filled in, and prints the URL the post will get. Edit
+the body, then commit and push.
+
+The file it writes looks like this (you can also create one by hand, as
+`.md` or `.html`):
 
 ```html
 ---json
@@ -64,5 +73,5 @@ Create `src/posts/2026/2026-01-15-my-post.html`:
 ```
 
 Without an explicit `permalink` the post gets the same
-`/archives/YYYY/MM/DD/HH.MM.SS/` style URL as the old ones. Markdown files
-(`.md`) work too.
+`/archives/YYYY/MM/DD/HH.MM.SS/` style URL as the old ones. Tags that match an
+existing tag name reuse its old slug; new tag names get a generated one.

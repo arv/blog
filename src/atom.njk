@@ -1,6 +1,9 @@
 ---
 permalink: /atom.xml
 eleventyExcludeFromCollections: true
+# Render posts first so their content is available here.
+eleventyImport:
+  collections: [posts]
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">

@@ -9,6 +9,9 @@ eleventyComputed:
   title: "{{ tag.name }}"
 bodyClass: archive tag
 eleventyExcludeFromCollections: true
+# Render posts first so their content is available here.
+eleventyImport:
+  collections: [posts]
 ---
 <h2 class="page-title">Tag: <span>{{ tag.name | safe }}</span></h2>
 
