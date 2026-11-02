@@ -31,8 +31,9 @@ serves `_site/` with the small static server in `server.js` (built on
 `serve-static`). It also rewrites the old WordPress feed URLs (`/feed/`,
 `/feed/atom/`, ...) to the generated feeds and serves `404.html` for misses.
 
-Set `SITE_URL` (for example `https://blog.example.com`) in the Railway service's
-variables so the RSS/Atom feeds and sitemap use absolute URLs.
+Absolute URLs (feeds, sitemap, canonical links) use `https://blog.arv.tools`
+from `src/_data/site.js`. Set `SITE_URL` in the service's variables to override
+it, for example for a preview deployment.
 
 ## Layout
 

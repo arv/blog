@@ -4,8 +4,8 @@ export default {
   author: "Erik Arvidsson",
   description: "The Weblog of Erik Arvidsson",
   language: "en-US",
-  // Set SITE_URL in the deploy environment (e.g. https://blog.example.com) so feeds get absolute links.
-  url: (process.env.SITE_URL || "http://erik.eae.net").replace(/\/$/, ""),
+  // Public URL of the site; SITE_URL in the environment overrides it (e.g. for a preview deploy).
+  url: (process.env.SITE_URL || "https://blog.arv.tools").replace(/\/$/, ""),
   repo: "https://github.com/arv/blog",
   postsPerPage: 10,
 };
