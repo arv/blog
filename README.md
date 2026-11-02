@@ -55,8 +55,8 @@ npm run new -- "My post title" JavaScript Chrome
 ```
 
 creates `src/posts/<year>/<date>-my-post-title.md` with the title, the current
-date and the given tags filled in, and prints the URL the post will get. Edit
-the body, then commit and push.
+local time (with its UTC offset) and the given tags filled in, and prints the
+URL the post will get. Edit the body, then commit and push.
 
 The file it writes looks like this (you can also create one by hand, as
 `.md` or `.html`):
@@ -73,5 +73,7 @@ The file it writes looks like this (you can also create one by hand, as
 ```
 
 Without an explicit `permalink` the post gets the same
-`/archives/YYYY/MM/DD/HH.MM.SS/` style URL as the old ones. Tags that match an
+`/archives/YYYY/MM/DD/HH.MM.SS/` style URL as the old ones. The URL and the
+displayed date use the offset written in `date`, so a post written at 02:00
+Paris time is filed under that day; the old posts all carry `-08:00`. Tags that match an
 existing tag name reuse its old slug; new tag names get a generated one.

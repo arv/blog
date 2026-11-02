@@ -8,9 +8,9 @@
 	<div class="post-bodycopy cf">
 
 		<div class="post-date">
-			<p class="post-month">{{ post.date | dateFormat("MMM") }}</p>
-			<p class="post-day">{{ post.date | dateFormat("d") }}</p>
-			<p class="post-year">{{ post.date | dateFormat("yyyy") }}</p>
+			<p class="post-month">{{ post.data.postDate | dateFormat("MMM") }}</p>
+			<p class="post-day">{{ post.data.postDate | dateFormat("d") }}</p>
+			<p class="post-year">{{ post.data.postDate | dateFormat("yyyy") }}</p>
 		</div>
 
 		{{ post.templateContent | excerpt }}

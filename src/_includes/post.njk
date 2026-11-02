@@ -17,7 +17,7 @@ bodyClass: single single-post
 	</h1>
 
 	<div class="post-footer">
-		<time datetime="{{ date | dateIso }}">{{ date | dateFormat("d MMM yyyy") }}</time>
+		<time datetime="{{ postDate | dateIso }}">{{ postDate | dateFormat("d MMM yyyy") }}</time>
 		{% if tags and tags.length %}&nbsp;&nbsp;| {% for tag in tags %}<a href="/archives/tag/{{ tag | tagSlug(tagSlugs) }}/" title="View all posts in {{ tag }}" rel="category tag">{{ tag | safe }}</a>{% endfor %}{% endif %}
 	</div>
 

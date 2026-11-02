@@ -1,14 +1,20 @@
 import { DateTime } from "luxon";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 
-// The original WordPress site rendered all dates with a fixed UTC-8 offset.
+// The original WordPress site rendered all dates with a fixed UTC-8 offset,
+// and the old posts carry that offset in their front matter. Newer posts carry
+// whatever local offset `npm run new` wrote; dates are shown in that offset.
 const SITE_ZONE = "UTC-8";
 // Posts can be written as HTML or Markdown.
 const POSTS_GLOB = ["src/posts/**/*.html", "src/posts/**/*.md"];
 
+const HAS_OFFSET = /(Z|[+-]\d\d:?\d\d)$/;
+
 function toDateTime(value) {
   if (value instanceof Date) return DateTime.fromJSDate(value).setZone(SITE_ZONE);
-  return DateTime.fromISO(String(value), { setZone: true }).setZone(SITE_ZONE);
+  const text = String(value);
+  const dt = DateTime.fromISO(text, { setZone: true });
+  return HAS_OFFSET.test(text) ? dt : dt.setZone(SITE_ZONE);
 }
 
 function stripHtml(html) {
@@ -58,7 +64,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("months", (api) => {
     const map = new Map();
     for (const post of api.getFilteredByGlob(POSTS_GLOB)) {
-      const dt = toDateTime(post.date);
+      const dt = toDateTime(post.data.postDate);
       const key = dt.toFormat("yyyy/MM");
       const entry = map.get(key) || {
         key,
@@ -78,7 +84,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("years", (api) => {
     const map = new Map();
     for (const post of api.getFilteredByGlob(POSTS_GLOB)) {
-      const year = toDateTime(post.date).toFormat("yyyy");
+      const year = toDateTime(post.data.postDate).toFormat("yyyy");
       if (!map.has(year)) map.set(year, { year, posts: [] });
       map.get(year).posts.push(post);
     }

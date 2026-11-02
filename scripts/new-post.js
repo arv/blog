@@ -5,13 +5,12 @@
 //
 // Writes src/posts/<year>/<yyyy-MM-dd>-<slug>.md and prints the path and the
 // URL the post will get (/archives/YYYY/MM/DD/HH.MM.SS/, like the old posts).
+// The date is the current local time, written with its UTC offset.
 
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { DateTime } from "luxon";
-
-const SITE_ZONE = "UTC-8"; // same fixed offset as the original WordPress site
 
 const [title, ...tags] = process.argv.slice(2);
 if (!title) {
@@ -22,11 +21,11 @@ if (!title) {
 const slug = title
   .toLowerCase()
   .normalize("NFKD")
-  .replace(/[̀-ͯ]/g, "")
+  .replace(/[\u0300-\u036f]/g, "") // strip accents
   .replace(/[^a-z0-9]+/g, "-")
   .replace(/^-+|-+$/g, "") || "post";
 
-const now = DateTime.now().setZone(SITE_ZONE).startOf("second");
+const now = DateTime.now().startOf("second");
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dir = path.join(root, "src", "posts", now.toFormat("yyyy"));
 const file = path.join(dir, `${now.toFormat("yyyy-MM-dd")}-${slug}.md`);
