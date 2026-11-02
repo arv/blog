@@ -31,6 +31,12 @@ function stripHtml(html) {
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
 
+  // Posts with `draft: true` in their front matter are left out of the
+  // production build but still show up in `npm run dev`.
+  eleventyConfig.addPreprocessor("drafts", "*", (data) => {
+    if (data.draft && process.env.ELEVENTY_RUN_MODE === "build") return false;
+  });
+
   // Post bodies are raw WordPress HTML; never run them through a template engine
   // so stray "{{" in code samples survive untouched.
   eleventyConfig.setTemplateFormats(["html", "md", "njk"]);
