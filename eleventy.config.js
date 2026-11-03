@@ -1,3 +1,5 @@
+import crypto from "node:crypto";
+import fs from "node:fs";
 import { DateTime } from "luxon";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 
@@ -30,6 +32,12 @@ function stripHtml(html) {
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
+
+  // Cache-busting version for the stylesheet URL. The CDN in front of the site
+  // caches /css/style.css for a day, so each change needs a new URL.
+  eleventyConfig.addGlobalData("cssVersion", () =>
+    crypto.createHash("sha256").update(fs.readFileSync("src/css/style.css")).digest("hex").slice(0, 10),
+  );
 
   // Posts with `draft: true` in their front matter are left out of the
   // production build but still show up in `npm run dev`.

@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <title>{% if title %}{{ title | safe }} &larr; {% endif %}{{ site.title }}{% if not title %} &larr; {{ site.tagline }}{% endif %}</title>
 {% if description %}<meta name="description" content="{{ description }}">{% endif %}
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/style.css?v={{ cssVersion }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300;400&display=swap">
