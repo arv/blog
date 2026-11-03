@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import { DateTime } from "luxon";
 import pluginRss from "@11ty/eleventy-plugin-rss";
+import { highlightHtml, markdownHighlight } from "./lib/highlight.js";
 
 // The original WordPress site rendered all dates with a fixed UTC-8 offset,
 // and the old posts carry that offset in their front matter. Newer posts carry
@@ -48,6 +49,11 @@ function stripHtml(html) {
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
+
+  // Syntax highlighting at build time: fenced blocks in Markdown posts, and
+  // the plain <pre><code> blocks of the old HTML posts (via the filter).
+  eleventyConfig.amendLibrary("md", (md) => md.set({ highlight: markdownHighlight }));
+  eleventyConfig.addFilter("highlightHtml", highlightHtml);
 
   // Cache-busting version for the stylesheet URL. The CDN in front of the site
   // caches /css/style.css for a day, so each change needs a new URL.

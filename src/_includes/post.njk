@@ -22,7 +22,7 @@ bodyClass: single single-post
 	</div>
 
 	<div class="post-bodycopy cf">
-		{{ content | safe }}
+		{{ content | highlightHtml | safe }}
 	</div>
 
 </article>
@@ -36,7 +36,7 @@ bodyClass: single single-post
 			<div>
 				<div class="comment-author">{% if c.url %}<a href="{{ c.url }}" rel="external nofollow">{{ c.author }}</a>{% else %}{{ c.author }}{% endif %}</div>
 				{% if c.date %}<div class="comment-date-link">{{ c.date }}</div>{% endif %}
-				<div class="comment-text">{{ c.html | safe }}</div>
+				<div class="comment-text">{{ c.html | highlightHtml | safe }}</div>
 			</div>
 		</li>
 	{% endfor %}

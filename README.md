@@ -78,5 +78,12 @@ displayed date use the offset written in `date`, so a post written at 02:00
 Paris time is filed under that day; the old posts all carry `-08:00`.
 
 Add `"draft": true` to the front matter to keep a post out of the published
-site. Drafts still show up in `npm run dev` so you can preview them. Tags that match an
+site. Drafts still show up in `npm run dev` so you can preview them.
+
+Fenced code blocks are syntax highlighted at build time with
+[`@pierre/highlights`](https://diffs.com/highlights) (see `lib/highlight.js`);
+no JavaScript is shipped to readers. Name the language after the opening
+fence (` ```js `, ` ```html `, ...). An unlabeled fence is guessed as
+JavaScript, HTML or CSS; use ` ```text ` for plain text. The old posts' bare
+`<pre><code>` blocks are highlighted the same way, in posts and comments. Tags that match an
 existing tag name reuse its old slug; new tag names get a generated one.

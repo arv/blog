@@ -194,7 +194,12 @@ pre {
 	overflow-x: auto;
 	font-size: 13px;
 	line-height: 1.4;
+	tab-size: 4;
 }
+
+/* Highlighted code (see lib/highlight.js): token colors are inline, the box
+   follows the page palette. */
+pre.highlights { background-color: var(--paper-2) !important; }
 
 code { font-size: 0.95em; }
 
