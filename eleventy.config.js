@@ -19,15 +19,31 @@ function toDateTime(value) {
   return HAS_OFFSET.test(text) ? dt : dt.setZone(SITE_ZONE);
 }
 
+// Named entities that occur in the posts; numeric ones are handled generically.
+const NAMED_ENTITIES = {
+  amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ",
+  ouml: "\u00f6", Ccedil: "\u00c7", trade: "\u2122",
+};
+
+function decodeEntities(text) {
+  return text.replace(/&(?:#(\d+)|#x([0-9a-f]+)|([a-z][a-z0-9]*));/gi, (match, dec, hex, name) => {
+    if (dec || hex) {
+      const code = dec ? parseInt(dec, 10) : parseInt(hex, 16);
+      return code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : match;
+    }
+    return NAMED_ENTITIES[name] ?? match;
+  });
+}
+
+// HTML to plain text (excerpts, titles in attributes and feeds). The result is
+// unescaped text, so templates must output it with autoescaping, never `safe`.
 function stripHtml(html) {
-  return String(html)
+  const text = String(html)
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
     .replace(/<style[\s\S]*?<\/style>/gi, " ")
     .replace(/<\/?(?:p|div|li|ul|ol|h[1-6]|blockquote|pre|tr|td|th|br|dd|dt|table)\b[^>]*>/gi, " ")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&nbsp;/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+    .replace(/<[^>]+>/g, "");
+  return decodeEntities(text).replace(/\s+/g, " ").trim();
 }
 
 export default function (eleventyConfig) {

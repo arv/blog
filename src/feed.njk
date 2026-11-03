@@ -23,11 +23,11 @@ eleventyImport:
 		<title>{{ post.data.title | stripHtml }}</title>
 		<link>{{ site.url }}{{ post.url }}</link>
 		<pubDate>{{ post.date | rfc822 }}</pubDate>
-		<dc:creator><![CDATA[{{ site.author }}]]></dc:creator>
-		{% for tag in post.data.tags %}<category><![CDATA[{{ tag }}]]></category>
+		<dc:creator>{{ site.author }}</dc:creator>
+		{% for tag in post.data.tags %}<category>{{ tag }}</category>
 		{% endfor %}
 		<guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
-		<description><![CDATA[{{ post.templateContent | excerpt }}]]></description>
+		<description>{{ post.templateContent | excerpt }}</description>
 		<content:encoded><![CDATA[{{ post.templateContent | htmlToAbsoluteUrls(site.url + post.url) | safe }}]]></content:encoded>
 	</item>
 {% endfor %}
